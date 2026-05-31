@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Writing"
+  short_description: "Draft English engineering paper sections"
+  default_prompt: "Use $engineering-writing to draft or restructure my English engineering paper section from claims, evidence, and notes."

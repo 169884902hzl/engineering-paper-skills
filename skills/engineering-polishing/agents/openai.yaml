@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Polishing"
+  short_description: "Polish English engineering manuscript prose"
+  default_prompt: "Use $engineering-polishing to polish my English engineering manuscript paragraph while preserving evidence boundaries."

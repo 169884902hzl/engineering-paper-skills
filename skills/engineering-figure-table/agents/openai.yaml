@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Figure Table"
+  short_description: "Plan paper figures, tables, and captions"
+  default_prompt: "Use $engineering-figure-table to plan or audit my engineering paper figures, tables, captions, and evidence links."

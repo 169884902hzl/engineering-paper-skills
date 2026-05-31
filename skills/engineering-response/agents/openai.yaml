@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Response"
+  short_description: "Handle advisor and reviewer comments"
+  default_prompt: "Use $engineering-response to turn advisor or reviewer comments into English response text and revision tasks."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Validation"
+  short_description: "Validate English paper submission readiness"
+  default_prompt: "Use $engineering-validation to check my engineering paper build, evidence anchors, citations, figures, and submission readiness."
