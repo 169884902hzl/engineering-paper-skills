@@ -17,7 +17,7 @@ This checks:
 - relative Markdown links
 - agent metadata fields
 - private-path and stale-wording patterns
-- structured expected minimal and adversarial prompt specs
+- structured expected minimal, realistic, and adversarial prompt specs
 - optional prompt regression output checks when outputs are provided
 
 ## Codex Skill Validation
@@ -67,5 +67,6 @@ All returned `Skill is valid!` during the hardening pass.
   `UNKNOWN`.
 - Minimal and adversarial prompt specs still match the intended behavior.
 - Expected prompt behavior uses structured `.yaml` specs with forbidden claims,
-  status expectations, and allowed behavior.
+  forbidden regexes, required sections, status expectations, and allowed
+  behavior.
 - Third-party license notices are preserved.

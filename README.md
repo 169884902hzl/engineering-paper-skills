@@ -289,7 +289,7 @@ The skills are organized around five writing constraints:
 ## Files
 
 - `skills/_shared/`: shared evidence-bound, citation-boundary, claim-strength,
-  source-note, and output-mode rules
+  list-to-argument, terminology-ledger, source-note, and output-mode rules
 - `skills/engineering-paper-router/`: routing skill for ambiguous or mixed paper
   tasks
 - `skills/engineering-writing/`: drafting and manuscript-structure skill
@@ -302,8 +302,10 @@ The skills are organized around five writing constraints:
   coverage checks
 - `scripts/check_expected_behavior.py`: structured expected-behavior validation
 - `scripts/run_prompt_regression.py`: optional prompt regression runner
-- `tests/prompts/`: minimal and adversarial prompt specs for each skill
-- `tests/expected/`: structured expected-behavior specs for prompt checks
+- `tests/prompts/`: minimal, realistic, and adversarial prompt specs for each
+  skill
+- `tests/expected/`: structured expected-behavior specs for prompt checks,
+  including forbidden regexes and required output sections
 - `NOTICE.md`: third-party license notices
 - `OPEN_SOURCE_QA.md`: validation commands and release checks
 

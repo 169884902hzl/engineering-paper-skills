@@ -3,6 +3,8 @@
 This directory gives quick task examples. The executable prompt specifications
 used for release QA live in `tests/prompts/`.
 
+For more realistic regression inputs, see `tests/prompts/*_realistic.md`.
+
 ## Router
 
 ```text

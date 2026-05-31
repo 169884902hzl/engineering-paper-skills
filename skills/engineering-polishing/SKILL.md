@@ -37,7 +37,7 @@ English manuscript prose without hiding structural or evidence problems.
 | [references/fact-boundary.md](references/fact-boundary.md) | The source is a rough skeleton, non-English notes, or evidence is incomplete |
 | [references/paragraph-function.md](references/paragraph-function.md) | Identifying paragraph job before rewriting |
 | [references/engineering-topic-modules.md](references/engineering-topic-modules.md) | Polishing control, algorithm, data-driven, materials, process, or multi-physics paragraphs |
-| [references/list-handling.md](references/list-handling.md) | Turning long lists of methods, challenges, advantages, or chapter plans into arguments |
+| [references/list-handling.md](references/list-handling.md) | Skill-specific list cleanup examples |
 | [references/paragraph-flow.md](references/paragraph-flow.md) | Paragraphs feel unclear, repetitive, poorly ordered, or hard to follow |
 | [references/claim-strength.md](references/claim-strength.md) | Claims may overstate evidence, causality, robustness, generalization, or novelty |
 | [references/anti-ai-prose.md](references/anti-ai-prose.md) | Text sounds generic, repetitive, slogan-like, template-like, or model-generated |
@@ -47,8 +47,10 @@ English manuscript prose without hiding structural or evidence problems.
 | [references/failure-modes.md](references/failure-modes.md) | Handling requests to strengthen unsupported claims or hide weak evidence |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | The rewrite may change factual scope or claim strength |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | A local claim needs verb or novelty calibration |
+| [../_shared/list-to-argument.md](../_shared/list-to-argument.md) | Source prose is a list rather than a paragraph argument |
 | [../_shared/non-english-source-notes.md](../_shared/non-english-source-notes.md) | Source notes include assumptions or non-English shorthand |
 | [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for output only |
+| [../_shared/terminology-ledger.md](../_shared/terminology-ledger.md) | User asks for varied wording around technical terms |
 
 ## Workflow
 
@@ -63,6 +65,11 @@ English manuscript prose without hiding structural or evidence problems.
    calibrated verbs.
 7. Report any claim that still needs evidence.
 
+A paragraph has a stable claim-evidence structure only when at least three of
+these are clear: paragraph job, main claim, evidence anchor, and boundary. If
+fewer than three are clear, diagnose first and do not present polished prose as
+final.
+
 ## Default Output
 
 ```text
@@ -72,7 +79,7 @@ Diagnosis
 - Evidence risk:
 
 Before / After / Rationale
-| Source sentence | Revised sentence | Rationale | Fact/evidence risk |
+| Source sentence or span | Revised sentence or span | Rationale | Fact/evidence risk |
 
 Polished version
 [English prose]

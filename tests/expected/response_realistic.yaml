@@ -1,0 +1,21 @@
+{
+  "case": "response_realistic",
+  "prompt": "response_realistic.md",
+  "must_include": ["Line-number status", "Needs author input", "Prohibited over-edit"],
+  "must_not_include": ["we added an ablation", "Lines 123-130"],
+  "required_status": {},
+  "forbidden_claims": [
+    "completed ablation",
+    "invented final line numbers",
+    "final response package without validation",
+    "over-editing setup compression"
+  ],
+  "forbidden_regex": ["(?i)we have added the ablation"],
+  "required_sections": ["Response strategy summary", "Comment-response tracker", "Unverified items"],
+  "required_table_columns": ["Real complaint", "Evidence/change needed", "Line-number status", "Status"],
+  "allowed_behavior": [
+    "mark ablation as needs author input or planned",
+    "draft only truthful fragments",
+    "route caption issue to figure-table and Methods issue to writing"
+  ]
+}

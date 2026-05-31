@@ -58,3 +58,22 @@ Expected behavior:
 | R2.3 | Add broader deployment. | defer with reason | Defer with reason | state evaluation boundary |
 
 Line numbers remain pending until final build.
+
+Possible tracker output:
+
+| ID | Original comment | Type | Real complaint | Action | Evidence/change needed | Line-number status | Status |
+|---|---|---|---|---|---|---|---|
+| R1.1 | Add ablation. | experiment | component contribution is not isolated | planned or needs input | ablation result or explicit limitation | unavailable | Needs author input |
+| R1.2 | Method unclear. | clarity | execution-time use is ambiguous | revise Methods | sentence explaining visual module timing | placeholder only | Planned |
+| R2.1 | Caption overclaims. | figure/table | caption claims more than visible | revise caption | bounded caption text | placeholder only | Done with evidence if revised |
+| R2.2 | Too much setup. | structure | setup interrupts results | move to table | setup table or compressed paragraph | placeholder only | Planned |
+| R2.3 | Add broader deployment. | scope | reviewer wants external validity | defer with reason | boundary/limitation text | placeholder only | Defer with reason |
+
+Possible response fragment:
+
+```text
+We agree that the previous caption overstated what the figure showed. We have
+revised the caption to describe the visible workflow stages only and moved the
+robustness claim to the Results discussion where it can be tied to the tested
+conditions. Final line numbers will be inserted after the camera-ready build.
+```

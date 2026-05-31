@@ -1,6 +1,6 @@
 ---
 name: engineering-paper-router
-description: Route ambiguous or mixed English engineering paper tasks to the correct engineering paper skill. Use when the user asks broadly to improve, write, check, revise, respond to comments on, or prepare an engineering paper and it is unclear whether the task belongs to writing, polishing, figure/table work, response drafting, or validation.
+description: Route ambiguous or mixed English engineering paper tasks to the correct engineering paper skill. Use when the user asks broadly to improve my paper, check my manuscript, revise this draft, prepare submission, respond to comments, or combine drafting, polishing, figure/table work, response drafting, and validation.
 ---
 
 # Engineering Paper Router
@@ -15,6 +15,9 @@ routing.
 - Preserve evidence boundaries in the recommended next prompt.
 - For mixed tasks, name a primary skill, secondary skills, and workflow order.
 - If readiness or completion is requested, include `engineering-validation`.
+- Explain why plausible but non-primary skills should not run first.
+- Stop routing at the first missing input that would make the next step invent
+  facts, citations, line numbers, experiment results, or readiness status.
 
 ## Boundaries
 
@@ -41,15 +44,28 @@ routing.
 | classify reviewer/advisor/editor comments, build revision tracker, draft response letter | `engineering-response` |
 | compile/check manuscript, inspect citations, claim-evidence anchors, figures/tables, readiness | `engineering-validation` |
 
+## Input-State Routing
+
+| Input state | Primary route | Secondary route | Stop condition |
+|---|---|---|---|
+| Thin idea, no method/evidence/boundary | `engineering-writing` scaffold only | none | Do not draft final Abstract/Conclusion |
+| Notes plus result tables, no figure responsibilities | `engineering-writing` | `engineering-figure-table` | Do not write strong claims before evidence map |
+| Existing paragraph with stable claim/evidence | `engineering-polishing` | `engineering-writing` only if structure fails | Stop if claim, evidence, and boundary are unclear |
+| Caption, table, category names, or visual claims | `engineering-figure-table` | `engineering-polishing` for caption wording only | Stop if visual evidence cannot support the requested claim |
+| Reviewer/advisor/editor comments | `engineering-response` | writing/figure-table/validation as needed | Stop before final response if edits are not verified |
+| Ready/complete/submittable request | `engineering-validation` | writing/figure-table/response for blocking fixes | Stop if build, references, or source files are missing |
+
 ## Mixed Workflow Order
 
-For full-paper work, use:
+For full-paper work, use this order unless the user gives a narrower task:
 
-1. `engineering-writing`
-2. `engineering-figure-table`
-3. `engineering-polishing`
-4. `engineering-response` if comments exist
-5. `engineering-validation`
+1. `engineering-writing`: one-sentence thesis and contribution-evidence map.
+2. `engineering-figure-table`: visual responsibility and evidence roles.
+3. `engineering-writing`: Methods and Experiments before Introduction.
+4. `engineering-writing`: Introduction, Abstract, Conclusion.
+5. `engineering-polishing`: paragraph flow, terminology, and claim strength.
+6. `engineering-response`: only if comments exist.
+7. `engineering-validation`: before claiming complete, fixed, or ready.
 
 ## Default Output
 
@@ -58,6 +74,17 @@ Recommended route
 - Primary skill:
 - Secondary skill:
 - Reason:
+
+Task decomposition
+- User request contains:
+- Primary operation:
+- Secondary operations:
+
+Do not use first
+| Skill | Why not primary |
+
+Workflow order
+| Step | Skill | Required input | Stop condition |
 
 Required inputs
 - ...

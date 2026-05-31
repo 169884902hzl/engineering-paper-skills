@@ -15,13 +15,13 @@ Do not invent:
 
 ## Evidence Classes
 
-| Evidence class | Safe claim |
-|---|---|
-| Method only | what the method is designed to do |
-| Qualitative example | what the example illustrates |
-| Local quantitative result | what happened under the tested condition |
-| Ablation or stress test | which component or condition is supported |
-| Direct measurement | the measured mechanism or relationship |
+| Evidence class | Allowed output | Forbidden output | Required note |
+|---|---|---|---|
+| Method only | what the method is designed to do | measured improvement, superiority, or robustness | state evidence is not yet provided |
+| Qualitative example | what the example illustrates | generality or frequency | name it as illustrative |
+| Local quantitative result | what happened under the tested condition | broader deployment or unseen conditions | include protocol and boundary |
+| Ablation or stress test | which component or condition is supported | universal causality beyond the tested ablation | name removed component and metric |
+| Direct measurement | measured mechanism or relationship | mechanisms not directly measured | state measurement scope |
 
 If evidence is weaker than the requested claim, downgrade the claim and name the
 missing evidence.

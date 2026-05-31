@@ -13,6 +13,8 @@ Use this skill to make figures and tables serve the manuscript argument.
 - A figure or table should carry a specific claim, setup fact, evidence axis, or
   reader action.
 - Do not let captions claim what the visual does not show.
+- Visuals can illustrate mechanisms, but they cannot prove hidden mechanisms
+  without direct visual, tabular, or experimental evidence.
 - Do not use tables as unstructured parameter dumps unless the table's job is
   setup compression.
 - Keep category names, metric names, captions, and prose consistent.
@@ -42,6 +44,7 @@ Use this skill to make figures and tables serve the manuscript argument.
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Visual claims may exceed visible or tabulated evidence |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | Caption or table note verbs may overstate what is visible |
 | [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for caption/table output only |
+| [../_shared/terminology-ledger.md](../_shared/terminology-ledger.md) | Category, metric, object, or method names change across visuals and prose |
 
 ## Workflow
 
@@ -51,14 +54,16 @@ Use this skill to make figures and tables serve the manuscript argument.
 4. Check whether the caption states only visible or tabulated information.
 5. Check consistency across prose, caption, labels, and notes.
 6. Check whether any category/metric rename needs coordinated changes.
-7. If editing LaTeX, preserve labels and references unless there is a direct
+7. Remove or redesign a visual if it has no claim, setup fact, evidence axis, or
+   reader action.
+8. If editing LaTeX, preserve labels and references unless there is a direct
    reason to change them.
 
 ## Default Output
 
 ```text
 Visual audit
-| Item | Responsibility | Visible/tabulated evidence | Claim supported | Must not claim | Risk | Action |
+| Item | Responsibility | Visible/tabulated evidence | Claim supported | Must not claim | Placement | Related prose action | Risk | Action |
 
 Caption/table revision
 [English caption or table plan]

@@ -19,6 +19,8 @@ for writing the paper's argument, not merely polishing sentences.
 - Every claim must have a visible route to method detail, figure/table evidence,
   experiment evidence, or an explicit boundary.
 - If evidence is missing, expose the gap or write a scaffold with placeholders.
+- Do not finalize Abstract or Conclusion claims before Methods/Experiments
+  evidence and boundaries are available; produce a scaffold instead.
 - For an existing paper, read the current live draft and relevant files before
   rewriting.
 
@@ -44,19 +46,25 @@ for writing the paper's argument, not merely polishing sentences.
 | [references/introduction.md](references/introduction.md) | Drafting Introduction, positioning, gap, formulation, or contribution list |
 | [references/related-work.md](references/related-work.md) | Drafting Related Work, taxonomy, nearest-neighbor distinction, or folded literature positioning |
 | [references/methods.md](references/methods.md) | Writing Methods, overview, formulas, system roles, algorithms, execution, or safety/deployment logic |
+| [references/methods-worksheet.md](references/methods-worksheet.md) | A Methods draft risks becoming a module directory or formula dump |
 | [references/experiments.md](references/experiments.md) | Planning or writing Experiments/Results, baselines, metrics, main results, ablations, failure analysis |
+| [references/experiments-worksheet.md](references/experiments-worksheet.md) | Results need setup, baseline, metric, ablation, category, stress, or failure-envelope structure |
 | [references/discussion.md](references/discussion.md) | Writing Discussion, limitations, interpretation, or implications |
 | [references/conclusion.md](references/conclusion.md) | Writing a bounded conclusion and future work |
 | [references/section-boundaries.md](references/section-boundaries.md) | Auditing whether content belongs in the right section or when a section is drifting |
 | [references/section-budget.md](references/section-budget.md) | Checking whether a section is too thin, too dense, or taking space from evidence |
+| [references/page-budget-war-plan.md](references/page-budget-war-plan.md) | Cutting manuscript length without damaging evidence anchors |
 | [references/source-learning.md](references/source-learning.md) | Learning structure from 3-5 neighboring papers without copying wording or surface format |
+| [references/bad-sentence-repairs.md](references/bad-sentence-repairs.md) | Repairing common bad manuscript sentences and section-level failure symptoms |
 | [references/examples.md](references/examples.md) | Needing concrete prompt and output behavior examples |
 | [references/failure-modes.md](references/failure-modes.md) | Handling thin evidence, invented-citation requests, or overclaim pressure |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Any task asks for stronger claims, missing evidence, or manuscript facts |
 | [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | Related Work or citations are requested without provided sources |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | Calibrating verbs, novelty, robustness, generalization, or causal language |
+| [../_shared/list-to-argument.md](../_shared/list-to-argument.md) | Source material is a bullet list, module list, result-row list, or contribution list |
 | [../_shared/non-english-source-notes.md](../_shared/non-english-source-notes.md) | Non-English notes must become English manuscript prose |
 | [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for output only |
+| [../_shared/terminology-ledger.md](../_shared/terminology-ledger.md) | A writing task may rename methods, metrics, categories, or baselines |
 
 ## Intake
 
@@ -89,7 +97,8 @@ drafting. You may still provide a scaffold.
    `demonstrate` only when directly supported.
 6. Remove unsupported novelty, universal claims, and vague adjectives.
 7. Return prose plus assumptions, missing evidence, and a short claim-evidence
-   map unless the user asks for prose only.
+   map unless prose-only output was requested and no unsupported-risk note would
+   be hidden.
 
 ## Default Output
 
@@ -99,6 +108,9 @@ One-sentence thesis
 
 Section job map
 | Section/paragraph | Job | Evidence anchor | Boundary |
+
+Source-note triage
+| Source item | Fact / Assumption / Unsupported | Can enter prose? | Handling |
 
 Draft
 [English manuscript prose]

@@ -73,12 +73,25 @@ Blocking issues
 ## Full Readiness Report Shape
 
 ```text
+Validation result
+- Goal interpreted as: full submission readiness
+- Build: PASS
+- References: PASS
+- Figures/tables: PARTIAL
+- Claim-evidence audit: FAIL
+- Private/stale wording scan: PASS
+- Overall readiness: NOT_READY
+
 Evidence
 - Commands run:
 - Files inspected:
 - Outputs observed:
 - Failures:
 - Not verified:
+
+Blocking issues
+- Contribution 2 claims robustness, but no stress-test or cross-condition
+  evidence was found in the inspected manuscript sections.
 
 Next actions
 - ...

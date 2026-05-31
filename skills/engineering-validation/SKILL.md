@@ -64,18 +64,22 @@ overall readiness must be `NOT_READY` or `CANNOT_DETERMINE`.
 
 ## Workflow
 
-1. Identify manuscript root and live draft.
-2. Read local instructions and relevant build files.
-3. Check structure anchors: thesis, contribution list, main results, ablation,
+1. State the validation goal being interpreted from the user request.
+2. Identify manuscript root and live draft.
+3. Read local instructions and relevant build files.
+4. Check structure anchors: thesis, contribution list, main results, ablation,
    limitations.
-4. Check figures, tables, captions, labels, and category/metric names.
-5. Run the smallest relevant build and consistency commands.
-6. Report evidence, failures, and unverified items.
+5. Check figures, tables, captions, labels, and category/metric names.
+6. Run the smallest relevant build and consistency commands.
+7. If tools or files are unavailable, mark command-dependent checks `NOT_RUN`
+   and perform only the file-based or local-text audit that evidence allows.
+8. Report evidence, failures, and unverified items.
 
 ## Default Output
 
 ```text
 Validation result
+- Goal interpreted as:
 - Build: PASS / FAIL / NOT_RUN / UNKNOWN
 - References: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
 - Figures/tables: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN

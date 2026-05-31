@@ -27,3 +27,23 @@ Unsupported claims
 English draft or scaffold
 [bounded prose]
 ```
+
+## Mixed-Note Example
+
+Source notes:
+
+```text
+Problem: insertion often fails when the target is occluded.
+Method: active observation keeps the gripper and target visible.
+Assumption: this may improve contact reasoning.
+Result: success improves from 71% to 86% in the provided trials.
+```
+
+Allowed prose:
+
+```text
+The method uses active observation to keep the gripper and target visible during
+insertion. In the provided trials, success increases from 71% to 86%. The
+available notes do not directly verify the proposed contact-reasoning
+mechanism.
+```

@@ -1,0 +1,20 @@
+{
+  "case": "router_realistic",
+  "prompt": "router_realistic.md",
+  "must_include": ["Workflow order", "engineering-validation", "Stop condition"],
+  "must_not_include": ["Overall readiness: READY", "final abstract"],
+  "required_status": {},
+  "forbidden_claims": [
+    "single-skill route",
+    "readiness decision without validation",
+    "final response before ablation status is resolved"
+  ],
+  "forbidden_regex": ["(?i)primary skill:\\s*engineering-writing\\s*$"],
+  "required_sections": ["Recommended route", "Task decomposition", "Do not use first", "Workflow order"],
+  "required_table_columns": ["Step", "Skill", "Required input", "Stop condition"],
+  "allowed_behavior": [
+    "route through writing, figure-table, response, and validation",
+    "name missing build logs, references, ablation evidence, and line numbers",
+    "stop before readiness"
+  ]
+}

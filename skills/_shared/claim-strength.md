@@ -25,3 +25,12 @@ Evidence available: [actual evidence]
 Safe wording: [bounded claim]
 Evidence needed for stronger wording: [missing test/source]
 ```
+
+## Engineering Examples
+
+| Available evidence | Safe wording | Unsafe wording |
+|---|---|---|
+| One ablation row shows a success drop after removing a component | "supports the contribution of the component under the tested protocol" | "proves the mechanism" |
+| Stress test covers one perturbation range | "shows robustness within the evaluated range" | "fully robust" |
+| Qualitative workflow image | "illustrates the execution sequence" | "validates the controller" |
+| Direct timing measurement | "reduces runtime under the measured setup" | "is efficient in real-world deployment" |

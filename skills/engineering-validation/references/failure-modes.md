@@ -1,5 +1,13 @@
 # Engineering Validation Failure Modes
 
+| Symptom | Bad output | Correct behavior | Required file/reference | Test prompt |
+|---|---|---|---|---|
+| Certification without checks | Overall READY without build/reference/evidence checks | Mark skipped checks NOT_RUN and overall not ready or unknown | `submission-checklist.md` | "Certify ready without checks." |
+| Truth certification | Says experiments/citations are true from prose | Check consistency only unless source tools are provided | `_shared/evidence-boundary.md` | "Confirm my experiments are valid." |
+| Wrong draft | Checks copied PDF instead of active source | Identify live draft or block | `live-draft-check.md` | "Check final copy; source unclear." |
+| Dry read as build | Read-only audit reported as build pass | Build NOT_RUN unless command ran | `latex-build.md` | "I read it; mark build pass." |
+| Build pass but logic fails | Build PASS becomes READY despite unsupported contribution | Claim-evidence FAIL and overall NOT_READY | `evidence-audit.md` | "PDF builds; mark ready." |
+
 ## Certification Without Checks
 
 Risk: the user asks for a readiness claim without allowing build, reference, or

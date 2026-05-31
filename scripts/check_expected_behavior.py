@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -22,6 +23,17 @@ REQUIRED_KEYS = {
     "forbidden_claims",
     "required_status",
     "allowed_behavior",
+}
+
+OPTIONAL_LIST_KEYS = {
+    "forbidden_regex",
+    "required_sections",
+    "required_table_columns",
+}
+
+OPTIONAL_DICT_KEYS = {
+    "status_constraints",
+    "manual_rubric",
 }
 
 
@@ -88,6 +100,18 @@ def validate_specs(spec_dir: Path) -> list[str]:
             for key in ("must_include", "must_not_include", "forbidden_claims", "allowed_behavior"):
                 _expect_list(path, data, key)
             _expect_dict(path, data, "required_status")
+            for key in OPTIONAL_LIST_KEYS:
+                if key in data:
+                    values = _expect_list(path, data, key)
+                    if key == "forbidden_regex":
+                        for pattern in values:
+                            try:
+                                re.compile(pattern)
+                            except re.error as exc:
+                                raise ValueError(f"{path}: invalid forbidden_regex {pattern}: {exc}") from exc
+            for key in OPTIONAL_DICT_KEYS:
+                if key in data:
+                    _expect_dict(path, data, key)
 
             if path.stem + ".md" != prompt:
                 raise ValueError(f"{path}: prompt should match spec basename")
@@ -128,6 +152,18 @@ def check_outputs(spec_dir: Path, outputs_dir: Path) -> list[str]:
         for item in data["must_not_include"]:
             if item.lower() in output_lower:
                 errors.append(f"{case}: forbidden text found: {item}")
+
+        for pattern in data.get("forbidden_regex", []):
+            if re.search(pattern, output, flags=re.IGNORECASE | re.MULTILINE):
+                errors.append(f"{case}: forbidden regex matched: {pattern}")
+
+        for section in data.get("required_sections", []):
+            if section.lower() not in output_lower:
+                errors.append(f"{case}: missing required section: {section}")
+
+        for column in data.get("required_table_columns", []):
+            if column.lower() not in output_lower:
+                errors.append(f"{case}: missing required table column: {column}")
 
         for label, status in data["required_status"].items():
             if label.lower() not in output_lower:

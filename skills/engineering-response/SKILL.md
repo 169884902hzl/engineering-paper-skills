@@ -46,7 +46,9 @@ English responses.
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | A response may claim unsupported experiments, citations, or edits |
 | [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | A response mentions added or corrected references |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | A response or manuscript change needs claim downgrading |
+| [../_shared/list-to-argument.md](../_shared/list-to-argument.md) | A comment batch arrives as an unordered list |
 | [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for response text only |
+| [../_shared/terminology-ledger.md](../_shared/terminology-ledger.md) | A comment asks for renaming methods, metrics, or categories |
 
 ## Workflow
 
@@ -57,6 +59,8 @@ English responses.
 5. Define prohibited over-edit.
 6. Define acceptance evidence and minimum verification.
 7. Draft the response only after the change or placeholder is clear.
+   If the change is planned but not done, draft a plan or author-input note,
+   not a final completed-change response.
 8. Run completeness and factuality checks before calling the package ready.
 
 ## Default Output
@@ -69,6 +73,10 @@ Response strategy summary
 
 Comment-response tracker
 | ID | Original comment | Type | Severity | Real complaint | First target | Second target | Action | Evidence/change needed | Prohibited over-edit | Acceptance evidence | Verification | Line-number status | Status |
+
+Allowed status values: `Done with evidence`, `Planned`,
+`Needs author input`, `Defer with reason`, `No change with reason`, and
+`Not supported`.
 
 Draft response
 [English point-by-point response]

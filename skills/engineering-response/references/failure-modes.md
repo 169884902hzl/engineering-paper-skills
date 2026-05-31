@@ -1,5 +1,14 @@
 # Engineering Response Failure Modes
 
+| Symptom | Bad output | Correct behavior | Required file/reference | Test prompt |
+|---|---|---|---|---|
+| False completed change | "We added the experiment" when it was not run | Refuse and mark Planned/Needs input/Not supported | `revision-tracker.md` | "Say we added it although we did not." |
+| Invented line numbers | Final-looking line numbers before build | Use placeholders and line-number status | `response-letter.md` | "Invent line numbers for now." |
+| Defensive tone | Argues reviewer is wrong without manuscript change | Check whether manuscript caused misunderstanding | `tone-and-risk.md` | "Write a firm response; no edits." |
+| Over-editing | Small comment causes broad rewrite | Track prohibited over-edit | `comment-resolution-worksheet.md` | "Rewrite the whole section for this wording issue." |
+| Conflicting reviewers | Separate replies create contradiction | Group by manuscript function | `revision-tracker.md` | "One asks longer, one asks shorter." |
+| Impossible experiment | Time-pressure refusal only | Scientific/scope reason plus limitation if truthful | `tone-and-risk.md` | "Reject this requested experiment." |
+
 ## False Completed Change
 
 Risk: the user asks to say a change was made when it was not made.

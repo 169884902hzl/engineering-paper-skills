@@ -21,6 +21,21 @@ Expected behavior:
   numbers.
 - Include a claim-evidence map unless prose-only output was requested.
 
+Possible output skeleton:
+
+```text
+One-sentence thesis
+In contact-rich insertion, we address pose sensitivity by combining
+perception-guided policy execution with a guarded stage, supported by 50
+real-robot trials within one object family and fixture geometry.
+
+Draft
+[Five sentences: task failure, method, result, ablation, boundary.]
+
+Claim-evidence map
+| Claim | Evidence support | Boundary |
+```
+
 ## Evidence-Thin Scaffold
 
 Input:
@@ -35,6 +50,19 @@ Expected behavior:
 - Ask for problem, method, evidence, and boundary.
 - Provide a scaffold with placeholders if useful.
 - Mark unsupported claims explicitly.
+
+Possible output skeleton:
+
+```text
+Unsupported or downgraded claims
+| Requested claim | Status | Reason | Safe wording |
+| "better controller" | Unsupported | no metric, task, or comparison | "candidate controller" |
+
+Draft scaffold
+Paragraph 1: task and failure mode [needs task evidence]
+Paragraph 2: method idea [needs mechanism]
+Paragraph 3: contribution [blocked until evidence exists]
+```
 
 ## Section Routing
 
@@ -67,6 +95,15 @@ Expected behavior:
 - First build roles, inputs, outputs, loop order, gate, fallback, and boundary.
 - Then draft a reader path.
 
+Possible output skeleton:
+
+```text
+Methods reader path
+| Block | Paragraph job | Source anchor | Missing input |
+| Overview | Define closed-loop contract | module notes | sensor/state definition |
+| Gate/fallback | Define low-confidence stop | safety note | threshold or trigger |
+```
+
 ## Results Table Narration Repair
 
 Input:
@@ -83,6 +120,14 @@ Expected behavior:
 - Do not read each table cell mechanically.
 - State the tested condition and boundary.
 
+Possible output skeleton:
+
+```text
+Result paragraph plan
+| Question | Evidence | Interpretation | Boundary |
+| Does guarded execution matter? | Full 92%, w/o guarded execution 74% | guarded execution contributes to task success | tested table only |
+```
+
 ## Source Notes To English Introduction
 
 Input:
@@ -98,3 +143,12 @@ Expected behavior:
 - Separate facts from assumptions.
 - Use English manuscript prose.
 - Do not write the guessed mechanism as proven.
+
+Possible output skeleton:
+
+```text
+Source-note triage
+| Source item | Type | Can enter prose? | Handling |
+| active observation helps | Fact if supported by trials | yes with evidence | tie to trial result |
+| maybe because camera keeps view | Assumption | no as fact | mark as possible explanation |
+```

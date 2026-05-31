@@ -18,6 +18,18 @@ citation support.
 [citation needed: source-grounded paper supporting this route or limitation]
 ```
 
+## Source-Grounded Search Record
+
+When search is available, keep enough evidence to avoid citation drift:
+
+```text
+| Query | Source | Verified claim | Citation placeholder | Notes |
+|---|---|---|---|---|
+```
+
+The verified claim must be narrower than or equal to what the source actually
+supports.
+
 ## Related Work Output
 
 ```text

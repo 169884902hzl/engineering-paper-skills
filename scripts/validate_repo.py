@@ -27,8 +27,10 @@ REQUIRED_SHARED = {
     "evidence-boundary.md",
     "citation-boundary.md",
     "claim-strength.md",
+    "list-to-argument.md",
     "non-english-source-notes.md",
     "output-mode.md",
+    "terminology-ledger.md",
 }
 
 
@@ -72,16 +74,22 @@ STALE_PATTERNS = [
 REQUIRED_PROMPTS = {
     "router_min.md",
     "router_adversarial.md",
+    "router_realistic.md",
     "writing_min.md",
     "writing_adversarial.md",
+    "writing_realistic.md",
     "polishing_min.md",
     "polishing_adversarial.md",
+    "polishing_realistic.md",
     "figure_table_min.md",
     "figure_table_adversarial.md",
+    "figure_table_realistic.md",
     "response_min.md",
     "response_adversarial.md",
+    "response_realistic.md",
     "validation_min.md",
     "validation_adversarial.md",
+    "validation_realistic.md",
 }
 
 

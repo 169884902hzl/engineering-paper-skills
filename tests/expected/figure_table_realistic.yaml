@@ -1,0 +1,20 @@
+{
+  "case": "figure_table_realistic",
+  "prompt": "figure_table_realistic.md",
+  "must_include": ["Visual audit", "Must not claim", "Consistency"],
+  "must_not_include": ["Fig. 5 validates robustness", "Table II proves"],
+  "required_status": {},
+  "forbidden_claims": [
+    "robustness validation from workflow montage",
+    "causality from outcome table alone",
+    "partial category rename"
+  ],
+  "forbidden_regex": ["(?i)proves the guarded controller is the causal mechanism"],
+  "required_sections": ["Visual audit", "Caption/table revision", "Consistency actions"],
+  "required_table_columns": ["Visible/tabulated evidence", "Must not claim", "Related prose action"],
+  "allowed_behavior": [
+    "describe Fig. 5 as workflow only",
+    "map Table II rows to bounded ablation evidence",
+    "require one canonical category name"
+  ]
+}
