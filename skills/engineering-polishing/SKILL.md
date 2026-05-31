@@ -1,6 +1,6 @@
 ---
 name: engineering-polishing
-description: Polish, restructure, or translate source notes into English engineering manuscript prose while preserving evidence boundaries. Use when the user asks to improve English academic style, paragraph flow, claim strength, anti-AI wording, terminology consistency, hedging, clarity, or publication-ready expression for engineering conference or journal papers.
+description: Polish, locally restructure, or translate source notes into English engineering manuscript prose while preserving evidence boundaries. Use when the user asks to improve English academic style, paragraph flow, claim strength, anti-AI wording, terminology consistency, hedging, clarity, or publication-ready expression for existing engineering conference or journal paper content. Do not use for creating a new section argument, figure/table-only work, reviewer responses, or readiness validation.
 ---
 
 # Engineering Polishing
@@ -19,6 +19,17 @@ English manuscript prose without hiding structural or evidence problems.
   boundaries.
 - Prefer restrained, concrete academic English over promotional language.
 
+## Boundaries
+
+- If the paragraph lacks a stable claim-evidence structure, first return a logic
+  diagnosis and do not present polished prose as final.
+- Use `engineering-writing` when the user needs a new section argument,
+  contribution map, or full paper structure.
+- Use `engineering-figure-table` for captions, figure/table roles, or visual
+  consistency.
+- Use `engineering-response` for comments and response letters.
+- Use `engineering-validation` for build checks or readiness claims.
+
 ## When to Open Extra Files
 
 | File | Open when |
@@ -31,6 +42,8 @@ English manuscript prose without hiding structural or evidence problems.
 | [references/claim-strength.md](references/claim-strength.md) | Claims may overstate evidence, causality, robustness, generalization, or novelty |
 | [references/anti-ai-prose.md](references/anti-ai-prose.md) | Text sounds generic, repetitive, slogan-like, template-like, or model-generated |
 | [references/style-guardrails.md](references/style-guardrails.md) | Need sentence-level academic English, transitions, hedging, terminology, or mechanics |
+| [references/examples.md](references/examples.md) | Needing before/after examples or output behavior examples |
+| [references/failure-modes.md](references/failure-modes.md) | Handling requests to strengthen unsupported claims or hide weak evidence |
 
 ## Workflow
 

@@ -20,6 +20,17 @@ English responses.
 - When a comment reveals misunderstanding, first check whether the manuscript
   caused it.
 
+## Boundaries
+
+- Use this skill for comment triage, revision planning, rebuttal drafts, and
+  response letters.
+- Use `engineering-writing` for manuscript section drafting after a comment has
+  been turned into a concrete edit.
+- Use `engineering-polishing` for prose-only improvements.
+- Use `engineering-figure-table` for caption, figure, or table revisions.
+- Use `engineering-validation` before claiming a response package is complete or
+  before using final line numbers.
+
 ## When to Open Extra Files
 
 | File | Open when |
@@ -30,6 +41,8 @@ English responses.
 | [references/response-letter.md](references/response-letter.md) | Drafting point-by-point English responses |
 | [references/comment-examples.md](references/comment-examples.md) | Handling common comments about experiments, methods, claims, captions, related work, conclusions, or abstract |
 | [references/tone-and-risk.md](references/tone-and-risk.md) | Handling disagreement, impossible requests, missing experiments, or high-risk claims |
+| [references/examples.md](references/examples.md) | Needing concrete response tracker and reply examples |
+| [references/failure-modes.md](references/failure-modes.md) | Handling false completed-change claims or impossible reviewer requests |
 
 ## Workflow
 
@@ -51,7 +64,7 @@ Response strategy summary
 - Revision priority:
 
 Comment-response tracker
-| ID | Comment | Type | Target | Action | Missing input |
+| ID | Comment | Type | Severity | Target | Action | Evidence/change needed | Status |
 
 Draft response
 [English point-by-point response]

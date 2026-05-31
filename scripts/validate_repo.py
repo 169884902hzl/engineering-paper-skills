@@ -1,0 +1,180 @@
+#!/usr/bin/env python3
+"""Repository QA for Engineering Paper Skills."""
+
+from __future__ import annotations
+
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+SKILLS = sorted((ROOT / "skills").glob("engineering-*"))
+
+
+def s(*parts: str) -> str:
+    return "".join(parts)
+
+
+PRIVATE_PATTERNS = [
+    r"/home/",
+    r"/Users/",
+    r"C:\\Users\\",
+    s("ag", "ilex"),
+    s("cobot", "_magic"),
+    s("ieee", "_case", "2026"),
+    s("final", "_paper"),
+    "\u4f1a\u8bae\u8bba\u6587\u5199\u4f5c\u6307\u5357",
+    "\u5bfc\u5e08",
+    "\u5e08\u5144",
+    "\u5fae\u4fe1",
+    "\u624b\u673a\u53f7",
+]
+
+STALE_PATTERNS = [
+    r"TODO",
+    r"\[TODO\]",
+    r"FIXME",
+    r"TBD",
+    s("Source", " Basis"),
+    s("Source", " Mapping"),
+    s("source", "-to-", "skill"),
+    "\u6765\u6e90\u4f9d\u636e",
+    "\u6765\u6e90\u6620\u5c04",
+    s("dissert", "ation"),
+    "\u535a\u58eb",
+    s("paper", "-facing"),
+    s("truth", " layer"),
+    s("scope", " drift"),
+    s("money", " figure"),
+]
+
+REQUIRED_PROMPTS = {
+    "writing_min.md",
+    "writing_adversarial.md",
+    "polishing_min.md",
+    "polishing_adversarial.md",
+    "figure_table_min.md",
+    "figure_table_adversarial.md",
+    "response_min.md",
+    "response_adversarial.md",
+    "validation_min.md",
+    "validation_adversarial.md",
+}
+
+
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT))
+
+
+def read(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def md_files() -> list[Path]:
+    return [
+        p
+        for p in ROOT.rglob("*.md")
+        if ".git" not in p.parts and "tests/expected" not in str(p)
+    ]
+
+
+def check_structure(errors: list[str]) -> None:
+    if len(SKILLS) != 5:
+        errors.append(f"Expected 5 engineering skills, found {len(SKILLS)}")
+
+    for skill in SKILLS:
+        for required in ("SKILL.md", "references", "agents/openai.yaml"):
+            if not (skill / required).exists():
+                errors.append(f"{rel(skill)} missing {required}")
+
+        skill_md = skill / "SKILL.md"
+        if not skill_md.exists():
+            continue
+        text = read(skill_md)
+        if not text.startswith("---"):
+            errors.append(f"{rel(skill_md)} missing YAML frontmatter")
+        if "description:" not in text.split("---", 2)[1]:
+            errors.append(f"{rel(skill_md)} missing description")
+        if "## Boundaries" not in text:
+            errors.append(f"{rel(skill_md)} missing Boundaries section")
+        for ref in re.findall(r"\]\((references/[^)]+\.md)\)", text):
+            if not (skill / ref).exists():
+                errors.append(f"{rel(skill_md)} links missing reference {ref}")
+
+        agent = skill / "agents/openai.yaml"
+        if agent.exists():
+            agent_text = read(agent)
+            for key in ("display_name:", "short_description:", "default_prompt:"):
+                if key not in agent_text:
+                    errors.append(f"{rel(agent)} missing {key}")
+
+
+def check_links(errors: list[str]) -> None:
+    link_re = re.compile(r"\]\(([^)]+)\)")
+    for md in md_files():
+        text = read(md)
+        for match in link_re.finditer(text):
+            target = match.group(1)
+            if target.startswith(("http://", "https://", "mailto:", "#")):
+                continue
+            if target.startswith("<") and target.endswith(">"):
+                target = target[1:-1]
+            target_path = (md.parent / target).resolve()
+            if not target_path.exists():
+                errors.append(f"{rel(md)} broken relative link: {target}")
+
+
+def check_patterns(errors: list[str]) -> None:
+    scan_files = [
+        p
+        for p in ROOT.rglob("*")
+        if p.is_file()
+        and ".git" not in p.parts
+        and p.suffix in {".md", ".yaml", ".yml", ".py", ".sh", ".txt"}
+        and rel(p) != "scripts/validate_repo.py"
+    ]
+
+    for path in scan_files:
+        text = read(path)
+        for pattern in PRIVATE_PATTERNS:
+            if re.search(pattern, text, flags=re.IGNORECASE):
+                errors.append(f"{rel(path)} matches private pattern: {pattern}")
+        for pattern in STALE_PATTERNS:
+            if re.search(pattern, text, flags=re.IGNORECASE):
+                errors.append(f"{rel(path)} matches stale pattern: {pattern}")
+
+
+def check_prompts(errors: list[str]) -> None:
+    prompt_dir = ROOT / "tests/prompts"
+    expected_dir = ROOT / "tests/expected"
+    prompts = {p.name for p in prompt_dir.glob("*.md")} if prompt_dir.exists() else set()
+
+    missing = REQUIRED_PROMPTS - prompts
+    if missing:
+        errors.append(f"Missing prompt specs: {', '.join(sorted(missing))}")
+
+    for prompt_name in REQUIRED_PROMPTS:
+        expected = expected_dir / prompt_name
+        if not expected.exists():
+            errors.append(f"Missing expected behavior for {prompt_name}")
+
+
+def main() -> int:
+    errors: list[str] = []
+    check_structure(errors)
+    check_links(errors)
+    check_patterns(errors)
+    check_prompts(errors)
+
+    if errors:
+        print("Repository QA failed:")
+        for error in errors:
+            print(f"- {error}")
+        return 1
+
+    print("Repository QA passed.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

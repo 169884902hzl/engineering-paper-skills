@@ -1,6 +1,6 @@
 ---
 name: engineering-writing
-description: Draft, restructure, or plan English engineering research paper sections from author-provided claims, results, figures, notes, outlines, or manuscript drafts. Use when the user asks to write or rebuild a title, abstract, introduction, related work, methods, experiments/results, discussion, conclusion, full paper outline, section logic, contribution-evidence map, or IEEE/robotics conference manuscript argument.
+description: Draft, restructure, or plan English engineering research paper sections from author-provided claims, methods, results, figures, notes, outlines, LaTeX files, or manuscript drafts. Use for section logic, contribution-evidence mapping, abstract/introduction/related-work/methods/experiments/discussion/conclusion drafting, and evidence-bounded manuscript prose. Do not use for pure language polishing, figure/table-only work, reviewer responses, or final build/readiness validation unless the user explicitly asks for those workflows.
 ---
 
 # Engineering Writing
@@ -22,6 +22,17 @@ for writing the paper's argument, not merely polishing sentences.
 - For an existing paper, read the current live draft and relevant files before
   rewriting.
 
+## Boundaries
+
+- Use `engineering-polishing` for pure language polish after the section logic is
+  already stable.
+- Use `engineering-figure-table` for captions, table design, visual roles, and
+  figure/table consistency.
+- Use `engineering-response` for reviewer, editor, advisor, or senior-author
+  comments.
+- Use `engineering-validation` for build checks, readiness claims, citation
+  checks, and final submission QA.
+
 ## When to Open Extra Files
 
 | File | Open when |
@@ -39,6 +50,8 @@ for writing the paper's argument, not merely polishing sentences.
 | [references/section-boundaries.md](references/section-boundaries.md) | Auditing whether content belongs in the right section or when a section is drifting |
 | [references/section-budget.md](references/section-budget.md) | Checking whether a section is too thin, too dense, or taking space from evidence |
 | [references/source-learning.md](references/source-learning.md) | Learning structure from 3-5 neighboring papers without copying wording or surface format |
+| [references/examples.md](references/examples.md) | Needing concrete prompt and output behavior examples |
+| [references/failure-modes.md](references/failure-modes.md) | Handling thin evidence, invented-citation requests, or overclaim pressure |
 
 ## Intake
 
@@ -62,7 +75,9 @@ drafting. You may still provide a scaffold.
 
 1. Build a one-sentence thesis:
    `In [task/setting], we address [gap] by [method/formulation], supported by [evidence], within [boundary].`
-2. Create a contribution-evidence map before writing strong claims.
+2. Create a contribution-evidence map before writing strong claims. Use columns:
+   `Claim`, `First stated in`, `Mechanism support`, `Evidence`, and
+   `Boundary/overclaim risk`.
 3. Choose the section reference and assign one job to each paragraph.
 4. Draft from evidence outward.
 5. Calibrate claim verbs: `show`, `indicate`, `suggest`, `support`, `enable`,
@@ -78,7 +93,7 @@ Draft
 [English manuscript prose]
 
 Claim-evidence map
-| Claim | Evidence | Boundary |
+| Claim | First stated in | Mechanism support | Evidence | Boundary/overclaim risk |
 
 Missing evidence or assumptions
 - ...

@@ -1,5 +1,7 @@
 # Engineering Paper Skills
 
+Evidence-bound Codex skills for English engineering research papers.
+
 > **Statement**
 >
 > - This project provides five Codex skills for English engineering paper
@@ -13,6 +15,42 @@
 >   producing overconfident manuscript prose.
 
 ---
+
+## What This Does Not Do
+
+These skills do not replace real experiments, citation checking, advisor review,
+venue instructions, or author judgment. They cannot verify that an experiment is
+true, that a citation exists, or that a result is valid unless the relevant
+source material and verification tools are provided. When evidence is missing,
+the skills should ask for the missing evidence, downgrade the claim, or mark the
+output as unsupported.
+
+## Quick Start
+
+```bash
+git clone https://github.com/169884902hzl/engineering-paper-skills.git
+cd engineering-paper-skills
+cp -a skills/engineering-* ~/.codex/skills/
+```
+
+Restart Codex, then run:
+
+```text
+Use $engineering-writing to draft a five-sentence abstract from this evidence:
+- Method: perception-guided insertion with guarded execution.
+- Evidence: 92% success over 50 real-robot trials.
+- Boundary: one object family and one fixture geometry.
+Do not add citations, baselines, objects, or extra numbers.
+```
+
+For repository QA:
+
+```bash
+python scripts/validate_repo.py
+for s in skills/engineering-*; do
+  python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
+done
+```
 
 ## Project Overview
 
@@ -33,15 +71,23 @@ This project is useful for:
 
 ## Skill Set
 
-| Skill | Use it for |
+| Use case | Skill |
 |---|---|
-| `engineering-writing` | Paper structure, section drafting, contribution-evidence maps, and full manuscript argument |
-| `engineering-polishing` | English prose polishing, paragraph flow, claim strength, terminology, and anti-generic wording checks |
-| `engineering-figure-table` | Figure/table planning, captions, table notes, visual responsibility, and consistency checks |
-| `engineering-response` | Comment classification, revision planning, and point-by-point response drafting |
-| `engineering-validation` | Live-draft checks, LaTeX build checks, evidence audits, citation/figure/table checks, and final submission QA |
+| Plan or draft paper sections from claims, notes, figures, or results | `engineering-writing` |
+| Improve English prose, flow, hedging, terminology, and anti-generic wording | `engineering-polishing` |
+| Design figure/table responsibilities, captions, and visual evidence flow | `engineering-figure-table` |
+| Triage reviewer/advisor comments and draft evidence-linked responses | `engineering-response` |
+| Check manuscript readiness, LaTeX build state, claim-evidence alignment, and submission risks | `engineering-validation` |
 
 ## Installation
+
+### Prerequisites
+
+- Codex with local skills support enabled.
+- A writable Codex skills directory, usually `~/.codex/skills/`.
+- Python 3 for repository QA scripts.
+- Optional: LaTeX tools if you want `engineering-validation` to compile paper
+  projects.
 
 ### Method 1: Clone and Copy Skills
 
@@ -59,6 +105,44 @@ cp -a skills/engineering-* ~/.codex/skills/
 ```
 
 Restart Codex so the new skills are loaded.
+
+### Install One Skill
+
+```bash
+cp -a skills/engineering-writing ~/.codex/skills/
+```
+
+Use the same pattern for any other skill directory.
+
+### Update
+
+```bash
+cd engineering-paper-skills
+git pull
+cp -a skills/engineering-* ~/.codex/skills/
+```
+
+Restart Codex after updating.
+
+### Uninstall
+
+Remove the installed skill directories:
+
+```bash
+rm -rf ~/.codex/skills/engineering-writing \
+       ~/.codex/skills/engineering-polishing \
+       ~/.codex/skills/engineering-figure-table \
+       ~/.codex/skills/engineering-response \
+       ~/.codex/skills/engineering-validation
+```
+
+### Troubleshooting
+
+- Copy the whole skill directory, not only `SKILL.md`.
+- Restart Codex after install or update.
+- If a skill does not trigger, call it explicitly with `$skill-name`.
+- If validation claims are needed, provide the manuscript root and let the agent
+  report exactly which commands were run.
 
 ### Method 2: Manual Install
 
@@ -96,6 +180,21 @@ python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
 ```
 
 Repeat the command for the other four installed skill directories when needed.
+
+## Validation
+
+Before publishing changes to this repository, run the repository QA checks. A
+skill is not considered release-ready only because `quick_validate.py` passes.
+At minimum, validate every skill directory, check relative links, scan for
+private paths and stale wording, and review adversarial prompts that try to
+induce unsupported claims.
+
+```bash
+python scripts/validate_repo.py
+for s in skills/engineering-*; do
+  python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
+done
+```
 
 ## Basic Usage
 
@@ -187,8 +286,20 @@ The skills are organized around five writing constraints:
   evidence skill
 - `skills/engineering-response/`: reviewer/advisor response skill
 - `skills/engineering-validation/`: final manuscript validation skill
+- `scripts/validate_repo.py`: repository structure, link, wording, and prompt
+  coverage checks
+- `tests/prompts/`: minimal and adversarial prompt specs for each skill
+- `tests/expected/`: expected behavior summaries for prompt specs
 - `NOTICE.md`: third-party license notices
 - `OPEN_SOURCE_QA.md`: validation commands and release checks
+
+## Roadmap
+
+- Add executable prompt regression runs once the preferred Codex CLI interface is
+  fixed for this repository.
+- Add more full before/after examples for each skill.
+- Add LaTeX project QA helpers for labels, citations, page count, and warnings.
+- Consider optional packaging once the manual installation path is stable.
 
 ## Manual Use Without Installing
 
@@ -224,6 +335,15 @@ Good contribution areas include:
 - reviewer-response patterns for different venues
 - validation checklists for LaTeX and submission workflows
 - clearer anti-overclaim rules
+
+Before opening a pull request, run `python scripts/validate_repo.py`. Do not add
+private manuscripts, reviewer letters, unpublished data, local paths, or
+unsupported paper claims to public examples.
+
+## License and Notices
+
+This project is released under the MIT License. Third-party license notices are
+preserved in `NOTICE.md`.
 
 The goal is not to make papers sound longer or more impressive. The goal is to
 make technical claims clear, bounded, and supported.

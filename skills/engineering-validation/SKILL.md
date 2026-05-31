@@ -1,6 +1,6 @@
 ---
 name: engineering-validation
-description: Validate English engineering manuscript readiness before claiming edits are complete. Use when the user asks to check a paper, compile LaTeX, verify references, page count, citations, figure/table consistency, claim-evidence anchors, final-paper synchronization, submission checklist, or whether a conference/journal manuscript is safe to submit.
+description: Validate English engineering manuscript readiness before claiming edits are complete. Use when the user asks to check a paper, compile LaTeX, inspect references, page count, citations, figure/table consistency, claim-evidence anchors, final-paper synchronization, submission checklist, or whether a conference/journal manuscript is safe to submit. This is readiness validation, not certification that experiments, citations, or claims are true unless the relevant sources and checks were actually provided and inspected.
 ---
 
 # Engineering Validation
@@ -16,6 +16,30 @@ Use this skill before saying a paper edit is complete, fixed, or ready.
   manuscript correctness.
 - For existing paper repos, read the current live draft and project-specific
   instructions before validating.
+- This is readiness validation, not truth certification. Never certify
+  experiment truth, citation truth, or venue compliance without the relevant
+  source files, tools, and checks.
+
+## Boundaries
+
+- Use this skill for readiness checks, not for drafting new manuscript prose.
+- Use `engineering-writing` when the user needs new section structure or
+  claim-evidence planning before validation.
+- Use `engineering-polishing` for prose-only improvements.
+- Use `engineering-figure-table` for visual design before final consistency
+  checks.
+- Use `engineering-response` for reviewer/advisor reply drafting before final
+  response package validation.
+
+## Status Vocabulary
+
+- `PASS`: checked directly and no issue found.
+- `FAIL`: checked directly and an issue was found.
+- `PARTIAL`: checked only in part; name the unchecked part.
+- `NOT_RUN`: check was relevant but not run.
+- `UNKNOWN`: cannot determine from provided material.
+
+Overall readiness can only be `READY`, `NOT_READY`, or `CANNOT_DETERMINE`.
 
 ## When to Open Extra Files
 
@@ -27,6 +51,8 @@ Use this skill before saying a paper edit is complete, fixed, or ready.
 | [references/final-readonly-check.md](references/final-readonly-check.md) | Running the final 30-minute style read-only inspection |
 | [references/error-archive.md](references/error-archive.md) | Diagnosing common manuscript failure symptoms and the first section to inspect |
 | [references/submission-checklist.md](references/submission-checklist.md) | Final read-only inspection before submission |
+| [references/examples.md](references/examples.md) | Needing concrete validation report examples |
+| [references/failure-modes.md](references/failure-modes.md) | Handling requests to certify readiness without running checks |
 
 ## Workflow
 
@@ -42,9 +68,16 @@ Use this skill before saying a paper edit is complete, fixed, or ready.
 
 ```text
 Validation result
-- Status:
+- Build: PASS / FAIL / NOT_RUN / UNKNOWN
+- References: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
+- Figures/tables: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
+- Claim-evidence audit: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
+- Private/stale wording scan: PASS / FAIL / NOT_RUN / UNKNOWN
+- Overall readiness: READY / NOT_READY / CANNOT_DETERMINE
+
+Evidence
 - Commands run:
-- Evidence:
+- Files inspected:
 - Failures:
 - Not verified:
 
