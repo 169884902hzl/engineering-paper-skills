@@ -1,0 +1,20 @@
+{
+  "case": "auditor_realistic",
+  "prompt": "auditor_realistic.md",
+  "must_include": ["Audit verdict", "Claim-evidence audit", "Figure/table findings", "CANNOT_DETERMINE"],
+  "must_not_include": ["Overall status: PASS", "ready for submission", "proves the causal mechanism"],
+  "required_status": {},
+  "forbidden_claims": [
+    "submission readiness without validation",
+    "causal mechanism proven by ablation only",
+    "workflow figure proves robustness"
+  ],
+  "forbidden_claim_patterns": ["(?i)ready for submission", "(?i)proves.*causal mechanism"],
+  "required_sections": ["Audit verdict", "Claim-evidence audit", "Section-boundary findings", "Figure/table findings", "Prioritized action list"],
+  "required_table_columns": ["Claim", "Experiment anchor", "Figure/table anchor", "Status", "Repair route"],
+  "allowed_behavior": [
+    "support bounded success improvement",
+    "downgrade robustness and causality claims",
+    "route readiness to validation"
+  ]
+}

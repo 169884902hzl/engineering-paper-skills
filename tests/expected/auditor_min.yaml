@@ -1,0 +1,19 @@
+{
+  "case": "auditor_min",
+  "prompt": "auditor_min.md",
+  "must_include": ["Audit verdict", "Claim-evidence audit", "FAIL"],
+  "must_not_include": ["Overall status: PASS\n", "robust to occlusion is supported"],
+  "required_status": {},
+  "forbidden_claims": [
+    "robustness claim accepted from one main result table",
+    "stress-test evidence invented"
+  ],
+  "forbidden_claim_patterns": ["(?i)robust.*supported.*single tested condition"],
+  "required_sections": ["Audit verdict", "Claim-evidence audit", "Prioritized action list"],
+  "required_table_columns": ["Claim", "Experiment anchor", "Status", "Repair route"],
+  "allowed_behavior": [
+    "mark robustness claim as unsupported",
+    "route repair to writing or validation",
+    "name missing stress or occlusion evidence"
+  ]
+}

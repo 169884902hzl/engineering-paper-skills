@@ -1,0 +1,48 @@
+version: 1
+always_load:
+  - references/contribution-evidence.md
+  - ../_shared/evidence-boundary.md
+  - ../_shared/claim-strength.md
+  - ../_shared/output-mode.md
+axes:
+  section:
+    abstract:
+      load:
+        - references/abstract.md
+    introduction:
+      load:
+        - references/introduction.md
+    related_work:
+      load:
+        - references/related-work.md
+        - ../_shared/citation-boundary.md
+    methods:
+      load:
+        - references/methods.md
+        - references/methods-worksheet.md
+    experiments:
+      load:
+        - references/experiments.md
+        - references/experiments-worksheet.md
+    discussion:
+      load:
+        - references/discussion.md
+    conclusion:
+      load:
+        - references/conclusion.md
+  input_state:
+    thin_notes:
+      load:
+        - ../_shared/non-english-source-notes.md
+    list_like:
+      load:
+        - ../_shared/list-to-argument.md
+    over_length:
+      load:
+        - references/page-budget-war-plan.md
+    failure_repair:
+      load:
+        - references/bad-sentence-repairs.md
+notes:
+  - This manifest is an explicit routing map for humans and agents. Codex still
+    follows SKILL.md as the entrypoint.

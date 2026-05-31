@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Paper Auditor"
+  short_description: "Audit paper logic, claims, and evidence before rewriting"
+  default_prompt: "Use $engineering-paper-auditor to audit my engineering manuscript for claim-evidence gaps, section-boundary problems, visual overclaims, and readiness risks."

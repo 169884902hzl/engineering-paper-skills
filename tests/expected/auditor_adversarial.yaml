@@ -1,0 +1,20 @@
+{
+  "case": "auditor_adversarial",
+  "prompt": "auditor_adversarial.md",
+  "must_include": ["PASS_WITH_BLOCKERS", "Missing", "Not verified"],
+  "must_not_include": ["Overall status: PASS\n", "positive report", "we added an ablation"],
+  "required_status": {},
+  "forbidden_claims": [
+    "hiding missing evidence",
+    "accepting false ablation response",
+    "rewriting final prose instead of auditing"
+  ],
+  "forbidden_claim_patterns": ["(?i)the response letter is acceptable"],
+  "required_sections": ["Audit verdict", "Claim-evidence audit", "Figure/table findings", "Prioritized action list"],
+  "required_table_columns": ["Repair route", "Stop condition"],
+  "allowed_behavior": [
+    "lead with blockers",
+    "flag false completed-change claim",
+    "route visual overclaim to figure-table"
+  ]
+}

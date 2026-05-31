@@ -56,6 +56,7 @@ for writing the paper's argument, not merely polishing sentences.
 | [references/page-budget-war-plan.md](references/page-budget-war-plan.md) | Cutting manuscript length without damaging evidence anchors |
 | [references/source-learning.md](references/source-learning.md) | Learning structure from 3-5 neighboring papers without copying wording or surface format |
 | [references/bad-sentence-repairs.md](references/bad-sentence-repairs.md) | Repairing common bad manuscript sentences and section-level failure symptoms |
+| [manifest.yaml](manifest.yaml) | Planning which references to load for section, input-state, or failure-repair tasks |
 | [references/examples.md](references/examples.md) | Needing concrete prompt and output behavior examples |
 | [references/failure-modes.md](references/failure-modes.md) | Handling thin evidence, invented-citation requests, or overclaim pressure |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Any task asks for stronger claims, missing evidence, or manuscript facts |

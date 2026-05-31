@@ -27,6 +27,7 @@ REQUIRED_KEYS = {
 
 OPTIONAL_LIST_KEYS = {
     "forbidden_regex",
+    "forbidden_claim_patterns",
     "required_sections",
     "required_table_columns",
 }
@@ -103,7 +104,7 @@ def validate_specs(spec_dir: Path) -> list[str]:
             for key in OPTIONAL_LIST_KEYS:
                 if key in data:
                     values = _expect_list(path, data, key)
-                    if key == "forbidden_regex":
+                    if key in {"forbidden_regex", "forbidden_claim_patterns"}:
                         for pattern in values:
                             try:
                                 re.compile(pattern)
@@ -112,6 +113,16 @@ def validate_specs(spec_dir: Path) -> list[str]:
             for key in OPTIONAL_DICT_KEYS:
                 if key in data:
                     _expect_dict(path, data, key)
+
+            if data["forbidden_claims"] and not (
+                data["must_not_include"]
+                or data.get("forbidden_regex")
+                or data.get("forbidden_claim_patterns")
+            ):
+                raise ValueError(
+                    f"{path}: forbidden_claims must be backed by must_not_include, "
+                    "forbidden_regex, or forbidden_claim_patterns"
+                )
 
             if path.stem + ".md" != prompt:
                 raise ValueError(f"{path}: prompt should match spec basename")
@@ -156,6 +167,10 @@ def check_outputs(spec_dir: Path, outputs_dir: Path) -> list[str]:
         for pattern in data.get("forbidden_regex", []):
             if re.search(pattern, output, flags=re.IGNORECASE | re.MULTILINE):
                 errors.append(f"{case}: forbidden regex matched: {pattern}")
+
+        for pattern in data.get("forbidden_claim_patterns", []):
+            if re.search(pattern, output, flags=re.IGNORECASE | re.MULTILINE):
+                errors.append(f"{case}: forbidden claim pattern matched: {pattern}")
 
         for section in data.get("required_sections", []):
             if section.lower() not in output_lower:

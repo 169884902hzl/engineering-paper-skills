@@ -4,9 +4,9 @@ Evidence-bound Codex skills for English engineering research papers.
 
 > **Statement**
 >
-> - This project provides five task skills plus a routing skill for English
->   engineering paper writing, polishing, figures and tables, revision
->   responses, and validation.
+> - This project provides six task skills plus a routing skill for English
+>   engineering paper auditing, writing, polishing, figures and tables,
+>   revision responses, and validation.
 > - The skills help organize and express author-provided research content. They
 >   do not replace real experiments, citation checking, advisor review, or venue
 >   requirements.
@@ -76,6 +76,7 @@ This project is useful for:
 | Use case | Skill |
 |---|---|
 | Unsure which workflow to use, or planning a mixed paper task | `engineering-paper-router` |
+| Audit paper logic, claim-evidence gaps, section drift, and visual overclaims before rewriting | `engineering-paper-auditor` |
 | Plan or draft paper sections from claims, notes, figures, or results | `engineering-writing` |
 | Improve English prose, flow, hedging, terminology, and anti-generic wording | `engineering-polishing` |
 | Design figure/table responsibilities, captions, and visual evidence flow | `engineering-figure-table` |
@@ -137,6 +138,7 @@ rm -rf ~/.codex/skills/engineering-writing \
        ~/.codex/skills/engineering-figure-table \
        ~/.codex/skills/engineering-response \
        ~/.codex/skills/engineering-validation \
+       ~/.codex/skills/engineering-paper-auditor \
        ~/.codex/skills/engineering-paper-router \
        ~/.codex/skills/_shared
 ```
@@ -166,6 +168,7 @@ rm -rf ~/.codex/skills/engineering-writing \
 ├── engineering-figure-table/
 ├── engineering-response/
 ├── engineering-validation/
+├── engineering-paper-auditor/
 └── engineering-paper-router/
 ```
 
@@ -212,6 +215,15 @@ done
 Use $engineering-writing to write an Introduction section from this outline:
 
 [paste problem, gap, method, evidence, and contribution notes]
+```
+
+### Audit Before Rewriting
+
+```text
+Use $engineering-paper-auditor to audit this manuscript section before I revise
+it:
+
+[paste section, claims, figures/tables, and evidence notes]
 ```
 
 ### Polish Existing Text
@@ -292,6 +304,8 @@ The skills are organized around five writing constraints:
   list-to-argument, terminology-ledger, source-note, and output-mode rules
 - `skills/engineering-paper-router/`: routing skill for ambiguous or mixed paper
   tasks
+- `skills/engineering-paper-auditor/`: reviewer-like paper audit skill for
+  claim-evidence, section-boundary, visual, and readiness risks
 - `skills/engineering-writing/`: drafting and manuscript-structure skill
 - `skills/engineering-polishing/`: English polishing and claim-boundary skill
 - `skills/engineering-figure-table/`: figure, table, caption, and visual
@@ -304,8 +318,10 @@ The skills are organized around five writing constraints:
 - `scripts/run_prompt_regression.py`: optional prompt regression runner
 - `tests/prompts/`: minimal, realistic, and adversarial prompt specs for each
   skill
+- `tests/outputs/golden/`: golden output snapshots for expected-behavior checks
 - `tests/expected/`: structured expected-behavior specs for prompt checks,
-  including forbidden regexes and required output sections
+  including forbidden regexes, forbidden claim patterns, and required output
+  sections
 - `NOTICE.md`: third-party license notices
 - `OPEN_SOURCE_QA.md`: validation commands and release checks
 

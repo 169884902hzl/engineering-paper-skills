@@ -4,6 +4,7 @@ This directory gives quick task examples. The executable prompt specifications
 used for release QA live in `tests/prompts/`.
 
 For more realistic regression inputs, see `tests/prompts/*_realistic.md`.
+For complete before/after demos, see `examples/before-after/`.
 
 ## Router
 
@@ -28,6 +29,16 @@ Do not add citations, baselines, objects, or extra numbers.
 ```
 
 Expected behavior: English abstract plus bounded claim-evidence mapping.
+
+## Auditor
+
+```text
+Use $engineering-paper-auditor to audit whether this Introduction contribution
+is supported by Methods, Experiments, and figures.
+```
+
+Expected behavior: prioritized findings, claim-evidence audit, and repair routes
+instead of final prose.
 
 ## Polishing
 

@@ -5,4 +5,6 @@ __pycache__/
 .vscode/
 *.swp
 *.swo
-tests/outputs/
+tests/outputs/*
+!tests/outputs/golden/
+!tests/outputs/golden/*.md

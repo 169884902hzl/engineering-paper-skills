@@ -7,6 +7,7 @@ Run these checks before publishing, tagging, or accepting a pull request.
 ```bash
 python scripts/validate_repo.py
 python scripts/check_expected_behavior.py --spec-dir tests/expected
+python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-dir tests/outputs/golden
 python scripts/run_prompt_regression.py
 ```
 
@@ -19,6 +20,7 @@ This checks:
 - private-path and stale-wording patterns
 - structured expected minimal, realistic, and adversarial prompt specs
 - optional prompt regression output checks when outputs are provided
+- golden output snapshots under `tests/outputs/golden`
 
 ## Codex Skill Validation
 
@@ -38,6 +40,7 @@ rg -n "[\\p{Han}]" skills
 For this package, validation was run on both installed skill sources and copied
 package skill directories:
 
+- `engineering-paper-auditor`
 - `engineering-writing`
 - `engineering-polishing`
 - `engineering-figure-table`
@@ -67,6 +70,6 @@ All returned `Skill is valid!` during the hardening pass.
   `UNKNOWN`.
 - Minimal and adversarial prompt specs still match the intended behavior.
 - Expected prompt behavior uses structured `.yaml` specs with forbidden claims,
-  forbidden regexes, required sections, status expectations, and allowed
-  behavior.
+  forbidden regexes, forbidden claim patterns, required sections, status
+  expectations, and allowed behavior.
 - Third-party license notices are preserved.

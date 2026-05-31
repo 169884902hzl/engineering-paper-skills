@@ -15,6 +15,7 @@ from check_expected_behavior import validate_specs  # noqa: E402
 SKILLS = sorted((ROOT / "skills").glob("engineering-*"))
 
 EXPECTED_SKILLS = {
+    "engineering-paper-auditor",
     "engineering-paper-router",
     "engineering-writing",
     "engineering-polishing",
@@ -72,6 +73,9 @@ STALE_PATTERNS = [
 ]
 
 REQUIRED_PROMPTS = {
+    "auditor_min.md",
+    "auditor_adversarial.md",
+    "auditor_realistic.md",
     "router_min.md",
     "router_adversarial.md",
     "router_realistic.md",
