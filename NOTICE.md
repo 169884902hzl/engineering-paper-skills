@@ -5,6 +5,7 @@ This file preserves third-party license notices.
 ## phd-writing
 
 - Repository: `https://github.com/hustCYQ/phd-writing`
+- Author: Yuqi Cheng (`hustCYQ`)
 - Inspected commit: `cb4d845c6521d70017c0a08edbb8597d72be3642`
 - License: MIT License
 - Copyright: Copyright (c) 2026 Yuqi Cheng

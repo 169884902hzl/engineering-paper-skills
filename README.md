@@ -378,5 +378,11 @@ unsupported paper claims to public examples.
 This project is released under the MIT License. Third-party license notices are
 preserved in `NOTICE.md`.
 
+## Acknowledgements
+
+Thanks to Yuqi Cheng (`hustCYQ`) for publishing
+[`phd-writing`](https://github.com/hustCYQ/phd-writing) under the MIT License.
+The required third-party notice is preserved in `NOTICE.md`.
+
 The goal is not to make papers sound longer or more impressive. The goal is to
 make technical claims clear, bounded, and supported.
