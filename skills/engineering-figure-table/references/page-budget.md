@@ -19,6 +19,10 @@ Use this when the paper is over page budget.
 - framework visual if it is the only system overview
 - caption definitions needed to understand categories or metrics
 
+Do not cut evenly across all sections. Cut repetition and setup compression
+first, while protecting formulation, main results, ablations, and failure
+boundaries.
+
 ## Dangerous Cuts
 
 - shrinking a figure until labels cannot be read

@@ -42,3 +42,21 @@ Flag to user before final response if:
 - line numbers or figure panels are unknown
 - reviewers conflict
 - appeal-like language appears
+
+## Misunderstood Because Manuscript Is Unclear
+
+If the reviewer is wrong but the manuscript made the misunderstanding possible,
+revise first and then respond.
+
+Pattern:
+
+```text
+We clarified in [section/figure/table] that [correct interpretation]. The
+revision now distinguishes [misread point] from [actual method/claim].
+```
+
+Avoid:
+
+```text
+The reviewer misunderstood our method.
+```

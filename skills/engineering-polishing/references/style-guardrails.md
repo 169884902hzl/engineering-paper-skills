@@ -28,3 +28,12 @@ Avoid using transitions to force unrelated sentences together.
 - Use parentheses for short clarifications.
 - Use colons sparingly for definitions or lists.
 - Keep equations and variable references exact.
+
+## Terminology Lock
+
+Do not vary names for technical objects just to make prose sound less
+repetitive. If the manuscript uses `active observer camera`, do not alternate
+with `view arm`, `auxiliary camera`, and `visual module` unless those terms are
+defined as different objects.
+
+Use sentence variation around stable terms, not synonym drift.

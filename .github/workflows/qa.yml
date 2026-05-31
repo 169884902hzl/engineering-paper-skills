@@ -13,3 +13,4 @@ jobs:
         with:
           python-version: "3.x"
       - run: python scripts/validate_repo.py
+      - run: python scripts/check_expected_behavior.py --spec-dir tests/expected

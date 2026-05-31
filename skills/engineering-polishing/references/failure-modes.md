@@ -35,3 +35,22 @@ Response:
 
 - Separate facts from assumptions.
 - Translate only source-supported facts into final manuscript prose.
+
+## Fluent But Unsupported
+
+Risk: a paragraph becomes clear and elegant while still claiming effects not
+shown by the evidence.
+
+Response: return a diagnosis and conservative rewrite; list unsupported claims.
+
+## Over-Polished Novelty
+
+Risk: ordinary engineering choices are rewritten as a novel framework.
+
+Response: keep novelty tied to the provided contribution and evidence.
+
+## Style Variation Causes Terminology Drift
+
+Risk: the rewrite varies technical nouns for style.
+
+Response: preserve established terms and vary syntax instead.

@@ -46,3 +46,15 @@ Expected behavior:
 - Status: `Done with evidence`.
 - Response can say the caption was revised.
 - Do not invent line numbers unless final line numbers are provided.
+
+## Five-Comment Package Sketch
+
+| ID | Comment | Decision | Status | Response posture |
+|---|---|---|---|---|
+| R1.1 | Add ablation. | revise if data exists; otherwise planned | Needs author input | no completed-change claim |
+| R1.2 | Method unclear. | revise Methods | Planned | clarify manuscript first |
+| R2.1 | Caption overclaims. | revise caption | Done with evidence if caption changed | state exact caption change |
+| R2.2 | Too much setup. | compress setup into table | Planned | preserve reproducibility |
+| R2.3 | Add broader deployment. | defer with reason | Defer with reason | state evaluation boundary |
+
+Line numbers remain pending until final build.

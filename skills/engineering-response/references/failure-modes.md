@@ -36,3 +36,25 @@ Response:
 
 - Define the minimum change that resolves the comment.
 - Track prohibited over-edit in the revision plan.
+
+## Conflicting Reviewers
+
+Risk: one reviewer asks for more detail while another asks for compression.
+
+Response:
+
+- Group comments by manuscript function.
+- Preserve the evidence-bearing detail.
+- Move secondary details to a table, appendix, or concise clarification when
+  allowed.
+- Do not write final replies before the merged revision plan is clear.
+
+## Impossible Central Experiment
+
+Risk: a reviewer asks for a new experiment that cannot be run in the revision.
+
+Response:
+
+- Do not cite time pressure as the main reason.
+- Give a scientific or scope reason.
+- Add a limitation or clarify the evaluation boundary when truthful.

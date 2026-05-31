@@ -41,3 +41,12 @@ For each paper, record:
 
 If your notes contain mainly phrases, terms, model names, figure counts, or table
 styles, you extracted the wrong thing. Rewrite the notes as reader-path rules.
+
+## Bad Extraction Examples
+
+- Copying a model-name list instead of learning how the paper groups methods.
+- Counting figures and reproducing the same figure order without matching your
+  evidence flow.
+- Copying a citation-count pattern instead of identifying the nearest-neighbor
+  distinction.
+- Importing a strong claim from a stronger paper when your evidence is local.

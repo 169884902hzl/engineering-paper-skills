@@ -15,9 +15,9 @@ If this sentence cannot be completed, the paper is not ready for strong prose.
 
 ## Contribution-Evidence Table
 
-| Contribution | First stated | Mechanism or method support | Evidence support | Overclaim risk |
-|---|---|---|---|---|
-|  |  |  |  |  |
+| Contribution | First stated | Mechanism or method support | Evidence support | Boundary | Overclaim repair |
+|---|---|---|---|---|---|
+|  |  |  |  |  |  |
 
 Rules:
 
@@ -26,6 +26,8 @@ Rules:
 - If evidence supports only a trend, do not claim a mechanism.
 - If evidence is local, do not claim generalization.
 - If a stress test shows sensitivity, write the boundary as clearly as the gain.
+- If a contribution cannot fill the mechanism and evidence columns, it can
+  appear as motivation or future work, not as a main contribution.
 
 ## Claim Strength Ladder
 

@@ -52,3 +52,11 @@ claim] is not provided.
 Data is not decoration. If a paragraph includes a number, explain which
 performance judgment, comparison, or mechanism interpretation it supports. If
 the source does not provide that relation, keep the number descriptive.
+
+## Fact Preservation Table
+
+Use this before and after a substantial rewrite:
+
+| Source item | Rewritten item | Changed? | Needs hedge? | Must not infer |
+|---|---|---|---|---|
+|  |  |  |  |  |

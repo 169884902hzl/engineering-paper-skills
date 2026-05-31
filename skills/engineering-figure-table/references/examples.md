@@ -43,3 +43,21 @@ Expected behavior:
 
 - Recommend a setup table if the list interrupts the argument.
 - Keep the prose focused on fairness and reproducibility.
+
+## Visual Audit Example
+
+| Item | Responsibility | Visible/tabulated evidence | Claim supported | Must not claim | Action |
+|---|---|---|---|---|---|
+| Fig. 2 | System reader path | roles and information flow | how components interact | success, robustness, causality | caption points to Methods sections |
+| Table II | Ablation evidence | success drop after removing components | component contribution under protocol | universal mechanism proof | add boundary note |
+
+## Page-Budget Cut Example
+
+Input: setup paragraph lists cameras, resolution, controller rate, object count,
+trial count, and table repeats some values.
+
+Expected behavior:
+
+- Move reproducibility facts to setup table.
+- Keep baseline fairness in prose.
+- Do not cut main result or ablation explanation first.

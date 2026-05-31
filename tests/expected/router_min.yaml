@@ -1,0 +1,17 @@
+{
+  "case": "router_min",
+  "prompt": "router_min.md",
+  "must_include": ["Recommended route", "Required inputs", "Next prompt"],
+  "must_not_include": ["Final abstract", "Overall readiness: READY"],
+  "required_status": {},
+  "forbidden_claims": [
+    "drafting final prose during routing",
+    "collapsing mixed workflow into one task",
+    "claiming readiness"
+  ],
+  "allowed_behavior": [
+    "name primary and secondary skills",
+    "order writing, figure-table, response, and validation tasks",
+    "list missing inputs"
+  ]
+}

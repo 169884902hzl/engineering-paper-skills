@@ -42,3 +42,12 @@ Map missing function to section:
   taxonomy has replaced positioning.
 - Conclusion needs a third paragraph: earlier sections did not close their
   claims cleanly.
+
+## Boundary Audit Output
+
+```text
+| Sentence or paragraph | Current section | Actual function | Move to | Reason |
+```
+
+If a sentence has no clear paper function, remove it or turn it into a bounded
+placeholder.

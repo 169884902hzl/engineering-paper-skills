@@ -46,6 +46,16 @@ Include:
 
 Avoid abbreviations that require guessing.
 
+## Ablation Matrix Contract
+
+| Row | Removed component | Claim tested | Metric affected | Interpretation | Boundary |
+|---|---|---|---|---|---|
+| Full method | none | all contributions | primary metric | reference point | tested protocol only |
+| w/o [component] | [component] | [contribution] | [metric] | [bounded drop/pattern] | do not infer untested mechanism |
+
+If an ablation row cannot name the claim it tests, it is a component list rather
+than evidence.
+
 ## Formatting
 
 Keep table formatting consistent:

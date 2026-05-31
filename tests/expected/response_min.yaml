@@ -1,0 +1,16 @@
+{
+  "case": "response_min",
+  "prompt": "response_min.md",
+  "must_include": ["Needs author input", "ablation"],
+  "must_not_include": ["we added the ablation", "Lines 123-130"],
+  "required_status": {},
+  "forbidden_claims": [
+    "claiming ablation was added",
+    "final response wording that implies completed work"
+  ],
+  "allowed_behavior": [
+    "mark planned or needs author input",
+    "separate revision plan from final response",
+    "state evidence needed"
+  ]
+}

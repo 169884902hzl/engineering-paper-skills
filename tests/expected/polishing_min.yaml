@@ -1,0 +1,18 @@
+{
+  "case": "polishing_min",
+  "prompt": "polishing_min.md",
+  "must_include": ["Diagnosis", "Polished version"],
+  "must_not_include": ["This proves the mechanism", "is totally robust across settings"],
+  "required_status": {},
+  "forbidden_claims": [
+    "new mechanism",
+    "new benchmark",
+    "new explanation",
+    "changed 71% or 86%"
+  ],
+  "allowed_behavior": [
+    "downgrade overstrong verbs",
+    "preserve 71% and 86%",
+    "mark evidence risk"
+  ]
+}

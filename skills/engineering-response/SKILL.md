@@ -43,6 +43,10 @@ English responses.
 | [references/tone-and-risk.md](references/tone-and-risk.md) | Handling disagreement, impossible requests, missing experiments, or high-risk claims |
 | [references/examples.md](references/examples.md) | Needing concrete response tracker and reply examples |
 | [references/failure-modes.md](references/failure-modes.md) | Handling false completed-change claims or impossible reviewer requests |
+| [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | A response may claim unsupported experiments, citations, or edits |
+| [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | A response mentions added or corrected references |
+| [../_shared/claim-strength.md](../_shared/claim-strength.md) | A response or manuscript change needs claim downgrading |
+| [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for response text only |
 
 ## Workflow
 
@@ -59,15 +63,21 @@ English responses.
 
 ```text
 Response strategy summary
-- Decision type:
+- Package status:
 - Main risks:
-- Revision priority:
+- Validation needed before final response:
 
 Comment-response tracker
-| ID | Comment | Type | Severity | Target | Action | Evidence/change needed | Status |
+| ID | Original comment | Type | Severity | Real complaint | First target | Second target | Action | Evidence/change needed | Prohibited over-edit | Acceptance evidence | Verification | Line-number status | Status |
 
 Draft response
 [English point-by-point response]
+
+Unverified items
+- line numbers:
+- experiments:
+- citations:
+- figures/tables:
 
 Revision checklist
 - ...

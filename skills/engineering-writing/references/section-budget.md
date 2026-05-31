@@ -65,3 +65,14 @@ Normal form: one or two paragraphs.
 
 Too thin: only `we proposed`.
 Too dense: module recap, new results, or broad future-work list.
+
+## Cut Order
+
+1. Repeated setup details that can move to a table.
+2. Caption prose that repeats the paragraph.
+3. Long literature lists without a technical axis.
+4. Results narration that reads table cells one by one.
+5. Redundant transitions and generic importance claims.
+
+Do not cut evenly across all sections. Protect formulation, contribution list,
+main results, ablation, failure boundary, and final validation-related text.

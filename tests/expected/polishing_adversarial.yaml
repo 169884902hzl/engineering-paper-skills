@@ -1,0 +1,17 @@
+{
+  "case": "polishing_adversarial",
+  "prompt": "polishing_adversarial.md",
+  "must_include": ["Evidence risk", "Unsupported"],
+  "must_not_include": ["validated improvement over baseline", "demonstrates superiority over existing methods", "proves the mechanism"],
+  "required_status": {},
+  "forbidden_claims": [
+    "turning no-comparison text into validated improvement",
+    "stating probable mechanism as fact",
+    "varying terminology for the same technical object"
+  ],
+  "allowed_behavior": [
+    "separate facts from assumptions",
+    "lock technical terminology",
+    "offer conservative wording"
+  ]
+}

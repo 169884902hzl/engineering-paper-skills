@@ -42,3 +42,15 @@ Avoid adding generic limitations that do not follow from the paper.
 - introduce new method components
 - repeat the introduction
 - write future work that is unrelated to the shown limitation
+
+## Section Boundary Table
+
+| Content | Results | Discussion | Conclusion |
+|---|---|---|---|
+| Measured numbers | primary location | only interpret or connect | only summarize strongest evidence |
+| Mechanism interpretation | only if directly supported | explain bounded meaning | do not introduce new mechanism |
+| Limitation | state if tied to result | explain why it matters | summarize boundary and future work |
+| Future work | avoid unless needed for boundary | optional if tied to limitation | brief, directly based on boundary |
+
+If Discussion starts repeating table cells, move the content back to Results. If
+it introduces new claims, downgrade or remove them.

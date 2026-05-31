@@ -1,0 +1,20 @@
+{
+  "case": "writing_min",
+  "prompt": "writing_min.md",
+  "must_include": ["One-sentence thesis", "Claim-evidence map"],
+  "must_not_include": ["SOTA", "guarantees", "complete generalization"],
+  "required_status": {},
+  "forbidden_claims": [
+    "invented citations",
+    "invented datasets",
+    "invented mechanisms",
+    "extra numbers beyond 120 trials, 86%, and 71%",
+    "claims beyond complete target invisibility boundary"
+  ],
+  "allowed_behavior": [
+    "English abstract prose",
+    "preserve provided numbers",
+    "state limitation",
+    "include evidence map unless output-only mode is requested"
+  ]
+}

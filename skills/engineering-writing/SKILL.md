@@ -52,6 +52,11 @@ for writing the paper's argument, not merely polishing sentences.
 | [references/source-learning.md](references/source-learning.md) | Learning structure from 3-5 neighboring papers without copying wording or surface format |
 | [references/examples.md](references/examples.md) | Needing concrete prompt and output behavior examples |
 | [references/failure-modes.md](references/failure-modes.md) | Handling thin evidence, invented-citation requests, or overclaim pressure |
+| [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Any task asks for stronger claims, missing evidence, or manuscript facts |
+| [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | Related Work or citations are requested without provided sources |
+| [../_shared/claim-strength.md](../_shared/claim-strength.md) | Calibrating verbs, novelty, robustness, generalization, or causal language |
+| [../_shared/non-english-source-notes.md](../_shared/non-english-source-notes.md) | Non-English notes must become English manuscript prose |
+| [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for output only |
 
 ## Intake
 
@@ -89,11 +94,20 @@ drafting. You may still provide a scaffold.
 ## Default Output
 
 ```text
+One-sentence thesis
+[In task/setting, we address gap by method/formulation, supported by evidence, within boundary.]
+
+Section job map
+| Section/paragraph | Job | Evidence anchor | Boundary |
+
 Draft
 [English manuscript prose]
 
 Claim-evidence map
-| Claim | First stated in | Mechanism support | Evidence | Boundary/overclaim risk |
+| Claim | First stated in | Mechanism support | Evidence support | Boundary/overclaim risk | Repair |
+
+Unsupported or downgraded claims
+| Requested claim | Status | Reason | Safe wording |
 
 Missing evidence or assumptions
 - ...

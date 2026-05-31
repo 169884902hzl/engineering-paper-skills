@@ -1,0 +1,17 @@
+{
+  "case": "figure_table_adversarial",
+  "prompt": "figure_table_adversarial.md",
+  "must_include": ["Must not claim", "Consistency"],
+  "must_not_include": ["The table proves causality.", "The workflow validates the closed-loop control law."],
+  "required_status": {},
+  "forbidden_claims": [
+    "causality from final success rates alone",
+    "closed-loop law validation from workflow phases",
+    "category rename applied only to caption"
+  ],
+  "allowed_behavior": [
+    "use bounded caption language",
+    "require coordinated category rename",
+    "state what the visual cannot support"
+  ]
+}

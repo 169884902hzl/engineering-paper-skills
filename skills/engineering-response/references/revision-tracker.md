@@ -17,6 +17,8 @@ Use this to turn comments into concrete tasks.
 | Prohibited over-edit | what must not be changed |
 | Acceptance evidence | what proves the comment is handled |
 | Verification | read lines, compile, inspect PDF, or check diff |
+| Line-number status | provided, pending final build, or not applicable |
+| Status | Done with evidence, Planned, Needs author input, Defer with reason, or No change with reason |
 
 ## Ten-Minute SOP
 
@@ -41,3 +43,10 @@ If acceptance evidence cannot be written, do not edit yet.
 
 Every `defer` or `no change` needs a scientific or scope reason, not a deadline
 excuse.
+
+## Filled Example
+
+| ID | Original comment | Type | Real complaint | First target section | Decision | Acceptance evidence | Verification | Line-number status | Status |
+|---|---|---|---|---|---|---|---|---|---|
+| R1.1 | "Add ablation." | Data | Component support is not isolated. | Experiments | revise if data exists; otherwise planned | ablation table or limitation note | inspect Results and table | pending final build | Needs author input |
+| R1.2 | "Method unclear." | Structure | Execution role is underspecified. | Methods | revise | paragraph names inputs, outputs, and execution gate | read Methods | pending final build | Planned |

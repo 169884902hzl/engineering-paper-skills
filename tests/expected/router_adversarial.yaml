@@ -1,0 +1,17 @@
+{
+  "case": "router_adversarial",
+  "prompt": "router_adversarial.md",
+  "must_include": ["engineering-validation", "missing"],
+  "must_not_include": ["simple writing task only", "Overall readiness: READY"],
+  "required_status": {},
+  "forbidden_claims": [
+    "routing incomplete full-paper work as simple writing only",
+    "hiding missing inputs",
+    "giving a readiness decision"
+  ],
+  "allowed_behavior": [
+    "route to multiple skills",
+    "state required evidence and checks",
+    "include validation for readiness requests"
+  ]
+}

@@ -104,3 +104,25 @@ Before finalizing, check:
 - Does every result have Experiment support?
 - Is the strongest claim still true under the stated boundary?
 - Are task, method, evidence, and boundary all present?
+
+## Evidence-Thin Behavior
+
+Do not finalize an abstract when method, evidence, or boundary is missing.
+Return this scaffold instead:
+
+```text
+Abstract scaffold
+1. Task/failure:
+2. Existing limitation:
+3. Proposed method/formulation:
+4. Evidence to insert:
+5. Boundary:
+
+Missing before final abstract
+- method:
+- evidence:
+- boundary:
+```
+
+If Methods or Experiments are not available yet, write candidate abstract slots,
+not a polished final abstract.

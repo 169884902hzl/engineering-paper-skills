@@ -97,3 +97,20 @@ Before writing formulas, fill:
 | Main object/signal | What is being formalized? |  |  |
 | Mechanism 1 | What bottleneck is solved? |  |  |
 | Execution/safety | How does it run and fail? |  |  |
+
+## Detailed Methods Worksheet
+
+Use this when a Methods section risks becoming a module directory.
+
+| Block | Required question | Must include | Must avoid |
+|---|---|---|---|
+| Overview | How should the reader traverse the system? | roles, inputs, outputs, component order | table of contents without reader path |
+| Main object/signal | What object is formalized first and why? | downstream dependency and notation role | formula before motivation |
+| Data or observation | What is observed and what is assumed? | observable inputs, noise/validity limits | hidden sensors or unprovided data |
+| Mechanism block | Which bottleneck does this block solve? | variable/procedure, operating condition, link to next block | combining perception/control/training/safety in one paragraph |
+| Algorithm or derivation | How is the output produced? | input, transformation, assumption, output, downstream use | claiming system-level proof without experiments |
+| Gate/fallback | When does the method stop, switch, or degrade? | confidence gate, timeout, invalid state, recovery | detached threshold note |
+| Execution closure | How does the method run in deployment? | phases, rates if known, safety/monitoring, operating envelope | new claims not evaluated later |
+
+Every subsection should close by telling the reader why the next subsection is
+needed.

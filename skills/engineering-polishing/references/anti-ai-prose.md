@@ -53,3 +53,14 @@ Better:
 The improvement over the fixed-camera baseline suggests that active observation
 helps preserve the visual signal during the final approach.
 ```
+
+## Micro Repairs
+
+| Pattern | Bad | Better |
+|---|---|---|
+| empty importance | This problem is very important. | The task fails when the visual target leaves the camera view. |
+| repeated transition | Specifically, the system first... Specifically, it then... | The system first... It then... |
+| vague pronoun | This improves robustness. | Active observation improves success under the tested occlusion regimes. |
+| coined term | We introduce a robustification module. | We add a guarded execution stage. |
+| symmetric list | The method is accurate, efficient, and robust. | The method improves success while keeping cycle time within the tested range. |
+| invented bridge | This naturally leads to optimal insertion. | This provides the pose estimate used by the insertion policy. |

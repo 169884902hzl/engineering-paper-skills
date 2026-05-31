@@ -49,3 +49,34 @@ or lower is better for [metric].}
 - panel letters match text references
 - caption title style is consistent
 - abbreviations are defined once and reused
+
+## Bad-To-Good Caption Repairs
+
+Bad:
+
+```latex
+\caption{\textbf{Workflow.} The workflow proves that the controller is robust to
+calibration error.}
+```
+
+Better:
+
+```latex
+\caption{\textbf{Workflow.} The panels show detection, alignment, and guarded
+execution. Robustness to calibration error must be supported by the stress-test
+results, not this workflow diagram alone.}
+```
+
+Bad:
+
+```latex
+\caption{\textbf{Ablation.} The table proves that the perception module causes
+the success improvement.}
+```
+
+Better:
+
+```latex
+\caption{\textbf{Ablation results.} The table reports the success-rate change
+after removing each component under the tested protocol.}
+```

@@ -42,8 +42,13 @@ English manuscript prose without hiding structural or evidence problems.
 | [references/claim-strength.md](references/claim-strength.md) | Claims may overstate evidence, causality, robustness, generalization, or novelty |
 | [references/anti-ai-prose.md](references/anti-ai-prose.md) | Text sounds generic, repetitive, slogan-like, template-like, or model-generated |
 | [references/style-guardrails.md](references/style-guardrails.md) | Need sentence-level academic English, transitions, hedging, terminology, or mechanics |
+| [references/source-notes.md](references/source-notes.md) | Non-English or rough notes must become English manuscript prose |
 | [references/examples.md](references/examples.md) | Needing before/after examples or output behavior examples |
 | [references/failure-modes.md](references/failure-modes.md) | Handling requests to strengthen unsupported claims or hide weak evidence |
+| [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | The rewrite may change factual scope or claim strength |
+| [../_shared/claim-strength.md](../_shared/claim-strength.md) | A local claim needs verb or novelty calibration |
+| [../_shared/non-english-source-notes.md](../_shared/non-english-source-notes.md) | Source notes include assumptions or non-English shorthand |
+| [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for output only |
 
 ## Workflow
 
@@ -61,13 +66,20 @@ English manuscript prose without hiding structural or evidence problems.
 ## Default Output
 
 ```text
+Diagnosis
+- Paragraph job:
+- Main issue:
+- Evidence risk:
+
+Before / After / Rationale
+| Source sentence | Revised sentence | Rationale | Fact/evidence risk |
+
 Polished version
 [English prose]
 
-Notes
-- Claim/evidence issue:
-- Terminology issue:
-- Remaining risk:
+Unsupported claims
+- ...
 ```
 
-If the user asks for output only, return only the polished prose.
+If the user asks for output only, return only the polished prose unless doing so
+would hide unsupported claims or unverified evidence.

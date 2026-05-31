@@ -4,8 +4,9 @@ Evidence-bound Codex skills for English engineering research papers.
 
 > **Statement**
 >
-> - This project provides five Codex skills for English engineering paper
->   writing, polishing, figures and tables, revision responses, and validation.
+> - This project provides five task skills plus a routing skill for English
+>   engineering paper writing, polishing, figures and tables, revision
+>   responses, and validation.
 > - The skills help organize and express author-provided research content. They
 >   do not replace real experiments, citation checking, advisor review, or venue
 >   requirements.
@@ -30,7 +31,7 @@ output as unsupported.
 ```bash
 git clone https://github.com/169884902hzl/engineering-paper-skills.git
 cd engineering-paper-skills
-cp -a skills/engineering-* ~/.codex/skills/
+cp -a skills/_shared skills/engineering-* ~/.codex/skills/
 ```
 
 Restart Codex, then run:
@@ -47,6 +48,7 @@ For repository QA:
 
 ```bash
 python scripts/validate_repo.py
+python scripts/check_expected_behavior.py --spec-dir tests/expected
 for s in skills/engineering-*; do
   python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
 done
@@ -73,6 +75,7 @@ This project is useful for:
 
 | Use case | Skill |
 |---|---|
+| Unsure which workflow to use, or planning a mixed paper task | `engineering-paper-router` |
 | Plan or draft paper sections from claims, notes, figures, or results | `engineering-writing` |
 | Improve English prose, flow, hedging, terminology, and anti-generic wording | `engineering-polishing` |
 | Design figure/table responsibilities, captions, and visual evidence flow | `engineering-figure-table` |
@@ -98,10 +101,10 @@ git clone https://github.com/169884902hzl/engineering-paper-skills.git
 cd engineering-paper-skills
 ```
 
-Copy the five skill folders into your Codex skills directory:
+Copy the skill folders and shared references into your Codex skills directory:
 
 ```bash
-cp -a skills/engineering-* ~/.codex/skills/
+cp -a skills/_shared skills/engineering-* ~/.codex/skills/
 ```
 
 Restart Codex so the new skills are loaded.
@@ -109,7 +112,7 @@ Restart Codex so the new skills are loaded.
 ### Install One Skill
 
 ```bash
-cp -a skills/engineering-writing ~/.codex/skills/
+cp -a skills/_shared skills/engineering-writing ~/.codex/skills/
 ```
 
 Use the same pattern for any other skill directory.
@@ -119,7 +122,7 @@ Use the same pattern for any other skill directory.
 ```bash
 cd engineering-paper-skills
 git pull
-cp -a skills/engineering-* ~/.codex/skills/
+cp -a skills/_shared skills/engineering-* ~/.codex/skills/
 ```
 
 Restart Codex after updating.
@@ -133,7 +136,9 @@ rm -rf ~/.codex/skills/engineering-writing \
        ~/.codex/skills/engineering-polishing \
        ~/.codex/skills/engineering-figure-table \
        ~/.codex/skills/engineering-response \
-       ~/.codex/skills/engineering-validation
+       ~/.codex/skills/engineering-validation \
+       ~/.codex/skills/engineering-paper-router \
+       ~/.codex/skills/_shared
 ```
 
 ### Troubleshooting
@@ -152,6 +157,7 @@ rm -rf ~/.codex/skills/engineering-writing \
 
 ```text
 ~/.codex/skills/
+├── _shared/
 ├── engineering-writing/
 │   ├── SKILL.md
 │   ├── agents/
@@ -159,7 +165,8 @@ rm -rf ~/.codex/skills/engineering-writing \
 ├── engineering-polishing/
 ├── engineering-figure-table/
 ├── engineering-response/
-└── engineering-validation/
+├── engineering-validation/
+└── engineering-paper-router/
 ```
 
 ## Verify Installation
@@ -179,7 +186,7 @@ python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
   ~/.codex/skills/engineering-writing
 ```
 
-Repeat the command for the other four installed skill directories when needed.
+Repeat the command for the other installed skill directories when needed.
 
 ## Validation
 
@@ -191,6 +198,7 @@ induce unsupported claims.
 
 ```bash
 python scripts/validate_repo.py
+python scripts/check_expected_behavior.py --spec-dir tests/expected
 for s in skills/engineering-*; do
   python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
 done
@@ -280,6 +288,10 @@ The skills are organized around five writing constraints:
 
 ## Files
 
+- `skills/_shared/`: shared evidence-bound, citation-boundary, claim-strength,
+  source-note, and output-mode rules
+- `skills/engineering-paper-router/`: routing skill for ambiguous or mixed paper
+  tasks
 - `skills/engineering-writing/`: drafting and manuscript-structure skill
 - `skills/engineering-polishing/`: English polishing and claim-boundary skill
 - `skills/engineering-figure-table/`: figure, table, caption, and visual
@@ -288,15 +300,17 @@ The skills are organized around five writing constraints:
 - `skills/engineering-validation/`: final manuscript validation skill
 - `scripts/validate_repo.py`: repository structure, link, wording, and prompt
   coverage checks
+- `scripts/check_expected_behavior.py`: structured expected-behavior validation
+- `scripts/run_prompt_regression.py`: optional prompt regression runner
 - `tests/prompts/`: minimal and adversarial prompt specs for each skill
-- `tests/expected/`: expected behavior summaries for prompt specs
+- `tests/expected/`: structured expected-behavior specs for prompt checks
 - `NOTICE.md`: third-party license notices
 - `OPEN_SOURCE_QA.md`: validation commands and release checks
 
 ## Roadmap
 
-- Add executable prompt regression runs once the preferred Codex CLI interface is
-  fixed for this repository.
+- Add executable prompt regression runs once a stable non-interactive Codex CLI
+  command is selected for this repository.
 - Add more full before/after examples for each skill.
 - Add LaTeX project QA helpers for labels, citations, page count, and warnings.
 - Consider optional packaging once the manual installation path is stable.
@@ -336,8 +350,9 @@ Good contribution areas include:
 - validation checklists for LaTeX and submission workflows
 - clearer anti-overclaim rules
 
-Before opening a pull request, run `python scripts/validate_repo.py`. Do not add
-private manuscripts, reviewer letters, unpublished data, local paths, or
+Before opening a pull request, run `python scripts/validate_repo.py` and
+`python scripts/check_expected_behavior.py --spec-dir tests/expected`. Do not
+add private manuscripts, reviewer letters, unpublished data, local paths, or
 unsupported paper claims to public examples.
 
 ## License and Notices

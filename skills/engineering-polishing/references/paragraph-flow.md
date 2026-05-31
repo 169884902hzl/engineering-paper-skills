@@ -41,3 +41,14 @@ object and claim.
 After an abstract judgment, add a concrete object, metric, mechanism,
 constraint, or scenario. Do not leave words such as `important`, `effective`,
 `improved`, or `optimized` alone.
+
+## Source Anchor Check
+
+If a Results paragraph invokes prior theory, a mechanism explanation, or a
+field-level interpretation, add a source anchor:
+
+- measured result in this paper
+- cited prior work
+- explicit hypothesis or limitation
+
+Without one of these, keep the interpretation local and hedged.

@@ -118,3 +118,37 @@ State:
 | Main results | contribution evidence | overall + axes | table narration |
 | Ablation | mechanism evidence | removed part + metric + role | module list |
 | Failure | boundary | hardest regime + failure types | hidden limitations |
+
+## Result Paragraph Templates
+
+### Overall Result
+
+```text
+Across [protocol], [method] achieves [primary result] compared with [baseline].
+This result supports [contribution] under [tested condition], while [boundary]
+remains outside the evaluation.
+```
+
+### Category Or Condition Axis
+
+```text
+The gain is concentrated in [category/condition], where [mechanism-relevant
+factor] affects [signal/decision]. This pattern is consistent with [bounded
+interpretation], but it does not establish [untested stronger claim].
+```
+
+### Ablation
+
+```text
+Removing [component] primarily changes [metric], which supports its role in
+[contribution]. The remaining performance indicates [boundary or residual
+capability].
+```
+
+### Stress Or Failure
+
+```text
+Performance degrades when [stress condition], indicating that [failure type]
+defines the current operating envelope. This boundary should be reported with
+the main gain rather than deferred only to Conclusion.
+```

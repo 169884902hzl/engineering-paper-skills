@@ -89,3 +89,18 @@ Ask:
 2. Are the gaps split into layers rather than compressed into one vague claim?
 3. Does the formulation sentence come after the gap is clear?
 4. Can every contribution be traced to later evidence?
+
+## Paragraph Worksheet
+
+| Block | First sentence role | Must contain | Must not contain | Evidence route |
+|---|---|---|---|---|
+| Task context | Name the engineering task and stakes | task, setting, capability or reliability need | your method, result numbers | venue/task motivation |
+| Central challenge | Make the failure concrete | broken assumption, affected loop/signal/decision | generic difficulty | Methods problem statement |
+| Classical routes | Group dominant approaches by behavior | route, useful role, shared limitation | citation list or paper-by-paper summary | Related Work axes |
+| Partial repair | Explain what improves but remains insufficient | partial fix and remaining gap | dismissive wording | nearest-neighbor distinction |
+| Second gap | Introduce the paper-specific missing piece | signal, supervision, data, calibration, deployment, speed, or evaluation gap | experiments | formulation bridge |
+| Formulation bridge | Convert gaps into this paper's formulation | system/formulation role and boundary | implementation trivia | Methods overview |
+| Contributions | State testable contributions | concrete verbs and evidence path | adjectives without evidence | Methods + Experiments anchors |
+
+If any block cannot fill `Evidence route`, downgrade the claim or leave a
+placeholder.

@@ -22,11 +22,11 @@ Use this for final read-only inspection.
 
 ## Status Labels
 
-- `ready`: all required checks passed
-- `ready_with_risks`: build passed but minor known risks remain
-- `needs_fix`: actionable problem found
-- `blocked`: missing files, ambiguous source draft, or command failure prevents
-  validation
+- `READY`: all required checks passed
+- `NOT_READY`: actionable problem found or a required check failed
+- `CANNOT_DETERMINE`: missing files, ambiguous source draft, skipped required
+  checks, or command failure prevents validation
 
-Do not use `ready` if any required build, bibliography, page, citation, figure,
-or evidence-anchor check was skipped.
+Do not use `READY` if any required build, bibliography, page, citation, figure,
+or evidence-anchor check was skipped or returned `PARTIAL`, `NOT_RUN`, or
+`UNKNOWN`.

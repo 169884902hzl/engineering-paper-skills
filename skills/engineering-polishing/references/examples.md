@@ -52,3 +52,25 @@ Expected behavior:
 - Do not polish it into a stronger claim.
 - Explain that the claim/evidence relation is broken.
 - Offer a conservative rewrite or ask for robustness evidence.
+
+## Before / After / Rationale Example
+
+| Source sentence | Revised sentence | Rationale | Fact/evidence risk |
+|---|---|---|---|
+| Our method proves robustness in clutter. | The results support improved performance in the tested clutter regimes. | Downgrades `proves` and narrows the scope. | Does not claim untested regimes. |
+| It uses an active camera, observer arm, and visual module. | It uses an active observer camera. | Locks terminology to one object. | Requires confirmation that these names refer to the same component. |
+
+## Anti-AI Rhythm Repair
+
+Input:
+
+```text
+Specifically, the method is robust, efficient, and accurate. Specifically, this
+demonstrates the superiority of our framework.
+```
+
+Expected behavior:
+
+- Remove repeated `Specifically`.
+- Replace promotional adjectives with measured outcomes.
+- Keep only claims supported by provided metrics.

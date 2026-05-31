@@ -41,6 +41,10 @@ Use this skill before saying a paper edit is complete, fixed, or ready.
 
 Overall readiness can only be `READY`, `NOT_READY`, or `CANNOT_DETERMINE`.
 
+`READY` is allowed only when every required check for the user's stated goal is
+`PASS`. If any required check is `FAIL`, `PARTIAL`, `NOT_RUN`, or `UNKNOWN`,
+overall readiness must be `NOT_READY` or `CANNOT_DETERMINE`.
+
 ## When to Open Extra Files
 
 | File | Open when |
@@ -53,6 +57,10 @@ Overall readiness can only be `READY`, `NOT_READY`, or `CANNOT_DETERMINE`.
 | [references/submission-checklist.md](references/submission-checklist.md) | Final read-only inspection before submission |
 | [references/examples.md](references/examples.md) | Needing concrete validation report examples |
 | [references/failure-modes.md](references/failure-modes.md) | Handling requests to certify readiness without running checks |
+| [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Validation touches claims, citations, results, or completion status |
+| [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | Citation existence, citation placement, or reference claims are part of the check |
+| [../_shared/claim-strength.md](../_shared/claim-strength.md) | High-risk claim verbs need audit during validation |
+| [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for a short validation result only |
 
 ## Workflow
 
@@ -78,8 +86,12 @@ Validation result
 Evidence
 - Commands run:
 - Files inspected:
+- Outputs observed:
 - Failures:
 - Not verified:
+
+Blocking issues
+- ...
 
 Next actions
 - ...

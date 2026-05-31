@@ -39,6 +39,9 @@ Use this skill to make figures and tables serve the manuscript argument.
 | [references/page-budget.md](references/page-budget.md) | Cutting visual space, caption length, or table detail without damaging evidence |
 | [references/examples.md](references/examples.md) | Needing concrete figure/table role examples and caption behavior |
 | [references/failure-modes.md](references/failure-modes.md) | Handling captions or tables that claim more than the visual supports |
+| [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Visual claims may exceed visible or tabulated evidence |
+| [../_shared/claim-strength.md](../_shared/claim-strength.md) | Caption or table note verbs may overstate what is visible |
+| [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for caption/table output only |
 
 ## Workflow
 
@@ -55,8 +58,14 @@ Use this skill to make figures and tables serve the manuscript argument.
 
 ```text
 Visual audit
-| Item | Responsibility | Evidence link | Must not claim | Risk | Action |
+| Item | Responsibility | Visible/tabulated evidence | Claim supported | Must not claim | Risk | Action |
 
 Caption/table revision
 [English caption or table plan]
+
+Consistency actions
+- labels:
+- category names:
+- metric names:
+- prose references:
 ```

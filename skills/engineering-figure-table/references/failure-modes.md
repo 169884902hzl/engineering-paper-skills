@@ -38,3 +38,14 @@ Response:
 
 - Preserve labels unless there is a direct reason to change them.
 - If a label changes, list all affected references.
+
+## Causality From Visuals Or Outcome Tables
+
+Risk: a workflow figure or final success-rate table is used to claim causality.
+
+Response:
+
+- State what the visual or table directly shows.
+- Move causal language to an ablation, stress test, or direct measurement only
+  when such evidence exists.
+- Use bounded wording such as `reports`, `shows`, or `is consistent with`.

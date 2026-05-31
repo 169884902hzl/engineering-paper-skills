@@ -8,7 +8,28 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from check_expected_behavior import validate_specs  # noqa: E402
+
 SKILLS = sorted((ROOT / "skills").glob("engineering-*"))
+
+EXPECTED_SKILLS = {
+    "engineering-paper-router",
+    "engineering-writing",
+    "engineering-polishing",
+    "engineering-figure-table",
+    "engineering-response",
+    "engineering-validation",
+}
+
+REQUIRED_SHARED = {
+    "evidence-boundary.md",
+    "citation-boundary.md",
+    "claim-strength.md",
+    "non-english-source-notes.md",
+    "output-mode.md",
+}
 
 
 def s(*parts: str) -> str:
@@ -49,6 +70,8 @@ STALE_PATTERNS = [
 ]
 
 REQUIRED_PROMPTS = {
+    "router_min.md",
+    "router_adversarial.md",
     "writing_min.md",
     "writing_adversarial.md",
     "polishing_min.md",
@@ -79,8 +102,23 @@ def md_files() -> list[Path]:
 
 
 def check_structure(errors: list[str]) -> None:
-    if len(SKILLS) != 5:
-        errors.append(f"Expected 5 engineering skills, found {len(SKILLS)}")
+    skill_names = {p.name for p in SKILLS}
+    if skill_names != EXPECTED_SKILLS:
+        missing = sorted(EXPECTED_SKILLS - skill_names)
+        extra = sorted(skill_names - EXPECTED_SKILLS)
+        if missing:
+            errors.append(f"Missing engineering skills: {', '.join(missing)}")
+        if extra:
+            errors.append(f"Unexpected engineering skills: {', '.join(extra)}")
+
+    shared = ROOT / "skills/_shared"
+    if not shared.exists():
+        errors.append("Missing shared reference directory: skills/_shared")
+    else:
+        shared_files = {p.name for p in shared.glob("*.md")}
+        missing_shared = REQUIRED_SHARED - shared_files
+        if missing_shared:
+            errors.append(f"Missing shared references: {', '.join(sorted(missing_shared))}")
 
     for skill in SKILLS:
         for required in ("SKILL.md", "references", "agents/openai.yaml"):
@@ -97,7 +135,7 @@ def check_structure(errors: list[str]) -> None:
             errors.append(f"{rel(skill_md)} missing description")
         if "## Boundaries" not in text:
             errors.append(f"{rel(skill_md)} missing Boundaries section")
-        for ref in re.findall(r"\]\((references/[^)]+\.md)\)", text):
+        for ref in re.findall(r"\]\(((?:references|\.\./_shared)/[^)]+\.md)\)", text):
             if not (skill / ref).exists():
                 errors.append(f"{rel(skill_md)} links missing reference {ref}")
 
@@ -154,9 +192,14 @@ def check_prompts(errors: list[str]) -> None:
         errors.append(f"Missing prompt specs: {', '.join(sorted(missing))}")
 
     for prompt_name in REQUIRED_PROMPTS:
-        expected = expected_dir / prompt_name
+        expected = expected_dir / prompt_name.replace(".md", ".yaml")
         if not expected.exists():
             errors.append(f"Missing expected behavior for {prompt_name}")
+
+    try:
+        errors.extend(validate_specs(expected_dir))
+    except Exception as exc:  # pragma: no cover - defensive release check
+        errors.append(f"Expected-behavior validation crashed: {exc}")
 
 
 def main() -> int:

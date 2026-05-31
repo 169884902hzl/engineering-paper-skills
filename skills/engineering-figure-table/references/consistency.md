@@ -49,3 +49,15 @@ For every visual:
 - metric names match
 - caption does not introduce a new term
 - visual claim is supported in Results or Methods
+
+## Useful Scans
+
+```bash
+rg -n "success rate|Success Rate|SR" .
+rg -n "Fig\\.|Figure|Table|Tab\\." .
+rg -n "\\\\label\\{|\\\\ref\\{|\\\\Cref\\{" .
+rg -n "baseline|ablation|w/o|without" .
+```
+
+Use scans to find inconsistent names; do not blindly replace terms without
+checking meaning.

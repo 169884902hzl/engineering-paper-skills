@@ -6,6 +6,8 @@ Run these checks before publishing, tagging, or accepting a pull request.
 
 ```bash
 python scripts/validate_repo.py
+python scripts/check_expected_behavior.py --spec-dir tests/expected
+python scripts/run_prompt_regression.py
 ```
 
 This checks:
@@ -15,7 +17,8 @@ This checks:
 - relative Markdown links
 - agent metadata fields
 - private-path and stale-wording patterns
-- expected minimal and adversarial prompt specs
+- structured expected minimal and adversarial prompt specs
+- optional prompt regression output checks when outputs are provided
 
 ## Codex Skill Validation
 
@@ -40,6 +43,10 @@ package skill directories:
 - `engineering-figure-table`
 - `engineering-response`
 - `engineering-validation`
+- `engineering-paper-router`
+
+The shared reference directory `skills/_shared/` is also checked by repository
+QA and should be copied during installation.
 
 All returned `Skill is valid!` during the hardening pass.
 
@@ -59,4 +66,6 @@ All returned `Skill is valid!` during the hardening pass.
 - Validation outputs distinguish `PASS`, `FAIL`, `PARTIAL`, `NOT_RUN`, and
   `UNKNOWN`.
 - Minimal and adversarial prompt specs still match the intended behavior.
+- Expected prompt behavior uses structured `.yaml` specs with forbidden claims,
+  status expectations, and allowed behavior.
 - Third-party license notices are preserved.

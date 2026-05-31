@@ -15,6 +15,19 @@ Check that these exist and align:
 - failure or limitation statement
 - conclusion without new claims
 
+## Claim-Evidence Audit Table
+
+| Claim | First stated | Method anchor | Experiment anchor | Figure/table anchor | Status | Fix |
+|---|---|---|---|---|---|---|
+|  |  |  |  |  | PASS / FAIL / PARTIAL / UNKNOWN |  |
+
+Rules:
+
+- A claim with no method anchor cannot be a contribution.
+- A claim with no experiment anchor cannot be an Abstract or Conclusion
+  headline.
+- A figure/table anchor must support the same claim, not only a related visual.
+
 ## Claim Search
 
 Search for strong words:

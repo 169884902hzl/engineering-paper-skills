@@ -56,3 +56,9 @@ Before finalizing:
 - Is every limitation anchored earlier?
 - Is future work a direct consequence of a limitation?
 - Are there any new claims, terms, or results? If yes, remove them.
+
+## Revived-Claim Check
+
+Do not revive a result, subset metric, baseline, or mechanism that was removed
+from Results. If a claim cannot be traced to a surviving Methods and
+Experiments anchor, it cannot appear in Conclusion.

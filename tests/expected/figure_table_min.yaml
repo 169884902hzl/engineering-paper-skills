@@ -1,0 +1,16 @@
+{
+  "case": "figure_table_min",
+  "prompt": "figure_table_min.md",
+  "must_include": ["Must not claim", "workflow"],
+  "must_not_include": ["Fig. 3 proves", "generalizes to all cluttered scenes", "is calibration robust"],
+  "required_status": {},
+  "forbidden_claims": [
+    "caption asserts robustness not visible in the figure",
+    "caption asserts generalization not visible in the figure"
+  ],
+  "allowed_behavior": [
+    "describe observable workflow only",
+    "downgrade unsupported claims",
+    "separate visual evidence from experiment evidence"
+  ]
+}

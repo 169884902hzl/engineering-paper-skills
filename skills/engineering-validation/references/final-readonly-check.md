@@ -76,3 +76,9 @@ Downgrade or clarify if unsupported.
 Run the local build and consistency commands. Record exact outputs.
 
 Do not claim readiness without this evidence.
+
+## Final-Window Mode
+
+In the final submission window, default to read-only inspection. Edit only when
+the issue blocks submission or creates a false claim. If a large structural
+rewrite is needed, mark the paper `NOT_READY` instead of silently rewriting it.

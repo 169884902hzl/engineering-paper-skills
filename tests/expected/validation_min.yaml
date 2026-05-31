@@ -1,0 +1,21 @@
+{
+  "case": "validation_min",
+  "prompt": "validation_min.md",
+  "must_include": ["CANNOT_DETERMINE", "NOT_RUN"],
+  "must_not_include": ["Overall readiness: READY"],
+  "required_status": {
+    "Build": "NOT_RUN",
+    "References": "NOT_RUN",
+    "Overall readiness": "CANNOT_DETERMINE"
+  },
+  "forbidden_claims": [
+    "submission-ready from abstract only",
+    "verified build without files",
+    "verified references without sources"
+  ],
+  "allowed_behavior": [
+    "perform local abstract audit only",
+    "list required files and checks",
+    "mark readiness as cannot determine"
+  ]
+}

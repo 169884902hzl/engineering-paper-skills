@@ -50,3 +50,17 @@ For each neighboring paper, record:
 
 If the note only contains author names and one-sentence summaries, it is not a
 useful Related Work extraction.
+
+## Citation Boundary
+
+- Do not invent references, authors, titles, venues, years, or BibTeX entries.
+- Use only papers provided by the user, already present in the manuscript, or
+  found through an explicit source-grounded search.
+- If sources are not available, write a taxonomy scaffold with citation
+  placeholders.
+
+Use:
+
+```text
+| Axis | Provided or verified sources | What they solve | Remaining gap | Our distinction |
+```

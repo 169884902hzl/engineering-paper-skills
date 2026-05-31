@@ -36,3 +36,14 @@ Response:
 
 - Separate dry-read findings from build findings.
 - Use `NOT_RUN` for build if no build command was run.
+
+## Build Pass But Logic Fails
+
+Risk: LaTeX compiles, but a contribution has no Methods, Experiments, or
+figure/table support.
+
+Response:
+
+- Build can be `PASS`.
+- Claim-evidence audit must be `FAIL` or `PARTIAL`.
+- Overall readiness must be `NOT_READY`.

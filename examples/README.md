@@ -3,6 +3,17 @@
 This directory gives quick task examples. The executable prompt specifications
 used for release QA live in `tests/prompts/`.
 
+## Router
+
+```text
+Use $engineering-paper-router to route this task. I have a draft abstract, a
+result table, and reviewer comments, and I do not know which skill should run
+first.
+```
+
+Expected behavior: choose primary and secondary skills, list required inputs,
+and avoid drafting final prose during routing.
+
 ## Writing
 
 ```text

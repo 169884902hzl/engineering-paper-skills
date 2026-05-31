@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Paper Router"
+  short_description: "Choose the right engineering paper skill"
+  default_prompt: "Use $engineering-paper-router to route my engineering paper task to the right writing, polishing, figure/table, response, or validation skill."
