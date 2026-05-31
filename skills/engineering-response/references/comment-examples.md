@@ -84,7 +84,7 @@ First target: Conclusion.
 Fix:
 
 - paragraph 1: method + strongest stable evidence
-- paragraph 2: boundary + future work derived from boundary
+- paragraph 2: boundary + future work based on that boundary
 
 Prohibited over-edit: do not introduce new claims or revive removed analysis.
 

@@ -29,7 +29,7 @@ Include:
 
 - key assumption
 - observed or plausible failure regimes grounded in the paper
-- future work directly derived from the boundary
+- future work directly based on the stated boundary
 
 Avoid:
 

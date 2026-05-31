@@ -83,9 +83,3 @@ Claim-evidence map
 Missing evidence or assumptions
 - ...
 ```
-
-## Source Basis
-
-This skill is based primarily on the CASE conference-paper writing guide supplied
-by the project author, with conservative fact-boundary rules adapted from
-`https://github.com/hustCYQ/phd-writing`.

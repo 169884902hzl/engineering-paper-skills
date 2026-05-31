@@ -1,13 +1,5 @@
 # Open Source QA
 
-## Source Currency
-
-`phd-writing` was checked against origin HEAD:
-
-```text
-cb4d845c6521d70017c0a08edbb8597d72be3642
-```
-
 ## Validation Commands
 
 Run from a machine with Codex skills installed:
@@ -47,4 +39,4 @@ All returned `Skill is valid!` during the hardening pass.
 - Figure/table responsibility is explicit.
 - Comment-response workflow requires acceptance evidence.
 - Validation workflow requires fresh command evidence.
-- MIT notice for `phd-writing` is preserved.
+- Third-party license notices are preserved.

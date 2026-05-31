@@ -1,6 +1,6 @@
 # Notice
 
-This project adapts ideas and procedural rules from:
+This file preserves third-party license notices.
 
 ## phd-writing
 
@@ -35,12 +35,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
-## CASE conference-paper writing guide
-
-The suite also adapts an author-supplied CASE 2026 engineering conference-paper
-writing guide. The guide provided paper-specific lessons that were generalized
-into reusable rules for English engineering manuscripts.
-
-The package does not include private manuscript content, figures, source PDFs,
-or project-specific LaTeX files from the guide.
