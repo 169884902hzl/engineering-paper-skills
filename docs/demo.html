@@ -143,6 +143,88 @@ family.</code></pre>
         </article>
 
         <article class="card">
+          <h3>Related Work Positioning</h3>
+          <p><strong>Recorded local output excerpt:</strong> generated from <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/demo_related_work_nearest_neighbor.md">demo_related_work_nearest_neighbor.md</a> and stored as <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_related_work_nearest_neighbor_681d305.md">demo_related_work_nearest_neighbor_681d305.md</a>.</p>
+          <div class="example">
+            <pre><code>Input:
+Use $engineering-writing to draft a Related Work
+positioning paragraph.
+
+Prior-work notes:
+- fixed-camera insertion systems
+- active perception for grasping or inspection
+- force-guarded insertion controllers
+- industrial insertion systems, exact citation missing
+
+Current paper:
+Contact-rich insertion under partial occlusion.
+Requests another RGB-D view when confidence is low.
+Uses guarded execution with force and pose-deviation
+stop conditions.
+Evaluated in one tabletop setup.</code></pre>
+            <pre><code>Recorded local output excerpt:
+Prior work on robotic insertion has studied
+fixed-camera perception pipelines, active perception
+for manipulation, and force-guarded execution.
+Fixed-camera insertion systems address the same task
+family but typically assume a fixed overhead or side
+view during execution [citation needed: fixed-camera
+insertion systems]. Active-perception methods select
+viewpoints for manipulation tasks such as grasping or
+inspection, but the supplied sources do not yet
+establish that these methods handle contact-rich
+insertion under partial occlusion [citation needed:
+active perception for manipulation scope]. Against
+these axes, the present system should be positioned as
+a tabletop contact-rich insertion pipeline that couples
+confidence-triggered RGB-D view requests with force
+and pose-deviation guards.</code></pre>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Methods Execution Path</h3>
+          <p><strong>Recorded local output excerpt:</strong> generated from <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/demo_methods_execution_path.md">demo_methods_execution_path.md</a> and stored as <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_methods_execution_path_681d305.md">demo_methods_execution_path_681d305.md</a>.</p>
+          <div class="example">
+            <pre><code>Input:
+Use $engineering-writing to convert this module list
+into a Methods paragraph.
+
+Inputs:
+RGB-D observations from overhead and side cameras.
+
+State:
+Insertion pose estimate and confidence score.
+
+View request:
+If confidence is low, request another view.
+
+Controller:
+Guarded insertion controller.
+
+Stop conditions:
+force threshold exceeded or pose deviation exceeds
+limit.</code></pre>
+            <pre><code>Recorded local output excerpt:
+The execution path begins with RGB-D observations
+from an overhead camera and a side camera. These
+observations are used to estimate the insertion pose
+and a confidence score for the estimate. If the
+confidence score is low, the system requests an
+additional view before proceeding. The guarded
+insertion controller then attempts insertion using
+the current pose estimate while monitoring force and
+pose deviation. The execution is stopped when either
+the force threshold is exceeded or the pose deviation
+exceeds its limit, and the run is assigned an
+insertion success or failure outcome. The supplied
+notes do not specify the confidence formula,
+threshold values, timing behavior, calibration
+procedure, or controller pseudocode.</code></pre>
+          </div>
+        </article>
+
+        <article class="card">
           <h3>Research Notes To Paper Skeleton</h3>
           <div class="example">
             <pre><code>Input:

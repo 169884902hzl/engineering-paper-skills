@@ -9,6 +9,10 @@ notes, draft text, results, figures, or reviewer comments; it will either write
 within the supplied evidence, downgrade unsupported claims, or tell you what
 evidence is missing.
 
+Normal users only need `skills/_shared` and `skills/engineering-*`. The
+`scripts/`, `tests/`, and `evals/` directories are for maintainers and
+reviewers, not for ordinary skill use.
+
 This is a beta skill suite. It does not replace experiments, citation
 verification, advisor review, official venue instructions, or author judgment.
 It should not invent methods, baselines, citations, metrics, figures, line
@@ -16,11 +20,9 @@ numbers, deployment tests, or submission readiness.
 
 ## What It Can Write
 
-The example below is a **recorded local Codex output excerpt** generated from
-[tests/prompts/demo_notes_to_manuscript_paragraph.md](tests/prompts/demo_notes_to_manuscript_paragraph.md)
-and stored at
-[tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md](tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md).
-It is local single-run evidence, not CI-controlled behavior proof.
+The example below shows the normal user path: paste the paper problem, prior
+limitation, method, evidence, and boundary; get bounded manuscript prose. The
+full provenance for this example is linked later in this README.
 
 **Input**
 
@@ -62,7 +64,7 @@ No industrial deployment test.
 No ablation isolating view selection from guarded execution.
 ```
 
-**Recorded local output excerpt**
+**Example manuscript paragraph**
 
 ```text
 Contact-rich insertion can fail when visual occlusion hides peg-hole alignment
@@ -89,6 +91,9 @@ test, and no ablation isolating view selection from guarded execution.
 - It turns rough notes into manuscript prose instead of only refusing unsafe
   claims.
 
+Better input evidence produces better manuscript prose. If evidence is missing,
+the skill should downgrade the claim, write a scaffold, or mark the gap instead
+of inventing results.
 
 ## Quick Start
 
@@ -103,7 +108,21 @@ Restart Codex, then run:
 ```text
 Use $engineering-paper-coach to turn these research notes into one bounded
 English manuscript paragraph:
-[paste problem, prior limitation, method, evidence, and boundary notes]
+
+Problem:
+[what fails or matters]
+
+Prior limitation:
+[what existing approach cannot handle]
+
+Method:
+[what your method does]
+
+Evidence:
+[numbers, comparisons, figures, tables, or qualitative evidence]
+
+Boundary:
+[what is not tested or not supplied]
 ```
 
 ## Which Skill Should I Use First?
@@ -118,8 +137,8 @@ English manuscript paragraph:
 | I need to respond to reviewer or advisor comments | `engineering-response` |
 | I need readiness triage before submission | `engineering-validation` |
 
-For structured JSON audits, regression artifacts, and quality gates, see the
-[Demo Gallery](docs/demo.html) and [Quality Gates](docs/quality-gates.md).
+For more usage examples, see the [Demo Gallery](docs/demo.html). Repository QA
+and behavior-evidence details are in the maintainer section below.
 
 ## Project Overview
 
@@ -171,6 +190,10 @@ from Codex, not polished golden examples.
 
 Full provenance is recorded in
 [tests/outputs/model_runs/demo/manifest.json](tests/outputs/model_runs/demo/manifest.json).
+
+The notes-to-manuscript paragraph hero example is stored at
+[tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md](tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md).
+It is local single-run evidence, not CI-controlled behavior proof.
 
 ### Recorded Output Excerpts
 
@@ -228,7 +251,7 @@ numbers, and broad generalization.
 
 - Codex with local skills support enabled.
 - A writable Codex skills directory, usually `~/.codex/skills/`.
-- Python 3 for repository QA scripts.
+- Python 3 is only needed for repository QA scripts, not for normal skill use.
 - Optional: LaTeX tools if you want `engineering-validation` to compile paper
   projects.
 
@@ -332,13 +355,14 @@ python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
 
 Repeat the command for the other installed skill directories when needed.
 
-## Validation
+## Maintainer Validation
 
-Before publishing changes to this repository, run the repository QA checks. A
-skill is not considered publish-ready only because `quick_validate.py` passes.
-At minimum, validate every skill directory, check relative links, scan for
-private paths and stale wording, and review adversarial prompts that try to
-induce unsupported claims.
+Normal users do not need this section. Before publishing changes to this
+repository, maintainers should run the repository QA checks. A skill is not
+considered publish-ready only because `quick_validate.py` passes. At minimum,
+validate every skill directory, check relative links, scan for private paths
+and stale wording, and review adversarial prompts that try to induce
+unsupported claims.
 
 ```bash
 python scripts/validate_repo.py
@@ -446,11 +470,12 @@ The skills are organized around five writing constraints:
    checks of the live draft, evidence, citations, figures, tables, and build
    state.
 
-## Quality Evidence for Maintainers and Reviewers
+## For Maintainers and Reviewers
 
-These links are review evidence for the repository. They are useful for
-maintainers, external reviewers, and contributors, but they are not required for
-a first-time user to understand how to use the skills.
+Normal skill users do not need the `scripts/`, `tests/`, or `evals/`
+directories. They are review evidence for maintainers, external reviewers, and
+contributors, but they are not required for a first-time user to understand how
+to use the skills.
 
 - [Demo gallery](https://169884902hzl.github.io/engineering-paper-skills/demo.html)
 - [Quality gates](https://169884902hzl.github.io/engineering-paper-skills/quality-gates.html)
@@ -463,8 +488,11 @@ a first-time user to understand how to use the skills.
 - [Recorded local model-run artifact](tests/outputs/model_runs/full_paper_realistic_audit_8da3ceb.md)
 - [Known-good commit matrix](KNOWN_GOOD.md)
 - [No-release beta changelog](CHANGELOG.md)
+- [Maintainer-only QA scripts](scripts/README.md)
 
 ## Files
+
+### Runtime Skill Files
 
 - `skills/_shared/`: shared evidence-bound, citation-boundary, claim-strength,
   sentence-role, story-spine, AI-writing, list-to-argument,
@@ -482,6 +510,9 @@ a first-time user to understand how to use the skills.
   evidence skill
 - `skills/engineering-response/`: reviewer/advisor response skill
 - `skills/engineering-validation/`: final manuscript validation skill
+
+### Maintainer and Reviewer Files
+
 - `scripts/validate_repo.py`: repository structure, link, wording, and prompt
   coverage checks
 - `scripts/check_expected_behavior.py`: structured expected-behavior validation

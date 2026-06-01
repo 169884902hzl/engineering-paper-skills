@@ -59,6 +59,16 @@ Recorded demo outputs remain `local_single_run` evidence. They are useful for
 showing real skill behavior, but they are not CI-controlled proof and do not
 upgrade the project to top-tier ready.
 
+Recorded demo command strings use `<repo-root>` placeholders in public
+JSON/JSONL provenance files. Local absolute workspace paths are not part of the
+published evidence contract.
+
+## Normal user boundary
+
+Normal skill users only need `skills/_shared` and `skills/engineering-*`.
+The `scripts/`, `tests/`, and `evals/` directories are maintainer/reviewer
+evidence assets for repository QA, provenance checks, and behavior review.
+
 ## Known limitations
 
 - No public CI-controlled model-run artifact is available for `6bec865`,

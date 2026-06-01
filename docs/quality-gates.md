@@ -4,6 +4,11 @@ This repository does not require GitHub releases to be useful. The public
 tracking unit is the current `main` branch plus explicit commit hashes in audit
 reports.
 
+Normal skill users do not need to run this page's scripts. Install only
+`skills/_shared` and `skills/engineering-*` for ordinary Codex use. The commands
+below are maintainer/reviewer checks; see `scripts/README.md` for the script
+inventory.
+
 ## Required Repository Checks
 
 ```bash

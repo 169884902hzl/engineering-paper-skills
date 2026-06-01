@@ -4,6 +4,25 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Separate normal user path from maintainer evidence
+
+- Added explicit README guidance that normal users only need `skills/_shared`
+  and `skills/engineering-*`; `scripts/`, `tests/`, and `evals/` are for
+  maintainers and reviewers.
+- Moved first-screen provenance details for the notes-to-manuscript demo below
+  the normal user path, while keeping full recorded output links and evidence
+  boundaries later in the README.
+- Added the `Problem / Prior limitation / Method / Evidence / Boundary` input
+  template near Quick Start so users can ask for bounded manuscript prose
+  without reading repository QA assets.
+- Reworked the Pages homepage navigation and evidence wording so install/demo
+  paths appear before maintainer quality evidence.
+- Added `scripts/README.md` to label repository scripts as maintainer-only QA
+  tools.
+- Cleaned local absolute paths from JSON/JSONL demo and eval provenance records
+  by replacing them with `<repo-root>`.
+- Extended private/stale pattern scanning to HTML, JSON, and JSONL files.
+
 ## Replace first-screen safety examples with writing demo
 
 - Removed the README first-screen `Quick Illustrative Examples` block because it

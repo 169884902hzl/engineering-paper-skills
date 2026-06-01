@@ -160,7 +160,8 @@
         <div class="actions">
           <a class="button" href="https://github.com/169884902hzl/engineering-paper-skills">GitHub repository</a>
           <a class="button" href="./demo.html">Demo gallery</a>
-          <a class="button" href="./quality-gates.html">Quality gates</a>
+          <a class="button" href="#install">Install</a>
+          <a class="button" href="./quality-gates.html">Maintainer quality</a>
           <a class="button" href="./discovery.html">Discovery</a>
         </div>
       </header>
@@ -174,7 +175,7 @@
       <section>
         <h2>Start With Rough Notes</h2>
         <p>Most users should begin by giving the skill the paper problem, method, evidence, and boundary. The example below shows how rough robotics notes become bounded manuscript prose instead of an overconfident claim.</p>
-        <p><strong>Recorded local output excerpt:</strong> generated from <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/demo_notes_to_manuscript_paragraph.md">demo_notes_to_manuscript_paragraph.md</a> and stored as <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md">demo_notes_to_manuscript_paragraph_2dc9571.md</a>. This is local single-run evidence, not CI-controlled proof.</p>
+        <p><strong>Example manuscript paragraph:</strong> full provenance is in the demo gallery. Normal users only need the installed skills, not the repository QA scripts.</p>
         <div class="card example">
           <pre><code>Input:
 Use $engineering-writing to turn these notes into
@@ -193,7 +194,7 @@ are 69%, 72%, and 61%.
 Boundary: one 7-DoF robot arm, one tabletop fixture,
 one cylindrical peg family, no significance test,
 no cross-robot test, and no deployment test.</code></pre>
-          <pre><code>Recorded output excerpt:
+          <pre><code>Example manuscript paragraph:
 Contact-rich insertion can fail when visual
 occlusion hides peg-hole alignment and the controller
 continues from a poor pose estimate. Fixed overhead
@@ -242,7 +243,7 @@ cross-robot robustness, or industrial deployment.</code></pre>
         </ul>
       </section>
 
-      <section>
+      <section id="install">
         <h2>Install</h2>
         <pre><code>git clone https://github.com/169884902hzl/engineering-paper-skills.git
 cd engineering-paper-skills
@@ -250,8 +251,8 @@ cp -a skills/_shared skills/engineering-* ~/.codex/skills/</code></pre>
       </section>
 
       <section>
-        <h2>Quality Evidence</h2>
-        <p>The repository includes structure checks, golden-output snapshots, static quality-asset checks, response-diff fixtures, venue profiles, a manual rubric, and recorded local model-run artifacts.</p>
+        <h2>Maintainer / Reviewer Evidence</h2>
+        <p>Normal users only need <code>skills/_shared</code> and <code>skills/engineering-*</code>. The repository also includes maintainer QA scripts, golden-output snapshots, response-diff fixtures, venue profiles, a manual rubric, and recorded local model-run artifacts.</p>
         <p>These are review evidence, not automatic certification of top-tier paper quality. Behavior regression requires a configured model command template and scored model outputs.</p>
         <p>For no-release version tracking, use the <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/KNOWN_GOOD.md">known-good commit matrix</a> and <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/CHANGELOG.md">changelog</a>.</p>
       </section>

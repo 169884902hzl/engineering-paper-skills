@@ -230,7 +230,7 @@ def check_patterns(errors: list[str]) -> None:
         for p in ROOT.rglob("*")
         if p.is_file()
         and ".git" not in p.parts
-        and p.suffix in {".md", ".yaml", ".yml", ".py", ".sh", ".txt"}
+        and p.suffix in {".html", ".json", ".jsonl", ".md", ".yaml", ".yml", ".py", ".sh", ".txt"}
         and rel(p) != "scripts/validate_repo.py"
     ]
 
