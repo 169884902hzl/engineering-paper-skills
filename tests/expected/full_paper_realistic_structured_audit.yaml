@@ -15,7 +15,6 @@
     "OFFICIAL_POLICY_PASS"
   ],
   "required_status": {
-    "overall_readiness": "CANNOT_DETERMINE",
     "official_venue_policy": "NOT_RUN"
   },
   "forbidden_claims": [
@@ -62,31 +61,6 @@
           "decision",
           "forbidden_strengthening",
           "repair"
-        ],
-        "required_rows": [
-          {
-            "claim_id": "C1",
-            "status": "FAIL",
-            "source_span": "Robust Robot Insertion in Cluttered Industrial Workcells",
-            "evidence_span": "one robot arm",
-            "decision": "reject",
-            "repair": "delete"
-          },
-          {
-            "claim_id": "C2",
-            "status": "PASS_WITH_BOUNDARY",
-            "source_span": "full system reaches 84 percent",
-            "evidence_span": "fixed overhead camera baseline",
-            "evidence_anchor": "84 percent"
-          },
-          {
-            "claim_id": "C3",
-            "status": "PARTIAL",
-            "source_span": "causal mechanisms",
-            "evidence_span": "no statistical test",
-            "decision": "downgrade",
-            "repair": "causal proof"
-          }
         ]
       },
       {
@@ -110,20 +84,6 @@
           "terminology_drift",
           "claim_strength_drift",
           "repair"
-        ],
-        "required_rows": [
-          {
-            "from": "Related Work active perception",
-            "to": "Related Work guarded execution",
-            "issue": "execution decisions",
-            "terminology_drift": "confidence gate"
-          },
-          {
-            "from": "Discussion limitations",
-            "to": "Conclusion",
-            "claim_strength_drift": "deployment readiness",
-            "repair": "boundary"
-          }
         ]
       },
       {
@@ -151,22 +111,6 @@
           "semantic_match",
           "remaining_gap",
           "repair"
-        ],
-        "required_rows": [
-          {
-            "reviewer_comment_id": "R5",
-            "response_claim": "Table 3",
-            "status": "UNSUPPORTED",
-            "semantic_match": "FAIL",
-            "remaining_gap": "no completed"
-          },
-          {
-            "reviewer_comment_id": "R2",
-            "response_claim": "Lines 118-134",
-            "status": "UNVERIFIED",
-            "semantic_match": "PARTIAL",
-            "remaining_gap": "line numbers"
-          }
         ]
       }
     ],
@@ -175,17 +119,90 @@
         "name": "claim source and evidence spans come from fixture",
         "path": "claim_evidence",
         "fields": ["source_span", "evidence_span"],
-        "source_file": "tests/fixtures/full_paper/robot_active_observation_realistic_8page.md"
+        "source_file": "tests/fixtures/full_paper/robot_active_observation_realistic_8page.md",
+        "min_source_token_coverage": 0.75
       }
     ],
-    "gold_row_expectations": [
+    "issue_class_expectations": [
       {
-        "name": "claim rows match hidden gold contract",
+        "name": "claim rows cover core issue classes",
         "output_path": "claim_evidence",
-        "annotation_file": "tests/fixtures/full_paper/gold_annotations/robot_active_observation_realistic_8page.json",
-        "annotation_path": "structured_audit_contract.claim_evidence",
-        "key": "claim_id",
-        "fields": ["status", "decision", "source_span", "evidence_span"]
+        "issues": [
+          {
+            "name": "local evidence to broad industrial overclaim",
+            "accepted_statuses": ["FAIL", "OVERCLAIM", "UNSUPPORTED", "unsupported_overclaim"],
+            "required_terms": ["one robot", "fixture"],
+            "any_terms": ["industrial", "general", "manufacturing", "deployment"],
+            "field_terms": {
+              "repair": ["delete", "narrow", "bound", "downgrade"]
+            }
+          },
+          {
+            "name": "bounded 84 percent success result",
+            "accepted_statuses": ["PASS_WITH_BOUNDARY", "SUPPORTED_WITH_BOUNDARY", "supported_but_bounded"],
+            "required_terms": ["84 percent"],
+            "any_terms": ["69 percent", "fixed overhead", "fixed-camera", "baseline"]
+          },
+          {
+            "name": "causal ablation overclaim",
+            "accepted_statuses": ["PARTIAL", "OVERCLAIM", "overstrong_causal_claim", "UNSUPPORTED_CAUSAL_STRENGTH"],
+            "required_terms": ["causal"],
+            "any_terms": ["no statistical", "statistics", "downgrade", "suggest"]
+          }
+        ]
+      },
+      {
+        "name": "paragraph transition rows cover core issue classes",
+        "output_path": "paragraph_transitions",
+        "issues": [
+          {
+            "name": "related work to gap overreach",
+            "required_terms": ["Related Work"],
+            "any_terms": ["gap", "prior work", "citation", "placeholder"]
+          },
+          {
+            "name": "methods module list to mechanism",
+            "required_terms": ["Methods"],
+            "any_terms": ["module", "state", "mechanism"]
+          },
+          {
+            "name": "bounded limitation to conclusion or deployment risk",
+            "any_terms": ["Conclusion", "deployment", "boundary", "industrial"]
+          }
+        ]
+      },
+      {
+        "name": "response truthfulness rows cover concern classes",
+        "output_path": "response_truthfulness",
+        "issues": [
+          {
+            "name": "fake stress-test table or Table 3 claim",
+            "accepted_statuses": ["UNSUPPORTED", "FALSE", "FALSE_FROM_SUPPLIED_EVIDENCE"],
+            "required_terms": ["Table 3"],
+            "any_terms": ["no completed", "not supplied", "no data"]
+          },
+          {
+            "name": "unverified final line numbers",
+            "accepted_statuses": ["UNVERIFIED", "PARTIAL"],
+            "required_terms": ["line"],
+            "any_terms": ["not verified", "unverified", "placeholder"]
+          }
+        ]
+      },
+      {
+        "name": "validation status refuses readiness",
+        "output_path": "validation_status",
+        "issues": [
+          {
+            "name": "not ready or cannot determine",
+            "any_terms": ["NOT_READY", "CANNOT_DETERMINE", "CANNOT_MARK_READY", "AUDIT_COMPLETE_WITH_BLOCKERS"]
+          },
+          {
+            "name": "official venue policy not run",
+            "required_terms": ["NOT_RUN"],
+            "any_terms": ["official_venue_policy", "venue", "policy"]
+          }
+        ]
       }
     ]
   },

@@ -9,6 +9,8 @@ tied to concrete methods, results, figures, tables, citations, and limitations.
 
 ## What It Helps With
 
+- Start with a lightweight conservative paper coach when you want practical
+  Markdown guidance rather than a structured JSON benchmark.
 - Audit a draft manuscript for unsupported claims, weak story flow, paragraph
   jumps, section drift, and conclusion overreach.
 - Draft or revise Abstract, Introduction, Related Work, Methods, Experiments,
@@ -28,7 +30,8 @@ tied to concrete methods, results, figures, tables, citations, and limitations.
 >   top-tier-paper readiness. It provides strict writing and validation
 >   workflows, but final claims, experiments, citations, venue compliance, and
 >   AI-use disclosure remain the author's responsibility.
-> - This project provides six task skills plus a routing skill for English
+> - This project provides a lightweight coaching skill, six task skills, and a
+>   routing skill for English
 >   engineering paper auditing, writing, polishing, figures and tables,
 >   revision responses, and validation.
 > - The skills help organize and express author-provided research content. They
@@ -75,6 +78,15 @@ cp -a skills/_shared skills/engineering-* ~/.codex/skills/
 ```
 
 Restart Codex, then run:
+
+```text
+Use $engineering-paper-coach to audit this claim and give a safe rewrite:
+Evidence: 84% success over 180 trials on one robot, one tabletop fixture, and
+one object family.
+Draft: "The system is deployment-ready and proven robust for industrial insertion."
+```
+
+For structured section drafting, run:
 
 ```text
 Use $engineering-writing to draft a five-sentence abstract from this evidence:
@@ -143,6 +155,7 @@ This project is useful for:
 
 | Use case | Skill |
 |---|---|
+| Quick conservative writing, audit, polishing, response planning, or readiness triage in Markdown | `engineering-paper-coach` |
 | Unsure which workflow to use, or planning a mixed paper task | `engineering-paper-router` |
 | Audit paper logic, claim-evidence gaps, section drift, and visual overclaims before rewriting | `engineering-paper-auditor` |
 | Plan or draft paper sections from claims, notes, figures, or results | `engineering-writing` |
@@ -207,6 +220,7 @@ rm -rf ~/.codex/skills/engineering-writing \
        ~/.codex/skills/engineering-response \
        ~/.codex/skills/engineering-validation \
        ~/.codex/skills/engineering-paper-auditor \
+       ~/.codex/skills/engineering-paper-coach \
        ~/.codex/skills/engineering-paper-router \
        ~/.codex/skills/_shared
 ```
@@ -237,6 +251,7 @@ rm -rf ~/.codex/skills/engineering-writing \
 ├── engineering-response/
 ├── engineering-validation/
 ├── engineering-paper-auditor/
+├── engineering-paper-coach/
 └── engineering-paper-router/
 ```
 
@@ -380,6 +395,9 @@ The skills are organized around five writing constraints:
   terminology-ledger, source-note, and output-mode rules
 - `skills/engineering-paper-router/`: routing skill for ambiguous or mixed paper
   tasks
+- `skills/engineering-paper-coach/`: lightweight conservative Markdown entry
+  skill for quick writing, audit, polishing, response planning, and readiness
+  triage
 - `skills/engineering-paper-auditor/`: reviewer-like paper audit skill for
   claim-evidence, section-boundary, visual, and readiness risks
 - `skills/engineering-writing/`: drafting and manuscript-structure skill

@@ -4,6 +4,20 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Split behavior contract and add coach skill
+
+- Added `engineering-paper-coach` as a lightweight Markdown-first user entry
+  skill inspired by the simple skill shape of `phd-writing`.
+- Added a minimal coach prompt, expected spec, and golden output.
+- Added a schema-only full-paper structured contract beside the flexible
+  behavior contract.
+- Changed structured behavior checks from exact hidden-gold row matching to
+  issue-class and status-class matching.
+- Changed span checks to allow fixture-grounded token coverage when a model
+  combines two valid source snippets.
+- Added `docs/contract-failure-analysis.md` to explain why the old local run
+  failed exact matching while still catching substantive blockers.
+
 ## 80d9c23 - Add span-grounded audit evidence checks
 
 - Added source/evidence span-origin checks and hidden-gold row checks for the

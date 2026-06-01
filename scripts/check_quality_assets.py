@@ -200,6 +200,12 @@ REQUIRED_DISCOVERY_ASSETS = {
         "Behavior Evidence",
         "Evidence Boundary",
     ],
+    "docs/contract-failure-analysis.md": [
+        "What The Model Got Right",
+        "What The Strict Contract Rejected",
+        "Evaluation Design Diagnosis",
+        "Current Contract Direction",
+    ],
     "docs/discovery.md": [
         "Discovery Checklist",
         "Google Search Console",
@@ -234,6 +240,49 @@ REQUIRED_DISCOVERY_ASSETS = {
         "Validate repository metadata",
         "commit-based-beta",
         "urlset",
+    ],
+    "skills/engineering-paper-coach/SKILL.md": [
+        "Engineering Paper Coach",
+        "Evidence Boundary",
+        "Claim Strength",
+        "Output Requirements",
+        "CANNOT_DETERMINE",
+    ],
+    "skills/engineering-paper-coach/agents/openai.yaml": [
+        "Engineering Paper Coach",
+        "conservative engineering paper",
+    ],
+    "tests/prompts/simple_engineering_paper.md": [
+        "engineering-paper-coach",
+        "deployment-ready",
+        "proven robust",
+    ],
+    "tests/expected/simple_engineering_paper.yaml": [
+        "simple_engineering_paper",
+        "Evidence Boundary",
+        "Safe Rewrite",
+        "NOT_READY",
+    ],
+    "tests/outputs/golden/simple_engineering_paper.md": [
+        "NOT_READY",
+        "Evidence Boundary",
+        "Safe Rewrite",
+        "one tabletop fixture",
+    ],
+    "tests/prompts/full_paper_realistic_schema_contract.md": [
+        "claim_evidence",
+        "response_truthfulness",
+        "validation_status",
+    ],
+    "tests/expected/full_paper_realistic_schema_contract.yaml": [
+        "full_paper_realistic_schema_contract",
+        "json_expectations",
+        "span_origin_checks",
+    ],
+    "tests/outputs/golden/full_paper_realistic_schema_contract.json": [
+        "claim_evidence",
+        "response_truthfulness",
+        "validation_status",
     ],
 }
 

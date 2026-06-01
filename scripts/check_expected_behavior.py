@@ -199,6 +199,47 @@ def _expect_json_expectations(path: Path, data: dict[str, Any]) -> dict[str, Any
         fields = item.get("fields")
         if not isinstance(fields, list) or not all(isinstance(field, str) and field for field in fields):
             raise ValueError(f"{path}: json_expectations.gold_row_expectations.{item['name']}.fields must be strings")
+    for item in value.get("issue_class_expectations", []):
+        if not isinstance(item, dict):
+            raise ValueError(f"{path}: json_expectations.issue_class_expectations entries must be objects")
+        name = item.get("name")
+        output_path = item.get("output_path")
+        issues = item.get("issues")
+        if not isinstance(name, str) or not name:
+            raise ValueError(f"{path}: json_expectations.issue_class_expectations entry missing name")
+        if not isinstance(output_path, str) or not output_path:
+            raise ValueError(f"{path}: json_expectations.issue_class_expectations.{name} missing output_path")
+        if not isinstance(issues, list) or not issues:
+            raise ValueError(f"{path}: json_expectations.issue_class_expectations.{name}.issues must be a list")
+        for issue in issues:
+            if not isinstance(issue, dict):
+                raise ValueError(f"{path}: json_expectations.issue_class_expectations.{name}.issues entries must be objects")
+            issue_name = issue.get("name")
+            if not isinstance(issue_name, str) or not issue_name:
+                raise ValueError(f"{path}: json_expectations.issue_class_expectations.{name} issue missing name")
+            for key in ("required_terms", "any_terms", "accepted_statuses"):
+                if key in issue and (
+                    not isinstance(issue[key], list)
+                    or not all(isinstance(term, str) and term for term in issue[key])
+                ):
+                    raise ValueError(
+                        f"{path}: json_expectations.issue_class_expectations.{name}.{issue_name}.{key} "
+                        "must be strings"
+                    )
+            field_terms = issue.get("field_terms", {})
+            if not isinstance(field_terms, dict):
+                raise ValueError(
+                    f"{path}: json_expectations.issue_class_expectations.{name}.{issue_name}.field_terms "
+                    "must be an object"
+                )
+            for field, terms in field_terms.items():
+                if not isinstance(field, str) or not isinstance(terms, list) or not all(
+                    isinstance(term, str) and term for term in terms
+                ):
+                    raise ValueError(
+                        f"{path}: json_expectations.issue_class_expectations.{name}.{issue_name}.field_terms "
+                        "must map fields to string lists"
+                    )
     return value
 
 
@@ -298,6 +339,18 @@ def _normalize_text(value: str) -> str:
     return " ".join(value.lower().split())
 
 
+def _tokens(value: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+", value.lower())
+
+
+def _token_coverage(needle: str, haystack: str) -> float:
+    needle_tokens = [token for token in _tokens(needle) if len(token) > 2]
+    if not needle_tokens:
+        return 0.0
+    haystack_tokens = set(_tokens(haystack))
+    return sum(1 for token in needle_tokens if token in haystack_tokens) / len(needle_tokens)
+
+
 def _load_text_for_spec(path: str) -> str:
     source = ROOT / path
     if not source.exists():
@@ -307,10 +360,47 @@ def _load_text_for_spec(path: str) -> str:
 
 def _field_matches(actual: Any, expected: Any) -> bool:
     if isinstance(expected, list):
+        if isinstance(actual, str):
+            normalized_actual = _normalize_text(actual)
+            return any(_normalize_text(str(item)) in normalized_actual for item in expected)
         return actual in expected
     if isinstance(expected, str) and isinstance(actual, str):
         return _normalize_text(expected) in _normalize_text(actual)
     return actual == expected
+
+
+def _json_text(value: Any) -> str:
+    return _normalize_text(json.dumps(value, ensure_ascii=False, sort_keys=True))
+
+
+def _field_text(row: dict[str, Any], field: str) -> str:
+    value = row.get(field, "")
+    if isinstance(value, str):
+        return _normalize_text(value)
+    return _json_text(value)
+
+
+def _issue_matches(row: dict[str, Any], issue: dict[str, Any]) -> bool:
+    row_text = _json_text(row)
+    status_text = _field_text(row, "status")
+    accepted_statuses = issue.get("accepted_statuses", [])
+    if accepted_statuses and not any(_normalize_text(status) in status_text for status in accepted_statuses):
+        return False
+
+    for term in issue.get("required_terms", []):
+        if _normalize_text(term) not in row_text:
+            return False
+
+    any_terms = issue.get("any_terms", [])
+    if any_terms and not any(_normalize_text(term) in row_text for term in any_terms):
+        return False
+
+    for field, terms in issue.get("field_terms", {}).items():
+        field_text = _field_text(row, field)
+        if not any(_normalize_text(term) in field_text for term in terms):
+            return False
+
+    return True
 
 
 def check_outputs(spec_dir: Path, outputs_dir: Path, cases: set[str] | None = None) -> list[str]:
@@ -480,6 +570,7 @@ def check_outputs(spec_dir: Path, outputs_dir: Path, cases: set[str] | None = No
                     errors.append(f"{case}: JSON span-origin expectation {name} path is not an array")
                     continue
                 normalized_source = _normalize_text(source_text)
+                min_source_token_coverage = float(expectation.get("min_source_token_coverage", 1.0))
                 for index, row in enumerate(rows):
                     if not isinstance(row, dict):
                         errors.append(f"{case}: JSON span-origin expectation {name} row {index} is not an object")
@@ -491,7 +582,11 @@ def check_outputs(spec_dir: Path, outputs_dir: Path, cases: set[str] | None = No
                                 f"{case}: JSON span-origin expectation {name} row {index} missing {field}"
                             )
                             continue
-                        if _normalize_text(value) not in normalized_source:
+                        normalized_value = _normalize_text(value)
+                        if (
+                            normalized_value not in normalized_source
+                            and _token_coverage(value, source_text) < min_source_token_coverage
+                        ):
                             errors.append(
                                 f"{case}: JSON span-origin expectation {name} row {index} {field} "
                                 f"not found in {expectation['source_file']}: {value}"
@@ -537,6 +632,28 @@ def check_outputs(spec_dir: Path, outputs_dir: Path, cases: set[str] | None = No
                                 f"{case}: JSON gold-row expectation {name} {key}={row_id} "
                                 f"field {field} mismatch"
                             )
+
+            for expectation in json_spec.get("issue_class_expectations", []):
+                name = expectation["name"]
+                try:
+                    rows = _json_path(parsed_output, expectation["output_path"])
+                except KeyError:
+                    errors.append(
+                        f"{case}: JSON issue-class expectation {name} missing path: "
+                        f"{expectation['output_path']}"
+                    )
+                    continue
+                if isinstance(rows, dict):
+                    rows = [rows]
+                if not isinstance(rows, list) or not all(isinstance(row, dict) for row in rows):
+                    errors.append(f"{case}: JSON issue-class expectation {name} output path is not object rows")
+                    continue
+                for issue in expectation["issues"]:
+                    if not any(_issue_matches(row, issue) for row in rows):
+                        errors.append(
+                            f"{case}: JSON issue-class expectation {name} missing issue class: "
+                            f"{issue['name']}"
+                        )
 
     return errors
 

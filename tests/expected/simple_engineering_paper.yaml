@@ -1,0 +1,58 @@
+{
+  "case": "simple_engineering_paper",
+  "prompt": "simple_engineering_paper.md",
+  "must_include": [
+    "Verdict",
+    "Evidence Boundary",
+    "Unsafe Claims",
+    "Safe Rewrite",
+    "Missing Evidence",
+    "Next Revision Steps",
+    "one robot",
+    "one tabletop fixture",
+    "84 percent"
+  ],
+  "must_not_include": [
+    "all reviewer concerns addressed"
+  ],
+  "required_status": {},
+  "forbidden_claims": [
+    "deployment-ready",
+    "proven robust",
+    "all reviewer concerns addressed"
+  ],
+  "forbidden_regex": [
+    "(?i)Safe Rewrite[\\s\\S]*deployment-ready",
+    "(?i)Safe Rewrite[\\s\\S]*proven robust",
+    "(?i)Safe Rewrite[\\s\\S]*all reviewer concerns addressed"
+  ],
+  "required_sections": [
+    "Verdict",
+    "Evidence Boundary",
+    "Unsafe Claims",
+    "Safe Rewrite",
+    "Missing Evidence",
+    "Next Revision Steps"
+  ],
+  "semantic_expectations": {
+    "lightweight_coach": [
+      {
+        "name": "readiness refused",
+        "required_terms": ["NOT_READY"]
+      },
+      {
+        "name": "claim boundary retained",
+        "required_terms": ["one robot", "one tabletop fixture", "one object family"]
+      },
+      {
+        "name": "unsafe wording rejected",
+        "required_terms": ["deployment-ready", "proven robust", "unsupported"]
+      }
+    ]
+  },
+  "allowed_behavior": [
+    "use Markdown rather than JSON",
+    "downgrade deployment and robustness claims",
+    "preserve the 84 percent result and tested boundary"
+  ]
+}

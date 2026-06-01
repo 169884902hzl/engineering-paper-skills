@@ -15,6 +15,7 @@ from check_expected_behavior import validate_specs  # noqa: E402
 SKILLS = sorted((ROOT / "skills").glob("engineering-*"))
 
 EXPECTED_SKILLS = {
+    "engineering-paper-coach",
     "engineering-paper-auditor",
     "engineering-paper-router",
     "engineering-writing",
@@ -22,6 +23,10 @@ EXPECTED_SKILLS = {
     "engineering-figure-table",
     "engineering-response",
     "engineering-validation",
+}
+
+REFERENCE_OPTIONAL_SKILLS = {
+    "engineering-paper-coach",
 }
 
 REQUIRED_SHARED = {
@@ -101,7 +106,9 @@ REQUIRED_PROMPTS = {
     "validation_realistic.md",
     "full_paper_audit.md",
     "full_paper_realistic_audit.md",
+    "full_paper_realistic_schema_contract.md",
     "full_paper_realistic_structured_audit.md",
+    "simple_engineering_paper.md",
 }
 
 
@@ -166,7 +173,10 @@ def check_structure(errors: list[str]) -> None:
             errors.append(f"Missing shared references: {', '.join(sorted(missing_shared))}")
 
     for skill in SKILLS:
-        for required in ("SKILL.md", "references", "agents/openai.yaml"):
+        required_paths = ["SKILL.md", "agents/openai.yaml"]
+        if skill.name not in REFERENCE_OPTIONAL_SKILLS:
+            required_paths.append("references")
+        for required in required_paths:
             if not (skill / required).exists():
                 errors.append(f"{rel(skill)} missing {required}")
 

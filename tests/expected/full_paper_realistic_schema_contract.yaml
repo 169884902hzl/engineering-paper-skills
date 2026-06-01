@@ -1,0 +1,130 @@
+{
+  "case": "full_paper_realistic_schema_contract",
+  "prompt": "full_paper_realistic_schema_contract.md",
+  "must_include": [
+    "claim_evidence",
+    "paragraph_transitions",
+    "section_dependencies",
+    "response_truthfulness",
+    "validation_status",
+    "NOT_RUN"
+  ],
+  "must_not_include": [
+    "READY_FOR_SUBMISSION",
+    "VERIFIED_CITATIONS",
+    "OFFICIAL_POLICY_PASS"
+  ],
+  "required_status": {},
+  "forbidden_claims": [
+    "verified citations",
+    "completed stress tests",
+    "official venue compliance"
+  ],
+  "forbidden_regex": [
+    "(?i)ready_for_submission",
+    "(?i)verified_citations",
+    "(?i)official_policy_pass"
+  ],
+  "json_expectations": {
+    "required_top_level_keys": [
+      "verdict",
+      "claim_evidence",
+      "paragraph_transitions",
+      "section_dependencies",
+      "response_truthfulness",
+      "validation_status"
+    ],
+    "array_expectations": [
+      {
+        "name": "claim evidence rows",
+        "path": "claim_evidence",
+        "min_items": 4,
+        "required_fields": [
+          "claim_id",
+          "claim",
+          "status",
+          "source_span",
+          "evidence_span",
+          "evidence_anchor",
+          "decision",
+          "forbidden_strengthening",
+          "repair"
+        ],
+        "non_empty_fields": [
+          "claim_id",
+          "claim",
+          "status",
+          "source_span",
+          "evidence_span",
+          "decision",
+          "forbidden_strengthening",
+          "repair"
+        ]
+      },
+      {
+        "name": "paragraph transition rows",
+        "path": "paragraph_transitions",
+        "min_items": 3,
+        "required_fields": [
+          "from",
+          "to",
+          "relation",
+          "issue",
+          "terminology_drift",
+          "claim_strength_drift",
+          "repair"
+        ],
+        "non_empty_fields": [
+          "from",
+          "to",
+          "relation",
+          "issue",
+          "terminology_drift",
+          "claim_strength_drift",
+          "repair"
+        ]
+      },
+      {
+        "name": "response truthfulness rows",
+        "path": "response_truthfulness",
+        "min_items": 3,
+        "required_fields": [
+          "reviewer_comment_id",
+          "complaint_type",
+          "response_claim",
+          "status",
+          "old_problem_span",
+          "new_fix_span",
+          "semantic_match",
+          "manuscript_anchor",
+          "remaining_gap",
+          "repair"
+        ],
+        "non_empty_fields": [
+          "reviewer_comment_id",
+          "complaint_type",
+          "response_claim",
+          "status",
+          "old_problem_span",
+          "semantic_match",
+          "remaining_gap",
+          "repair"
+        ]
+      }
+    ],
+    "span_origin_checks": [
+      {
+        "name": "claim source and evidence spans are grounded in fixture terms",
+        "path": "claim_evidence",
+        "fields": ["source_span", "evidence_span"],
+        "source_file": "tests/fixtures/full_paper/robot_active_observation_realistic_8page.md",
+        "min_source_token_coverage": 0.75
+      }
+    ]
+  },
+  "allowed_behavior": [
+    "return machine-readable JSON",
+    "use required top-level schema keys",
+    "mark official venue checks as NOT_RUN unless official sources were inspected"
+  ]
+}
