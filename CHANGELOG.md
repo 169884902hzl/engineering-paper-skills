@@ -4,6 +4,17 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## 80d9c23 - Add span-grounded audit evidence checks
+
+- Added source/evidence span-origin checks and hidden-gold row checks for the
+  structured full-paper audit contract.
+- Added behavior-regression eval stub generation for manual CI runs.
+- Recorded a real local Codex structured-contract attempt against this commit
+  as `local_single_run_failed`; the output missed required readiness labels,
+  hidden-gold row matches, paragraph-transition rows, and response-truthfulness
+  rows.
+- This entry is failure evidence, not a passing behavior proof.
+
 ## 6bec865 - Strengthen metadata and audit evidence gates
 
 - Added `KNOWN_GOOD.md` and `CHANGELOG.md` as no-release version anchors.

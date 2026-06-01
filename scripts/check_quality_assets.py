@@ -84,6 +84,7 @@ REQUIRED_FULL_PAPER_CASES = {
 }
 
 REQUIRED_EVAL_RESULTS = {
+    "evals/results/80d9c23_full_paper_model_eval.jsonl",
     "evals/results/6bec865_full_paper_model_eval.jsonl",
     "evals/results/8da3ceb_full_paper_model_eval.jsonl",
     "evals/results/f3cbb28_full_paper_manual_eval.jsonl",
@@ -117,6 +118,13 @@ REQUIRED_MODEL_RUNS = {
     ],
     "tests/outputs/model_runs/full_paper_realistic_structured_audit_6bec865_failed.json": [
         "BLOCKED_NOT_READY",
+        "claim_evidence",
+        "source_span",
+        "response_truthfulness",
+        "validation_status",
+    ],
+    "tests/outputs/model_runs/full_paper_realistic_structured_audit_80d9c23_failed.json": [
+        "PASS_WITH_BLOCKERS",
         "claim_evidence",
         "source_span",
         "response_truthfulness",
@@ -212,6 +220,7 @@ REQUIRED_DISCOVERY_ASSETS = {
     ],
     "CHANGELOG.md": [
         "No-release beta changelog",
+        "80d9c23",
         "6bec865",
         "d03d683",
         "8da3ceb",
@@ -467,6 +476,23 @@ def main() -> int:
                     errors.append(
                         f"{eval_result.relative_to(ROOT)} line {line_no} must record failed local evidence"
                     )
+                if not isinstance(record.get("blocking_failures"), list) or not record["blocking_failures"]:
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must record blocking_failures"
+                    )
+            if "80d9c23" in rel_path:
+                if record.get("commit") != "80d9c23":
+                    errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record commit=80d9c23")
+                if record.get("ci_controlled") is not False:
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must explicitly record ci_controlled=false"
+                    )
+                if record.get("evidence_level") != "local_single_run_failed":
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must record failed local evidence"
+                    )
+                if "output_sha256" not in record:
+                    errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} missing key: output_sha256")
                 if not isinstance(record.get("blocking_failures"), list) or not record["blocking_failures"]:
                     errors.append(
                         f"{eval_result.relative_to(ROOT)} line {line_no} must record blocking_failures"

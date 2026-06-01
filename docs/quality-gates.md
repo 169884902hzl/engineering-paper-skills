@@ -38,8 +38,8 @@ When the manual behavior workflow succeeds, it writes a
 semantic judge scores the output.
 
 The repository also keeps failed local behavior attempts when they reveal a real
-contract gap. For example, the `6bec865` structured-audit attempt is recorded as
-`local_single_run_failed`, not as a passing model run.
+contract gap. For example, the `6bec865` and `80d9c23` structured-audit attempts
+are recorded as `local_single_run_failed`, not as passing model runs.
 
 ## Versioning Without Releases
 
