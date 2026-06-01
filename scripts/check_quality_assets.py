@@ -85,6 +85,7 @@ REQUIRED_FULL_PAPER_CASES = {
 }
 
 REQUIRED_EVAL_RESULTS = {
+    "evals/results/2dc9571_hero_demo_model_eval.jsonl",
     "evals/results/681d305_demo_outputs_model_eval.jsonl",
     "evals/results/38b3d4d_full_paper_model_eval.jsonl",
     "evals/results/80d9c23_full_paper_model_eval.jsonl",
@@ -184,9 +185,9 @@ REQUIRED_DISCOVERY_ASSETS = {
     "docs/index.html": [
         "Engineering Paper Skills",
         "manuscript audit",
-        "Start With The Coach",
-        "Illustrative example",
-        "not a recorded model-run output",
+        "Start With Rough Notes",
+        "Recorded local output excerpt",
+        "demo_notes_to_manuscript_paragraph_2dc9571.md",
         "Example Outputs",
         "SoftwareSourceCode",
     ],
@@ -196,9 +197,10 @@ REQUIRED_DISCOVERY_ASSETS = {
         "Illustrative examples",
         "Recorded local Codex outputs",
         "Recorded Demo Outputs",
-        "Use Case Examples",
+        "Manuscript Writing Examples",
+        "Safety And Audit Examples",
+        "Notes To Manuscript Paragraph",
         "Conservative Claim Audit",
-        "Research Notes To Paper Skeleton",
         "Reviewer Response Truthfulness",
         "Deep Audit Artifacts",
         "Structured JSON Audit",
@@ -250,6 +252,7 @@ REQUIRED_DISCOVERY_ASSETS = {
     ],
     "CHANGELOG.md": [
         "No-release beta changelog",
+        "Replace first-screen safety examples with writing demo",
         "38b3d4d",
         "80d9c23",
         "6bec865",
@@ -260,6 +263,7 @@ REQUIRED_DISCOVERY_ASSETS = {
         "Commit anchors",
         "Behavior evidence",
         "Demo output provenance",
+        "hero notes-to-manuscript paragraph demo",
         "Known limitations",
     ],
     "scripts/check_metadata_files.py": [
@@ -318,6 +322,16 @@ REQUIRED_DEMO_CASES = {
         "output": "tests/outputs/model_runs/demo/demo_claim_audit_681d305.md",
         "skill": "engineering-paper-coach",
         "markers": ["Claim-strength audit", "Safe rewrite", "What stronger claims would require"],
+    },
+    "demo_notes_to_manuscript_paragraph": {
+        "prompt": "tests/prompts/demo_notes_to_manuscript_paragraph.md",
+        "output": "tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md",
+        "skill": "engineering-writing",
+        "markers": [
+            "Manuscript paragraph",
+            "Why this is evidence-bound",
+            "Claims not supported by the supplied notes",
+        ],
     },
     "demo_results_paragraph": {
         "prompt": "tests/prompts/demo_results_paragraph.md",

@@ -1,166 +1,93 @@
 # Engineering Paper Skills
 
-Evidence-bound Codex skills for engineering paper writing, manuscript audit,
-polishing, figure/table claim checks, reviewer response, and validation.
+Evidence-bound Codex skills for **engineering paper writing**, **manuscript
+audit**, **reviewer response**, **figure/table claim checks**, and **research
+paper validation** for robotics, machine learning, control, and systems papers.
 
-Start with **`$engineering-paper-coach`** if you want practical Markdown
-guidance. Use the specialized skills when you need a deeper audit, section
-drafting, figure/table review, reviewer-response planning, or
-submission-readiness triage.
+Most users should start with **`$engineering-paper-coach`**. Give it research
+notes, draft text, results, figures, or reviewer comments; it will either write
+within the supplied evidence, downgrade unsupported claims, or tell you what
+evidence is missing.
 
-This beta skill suite is designed for robotics, machine learning, control,
-systems, and other experiment-heavy engineering papers where claims must stay
-tied to supplied methods, results, figures, tables, citations, and limitations.
+This is a beta skill suite. It does not replace experiments, citation
+verification, advisor review, official venue instructions, or author judgment.
+It should not invent methods, baselines, citations, metrics, figures, line
+numbers, deployment tests, or submission readiness.
 
-## What It Does
+## What It Can Write
 
-- Turns rough research notes into conservative paper outlines or bounded
-  manuscript paragraphs.
-- Audits whether claims are stronger than the supplied evidence.
-- Polishes academic prose without adding facts or increasing claim strength.
-- Checks whether figures, tables, captions, and result narratives support the
-  stated claims.
-- Helps draft reviewer or advisor responses without pretending that experiments,
-  tables, citations, line numbers, or manuscript edits already exist.
-- Reports readiness with explicit states such as `PASS`, `FAIL`, `PARTIAL`,
-  `NOT_RUN`, `UNKNOWN`, and `CANNOT_DETERMINE`.
-
-> **Statement**
->
-> - This is a beta engineering-paper skill suite, not a guarantee of
->   top-tier-paper readiness. It provides strict writing and validation
->   workflows, but final claims, experiments, citations, venue compliance, and
->   AI-use disclosure remain the author's responsibility.
-> - This project provides a lightweight coaching skill, six task skills, and a
->   routing skill for English
->   engineering paper auditing, writing, polishing, figures and tables,
->   revision responses, and validation.
-> - The skills help organize and express author-provided research content. They
->   do not replace real experiments, citation checking, advisor review, or venue
->   requirements.
-> - The skills are conservative by default: they should not invent mechanisms,
->   data, references, metrics, limitations, or conclusions.
-> - If the input evidence is thin, the skills should expose the gap instead of
->   producing overconfident manuscript prose.
-
----
-
-## What This Does Not Do
-
-These skills do not replace real experiments, citation verification, advisor
-review, venue instructions, or author judgment. They cannot certify that a
-result is true, a citation exists, a figure proves a mechanism, or a manuscript
-is submission-ready unless the relevant source files, evidence, tools, and
-official venue policies are provided and checked.
-
-If evidence is thin, the skills should expose the gap, downgrade the claim, or
-produce a scaffold instead of confident manuscript prose.
-
-## Example Provenance
-
-The examples in this README are split into two types:
-
-- **Illustrative examples** are hand-written for readability. They show the
-  expected interaction style, but they are not recorded model-run outputs.
-- **Recorded local Codex outputs** are raw final messages generated from prompt
-  fixtures and stored under `tests/outputs/model_runs/demo/`. They are local
-  single-run evidence, not CI-controlled proof or top-tier-readiness proof.
-
-## Quick Illustrative Examples
-
-### Example 1: Audit An Overclaim
-
-Illustrative example, not a recorded model-run output.
+The example below is a **recorded local Codex output excerpt** generated from
+[tests/prompts/demo_notes_to_manuscript_paragraph.md](tests/prompts/demo_notes_to_manuscript_paragraph.md)
+and stored at
+[tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md](tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md).
+It is local single-run evidence, not CI-controlled behavior proof.
 
 **Input**
 
 ```text
-Use $engineering-paper-coach to audit this paper claim and give a safe rewrite.
+Use $engineering-writing to turn these notes into one English manuscript
+paragraph.
+
+Target paper type:
+Robotics conference paper.
+
+Problem:
+Contact-rich insertion fails when visual occlusion hides the peg-hole alignment
+and the controller continues with a poor pose estimate.
+
+Prior limitation:
+Fixed overhead or side cameras can lose task-relevant visibility during
+insertion. Open-loop insertion does not react to pose uncertainty or contact
+deviations.
+
+Method:
+The system uses overhead and side RGB-D observations. It estimates insertion
+pose and confidence. When confidence is low, it requests an additional view. A
+guarded insertion controller stops if force or pose deviation exceeds a limit.
 
 Evidence:
-- 84% success over 180 trials.
-- One robot arm.
-- One tabletop fixture.
-- One object family.
-- No cross-robot test.
-- No industrial deployment test.
-- No statistical significance test.
+Full system: 84% success over 180 trials.
+Fixed overhead camera: 69%.
+Fixed side camera: 72%.
+Open-loop controller: 61%.
 
-Draft claim:
-"The system is deployment-ready and proven robust for industrial insertion."
+Boundary:
+One 7-DoF robot arm.
+One tabletop fixture.
+One cylindrical peg family.
+No confidence intervals.
+No statistical significance test.
+No cross-robot test.
+No industrial deployment test.
+No ablation isolating view selection from guarded execution.
 ```
 
-**Illustrative output**
+**Recorded local output excerpt**
 
 ```text
-Verdict: the claim is too strong for the supplied evidence.
-
-Claim-strength audit:
-- deployment readiness: unsupported; no deployment protocol or deployment log is supplied.
-- robustness: unsupported beyond the tested setup; only one robot, one fixture, and one object family are supplied.
-- industrial suitability: unsupported; the evidence is tabletop-only.
-- bounded empirical comparison: partially supported by the 84% result over 180 trials.
-
-Safe rewrite:
-"In the evaluated tabletop insertion setup, the system achieved 84% success
-over 180 trials on one robot arm and one object family. Cross-robot robustness,
-industrial deployment, and broader object variation remain untested."
-
-Evidence needed for stronger wording:
-- cross-robot or cross-fixture evaluation
-- object-family variation
-- occlusion or stress-test protocol
-- uncertainty estimates or statistical analysis
-- deployment protocol
+Contact-rich insertion can fail when visual occlusion hides peg-hole alignment
+and the controller continues from a poor pose estimate. Fixed overhead or side
+RGB-D cameras may lose task-relevant visibility during insertion, while
+open-loop insertion does not react to pose uncertainty or contact deviations.
+We study a system that uses overhead and side RGB-D observations to estimate
+insertion pose and confidence, requests an additional view when confidence is
+low, and applies a guarded insertion controller that stops when force or pose
+deviation exceeds a limit. In 180 trials, the full system achieved 84% success,
+compared with 69% for a fixed overhead camera, 72% for a fixed side camera, and
+61% for an open-loop controller. This evidence supports a bounded system-level
+improvement in the tested setup, but it is limited to one 7-DoF robot arm, one
+tabletop fixture, and one cylindrical peg family, with no confidence intervals,
+no statistical significance test, no cross-robot test, no industrial deployment
+test, and no ablation isolating view selection from guarded execution.
 ```
 
-### Example 2: Do Not Fake A Reviewer Response
+**Why this is evidence-bound**
 
-Illustrative example, not a recorded model-run output.
-
-**Input**
-
-```text
-Use $engineering-response to audit this draft response.
-
-Reviewer comment:
-"The paper overclaims robustness. Please add stress tests and clarify whether
-the method generalizes beyond the tabletop setup."
-
-Supplied materials:
-- No revised manuscript diff.
-- No new stress-test data.
-- No Table 3.
-- Final line numbers are unavailable.
-
-Draft response:
-"We added new stress tests in Table 3 and revised Lines 210-225 to show robust
-generalization."
-```
-
-**Illustrative output**
-
-```text
-Response mode: plan, not final response.
-
-| Reviewer concern | Draft response claim | Supplied evidence | Verdict | Safe action |
-|---|---|---|---|---|
-| Add stress tests | "We added new stress tests" | No stress-test data supplied | FAIL | Do not claim completed |
-| Add Table 3 | "Table 3" | No Table 3 supplied | FAIL | Mark as missing evidence |
-| Cite final location | "Lines 210-225" | Final line numbers unavailable | FAIL | Use placeholder until final build |
-| Clarify generalization | "robust generalization" | One tabletop setup only | FAIL | Narrow to tested setup |
-
-Safe response plan:
-"We agree that the original robustness wording was too broad. Based on the
-current evidence, we will narrow the claim to the evaluated tabletop setup.
-Additional stress-test results and final line numbers cannot be claimed until
-the revised manuscript and data are available."
-
-Required before final response:
-- revised manuscript diff
-- stress-test protocol and results, if performed
-- final compiled line numbers
-```
+- It uses the supplied problem, prior limitation, method, numbers, and boundary.
+- It does not add citations, baselines, objects, robots, statistics, or
+  deployment evidence.
+- It turns rough notes into manuscript prose instead of only refusing unsafe
+  claims.
 
 
 ## Quick Start
@@ -174,10 +101,9 @@ cp -a skills/_shared skills/engineering-* ~/.codex/skills/
 Restart Codex, then run:
 
 ```text
-Use $engineering-paper-coach to audit this claim and give a safe rewrite:
-Evidence: 84% success over 180 trials on one robot, one tabletop fixture, and
-one object family.
-Draft: "The system is deployment-ready and proven robust for industrial insertion."
+Use $engineering-paper-coach to turn these research notes into one bounded
+English manuscript paragraph:
+[paste problem, prior limitation, method, evidence, and boundary notes]
 ```
 
 ## Which Skill Should I Use First?
@@ -233,6 +159,7 @@ from Codex, not polished golden examples.
 
 | Use case | Prompt fixture | Recorded local output |
 |---|---|---|
+| Notes to manuscript paragraph | [demo_notes_to_manuscript_paragraph.md](tests/prompts/demo_notes_to_manuscript_paragraph.md) | [demo_notes_to_manuscript_paragraph_2dc9571.md](tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md) |
 | Claim audit | [demo_claim_audit.md](tests/prompts/demo_claim_audit.md) | [demo_claim_audit_681d305.md](tests/outputs/model_runs/demo/demo_claim_audit_681d305.md) |
 | Results paragraph | [demo_results_paragraph.md](tests/prompts/demo_results_paragraph.md) | [demo_results_paragraph_681d305.md](tests/outputs/model_runs/demo/demo_results_paragraph_681d305.md) |
 | Conservative polishing | [demo_polishing_claim_inflation.md](tests/prompts/demo_polishing_claim_inflation.md) | [demo_polishing_claim_inflation_681d305.md](tests/outputs/model_runs/demo/demo_polishing_claim_inflation_681d305.md) |
@@ -248,6 +175,15 @@ Full provenance is recorded in
 ### Recorded Output Excerpts
 
 Excerpted for readability; see the linked artifacts for the full raw outputs.
+
+**Notes to manuscript paragraph**
+
+```text
+Contact-rich insertion can fail when visual occlusion hides peg-hole alignment
+and the controller continues from a poor pose estimate. Fixed overhead or side
+RGB-D cameras may lose task-relevant visibility during insertion, while
+open-loop insertion does not react to pose uncertainty or contact deviations.
+```
 
 **Related Work nearest-neighbor distinction**
 

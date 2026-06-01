@@ -1,13 +1,14 @@
 {
   "manifest_type": "recorded_local_demo_outputs",
-  "base_commit": "681d305",
+  "base_commit": "mixed",
+  "base_commits": ["681d305", "2dc9571"],
   "generated_on": "2026-06-01",
   "codex_cli_version": "codex-cli 0.135.0",
   "runtime_model_executed": true,
   "ci_controlled": false,
   "evidence_level": "local_single_run",
   "edited_for_readme": false,
-  "note": "These are raw local Codex final-message outputs generated from demo prompt fixtures. They are not CI-controlled behavior proof and not top-tier-readiness proof.",
+  "note": "These are raw local Codex final-message outputs generated from demo prompt fixtures. Most outputs were generated at base commit 681d305; the notes-to-manuscript paragraph hero output was generated at base commit 2dc9571. They are not CI-controlled behavior proof and not top-tier-readiness proof.",
   "outputs": [
     {
       "case": "demo_claim_audit",
@@ -72,6 +73,14 @@
       "output": "tests/outputs/model_runs/demo/demo_methods_execution_path_681d305.md",
       "sha256": "a2448245bc0327e6bd597c9c61b09a8dc7dc1256dbb19cddecdcb74eafa118ea",
       "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C /home/agilex/engineering-paper-skills-open-source -o tests/outputs/model_runs/demo/demo_methods_execution_path_681d305.md \"Read tests/prompts/demo_methods_execution_path.md and produce the requested demo output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "demo_notes_to_manuscript_paragraph",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/demo_notes_to_manuscript_paragraph.md",
+      "output": "tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md",
+      "sha256": "19ba72403ad52f24502b2759d00766c63769a26f883c8aa1d504275711043501",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C /home/agilex/engineering-paper-skills-open-source -o tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md \"Read tests/prompts/demo_notes_to_manuscript_paragraph.md and produce the requested demo output. Do not edit files. Final answer only.\""
     }
   ]
 }

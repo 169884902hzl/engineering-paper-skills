@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Engineering Paper Skills Demo Gallery</title>
-    <meta name="description" content="Demo outputs for Engineering Paper Skills: full-paper audit, sentence-level audit, response diff verification, AI-smell polishing, and figure/table claim checks.">
+    <meta name="description" content="Demo outputs for Engineering Paper Skills: notes-to-manuscript writing, full-paper audit, response diff verification, polishing, and figure/table claim checks.">
     <link rel="canonical" href="https://169884902hzl.github.io/engineering-paper-skills/demo.html">
     <style>
       body {
@@ -89,38 +89,56 @@
       </section>
 
       <section>
-        <h2>Use Case Examples</h2>
-        <p>Start with short illustrative Markdown examples. Recorded local Codex outputs and structured artifacts are listed later for maintainers and reviewers.</p>
+        <h2>Manuscript Writing Examples</h2>
+        <p>Start here if you want to see what the skills can write from rough notes. Safety and audit examples are listed after the writing examples.</p>
 
         <article class="card">
-          <h3>Conservative Claim Audit</h3>
+          <h3>Notes To Manuscript Paragraph</h3>
+          <p><strong>Recorded local output excerpt:</strong> generated from <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/demo_notes_to_manuscript_paragraph.md">demo_notes_to_manuscript_paragraph.md</a> and stored as <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md">demo_notes_to_manuscript_paragraph_2dc9571.md</a>.</p>
           <div class="example">
             <pre><code>Input:
-Use $engineering-paper-coach to audit this claim.
+Use $engineering-writing to turn these notes into
+one English manuscript paragraph.
+
+Problem:
+Contact-rich insertion fails when occlusion hides
+peg-hole alignment and the controller continues
+from a poor pose estimate.
+
+Method:
+Overhead and side RGB-D observations estimate pose
+and confidence; low confidence triggers another
+view; guarded execution stops under force or
+pose-deviation limits.
 
 Evidence:
-- 84% success over 180 trials.
-- One robot arm.
-- One tabletop fixture.
-- One object family.
-- No cross-robot or deployment test.
+84% success over 180 trials. Baselines: 69%, 72%,
+and 61%.
 
-Draft:
-"The system is deployment-ready and proven robust
-for industrial insertion."</code></pre>
-            <pre><code>Illustrative output:
-Diagnosis: NOT_READY as written.
-
-Blocking issues:
-- "deployment-ready" is unsupported.
-- "proven robust" exceeds one-setup evidence.
-- "industrial insertion" is not tested.
-
-Safe rewrite:
-"In the evaluated tabletop insertion setup, the
-system achieved 84% success over 180 trials on
-one robot arm and one object family. Broader
-industrial deployment remains untested."</code></pre>
+Boundary:
+One 7-DoF robot arm, one tabletop fixture, one
+cylindrical peg family, no significance test, no
+cross-robot test, no deployment test.</code></pre>
+            <pre><code>Recorded local output excerpt:
+Contact-rich insertion can fail when visual
+occlusion hides peg-hole alignment and the controller
+continues from a poor pose estimate. Fixed overhead
+or side RGB-D cameras may lose task-relevant
+visibility during insertion, while open-loop
+insertion does not react to pose uncertainty or
+contact deviations. We study a system that uses
+overhead and side RGB-D observations to estimate
+insertion pose and confidence, requests an additional
+view when confidence is low, and applies a guarded
+insertion controller that stops when force or pose
+deviation exceeds a limit. In 180 trials, the full
+system achieved 84% success, compared with 69% for
+a fixed overhead camera, 72% for a fixed side camera,
+and 61% for an open-loop controller. This evidence
+supports a bounded system-level improvement in the
+tested setup, but it is limited to one 7-DoF robot
+arm, one tabletop fixture, and one cylindrical peg
+family.</code></pre>
           </div>
         </article>
 
@@ -202,6 +220,43 @@ The experiment does not establish cross-robot
 robustness, industrial deployment readiness, or
 generalization beyond the tested object family and
 fixture geometry.</code></pre>
+          </div>
+        </article>
+      </section>
+
+      <section>
+        <h2>Safety And Audit Examples</h2>
+        <p>Use these examples when the task is to check claim strength, figure/table support, response truthfulness, or readiness. They are useful, but they are not the first thing a writing-focused user needs to see.</p>
+
+        <article class="card">
+          <h3>Conservative Claim Audit</h3>
+          <div class="example">
+            <pre><code>Input:
+Use $engineering-paper-coach to audit this claim.
+
+Evidence:
+- 84% success over 180 trials.
+- One robot arm.
+- One tabletop fixture.
+- One object family.
+- No cross-robot or deployment test.
+
+Draft:
+"The system is deployment-ready and proven robust
+for industrial insertion."</code></pre>
+            <pre><code>Illustrative output:
+Diagnosis: NOT_READY as written.
+
+Blocking issues:
+- "deployment-ready" is unsupported.
+- "proven robust" exceeds one-setup evidence.
+- "industrial insertion" is not tested.
+
+Safe rewrite:
+"In the evaluated tabletop insertion setup, the
+system achieved 84% success over 180 trials on
+one robot arm and one object family. Broader
+industrial deployment remains untested."</code></pre>
           </div>
         </article>
 
@@ -354,9 +409,10 @@ Forbidden statement:
 
       <section id="recorded-demo-outputs">
         <h2>Recorded Demo Outputs</h2>
-        <p>These are raw local Codex final messages generated from prompt fixtures at base commit <code>681d305</code>. They are excerpted here for readability; the full artifacts and hashes are recorded in the manifest.</p>
+        <p>These are raw local Codex final messages generated from prompt fixtures. Most user-facing demo outputs were generated at base commit <code>681d305</code>; the notes-to-manuscript paragraph hero demo was generated at base commit <code>2dc9571</code>. They are excerpted here for readability; the full artifacts and hashes are recorded in the manifest.</p>
         <ul>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/manifest.json">Recorded demo manifest</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md">Notes-to-manuscript paragraph output</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_claim_audit_681d305.md">Claim audit output</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_results_paragraph_681d305.md">Results paragraph output</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_polishing_claim_inflation_681d305.md">Conservative polishing output</a></li>
@@ -366,6 +422,11 @@ Forbidden statement:
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_related_work_nearest_neighbor_681d305.md">Related Work nearest-neighbor output</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_methods_execution_path_681d305.md">Methods execution-path output</a></li>
         </ul>
+        <pre><code>Recorded excerpt: Notes to manuscript paragraph
+Contact-rich insertion can fail when visual occlusion hides peg-hole alignment
+and the controller continues from a poor pose estimate. Fixed overhead or side
+RGB-D cameras may lose task-relevant visibility during insertion, while
+open-loop insertion does not react to pose uncertainty or contact deviations.</code></pre>
         <pre><code>Recorded excerpt: Related Work nearest-neighbor
 The strongest novelty claim is not yet safe. The supplied notes support a
 positioning hypothesis, not a fully verified literature gap: the paper appears

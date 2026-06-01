@@ -53,7 +53,8 @@ artifacts:
 - Current recorded user-facing demos are listed in
   `tests/outputs/model_runs/demo/manifest.json`.
 - Current demo-output eval provenance is recorded in
-  `evals/results/681d305_demo_outputs_model_eval.jsonl`.
+  `evals/results/681d305_demo_outputs_model_eval.jsonl` and
+  `evals/results/2dc9571_hero_demo_model_eval.jsonl`.
 
 ## Versioning Without Releases
 

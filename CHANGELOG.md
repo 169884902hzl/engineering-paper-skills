@@ -4,6 +4,21 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Replace first-screen safety examples with writing demo
+
+- Removed the README first-screen `Quick Illustrative Examples` block because it
+  emphasized claim rejection and response safety before showing manuscript
+  writing value.
+- Added `tests/prompts/demo_notes_to_manuscript_paragraph.md` as a hero writing
+  prompt for rough notes to bounded manuscript prose.
+- Ran local Codex in read-only mode to generate
+  `tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md`.
+- Added `evals/results/2dc9571_hero_demo_model_eval.jsonl` to record the local
+  single-run evidence level, command, output hash, and limitations.
+- Updated README and Pages so the first screen shows a recorded notes-to-prose
+  output excerpt; claim audit, response truthfulness, and validation examples
+  remain available later as safety and audit examples.
+
 ## Rework user examples and demo-first documentation
 
 - Moved quality evidence links out of the README's first usage path and into a
