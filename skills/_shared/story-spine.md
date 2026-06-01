@@ -75,3 +75,46 @@ Section dependency audit
 Transition audit
 | From | To | Bridge needed | Action |
 ```
+
+## Repair Algorithm
+
+When the spine breaks, repair in this order:
+
+1. Inventory every claim-bearing sentence in Abstract, Introduction,
+   Experiments, Discussion, and Conclusion.
+2. Assign each claim to one story node.
+3. For each node, name the upstream basis and downstream proof.
+4. If a claim has no downstream proof, downgrade, move to limitation/future
+   work, or delete it.
+5. If Methods has modules but no insight-to-mechanism link, rebuild the Methods
+   reader path before polishing any prose.
+6. If Results reports numbers but does not answer contribution questions, build
+   the experiment-question map before drafting interpretation.
+7. Recheck Abstract and Conclusion last; they may only state claims that survive
+   the story-spine audit.
+
+## Worked Failure Example
+
+```text
+Story spine
+| Node | Draft text symptom | Evidence anchor | Verdict | Repair |
+| Problem | broad automation importance | one tabletop insertion fixture | too broad | define target visibility loss during insertion |
+| Gap | "existing methods remain limited" | no nearest-neighbor distinction | unsupported | group prior routes by fixed-view, active sensing, and guarded execution assumptions |
+| Insight | "combine perception, observation, guard, safety" | design notes | module list | state confidence-gated observation as the mechanism |
+| Method | four modules listed | no input-output path | weak | write image -> visibility confidence -> view update / action gate |
+| Evidence | 86 vs 71 vs 74 | one table | bounded | interpret as success improvement under evaluated condition |
+| Boundary | one object family and fixture | notes | missing in Abstract | add boundary to Abstract, Results, Discussion, Conclusion |
+| Implication | "industrial reliability" | no deployment evidence | overclaim | replace with narrower implication for tabletop insertion studies |
+```
+
+## Section Claim-Strength Diff
+
+Use this when Abstract, Discussion, or Conclusion sounds stronger than Results:
+
+```text
+Cross-section claim diff
+| Claim | Abstract strength | Intro strength | Results evidence | Discussion/Conclusion strength | Verdict | Safe repair |
+```
+
+Block the draft if any untested robustness, generalization, causality, or
+deployment claim grows stronger after the Results section.

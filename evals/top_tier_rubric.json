@@ -13,6 +13,14 @@
       "pass": "Each sentence has function, necessity, placement, connection, and evidence boundary.",
       "fail": "Decorative, redundant, misplaced, or disconnected sentences remain."
     },
+    "paragraph_transition": {
+      "pass": "Adjacent paragraphs have explicit logical relations and each paragraph makes the next necessary.",
+      "fail": "Paragraphs are individually plausible but can be swapped, skipped, or reordered without clear damage."
+    },
+    "section_dependency": {
+      "pass": "Abstract, Introduction, Methods, Experiments, Discussion, and Conclusion claims constrain one another.",
+      "fail": "Sections make promises that are not supported by later sections, or conclusions revive unsupported claims."
+    },
     "ai_smell": {
       "pass": "Generic importance, adjective stacks, vague subjects, and mechanical connectors are removed or justified.",
       "fail": "The output is fluent but generic, promotional, or template-like."

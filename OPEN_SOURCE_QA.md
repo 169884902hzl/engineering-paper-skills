@@ -23,6 +23,8 @@ This checks:
 - optional prompt regression output checks when outputs are provided
 - golden output snapshots under `tests/outputs/golden`
 - long-form flawed manuscript fixtures under `tests/fixtures/long`
+- full-paper flawed manuscript fixture and full-paper golden audit
+- recorded gold-fixture review results under `evals/results`
 - manual top-tier writing rubric under `evals/`
 
 ## Codex Skill Validation

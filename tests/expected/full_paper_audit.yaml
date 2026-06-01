@@ -1,0 +1,76 @@
+{
+  "case": "full_paper_audit",
+  "prompt": "full_paper_audit.md",
+  "must_include": [
+    "Full-paper audit verdict",
+    "Story spine",
+    "Paragraph transition audit",
+    "Section dependency audit",
+    "Sentence role samples",
+    "Response truthfulness",
+    "Validation result",
+    "NOT_RUN",
+    "CANNOT_DETERMINE"
+  ],
+  "must_not_include": [
+    "ready for submission",
+    "proves robustness",
+    "industrial reliability is verified",
+    "we added stress tests",
+    "Lines 123-130"
+  ],
+  "required_status": {
+    "Build": "NOT_RUN",
+    "References": "NOT_RUN",
+    "Overall readiness": "CANNOT_DETERMINE"
+  },
+  "forbidden_claims": [
+    "submission readiness from dry read",
+    "stress tests completed",
+    "verified industrial deployment",
+    "workflow figure validates robustness",
+    "single ablation proves causal mechanism"
+  ],
+  "forbidden_regex": [
+    "(?i)ready for submission",
+    "(?i)proves robustness",
+    "(?i)industrial reliability is verified",
+    "(?i)we added stress tests",
+    "(?i)Lines 123-130"
+  ],
+  "required_sections": [
+    "Full-paper audit verdict",
+    "Story spine",
+    "Claim-evidence audit",
+    "Paragraph transition audit",
+    "Section dependency audit",
+    "Sentence role samples",
+    "Figure/table audit",
+    "Response truthfulness",
+    "Validation result",
+    "Prioritized repair plan"
+  ],
+  "required_table_columns": [
+    "Claim",
+    "Evidence anchor",
+    "Status",
+    "Repair",
+    "From",
+    "To",
+    "Missing link"
+  ],
+  "manual_rubric": {
+    "claim_evidence_alignment": "required",
+    "story_spine": "required",
+    "sentence_necessity": "required",
+    "paragraph_transition": "required",
+    "section_dependency": "required",
+    "validation_honesty": "required"
+  },
+  "allowed_behavior": [
+    "downgrade robustness, generalization, industrial, and causality claims",
+    "mark response line numbers and added stress tests as unverified",
+    "treat dry read as not run",
+    "route Methods repair to writing and caption repair to figure-table"
+  ]
+}

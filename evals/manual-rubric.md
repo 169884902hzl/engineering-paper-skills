@@ -8,6 +8,8 @@ checks and golden strings are smoke tests only; this rubric judges paper quality
 | Claim-evidence alignment | major claims lack anchors | most claims bounded, some gaps missed | every major claim has method, experiment, figure/table, citation, or limitation anchor |
 | Story spine | sections are a list | problem, method, and evidence connect loosely | problem, gap, insight, method, evidence, boundary, implication form a clear chain |
 | Sentence necessity | many decorative or redundant sentences | some sentence roles identified | every sentence has function, placement, connection, and evidence boundary |
+| Paragraph transition | adjacent paragraphs jump, repeat, or can be swapped freely | some transitions are named but bridges remain weak | every adjacent paragraph pair has a clear relation, bridge, and next obligation |
+| Section dependency | sections make independent claims | some cross-section anchors exist | Abstract, Introduction, Methods, Experiments, Discussion, and Conclusion constrain the same bounded claims |
 | AI smell | generic importance, adjective stacks, and mechanical connectors remain | some patterns removed | prose is concrete, restrained, and source-grounded |
 | Venue awareness | no venue-specific constraints considered | venue family noted but not operationalized | checklist, limitations, reproducibility, figure, citation, and disclosure needs are explicit |
 | Response truthfulness | claims unverified changes | placeholders exist but some claims are vague | every response maps to action, evidence, and verification state |

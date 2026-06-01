@@ -329,11 +329,15 @@ The skills are organized around five writing constraints:
   skill
 - `tests/fixtures/long/`: longer flawed manuscript fixtures for story,
   sentence, AI-smell, and validation review
+- `tests/fixtures/full_paper/`: full-paper flawed manuscript fixture for
+  story, paragraph-transition, section-dependency, response, and validation
+  review
 - `tests/outputs/golden/`: golden output snapshots for expected-behavior checks
 - `tests/expected/`: structured expected-behavior specs for prompt checks,
   including forbidden regexes, forbidden claim patterns, and required output
   sections
-- `evals/`: manual top-tier paper quality rubric
+- `evals/`: manual top-tier paper quality rubric and recorded gold-fixture
+  review results
 - `NOTICE.md`: third-party license notices
 - `OPEN_SOURCE_QA.md`: validation commands and release checks
 

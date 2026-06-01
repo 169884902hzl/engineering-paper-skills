@@ -32,6 +32,8 @@ REQUIRED_SHARED = {
     "non-english-source-notes.md",
     "output-mode.md",
     "sentence-role-and-story-flow.md",
+    "story-spine.md",
+    "ai-assisted-writing-policy.md",
     "terminology-ledger.md",
 }
 
@@ -95,6 +97,7 @@ REQUIRED_PROMPTS = {
     "validation_min.md",
     "validation_adversarial.md",
     "validation_realistic.md",
+    "full_paper_audit.md",
 }
 
 

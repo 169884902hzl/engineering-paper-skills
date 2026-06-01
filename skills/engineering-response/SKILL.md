@@ -44,6 +44,7 @@ English responses.
 | [references/contradictory-reviewer-strategy.md](references/contradictory-reviewer-strategy.md) | Reviewers ask for conflicting detail, compression, experiments, or framing |
 | [references/partial-compliance-response.md](references/partial-compliance-response.md) | Authors can only partially satisfy a reviewer request |
 | [references/rebuttal-vs-revision-mode.md](references/rebuttal-vs-revision-mode.md) | Deciding whether the output is rebuttal, revision response, or camera-ready note |
+| [references/diff-verification.md](references/diff-verification.md) | A response says a manuscript change, line number, experiment, figure, or table has already been added |
 | [references/examples.md](references/examples.md) | Needing concrete response tracker and reply examples |
 | [references/failure-modes.md](references/failure-modes.md) | Handling false completed-change claims or impossible reviewer requests |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | A response may claim unsupported experiments, citations, or edits |
@@ -63,10 +64,11 @@ English responses.
 6. Define acceptance evidence and minimum verification.
 7. Decide whether the mode is rebuttal, revision response, camera-ready note,
    or internal revision plan.
-8. Draft the response only after the change or placeholder is clear.
+8. If the response claims completed changes, run the diff-verification gate.
+9. Draft the response only after the change or placeholder is clear.
    If the change is planned but not done, draft a plan or author-input note,
    not a final completed-change response.
-9. Run completeness and factuality checks before calling the package ready.
+10. Run completeness and factuality checks before calling the package ready.
 
 ## Default Output
 

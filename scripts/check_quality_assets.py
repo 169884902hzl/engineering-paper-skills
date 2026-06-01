@@ -32,10 +32,20 @@ REQUIRED_RUBRIC_KEYS = {
     "claim_evidence_alignment",
     "story_spine",
     "sentence_necessity",
+    "paragraph_transition",
+    "section_dependency",
     "ai_smell",
     "venue_awareness",
     "response_truthfulness",
     "validation_honesty",
+}
+
+REQUIRED_FULL_PAPER_ASSETS = {
+    "fixture": "tests/fixtures/full_paper/robot_active_observation_flawed_manuscript.md",
+    "prompt": "tests/prompts/full_paper_audit.md",
+    "expected": "tests/expected/full_paper_audit.yaml",
+    "golden": "tests/outputs/golden/full_paper_audit.md",
+    "eval_result": "evals/results/775ee48_full_paper_manual_eval.jsonl",
 }
 
 
@@ -85,6 +95,71 @@ def main() -> int:
         errors.append("Missing evals/manual-rubric.md")
     elif "Sentence necessity" not in rubric_md.read_text(encoding="utf-8"):
         errors.append("evals/manual-rubric.md missing Sentence necessity")
+
+    for label, rel_path in REQUIRED_FULL_PAPER_ASSETS.items():
+        path = ROOT / rel_path
+        if not path.exists():
+            errors.append(f"Missing full-paper {label}: {rel_path}")
+
+    full_fixture = ROOT / REQUIRED_FULL_PAPER_ASSETS["fixture"]
+    if full_fixture.exists():
+        words = word_count(full_fixture)
+        if words < 1500:
+            errors.append(f"{full_fixture.relative_to(ROOT)} is too short for a full-paper fixture")
+        fixture_text = full_fixture.read_text(encoding="utf-8")
+        for marker in (
+            "Draft Abstract",
+            "Draft Introduction",
+            "Draft Methods",
+            "Draft Experiments",
+            "Draft Discussion",
+            "Draft Conclusion",
+            "Reviewer Comments",
+            "Expected audit pressure",
+            "Failure modes",
+        ):
+            if marker not in fixture_text:
+                errors.append(f"{full_fixture.relative_to(ROOT)} missing marker: {marker}")
+
+    full_golden = ROOT / REQUIRED_FULL_PAPER_ASSETS["golden"]
+    if full_golden.exists():
+        golden_text = full_golden.read_text(encoding="utf-8")
+        for marker in (
+            "Story spine",
+            "Paragraph transition audit",
+            "Section dependency audit",
+            "Sentence role samples",
+            "Response truthfulness",
+            "Validation result",
+        ):
+            if marker not in golden_text:
+                errors.append(f"{full_golden.relative_to(ROOT)} missing marker: {marker}")
+
+    eval_result = ROOT / REQUIRED_FULL_PAPER_ASSETS["eval_result"]
+    if eval_result.exists():
+        for line_no, line in enumerate(eval_result.read_text(encoding="utf-8").splitlines(), start=1):
+            if not line.strip():
+                continue
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError as exc:
+                errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} invalid JSON: {exc}")
+                continue
+            for key in (
+                "fixture",
+                "gold_output",
+                "runtime_model_executed",
+                "review_type",
+                "claim_evidence_alignment",
+                "story_spine",
+                "sentence_necessity",
+                "paragraph_transition",
+                "section_dependency",
+                "response_truthfulness",
+                "validation_honesty",
+            ):
+                if key not in record:
+                    errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} missing key: {key}")
 
     if errors:
         print("Quality asset check failed:")
