@@ -301,7 +301,8 @@ The skills are organized around five writing constraints:
 ## Files
 
 - `skills/_shared/`: shared evidence-bound, citation-boundary, claim-strength,
-  list-to-argument, terminology-ledger, source-note, and output-mode rules
+  sentence-role, list-to-argument, terminology-ledger, source-note, and
+  output-mode rules
 - `skills/engineering-paper-router/`: routing skill for ambiguous or mixed paper
   tasks
 - `skills/engineering-paper-auditor/`: reviewer-like paper audit skill for

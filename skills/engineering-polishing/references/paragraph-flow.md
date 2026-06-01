@@ -2,6 +2,9 @@
 
 Use this when prose is hard to follow.
 
+For sentence-level necessity, placement, and non-redundancy checks, use
+[`../../_shared/sentence-role-and-story-flow.md`](../../_shared/sentence-role-and-story-flow.md).
+
 ## Reverse Outline
 
 For each paragraph, identify:
@@ -52,3 +55,16 @@ field-level interpretation, add a source anchor:
 - explicit hypothesis or limitation
 
 Without one of these, keep the interpretation local and hedged.
+
+## Sentence Chain Check
+
+After reverse outlining, audit each sentence:
+
+```text
+Sentence role audit
+| Sentence/span | Job | Needed because | Connection to previous/next | Evidence boundary | Action |
+```
+
+Use `delete` for decorative repetition, `add bridge` when the reader can jump
+to a wrong conclusion, and `move` when a sentence belongs to another section or
+paragraph.

@@ -3,6 +3,7 @@ always_load:
   - references/contribution-evidence.md
   - ../_shared/evidence-boundary.md
   - ../_shared/claim-strength.md
+  - ../_shared/sentence-role-and-story-flow.md
   - ../_shared/output-mode.md
 axes:
   section:
@@ -43,6 +44,7 @@ axes:
     failure_repair:
       load:
         - references/bad-sentence-repairs.md
+        - ../_shared/sentence-role-and-story-flow.md
 notes:
   - This manifest is an explicit routing map for humans and agents. Codex still
     follows SKILL.md as the entrypoint.

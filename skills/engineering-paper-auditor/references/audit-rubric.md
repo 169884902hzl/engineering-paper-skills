@@ -18,6 +18,7 @@ Use this rubric for full manuscripts, sections, and paper-quality reviews.
 | Thesis | One sentence names task, gap, method, evidence, boundary | thesis is promotional or absent |
 | Contribution-evidence | Every contribution has method and evidence anchors | contribution appears only in Abstract/Conclusion |
 | Section responsibility | Each section has a distinct job | Introduction contains Methods details; Results repeats table |
+| Sentence role | Every sentence has function, necessity, placement, connection, and evidence boundary | decorative, redundant, misplaced, or disconnected sentence |
 | Methods reader path | Inputs, state, mechanism, gate, and execution order are clear | module directory or formula dump |
 | Experiments proof | Q1/Q2/Q3 are answered with bounded evidence | table narration or missing ablation role |
 | Visual accountability | Each figure/table has responsibility and must-not-claim boundary | caption claims invisible mechanism |

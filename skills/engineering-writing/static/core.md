@@ -8,4 +8,6 @@ This static fragment records the default writing path:
 4. Draft Methods and Experiments before strong Abstract or Conclusion claims.
 5. Draft Introduction, Related Work, Discussion, and Conclusion only within the
    available evidence boundary.
-6. Polish only after claim/evidence structure is stable.
+6. Run sentence-role checks so every sentence has function, necessity,
+   placement, connection, and evidence boundary.
+7. Polish only after claim/evidence structure is stable.

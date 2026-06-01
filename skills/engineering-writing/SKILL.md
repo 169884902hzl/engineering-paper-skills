@@ -65,6 +65,7 @@ for writing the paper's argument, not merely polishing sentences.
 | [../_shared/list-to-argument.md](../_shared/list-to-argument.md) | Source material is a bullet list, module list, result-row list, or contribution list |
 | [../_shared/non-english-source-notes.md](../_shared/non-english-source-notes.md) | Non-English notes must become English manuscript prose |
 | [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for output only |
+| [../_shared/sentence-role-and-story-flow.md](../_shared/sentence-role-and-story-flow.md) | Drafting, shortening, or reordering paragraphs where every sentence must justify its role |
 | [../_shared/terminology-ledger.md](../_shared/terminology-ledger.md) | A writing task may rename methods, metrics, categories, or baselines |
 
 ## Intake
@@ -97,7 +98,9 @@ drafting. You may still provide a scaffold.
 5. Calibrate claim verbs: `show`, `indicate`, `suggest`, `support`, `enable`,
    `demonstrate` only when directly supported.
 6. Remove unsupported novelty, universal claims, and vague adjectives.
-7. Return prose plus assumptions, missing evidence, and a short claim-evidence
+7. Check sentence roles: every sentence must have a function, necessity,
+   placement, connection, and evidence boundary.
+8. Return prose plus assumptions, missing evidence, and a short claim-evidence
    map unless prose-only output was requested and no unsupported-risk note would
    be hidden.
 
@@ -121,6 +124,9 @@ Claim-evidence map
 
 Unsupported or downgraded claims
 | Requested claim | Status | Reason | Safe wording |
+
+Sentence role audit
+| Sentence/span | Job | Needed because | Connection to previous/next | Evidence boundary | Action |
 
 Missing evidence or assumptions
 - ...

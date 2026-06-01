@@ -50,6 +50,7 @@ English manuscript prose without hiding structural or evidence problems.
 | [../_shared/list-to-argument.md](../_shared/list-to-argument.md) | Source prose is a list rather than a paragraph argument |
 | [../_shared/non-english-source-notes.md](../_shared/non-english-source-notes.md) | Source notes include assumptions or non-English shorthand |
 | [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for output only |
+| [../_shared/sentence-role-and-story-flow.md](../_shared/sentence-role-and-story-flow.md) | Checking whether each sentence is necessary, connected, and non-redundant |
 | [../_shared/terminology-ledger.md](../_shared/terminology-ledger.md) | User asks for varied wording around technical terms |
 
 ## Workflow
@@ -60,10 +61,12 @@ English manuscript prose without hiding structural or evidence problems.
    paper logic, section job, paragraph flow, claim/evidence mismatch, or
    sentence style.
 4. Fix higher-level logic before sentence polish.
-5. Preserve source facts and evidence boundaries.
-6. Rewrite in English with concrete subjects, varied sentence shapes, and
+5. Run a sentence-role check: each sentence must be necessary, placed correctly,
+   connected to its neighbors, and bounded by evidence.
+6. Preserve source facts and evidence boundaries.
+7. Rewrite in English with concrete subjects, varied sentence shapes, and
    calibrated verbs.
-7. Report any claim that still needs evidence.
+8. Report any claim that still needs evidence.
 
 A paragraph has a stable claim-evidence structure only when at least three of
 these are clear: paragraph job, main claim, evidence anchor, and boundary. If
@@ -80,6 +83,9 @@ Diagnosis
 
 Before / After / Rationale
 | Source sentence or span | Revised sentence or span | Rationale | Fact/evidence risk |
+
+Sentence role audit
+| Sentence/span | Job | Needed because | Connection to previous/next | Evidence boundary | Action |
 
 Polished version
 [English prose]

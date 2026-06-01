@@ -128,3 +128,42 @@ Expected behavior:
 - Remove repeated `Specifically`.
 - Replace promotional adjectives with measured outcomes.
 - Keep only claims supported by provided metrics.
+
+## Sentence-By-Sentence Story Repair
+
+Input:
+
+```text
+The proposed system is useful for contact-rich manipulation. It uses perception,
+planning, and guarded control. The success rate is higher. This shows strong
+robustness. The method may be extended to many domains.
+```
+
+Expected behavior:
+
+- Assign a job to every sentence.
+- Delete or merge generic sentences that add no evidence, transition, or
+  boundary.
+- Add a missing bridge if module names are listed without explaining how the
+  information flows.
+- Downgrade robustness and future-domain claims unless stress evidence is
+  provided.
+
+Possible output:
+
+```text
+Sentence role audit
+| Sentence/span | Job | Needed because | Connection to previous/next | Evidence boundary | Action |
+| The proposed system is useful... | Context | too generic as written | does not set a specific failure | no evidence | rewrite |
+| It uses perception... | Method object | names components | lacks signal flow | method note only | add bridge |
+| The success rate is higher. | Evidence | needs metric and protocol | supports local result | missing number/protocol | require evidence |
+| This shows strong robustness. | Interpretation | overstates result | jumps beyond evidence | no stress test | downgrade |
+| The method may be extended... | Outlook | not needed here | unsupported broad hand-off | no domain evidence | delete or make limitation-derived |
+
+Polished version
+The system addresses contact-rich manipulation by linking perception outputs to
+guarded control decisions during execution. The available notes indicate a
+higher success rate, but the result should be tied to the measured protocol
+before making a final performance claim. Broader robustness or domain transfer
+requires stress-test evidence.
+```

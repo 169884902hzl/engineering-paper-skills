@@ -39,6 +39,7 @@ produce final paper prose; it produces a prioritized audit and repair plan.
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | Auditing novelty, robustness, causality, or generalization language |
 | [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | Related Work, citations, or source support are part of the audit |
 | [../_shared/list-to-argument.md](../_shared/list-to-argument.md) | A section reads like a list rather than an argument |
+| [../_shared/sentence-role-and-story-flow.md](../_shared/sentence-role-and-story-flow.md) | A paragraph may contain redundant, misplaced, missing, or disconnected sentences |
 | [../_shared/terminology-ledger.md](../_shared/terminology-ledger.md) | Terms, metrics, categories, or method names drift across sections |
 
 ## Workflow
@@ -51,9 +52,13 @@ produce final paper prose; it produces a prioritized audit and repair plan.
    Experiments, Discussion, Conclusion.
 5. Check figure/table responsibility against the claims they are asked to
    support.
-6. Flag overclaims, missing anchors, section drift, table narration, caption
-   overreach, terminology drift, and unsupported readiness claims.
-7. Produce a prioritized action list and route each action to the correct skill.
+6. Audit sentence roles when a paragraph is unclear: every sentence must be
+   necessary, placed correctly, connected to neighboring sentences, and bounded
+   by evidence.
+7. Flag overclaims, missing anchors, section drift, table narration, caption
+   overreach, sentence redundancy, terminology drift, and unsupported readiness
+   claims.
+8. Produce a prioritized action list and route each action to the correct skill.
 
 ## Default Output
 
@@ -68,6 +73,9 @@ Claim-evidence audit
 
 Section-boundary findings
 | Location | Symptom | Why it matters | Repair route |
+
+Sentence role findings
+| Sentence/span | Job | Needed because | Connection issue | Evidence boundary | Action |
 
 Figure/table findings
 | Item | Claim requested | Evidence visible/tabulated | Must not claim | Repair route |

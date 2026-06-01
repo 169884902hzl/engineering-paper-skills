@@ -31,6 +31,7 @@ REQUIRED_SHARED = {
     "list-to-argument.md",
     "non-english-source-notes.md",
     "output-mode.md",
+    "sentence-role-and-story-flow.md",
     "terminology-ledger.md",
 }
 
