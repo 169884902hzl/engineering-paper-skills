@@ -1,0 +1,303 @@
+{
+  "verdict": {
+    "overall_status": "CANNOT_MARK_READY",
+    "highest_risk_issue": "The draft and response letter repeatedly convert limited one-robot evidence into general, industrial, robustness, causality, stress-test, citation, and line-number claims that are not supported by the supplied fixture.",
+    "audit_scope": "Full-paper manuscript fixture plus supplied author evidence packet, reviewer comments, draft response letter, and validation request.",
+    "not_verified": [
+      "LaTeX build",
+      "citation metadata",
+      "official venue policy",
+      "revised manuscript diff",
+      "final line numbers",
+      "figure files",
+      "source data"
+    ]
+  },
+  "claim_evidence": [
+    {
+      "claim_id": "C1",
+      "claim": "The method is general, robust, and applicable to cluttered industrial workcells and real manufacturing settings.",
+      "status": "OVERCLAIM",
+      "source_span": "Title: \"General Active Observation and Guarded Execution for Robust Robot Insertion in Cluttered Industrial Workcells\"; Abstract: \"scalable route toward general robotic insertion in real manufacturing settings\"",
+      "evidence_span": "The main experiment has 180 trials on one robot arm, one tabletop fixture, and two part colors from the same object family.",
+      "evidence_anchor": "Author Evidence Packet",
+      "decision": "Downgrade to a bounded claim about one tabletop insertion setup.",
+      "forbidden_strengthening": "Do not claim generality, industrial deployment, cross-platform transfer, or manufacturing readiness.",
+      "repair": "Narrow title and abstract to active observation for visibility-limited tabletop insertion; carry the one-robot, one-fixture, one-object-family boundary into Abstract, Results, Discussion, and Conclusion."
+    },
+    {
+      "claim_id": "C2",
+      "claim": "The full system reaches 84 percent success and outperforms fixed-camera, open-loop, no-view-update, and no-confidence-gate variants.",
+      "status": "SUPPORTED_BOUNDED",
+      "source_span": "Abstract: \"our method achieves 84 percent success over 180 trials, substantially outperforming fixed-camera, open-loop, and no-guard baselines\"",
+      "evidence_span": "The full system reaches 84 percent success. A fixed overhead camera baseline reaches 69 percent success. A fixed side camera baseline reaches 72 percent success. A no-view-update variant reaches 76 percent success. A no-confidence-gate variant reaches 77 percent success. A scripted open-loop controller ... reaches 61 percent success.",
+      "evidence_anchor": "Author Evidence Packet and Draft Experiments",
+      "decision": "Retain only with protocol boundaries and trial counts.",
+      "forbidden_strengthening": "Do not infer statistical significance, reliability, or broader robustness from these rates.",
+      "repair": "State that the full system improves aggregate success under the evaluated tabletop protocol; add trial counts, success counts, and the absence of statistical tests."
+    },
+    {
+      "claim_id": "C3",
+      "claim": "The ablations prove that active observation and guarded execution are causal mechanisms behind the improvement.",
+      "status": "OVERCLAIM",
+      "source_span": "Abstract: \"the ablations prove that both active observation and guarded execution are causal mechanisms behind the improvement\"",
+      "evidence_span": "There are no repeated seeds, no statistical significance tests ... The no-view-update variant reaches 76 percent ... The no-confidence-gate variant reaches 77 percent.",
+      "evidence_anchor": "Author Evidence Packet and Draft Experiments",
+      "decision": "Replace proof/causality language with component-support language.",
+      "forbidden_strengthening": "Do not use \"prove\", \"causal\", or \"sole mechanism\" for the current ablations.",
+      "repair": "Write that the ablations suggest or support the contribution of view updates and the confidence gate under the tested protocol; require matched failure analysis or repeated randomized ablations for stronger causal claims."
+    },
+    {
+      "claim_id": "C4",
+      "claim": "Reflective-surface trials demonstrate robustness to challenging industrial conditions.",
+      "status": "OVERCLAIM",
+      "source_span": "Abstract: \"Additional reflective-surface trials further demonstrate robustness to challenging industrial conditions\"",
+      "evidence_span": "The authors also ran 30 qualitative failure trials with intentionally reflective part surfaces. The full system succeeds in 18 of these 30 trials, but the authors did not run all baselines on this condition.",
+      "evidence_anchor": "Author Evidence Packet and Draft Experiments",
+      "decision": "Treat as a qualitative stress observation, not robustness validation.",
+      "forbidden_strengthening": "Do not claim reflective robustness, baseline superiority under reflection, or industrial-condition validation.",
+      "repair": "Say reflective surfaces remain challenging; report 18/30 full-system success only as partial capability and future-work motivation."
+    },
+    {
+      "claim_id": "C5",
+      "claim": "The system reasons about where to look as a general active-observation or next-best-view framework.",
+      "status": "OVERCLAIM",
+      "source_span": "Abstract: \"lets the robot reason about where to look\"; Methods: \"The observer camera can be moved to three predefined viewpoints\"",
+      "evidence_span": "The observer camera can move to two predefined side views and one overhead view.",
+      "evidence_anchor": "Author Evidence Packet and Draft Methods",
+      "decision": "Describe the implemented decision rule, not a general planner.",
+      "forbidden_strengthening": "Do not call it a general next-best-view planner unless continuous or learned view planning and matching baselines are supplied.",
+      "repair": "Use \"requests a predefined alternate observer view when target confidence drops below threshold.\""
+    },
+    {
+      "claim_id": "C6",
+      "claim": "The timing data establish that the system is real-time for industrial use.",
+      "status": "UNSUPPORTED",
+      "source_span": "Supplementary Notes: \"The draft uses these numbers to say the system is real-time\"",
+      "evidence_span": "The detector runs at about 12 Hz ... the observer arm moves between predefined views in about 0.8 seconds ... the evidence packet does not define the required timing budget for the task.",
+      "evidence_anchor": "Draft Supplementary Notes",
+      "decision": "Keep latency as implementation context unless a task-level timing requirement is supplied.",
+      "forbidden_strengthening": "Do not claim real-time industrial cycle-time suitability.",
+      "repair": "Report measured latencies and state they were sufficient for the tested tabletop protocol only if the manuscript defines the relevant timing budget."
+    },
+    {
+      "claim_id": "C7",
+      "claim": "Related Work supports claims about what prior work usually assumes or does not solve.",
+      "status": "UNVERIFIED",
+      "source_span": "Related Work: \"The draft currently concludes that prior work does not solve robust and general visibility-aware insertion\"",
+      "evidence_span": "Citation metadata has not been verified. The current draft uses placeholder references such as RefA through RefQ.",
+      "evidence_anchor": "Author Evidence Packet and Draft Related Work",
+      "decision": "Cannot use placeholder references to support state-of-field claims.",
+      "forbidden_strengthening": "Do not say \"unlike prior work\" or \"prior work does not solve\" without verified nearest-neighbor comparisons.",
+      "repair": "Treat Related Work as a taxonomy scaffold until DOI/title/venue/year metadata and nearest active-perception and guarded-execution comparisons are verified."
+    }
+  ],
+  "paragraph_transitions": [
+    {
+      "from": "Draft Abstract: industrial assembly and intermittent occlusion problem",
+      "to": "Draft Abstract: general active observation framework and real manufacturing implication",
+      "relation": "problem_to_solution_to_implication",
+      "issue": "The paragraph jumps from a real visibility-loss problem to broad industrial and generality claims without matching evidence.",
+      "terminology_drift": "Uses \"general active observation framework\", \"unified pipeline\", and \"scalable route\" for a predefined-view system.",
+      "claim_strength_drift": "Local occlusion problem becomes general manufacturing readiness.",
+      "repair": "Make the abstract end with the evaluated tabletop scope and remove industrial scalability language."
+    },
+    {
+      "from": "Introduction paragraph defining visibility-confidence loop",
+      "to": "Introduction contribution list and following paragraph about robust workcells/generalizes to platforms",
+      "relation": "mechanism_to_contribution_to_boundary",
+      "issue": "The contribution list is bounded, but the next paragraph reveals claims that exceed the stated evidence.",
+      "terminology_drift": "The same system is called pipeline, framework, visibility-confidence loop, and general active observation.",
+      "claim_strength_drift": "A controlled comparison becomes robustness and platform generalization.",
+      "repair": "Choose one canonical method term and move the one-robot, one-fixture, one-object-family boundary into the contribution paragraph."
+    },
+    {
+      "from": "Related Work paragraphs listing visual servoing, force/tactile, active perception, and guarded execution",
+      "to": "Related Work conclusion about robust and general visibility-aware insertion",
+      "relation": "taxonomy_to_gap",
+      "issue": "The section lists topics but does not verify nearest-neighbor papers or define the precise unresolved gap.",
+      "terminology_drift": "Moves between observer-camera module, active perception, guarded execution, and visibility-aware insertion without a stable distinction.",
+      "claim_strength_drift": "Placeholder taxonomy becomes a strong field-level insufficiency claim.",
+      "repair": "Group verified papers by technical axis, then state only the specific missing combination that the manuscript evaluates."
+    },
+    {
+      "from": "Methods paragraph listing target detection, observer-camera control, guarded execution, and safety monitoring",
+      "to": "Methods paragraph defining the visibility-confidence state",
+      "relation": "module_list_to_mechanism",
+      "issue": "The first paragraph reads as disconnected modules; the second paragraph supplies the actual mechanism but arrives after the list.",
+      "terminology_drift": "Module names are stable, but the central method object is delayed.",
+      "claim_strength_drift": "No major drift; the problem is ordering and mechanism clarity.",
+      "repair": "Define the visibility-confidence state before listing modules, then map each module to one state transition."
+    },
+    {
+      "from": "Experiments variant definitions",
+      "to": "Experiments success-rate table narration and Q1-Q4 interpretation",
+      "relation": "protocol_to_result_to_answer",
+      "issue": "The result interpretation is useful, but the reader sees table narration before the experiment questions and missing protocol controls.",
+      "terminology_drift": "Variant labels are mostly stable.",
+      "claim_strength_drift": "Success-rate differences are sometimes treated as component proof despite missing statistics and failure taxonomy.",
+      "repair": "State Q1-Q4 before reporting rates; add randomization, balancing, and failure-labeling limitations before causal interpretation."
+    },
+    {
+      "from": "Figures and Tables: Figure 2 workflow illustration",
+      "to": "Draft Response Letter: Figure 2 validates robustness to occlusion",
+      "relation": "illustration_to_evidence_escalation",
+      "issue": "A workflow figure is converted into evidence of robustness.",
+      "terminology_drift": "Workflow illustration becomes validation.",
+      "claim_strength_drift": "Illustrates execution states becomes validates robust execution.",
+      "repair": "Caption Figure 2 as an execution-state illustration; use Figure 3/Table 1 for quantitative evidence and do not cite Figure 2 as robustness proof."
+    }
+  ],
+  "section_dependencies": [
+    {
+      "section": "Abstract",
+      "promise": "General active observation, robust occlusion handling, extensive real-robot evidence, causal ablations, reflective robustness, and manufacturing relevance.",
+      "proof": "Only 180 trials on one robot/fixture/object family, six success rates, and 30 full-system-only reflective trials are supplied.",
+      "boundary": "No cross-robot, cross-fixture, warehouse/factory deployment, repeated seeds, statistical tests, or verified learning-policy comparisons.",
+      "status": "FAIL"
+    },
+    {
+      "section": "Introduction",
+      "promise": "Visibility loss motivates a visibility-confidence loop and three contributions.",
+      "proof": "The contribution list matches the implemented detector/view-update/confidence-gate system and the main ablations.",
+      "boundary": "The final introduction paragraphs correctly admit one robot, one fixture, one object family, but broad industrial/general claims still need removal.",
+      "status": "PARTIAL"
+    },
+    {
+      "section": "Related Work",
+      "promise": "Prior work context and the paper's technical gap.",
+      "proof": "Only placeholder references RefA through RefQ and author note that the nearest active-perception paper may be stronger than current wording admits.",
+      "boundary": "No verified citations, DOI, venue, year, title, or nearest-neighbor comparison.",
+      "status": "FAIL"
+    },
+    {
+      "section": "Methods",
+      "promise": "A target-confidence state machine linking observer views, confidence, guarded execution, and stopping.",
+      "proof": "The manuscript describes detector outputs, AprilTag frame alignment, three predefined views, thresholds, view requests, and stop after low confidence persists.",
+      "boundary": "Detector training data, confidence definition, thresholds, calibration uncertainty, and safety-monitor role are missing or underdeveloped.",
+      "status": "PARTIAL"
+    },
+    {
+      "section": "Experiments",
+      "promise": "Evaluation of whether active observation and guarded execution help in one real-robot insertion setting.",
+      "proof": "Six variants and success rates are supplied, including full system at 84 percent and ablations at 76 and 77 percent.",
+      "boundary": "No randomization details, balancing details, blind failure labels, repeated seeds, confidence intervals, or statistical tests.",
+      "status": "SUPPORTED_BOUNDED"
+    },
+    {
+      "section": "Figures and Tables",
+      "promise": "Figure 1 structure, Figure 2 workflow, Figure 3 quantitative comparison, Figure 4 qualitative examples, Table 1 rates, Table 2 latency, Table 3 stress tests.",
+      "proof": "Only text descriptions are supplied; Table 3 is planned but empty.",
+      "boundary": "Figure 2 cannot validate robustness; Figure 4 cannot support industrial generality; Table 3 must not be cited as evidence.",
+      "status": "PARTIAL_WITH_BLOCKER"
+    },
+    {
+      "section": "Discussion and Conclusion",
+      "promise": "Bounded interpretation of success improvement and limitations.",
+      "proof": "The conclusion states 84 percent over 180 trials and the one-robot, one-fixture, one-object-family limitation.",
+      "boundary": "This section is more evidence-bound than the title, abstract, and response letter, but cannot rescue unsupported global claims elsewhere.",
+      "status": "PARTIAL"
+    },
+    {
+      "section": "Draft Response Letter",
+      "promise": "All reviewer concerns were addressed with new stress tests, Table 3, citations, causal line ranges, and final line numbers.",
+      "proof": "The validation request says no revised manuscript diff, bibliography, source data, figure files, official venue instructions, or final response line numbers are provided.",
+      "boundary": "Line numbers are placeholders; stress tests beyond reflective full-system trials are not completed; citations are unverified.",
+      "status": "FAIL_CRITICAL"
+    }
+  ],
+  "response_truthfulness": [
+    {
+      "reviewer_comment_id": "R1",
+      "complaint_type": "overclaim_scope",
+      "response_claim": "For R1, we clarified that the method generalizes to industrial workcells because the observer camera is not tied to a particular fixture.",
+      "status": "FALSE_STRENGTHENING",
+      "old_problem_span": "The paper uses the words robust, general, industrial, and reliable, but the experiments appear to use one robot, one fixture, and one object family.",
+      "new_fix_span": "we clarified that the method generalizes to industrial workcells because the observer camera is not tied to a particular fixture",
+      "semantic_match": "No; the response strengthens the unsupported generalization instead of narrowing it.",
+      "manuscript_anchor": "The current evidence does not yet include cross-robot, cross-fixture, or full industrial deployment.",
+      "remaining_gap": "Need broader experiments or narrower claims.",
+      "repair": "Say the manuscript narrows the claim to the evaluated tabletop setup only if the revised manuscript actually does so."
+    },
+    {
+      "reviewer_comment_id": "R2",
+      "complaint_type": "method_mechanism_clarity",
+      "response_claim": "For R2, we expanded the module descriptions in Section 3.",
+      "status": "PARTIAL_NOT_DIFF_VERIFIED",
+      "old_problem_span": "The method sounds like a list of modules. Please explain the core mechanism and how the observer camera, confidence score, and guarded execution interact.",
+      "new_fix_span": "we expanded the module descriptions in Section 3",
+      "semantic_match": "Partial; the supplied draft contains a visibility-confidence state paragraph, but expanding module descriptions alone does not fully answer the mechanism complaint.",
+      "manuscript_anchor": "Let the current state contain the target estimate, the camera view, the confidence score, and the controller phase.",
+      "remaining_gap": "No revised diff is supplied, and detector confidence, thresholds, and calibration uncertainty remain underdefined.",
+      "repair": "Frame the response around the visibility-confidence state machine, not merely expanded modules, and provide exact revised manuscript anchors only after a diff is available."
+    },
+    {
+      "reviewer_comment_id": "R3",
+      "complaint_type": "citation_verification",
+      "response_claim": "For R3, we added the relevant citations.",
+      "status": "UNVERIFIED_FALSE_IF_ASSERTED",
+      "old_problem_span": "Placeholder citations are not acceptable.",
+      "new_fix_span": "we added the relevant citations",
+      "semantic_match": "No verifiable match; no bibliography, DOI, title, venue, year, or source metadata is supplied.",
+      "manuscript_anchor": "Citation metadata has not been verified. The current draft uses placeholder references such as RefA through RefQ.",
+      "remaining_gap": "Verified nearest active-perception and guarded-execution citations are missing.",
+      "repair": "Report citations as not yet verified; do not claim they were added until a bibliography and source comparison are supplied."
+    },
+    {
+      "reviewer_comment_id": "R4",
+      "complaint_type": "causality_overclaim",
+      "response_claim": "For R4, we now state that the ablation proves the confidence gate causes the performance gain.",
+      "status": "FALSE",
+      "old_problem_span": "The ablations are useful, but the paper should not claim that the table proves causality.",
+      "new_fix_span": "the ablation proves the confidence gate causes the performance gain",
+      "semantic_match": "No; it directly contradicts the reviewer request.",
+      "manuscript_anchor": "They also do not prove that one component is the sole causal mechanism because the variants differ in several execution details and no statistical test is reported.",
+      "remaining_gap": "Need bounded ablation interpretation, matched failure analysis, and stronger experimental controls for causal language.",
+      "repair": "Replace \"proves\" with \"supports\" or \"suggests\" under the evaluated protocol."
+    },
+    {
+      "reviewer_comment_id": "R5",
+      "complaint_type": "stress_test_baseline_gap",
+      "response_claim": "For R5, we added the reflective-surface stress test to Table 3.",
+      "status": "FALSE_OR_NOT_SUPPORTED",
+      "old_problem_span": "The reflective-surface trials are interesting, but there are no baselines. Please avoid calling them robustness validation.",
+      "new_fix_span": "we added the reflective-surface stress test to Table 3",
+      "semantic_match": "No; Table 3 is planned but empty, and the reflective condition has full-system-only trials.",
+      "manuscript_anchor": "Table 3 is a planned but not completed stress-test table; it has no data.",
+      "remaining_gap": "No completed Table 3 and no reflective baselines.",
+      "repair": "Remove Table 3 result claims; describe reflective trials as qualitative full-system-only observations."
+    },
+    {
+      "reviewer_comment_id": "R6",
+      "complaint_type": "figure_evidence_overclaim",
+      "response_claim": "For R6, we revised the caption to say that the workflow validates robust execution.",
+      "status": "FALSE_STRENGTHENING",
+      "old_problem_span": "Figure 2 is a workflow illustration, not evidence of robustness. Revise the caption.",
+      "new_fix_span": "the workflow validates robust execution",
+      "semantic_match": "No; the response repeats the exact overclaim in stronger form.",
+      "manuscript_anchor": "Figure 2 is a workflow figure ... However, it cannot validate robustness to occlusion. Robustness requires an experiment.",
+      "remaining_gap": "Caption must distinguish illustration from evidence.",
+      "repair": "Caption Figure 2 as illustrating execution states; cite Figure 3/Table 1 for measured success rates."
+    },
+    {
+      "reviewer_comment_id": "R7",
+      "complaint_type": "artifact_and_line_number_verifiability",
+      "response_claim": "For R7, the final line numbers are included above.",
+      "status": "FALSE_UNVERIFIABLE",
+      "old_problem_span": "The response letter says new stress tests, Table 3, and exact line numbers were added. I cannot verify these changes from the supplied materials.",
+      "new_fix_span": "the final line numbers are included above",
+      "semantic_match": "No; the fixture explicitly says final line numbers are not available and response line numbers are placeholders.",
+      "manuscript_anchor": "No LaTeX build log or final line numbers are available. Source notes: \"Line numbers in the response are placeholders.\"",
+      "remaining_gap": "No revised manuscript, no final PDF, and no final line-number map.",
+      "repair": "Set line-number verification to NOT_RUN and remove exact line-number claims until final compiled manuscript line numbers are supplied."
+    }
+  ],
+  "validation_status": {
+    "overall_readiness": "CANNOT_MARK_READY",
+    "build": "NOT_RUN",
+    "citations": "NOT_RUN",
+    "official_venue_policy": "NOT_RUN",
+    "response_diff": "NOT_RUN",
+    "final_line_numbers": "NOT_RUN"
+  }
+}

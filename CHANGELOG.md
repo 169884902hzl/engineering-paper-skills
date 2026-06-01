@@ -4,7 +4,7 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
-## Split behavior contract and add coach skill
+## 38b3d4d - Split behavior contract and add coach skill
 
 - Added `engineering-paper-coach` as a lightweight Markdown-first user entry
   skill inspired by the simple skill shape of `phd-writing`.
@@ -17,6 +17,9 @@ review and reuse.
   combines two valid source snippets.
 - Added `docs/contract-failure-analysis.md` to explain why the old local run
   failed exact matching while still catching substantive blockers.
+- Recorded a local Codex structured-audit run at `38b3d4d` as
+  `local_single_run`; it passes the flexible issue-class behavior contract but
+  remains non-CI evidence and not top-tier-ready proof.
 
 ## 80d9c23 - Add span-grounded audit evidence checks
 

@@ -84,6 +84,7 @@ REQUIRED_FULL_PAPER_CASES = {
 }
 
 REQUIRED_EVAL_RESULTS = {
+    "evals/results/38b3d4d_full_paper_model_eval.jsonl",
     "evals/results/80d9c23_full_paper_model_eval.jsonl",
     "evals/results/6bec865_full_paper_model_eval.jsonl",
     "evals/results/8da3ceb_full_paper_model_eval.jsonl",
@@ -129,6 +130,15 @@ REQUIRED_MODEL_RUNS = {
         "source_span",
         "response_truthfulness",
         "validation_status",
+    ],
+    "tests/outputs/model_runs/full_paper_realistic_structured_audit_38b3d4d_pass.json": [
+        "CANNOT_MARK_READY",
+        "claim_evidence",
+        "SUPPORTED_BOUNDED",
+        "response_truthfulness",
+        "validation_status",
+        "official_venue_policy",
+        "NOT_RUN",
     ],
 }
 
@@ -226,6 +236,7 @@ REQUIRED_DISCOVERY_ASSETS = {
     ],
     "CHANGELOG.md": [
         "No-release beta changelog",
+        "38b3d4d",
         "80d9c23",
         "6bec865",
         "d03d683",
@@ -545,6 +556,29 @@ def main() -> int:
                 if not isinstance(record.get("blocking_failures"), list) or not record["blocking_failures"]:
                     errors.append(
                         f"{eval_result.relative_to(ROOT)} line {line_no} must record blocking_failures"
+                    )
+            if "38b3d4d" in rel_path:
+                if record.get("commit") != "38b3d4d72660fbfe5705103e6bc27addac14668e":
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must record full commit=38b3d4d..."
+                    )
+                if record.get("ci_controlled") is not False:
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must explicitly record ci_controlled=false"
+                    )
+                if record.get("evidence_level") != "local_single_run":
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must record local_single_run evidence"
+                    )
+                if "output_sha256" not in record:
+                    errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} missing key: output_sha256")
+                if record.get("output_sha256") != "41ca34d9c363ba2cd3cc308c4c5dba83430cbca33789616b7210de4db9d46f0f":
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} records unexpected output_sha256"
+                    )
+                if record.get("blocking_failures") != []:
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must record no blocking failures"
                     )
 
     for rel_path, markers in REQUIRED_MODEL_RUNS.items():

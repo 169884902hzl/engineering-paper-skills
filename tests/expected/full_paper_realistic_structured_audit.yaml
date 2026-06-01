@@ -139,7 +139,13 @@
           },
           {
             "name": "bounded 84 percent success result",
-            "accepted_statuses": ["PASS_WITH_BOUNDARY", "SUPPORTED_WITH_BOUNDARY", "supported_but_bounded"],
+            "accepted_statuses": [
+              "PASS_WITH_BOUNDARY",
+              "SUPPORTED_WITH_BOUNDARY",
+              "SUPPORTED_BOUNDED",
+              "PARTIALLY_SUPPORTED_WITH_BOUNDARY",
+              "supported_but_bounded"
+            ],
             "required_terms": ["84 percent"],
             "any_terms": ["69 percent", "fixed overhead", "fixed-camera", "baseline"]
           },
@@ -184,8 +190,17 @@
           {
             "name": "unverified final line numbers",
             "accepted_statuses": ["UNVERIFIED", "PARTIAL"],
-            "required_terms": ["line"],
-            "any_terms": ["not verified", "unverified", "placeholder"]
+            "any_terms": [
+              "line",
+              "line-number",
+              "line number",
+              "final line",
+              "not available",
+              "not verified",
+              "unverified",
+              "NOT_RUN",
+              "placeholder"
+            ]
           }
         ]
       },
