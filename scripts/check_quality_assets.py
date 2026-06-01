@@ -182,6 +182,7 @@ REQUIRED_DISCOVERY_ASSETS = {
     "docs/index.html": [
         "Engineering Paper Skills",
         "manuscript audit",
+        "Start With The Coach",
         "Example Outputs",
         "SoftwareSourceCode",
     ],
@@ -189,7 +190,9 @@ REQUIRED_DISCOVERY_ASSETS = {
         "Demo Gallery",
         "Use Case Examples",
         "Conservative Claim Audit",
+        "Research Notes To Paper Skeleton",
         "Reviewer Response Truthfulness",
+        "Deep Audit Artifacts",
         "Structured JSON Audit",
         "Response Diff Verification",
         "Inline Audit Snippets",

@@ -4,6 +4,18 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Rework user examples and demo-first documentation
+
+- Moved quality evidence links out of the README's first usage path and into a
+  maintainer/reviewer section.
+- Rewrote the README opening around `$engineering-paper-coach`, quick examples,
+  Quick Start, and a skill chooser.
+- Added practical README examples for research-note skeletons, bounded Results
+  prose, conservative polishing, figure/table caption checks, and readiness
+  triage.
+- Reordered the Pages demo so practical Markdown examples appear before
+  structured JSON artifacts and model-run evidence.
+
 ## Add README and Pages use-case examples
 
 - Added README input/output examples that show conservative claim audit and

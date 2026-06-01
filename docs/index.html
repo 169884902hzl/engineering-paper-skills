@@ -132,6 +132,24 @@
         padding: 16px;
         border-radius: 8px;
       }
+
+      .example {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .example pre {
+        margin: 0;
+        height: 100%;
+      }
+
+      @media (max-width: 760px) {
+        .example {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body>
@@ -154,6 +172,39 @@
       </section>
 
       <section>
+        <h2>Start With The Coach</h2>
+        <p>Most users should begin with <code>$engineering-paper-coach</code>. Give it evidence and a draft claim; it will either write within that evidence, downgrade the claim, or tell you what is missing.</p>
+        <div class="card example">
+          <pre><code>Input:
+Use $engineering-paper-coach to audit this claim.
+
+Evidence:
+- 84% success over 180 trials.
+- One robot arm.
+- One tabletop fixture.
+- One object family.
+- No cross-robot or deployment test.
+
+Draft:
+"The system is deployment-ready and proven robust
+for industrial insertion."</code></pre>
+          <pre><code>Output:
+Diagnosis: NOT_READY as written.
+
+Blocking issues:
+- "deployment-ready" is unsupported.
+- "proven robust" exceeds one-setup evidence.
+- "industrial insertion" is not tested.
+
+Safe rewrite:
+"In the evaluated tabletop insertion setup, the
+system achieved 84% success over 180 trials on
+one robot arm and one object family. Broader
+industrial deployment remains untested."</code></pre>
+        </div>
+      </section>
+
+      <section>
         <h2>Skills</h2>
         <div class="grid">
           <div class="card"><h3>Coach</h3><p>Provides a lightweight conservative Markdown first pass for writing, audit, polishing, response planning, and readiness triage.</p></div>
@@ -169,6 +220,7 @@
 
       <section>
         <h2>Example Outputs</h2>
+        <p>Practical input/output examples are in the demo gallery. Structured artifacts and model-run records are kept for reviewers and maintainers.</p>
         <ul>
           <li><a href="./demo.html">Demo gallery</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_audit.md">Full-paper realistic audit</a></li>

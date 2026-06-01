@@ -80,70 +80,11 @@
     <main>
       <p><a href="./">Engineering Paper Skills</a></p>
       <h1>Demo Gallery</h1>
-      <p>These examples show the expected shape of evidence-bound paper audits. They are review artifacts, not proof that every unseen manuscript will receive the same quality of review.</p>
-
-      <section class="grid" aria-label="Demo output links">
-        <article class="card">
-          <h2>Full-Paper Audit</h2>
-          <p>Story spine, claim-evidence audit, paragraph transitions, validation status, and repair plan.</p>
-          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_audit.md">Open full-paper audit</a>
-        </article>
-        <article class="card">
-          <h2>Structured JSON Audit</h2>
-          <p>Machine-readable claim, paragraph, response, and validation rows used by regression checks.</p>
-          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_structured_audit.json">Open JSON audit</a>
-        </article>
-        <article class="card">
-          <h2>Sentence-Level Audit</h2>
-          <p>Sentence role, evidence anchor, claim-strength risk, and safe repair examples.</p>
-          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_sentence_audit.md">Open sentence audit</a>
-        </article>
-        <article class="card">
-          <h2>Response Diff Verification</h2>
-          <p>Checks whether response claims match actual old/new manuscript changes.</p>
-          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/fixtures/full_paper/response_old_new_diff.md">Open response diff fixture</a>
-        </article>
-        <article class="card">
-          <h2>AI-Smell Polishing</h2>
-          <p>Rejects stronger wording when it inflates unsupported robustness or deployment claims.</p>
-          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/polishing_ai_smell.md">Open polishing example</a>
-        </article>
-        <article class="card">
-          <h2>Figure/Table Claim Check</h2>
-          <p>Maps panels and table cells to the claims they can and cannot support.</p>
-          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/figure_table_panel_claim.md">Open figure/table example</a>
-        </article>
-      </section>
-
-      <section>
-        <h2>Inline Audit Snippets</h2>
-        <p>Short excerpts show the contract shape before readers open the full artifacts.</p>
-        <pre><code>{
-  "claim_id": "C1",
-  "status": "FAIL",
-  "source_span": "robust insertion in industrial workcells",
-  "evidence_span": "one robot, one tabletop fixture, one object family",
-  "decision": "reject",
-  "repair": "delete industrial reliability language"
-}</code></pre>
-        <pre><code>{
-  "reviewer_comment_id": "R5",
-  "response_claim": "new stress-test section and Table 3 were added",
-  "semantic_match": "FAIL",
-  "remaining_gap": "no completed stress-test table or manuscript data are supplied"
-}</code></pre>
-        <pre><code>{
-  "validation_status": {
-    "overall_readiness": "CANNOT_DETERMINE",
-    "official_venue_policy": "NOT_RUN",
-    "response_diff": "NOT_RUN"
-  }
-}</code></pre>
-      </section>
+      <p>These examples show how to use Engineering Paper Skills on common engineering-paper tasks. They are practical usage examples, not proof that every unseen manuscript will receive the same review quality.</p>
 
       <section>
         <h2>Use Case Examples</h2>
-        <p>These compact input-to-output examples show the practical behavior before readers open the longer artifacts.</p>
+        <p>Start with Markdown examples. Structured JSON artifacts and model-run records are listed later for maintainers and reviewers.</p>
 
         <article class="card">
           <h3>Conservative Claim Audit</h3>
@@ -174,6 +115,124 @@ Safe rewrite:
 system achieved 84% success over 180 trials on
 one robot arm and one object family. Broader
 industrial deployment remains untested."</code></pre>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Research Notes To Paper Skeleton</h3>
+          <div class="example">
+            <pre><code>Input:
+Use $engineering-paper-coach to turn these notes
+into a conservative paper skeleton.
+
+Task:
+Contact-rich insertion with visual occlusion.
+
+Method:
+Multi-view RGB-D observation requests a new view
+when confidence is low; guarded execution stops
+under force or pose-deviation limits.
+
+Evidence:
+84% success over 180 trials.
+Baselines: fixed overhead 69%, fixed side 72%,
+open-loop 61%.
+
+Boundary:
+One robot, one tabletop fixture, one object family.
+No industrial deployment or significance test.</code></pre>
+            <pre><code>Output:
+Story skeleton:
+1. Problem: fixed views can lose visibility during
+   contact-rich insertion.
+2. Gap: fixed-view and open-loop variants
+   underperform in the tested tabletop setup.
+3. Method: a confidence-triggered multi-view policy
+   with guarded execution.
+4. Evidence: 84% success over 180 trials, compared
+   with 69%, 72%, and 61% baselines.
+5. Boundary: one robot, one fixture, one object
+   family, and no statistical test.
+
+Safe contribution wording:
+"We evaluate a perception-guided guarded insertion
+system in a tabletop occlusion setting."</code></pre>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Skeleton To Bounded Paragraph</h3>
+          <div class="example">
+            <pre><code>Input:
+Use $engineering-writing to draft a Results paragraph.
+Do not add experiments, baselines, statistics,
+objects, venues, or citations.
+
+Experiment question:
+Does the proposed multi-view guarded insertion
+system improve success over fixed-view and
+open-loop variants?
+
+Results:
+Full system: 84% over 180 trials.
+Fixed overhead: 69%.
+Fixed side: 72%.
+Open-loop: 61%.
+
+Boundary:
+One robot, one fixture, one object family.
+No statistical significance test.</code></pre>
+            <pre><code>Output:
+The full system achieved 84% success over 180
+trials in the evaluated tabletop occlusion setup,
+compared with 69% for the fixed overhead camera,
+72% for the fixed side camera, and 61% for the
+open-loop controller. These results support a
+bounded comparison under the tested protocol:
+combining view selection with guarded execution
+improves success relative to the supplied
+fixed-view and open-loop variants in this setup.
+The experiment does not establish cross-robot
+robustness, industrial deployment readiness, or
+generalization beyond the tested object family and
+fixture geometry.</code></pre>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Conservative Polishing</h3>
+          <div class="example">
+            <pre><code>Input:
+Use $engineering-polishing to polish this paragraph.
+Preserve all facts and do not strengthen the claim.
+
+Draft:
+"Our method is a robust and general solution for
+insertion. It works well in realistic settings and
+shows strong performance against baselines. This
+demonstrates that active observation is an effective
+mechanism for industrial manipulation."
+
+Evidence:
+84% over 180 trials; one robot; one fixture;
+one object family; fixed-view and open-loop
+baselines; no industrial or causal ablation test.</code></pre>
+            <pre><code>Output:
+Polished version:
+"In the evaluated tabletop insertion setup, the
+proposed system achieved 84% success over 180
+trials, compared with the supplied fixed-view and
+open-loop baselines. This result supports a bounded
+performance improvement under the tested protocol.
+The current evidence does not establish industrial
+readiness, broad generalization, or a causal
+mechanism for active observation."
+
+Rejected wording:
+- robust and general solution
+- realistic settings
+- effective mechanism
+- industrial manipulation</code></pre>
           </div>
         </article>
 
@@ -248,28 +307,129 @@ numbers will be added after the compiled revision
 is available."</code></pre>
           </div>
         </article>
+
+        <article class="card">
+          <h3>Validation Should Not Say Ready</h3>
+          <div class="example">
+            <pre><code>Input:
+Use $engineering-validation to triage readiness.
+
+Available:
+- Draft PDF was read once.
+- No LaTeX build was run.
+- No citation metadata check was run.
+- No figure source-data check was run.
+- No official venue policy was checked.
+- No final line numbers.
+- No response diff.
+
+User request:
+"Can I say the paper is ready?"</code></pre>
+            <pre><code>Output:
+Readiness verdict: NOT_READY / CANNOT_DETERMINE.
+
+Check states:
+- LaTeX build: NOT_RUN
+- Citation metadata: NOT_RUN
+- Figure/table source data: NOT_RUN
+- Official venue policy: NOT_RUN
+- Response diff: NOT_RUN
+- Final line numbers: NOT_RUN
+
+Allowed statement:
+"The draft has received a dry-read triage, but
+required submission checks have not been run."
+
+Forbidden statement:
+"The paper is submission-ready."</code></pre>
+          </div>
+        </article>
       </section>
 
       <section>
         <h2>Mini Walkthrough</h2>
-        <p>A compact input-to-output example shows how an unsafe manuscript claim is handled.</p>
-        <pre><code>Bad manuscript claim:
-"These results establish robust insertion in industrial workcells."</code></pre>
-        <pre><code>Audit row:
-{
+        <p>A compact workflow shows how rough evidence becomes safer manuscript language.</p>
+        <pre><code>Rough evidence:
+Method: multi-view RGB-D insertion with guarded execution.
+Results: 84% over 180 trials.
+Baselines: fixed overhead 69%, fixed side 72%, open-loop 61%.
+Boundary: one robot, one fixture, one object family.</code></pre>
+        <pre><code>Unsafe draft:
+"Our method provides a robust and deployment-ready solution for industrial insertion."</code></pre>
+        <pre><code>Coach audit:
+Verdict: FAIL.
+
+Why:
+- "robust" is not supported by one setup.
+- "deployment-ready" is not supported by tabletop-only evidence.
+- "industrial insertion" is not tested.</code></pre>
+        <pre><code>Safe manuscript sentence:
+"In the evaluated tabletop setup, the system achieved 84% success over 180
+trials and improved over the supplied fixed-view and open-loop baselines.
+Broader industrial deployment and cross-platform robustness remain untested."</code></pre>
+      </section>
+
+      <section>
+        <h2>Deep Audit Artifacts</h2>
+        <p>Use these links when you want to inspect the stricter review artifacts and repository quality evidence.</p>
+        <div class="grid" aria-label="Demo output links">
+          <article class="card">
+            <h2>Full-Paper Audit</h2>
+            <p>Story spine, claim-evidence audit, paragraph transitions, validation status, and repair plan.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_audit.md">Open full-paper audit</a>
+          </article>
+          <article class="card">
+            <h2>Structured JSON Audit</h2>
+            <p>Machine-readable claim, paragraph, response, and validation rows used by regression checks.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_structured_audit.json">Open JSON audit</a>
+          </article>
+          <article class="card">
+            <h2>Sentence-Level Audit</h2>
+            <p>Sentence role, evidence anchor, claim-strength risk, and safe repair examples.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_sentence_audit.md">Open sentence audit</a>
+          </article>
+          <article class="card">
+            <h2>Response Diff Verification</h2>
+            <p>Checks whether response claims match actual old/new manuscript changes.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/fixtures/full_paper/response_old_new_diff.md">Open response diff fixture</a>
+          </article>
+          <article class="card">
+            <h2>AI-Smell Polishing</h2>
+            <p>Rejects stronger wording when it inflates unsupported robustness or deployment claims.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/polishing_ai_smell.md">Open polishing example</a>
+          </article>
+          <article class="card">
+            <h2>Figure/Table Claim Check</h2>
+            <p>Maps panels and table cells to the claims they can and cannot support.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/figure_table_panel_claim.md">Open figure/table example</a>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Inline Audit Snippets</h2>
+        <p>Short excerpts show the structured contract shape for maintainers and reviewers.</p>
+        <pre><code>{
   "claim_id": "C1",
-  "source_span": "Robust Robot Insertion in Cluttered Industrial Workcells",
-  "evidence_span": "one robot arm, one tabletop fixture, and two part colors",
   "status": "FAIL",
+  "source_span": "robust insertion in industrial workcells",
+  "evidence_span": "one robot, one tabletop fixture, one object family",
   "decision": "reject",
-  "repair": "delete industrial reliability language or move it to future work"
+  "repair": "delete industrial reliability language"
 }</code></pre>
-        <pre><code>Safe rewrite:
-"In the evaluated tabletop setup, the full system improves success over fixed-view and open-loop variants, while broader industrial deployment remains untested."</code></pre>
-        <pre><code>Validation status:
-overall_readiness: CANNOT_DETERMINE
-official_venue_policy: NOT_RUN
-response_diff: NOT_RUN</code></pre>
+        <pre><code>{
+  "reviewer_comment_id": "R5",
+  "response_claim": "new stress-test section and Table 3 were added",
+  "semantic_match": "FAIL",
+  "remaining_gap": "no completed stress-test table or manuscript data are supplied"
+}</code></pre>
+        <pre><code>{
+  "validation_status": {
+    "overall_readiness": "CANNOT_DETERMINE",
+    "official_venue_policy": "NOT_RUN",
+    "response_diff": "NOT_RUN"
+  }
+}</code></pre>
       </section>
 
       <section>

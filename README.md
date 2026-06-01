@@ -1,28 +1,29 @@
 # Engineering Paper Skills
 
 Evidence-bound Codex skills for engineering paper writing, manuscript audit,
-reviewer response, figure/table claim checks, and research paper validation.
+polishing, figure/table claim checks, reviewer response, and validation.
+
+Start with **`$engineering-paper-coach`** if you want practical Markdown
+guidance. Use the specialized skills when you need a deeper audit, section
+drafting, figure/table review, reviewer-response planning, or
+submission-readiness triage.
 
 This beta skill suite is designed for robotics, machine learning, control,
 systems, and other experiment-heavy engineering papers where claims must stay
-tied to concrete methods, results, figures, tables, citations, and limitations.
+tied to supplied methods, results, figures, tables, citations, and limitations.
 
-## What It Helps With
+## What It Does
 
-- Start with a lightweight conservative paper coach when you want practical
-  Markdown guidance rather than a structured JSON benchmark.
-- Audit a draft manuscript for unsupported claims, weak story flow, paragraph
-  jumps, section drift, and conclusion overreach.
-- Draft or revise Abstract, Introduction, Related Work, Methods, Experiments,
-  Discussion, and Conclusion from author-provided evidence.
-- Polish English academic prose without making claims stronger than the supplied
-  evidence.
-- Check whether figures, tables, captions, and result narratives actually
-  support the paper's claims.
-- Prepare reviewer or advisor responses without inventing completed edits,
-  experiments, citations, tables, or line numbers.
-- Validate manuscript readiness using explicit `PASS`, `FAIL`, `PARTIAL`,
-  `NOT_RUN`, and `UNKNOWN` states.
+- Turns rough research notes into conservative paper outlines or bounded
+  manuscript paragraphs.
+- Audits whether claims are stronger than the supplied evidence.
+- Polishes academic prose without adding facts or increasing claim strength.
+- Checks whether figures, tables, captions, and result narratives support the
+  stated claims.
+- Helps draft reviewer or advisor responses without pretending that experiments,
+  tables, citations, line numbers, or manuscript edits already exist.
+- Reports readiness with explicit states such as `PASS`, `FAIL`, `PARTIAL`,
+  `NOT_RUN`, `UNKNOWN`, and `CANNOT_DETERMINE`.
 
 > **Statement**
 >
@@ -41,39 +42,25 @@ tied to concrete methods, results, figures, tables, citations, and limitations.
 >   data, references, metrics, limitations, or conclusions.
 > - If the input evidence is thin, the skills should expose the gap instead of
 >   producing overconfident manuscript prose.
-> - Current repository checks include structure checks, golden-output snapshots,
->   static quality-asset checks, and one recorded local model run. They are not
->   proof that the skills can reliably produce top-tier manuscript guidance on
->   arbitrary long papers.
 
 ---
 
 ## What This Does Not Do
 
-These skills do not replace real experiments, citation checking, advisor review,
-venue instructions, or author judgment. They cannot verify that an experiment is
-true, that a citation exists, or that a result is valid unless the relevant
-source material and verification tools are provided. When evidence is missing,
-the skills should ask for the missing evidence, downgrade the claim, or mark the
-output as unsupported.
+These skills do not replace real experiments, citation verification, advisor
+review, venue instructions, or author judgment. They cannot certify that a
+result is true, a citation exists, a figure proves a mechanism, or a manuscript
+is submission-ready unless the relevant source files, evidence, tools, and
+official venue policies are provided and checked.
 
-## What Output Looks Like
+If evidence is thin, the skills should expose the gap, downgrade the claim, or
+produce a scaffold instead of confident manuscript prose.
 
-- [Demo gallery](https://169884902hzl.github.io/engineering-paper-skills/demo.html)
-- [Quality gates](https://169884902hzl.github.io/engineering-paper-skills/quality-gates.html)
-- [Discovery checklist](https://169884902hzl.github.io/engineering-paper-skills/discovery.html)
-- [Full-paper realistic audit](tests/outputs/golden/full_paper_realistic_audit.md)
-- [Structured JSON audit](tests/outputs/golden/full_paper_realistic_structured_audit.json)
-- [Sentence-level claim and evidence audit](tests/outputs/golden/full_paper_realistic_sentence_audit.md)
-- [AI-smell polishing example](tests/outputs/golden/polishing_ai_smell.md)
-- [Figure/table panel-claim audit](tests/outputs/golden/figure_table_panel_claim.md)
-- [Recorded local model-run artifact](tests/outputs/model_runs/full_paper_realistic_audit_8da3ceb.md)
+## Quick Examples
 
-## Use Case Examples
+### Example 1: Audit An Overclaim
 
-### Example 1: Conservative Claim Audit
-
-Input:
+**Input**
 
 ```text
 Use $engineering-paper-coach to audit this paper claim and give a safe rewrite.
@@ -83,74 +70,81 @@ Evidence:
 - One robot arm.
 - One tabletop fixture.
 - One object family.
-- No cross-robot test, no industrial deployment test, no statistical test.
+- No cross-robot test.
+- No industrial deployment test.
+- No statistical significance test.
 
-Draft:
+Draft claim:
 "The system is deployment-ready and proven robust for industrial insertion."
 ```
 
-Output:
+**Output**
 
 ```text
-Diagnosis:
-NOT_READY as written. The draft claim is stronger than the supplied evidence.
+Diagnosis: NOT_READY as written.
 
 Blocking issues:
 - "deployment-ready" is unsupported because no deployment or cycle-time evidence is supplied.
-- "proven robust" is unsupported because the evidence covers one robot, one fixture, and one object family.
-- "industrial insertion" is unsupported because the experiment is a tabletop protocol.
+- "proven robust" exceeds the supplied evidence: the experiments cover one robot, one fixture, and one object family.
+- "industrial insertion" is unsupported because the protocol is tabletop-only.
 
 Safe rewrite:
 "In the evaluated tabletop insertion setup, the system achieved 84% success
-over 180 trials on one robot arm and one object family. Broader industrial
-deployment and cross-platform robustness remain untested."
+over 180 trials on one robot arm and one object family. Cross-robot robustness,
+industrial deployment, and broader object variation remain untested."
 
 What not to say:
 - deployment-ready
 - proven robust
-- general industrial insertion
+- industrial insertion
+- generalizes across workcells
 ```
 
-### Example 2: Figure/Table Claim Check
+### Example 2: Do Not Fake A Reviewer Response
 
-Input:
+**Input**
 
 ```text
-Use $engineering-figure-table to audit this caption.
+Use $engineering-response to audit this draft response.
 
-Figure 2 content:
-A workflow diagram showing perception, view request, guarded execution, and stop states.
+Reviewer comment:
+"The paper overclaims robustness. Please add stress tests and clarify whether
+the method generalizes beyond the tabletop setup."
 
-Table 1 content:
-Full system: 84% success.
-Fixed overhead camera: 69% success.
-Fixed side camera: 72% success.
-Open-loop controller: 61% success.
+Supplied materials:
+- No revised manuscript diff.
+- No new stress-test data.
+- No Table 3.
+- Final line numbers are unavailable.
 
-Draft caption:
-"Figure 2 validates robust active observation under occlusion and proves the
-system is suitable for industrial insertion."
+Draft response:
+"We added new stress tests in Table 3 and revised Lines 210-225 to show robust
+generalization."
 ```
 
-Output:
+**Output**
 
 ```text
-Verdict:
-FAIL for caption claim strength.
+Verdict: FAIL.
 
-Supported:
-- Figure 2 can illustrate the workflow states.
-- Table 1 can support a bounded comparison in the tested tabletop protocol.
+Unsupported response claims:
+- The supplied materials do not include new stress-test data.
+- Table 3 was not supplied.
+- Final line numbers are unavailable.
+- "robust generalization" remains unsupported unless the new experiments actually test broader settings.
 
-Unsupported:
-- Figure 2 does not validate robustness because it is a workflow diagram.
-- The supplied table does not prove industrial suitability.
+Safe response plan:
+"We agree that the original robustness wording was too broad. Based on the
+current evidence, we will narrow the claim to the evaluated tabletop setup.
+Additional stress-test results and final line numbers cannot be claimed until
+the revised manuscript and data are available."
 
-Safe caption:
-"Figure 2 illustrates the perception, view-request, guarded-execution, and stop
-states used by the system. Quantitative success rates for the evaluated
-tabletop protocol are reported in Table 1."
+Required before final response:
+- revised manuscript diff
+- stress-test protocol and results, if performed
+- final compiled line numbers
 ```
+
 
 ## Quick Start
 
@@ -169,53 +163,20 @@ one object family.
 Draft: "The system is deployment-ready and proven robust for industrial insertion."
 ```
 
-For structured section drafting, run:
+## Which Skill Should I Use First?
 
-```text
-Use $engineering-writing to draft a five-sentence abstract from this evidence:
-- Method: perception-guided insertion with guarded execution.
-- Evidence: 92% success over 50 real-robot trials.
-- Boundary: one object family and one fixture geometry.
-Do not add citations, baselines, objects, or extra numbers.
-```
+| Task | Start with |
+|---|---|
+| I have notes and want practical Markdown guidance | `engineering-paper-coach` |
+| I want to audit a section before rewriting | `engineering-paper-auditor` |
+| I want to draft Abstract, Introduction, Methods, or Experiments | `engineering-writing` |
+| I want to polish text without strengthening claims | `engineering-polishing` |
+| I want to check figures, tables, captions, or result prose | `engineering-figure-table` |
+| I need to respond to reviewer or advisor comments | `engineering-response` |
+| I need readiness triage before submission | `engineering-validation` |
 
-For repository QA:
-
-```bash
-python scripts/validate_repo.py
-python scripts/check_expected_behavior.py --spec-dir tests/expected
-python scripts/check_quality_assets.py
-python scripts/check_response_diff.py
-python scripts/check_venue_profiles.py
-python scripts/check_metadata_files.py
-python scripts/write_behavior_eval_stub.py --help
-for s in skills/engineering-*; do
-  python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
-done
-```
-
-These commands validate repository structure, prompt specs, curated golden
-outputs, evaluation assets, and response-diff fixtures. They do not by
-themselves prove stable model behavior on unseen 8--12 page manuscripts.
-
-For behavior regression, configure the GitHub Actions secret
-`PROMPT_REGRESSION_COMMAND_TEMPLATE`. The CI will then run the
-`full_paper_realistic_audit` prompt through `scripts/run_prompt_regression.py`
-and check the resulting output against structured semantic expectations. Without
-that secret, CI reports that behavior regression was not run.
-The repository also includes a manual `Behavior Regression` workflow that fails
-closed when the command-template secret is absent and uploads the generated
-model outputs as an artifact. When that workflow runs successfully, it also
-writes a behavior eval stub with the commit, case, output hash, artifact name,
-and `ci_single_run` evidence level. The stub is still unscored until human or
-semantic review is applied. Failed local behavior attempts are recorded as
-failure evidence, not upgraded into passing model-run claims.
-This repository does not require GitHub releases; external reviews should cite
-the current `main` commit hash and the recorded eval artifacts.
-The no-release quality contract is documented in
-[Quality Gates](docs/quality-gates.md). The current public audit anchor is
-tracked in [Known-Good Commit Matrix](KNOWN_GOOD.md), and quality-gate changes
-are tracked in [CHANGELOG.md](CHANGELOG.md).
+For structured JSON audits, regression artifacts, and quality gates, see the
+[Demo Gallery](docs/demo.html) and [Quality Gates](docs/quality-gates.md).
 
 ## Project Overview
 
@@ -246,6 +207,283 @@ This project is useful for:
 | Design figure/table responsibilities, captions, and visual evidence flow | `engineering-figure-table` |
 | Triage reviewer/advisor comments and draft evidence-linked responses | `engineering-response` |
 | Check manuscript readiness, LaTeX build state, claim-evidence alignment, and submission risks | `engineering-validation` |
+
+## Use Case Examples
+
+### Example 3: Research Notes To Conservative Paper Skeleton
+
+**Input**
+
+```text
+Use $engineering-paper-coach to turn these notes into a conservative paper skeleton.
+
+Target venue family: robotics conference.
+Task: Contact-rich insertion with visual occlusion.
+
+Problem:
+- Fixed cameras lose visibility during insertion.
+- Open-loop insertion fails under pose error and partial occlusion.
+
+Method:
+- Multi-view RGB-D observation.
+- The policy requests an additional view when confidence is low.
+- Guarded execution stops when force threshold or pose deviation exceeds a limit.
+
+Evidence:
+- 84% success over 180 trials.
+- One robot arm.
+- One tabletop fixture.
+- One object family.
+- Baselines:
+  - fixed overhead camera: 69%
+  - fixed side camera: 72%
+  - open-loop controller: 61%
+- No cross-robot test.
+- No industrial deployment.
+- No statistical significance test.
+
+Need:
+- paper story skeleton
+- safe contribution wording
+- experiments needed for stronger claims
+```
+
+**Output**
+
+```text
+Working title:
+Perception-Guided Guarded Insertion Under Partial Visual Occlusion
+
+Story skeleton:
+1. Problem:
+   Contact-rich insertion is sensitive to pose error and visual occlusion.
+   Fixed cameras can lose task-relevant visibility during insertion.
+
+2. Gap:
+   The current evidence supports a bounded gap: fixed-view and open-loop
+   variants underperform in the tested tabletop setup. It does not support a
+   broad claim about industrial workcells or general deployment.
+
+3. Method object:
+   A multi-view RGB-D observation policy requests an additional view when
+   confidence is low and then uses guarded execution to stop under force or
+   pose-deviation limits.
+
+4. Evidence:
+   In one tabletop setup, the full system reaches 84% success over 180 trials,
+   compared with 69% for a fixed overhead camera, 72% for a fixed side camera,
+   and 61% for open-loop control.
+
+5. Boundary:
+   The evidence is limited to one robot arm, one fixture, one object family,
+   and no statistical significance test.
+
+Safe contribution wording:
+- "We evaluate a perception-guided guarded insertion system in a tabletop
+  occlusion setting."
+- "The system improves success over fixed-view and open-loop variants under the
+  tested protocol."
+
+Unsafe wording:
+- robust industrial insertion
+- deployment-ready manipulation
+- generalizes across workcells
+- proves active observation is causally responsible
+
+Experiments needed for stronger claims:
+- cross-robot evaluation
+- fixture variation
+- object-family variation
+- occlusion severity sweep
+- statistical uncertainty or repeated trials
+```
+
+### Example 4: Skeleton To Bounded Results Paragraph
+
+**Input**
+
+```text
+Use $engineering-writing to draft a Results paragraph from this evidence.
+Do not add new experiments, baselines, statistics, objects, venues, or citations.
+
+Experiment question:
+Does the proposed multi-view guarded insertion system improve success over
+fixed-view and open-loop variants in the tested tabletop occlusion setup?
+
+Results:
+- Full system: 84% success over 180 trials.
+- Fixed overhead camera: 69%.
+- Fixed side camera: 72%.
+- Open-loop controller: 61%.
+
+Boundary:
+- One robot arm.
+- One tabletop fixture.
+- One object family.
+- No statistical significance test.
+- No industrial deployment test.
+```
+
+**Output**
+
+```text
+The full system achieved 84% success over 180 trials in the evaluated tabletop
+occlusion setup, compared with 69% for the fixed overhead camera, 72% for the
+fixed side camera, and 61% for the open-loop controller. These results support
+a bounded comparison under the tested protocol: combining view selection with
+guarded execution improves success relative to the supplied fixed-view and
+open-loop variants in this setup. The experiment does not establish cross-robot
+robustness, industrial deployment readiness, or generalization beyond the
+tested object family and fixture geometry. Additional variation in robots,
+fixtures, objects, and occlusion conditions would be needed to support broader
+robustness claims.
+```
+
+### Example 5: Conservative Polishing Without Claim Inflation
+
+**Input**
+
+```text
+Use $engineering-polishing to polish this paragraph.
+Preserve all facts and do not strengthen the claim.
+
+Draft:
+"Our method is a robust and general solution for insertion. It works well in
+realistic settings and shows strong performance against baselines. This
+demonstrates that active observation is an effective mechanism for industrial
+manipulation."
+
+Evidence:
+- 84% success over 180 trials.
+- One robot arm.
+- One tabletop fixture.
+- One object family.
+- Baselines: fixed overhead 69%, fixed side 72%, open-loop 61%.
+- No industrial test.
+- No causal ablation isolating active observation.
+```
+
+**Output**
+
+```text
+Polished version:
+"In the evaluated tabletop insertion setup, the proposed system achieved 84%
+success over 180 trials, compared with 69% for the fixed overhead camera, 72%
+for the fixed side camera, and 61% for the open-loop controller. This result
+supports a bounded performance improvement over the supplied baselines under
+the tested protocol. The current evidence does not establish industrial
+readiness, broad generalization, or a causal mechanism for active observation."
+
+Rejected stronger wording:
+- robust and general solution
+- realistic settings
+- demonstrates an effective mechanism
+- industrial manipulation
+
+Why:
+The supplied evidence covers one robot, one fixture, and one object family, and
+does not include an industrial deployment test or a causal ablation.
+```
+
+### Example 6: Figure/Table Caption Claim Check
+
+**Input**
+
+```text
+Use $engineering-figure-table to audit this figure caption.
+
+Figure 2:
+- Panel A: workflow diagram with perception, view request, guarded execution,
+  and stop states.
+- Panel B: qualitative image sequence from one insertion trial.
+
+Table 1:
+- Full system: 84% success.
+- Fixed overhead camera: 69%.
+- Fixed side camera: 72%.
+- Open-loop controller: 61%.
+
+Draft caption:
+"Figure 2 validates the robustness of active observation under occlusion and
+proves that the system is suitable for industrial insertion."
+```
+
+**Output**
+
+```text
+Verdict: FAIL for caption claim strength.
+
+What the figure can support:
+- Panel A can illustrate the system workflow.
+- Panel B can show one qualitative example.
+- Table 1 can support a bounded quantitative comparison under the tested
+  tabletop protocol.
+
+Unsupported caption claims:
+- "validates robustness" is not supported by a workflow diagram or one
+  qualitative example.
+- "proves suitability for industrial insertion" is unsupported because no
+  industrial deployment test is supplied.
+- "active observation under occlusion" can be described as the evaluated
+  setting, but not as proven robust unless stress tests or occlusion sweeps are
+  provided.
+
+Safe caption:
+"Figure 2 illustrates the perception, view-request, guarded-execution, and stop
+states used by the system, along with one qualitative insertion example.
+Quantitative success rates for the evaluated tabletop protocol are reported in
+Table 1."
+```
+
+### Example 7: Validation Should Not Say Ready
+
+**Input**
+
+```text
+Use $engineering-validation to triage readiness.
+
+Target venue: robotics conference.
+
+Available:
+- Draft PDF was read once.
+- No LaTeX build was run.
+- No citation metadata check was run.
+- No figure source-data check was run.
+- No official venue policy was checked in this session.
+- No final line numbers.
+- No response diff.
+
+User request:
+"Can I say the paper is ready?"
+```
+
+**Output**
+
+```text
+Readiness verdict: NOT_READY / CANNOT_DETERMINE.
+
+Check states:
+- LaTeX build: NOT_RUN
+- Citation metadata: NOT_RUN
+- Figure/table source-data consistency: NOT_RUN
+- Official venue policy: NOT_RUN
+- Response diff: NOT_RUN
+- Final line numbers: NOT_RUN
+
+Allowed statement:
+"The draft has received a dry-read triage, but required submission checks have
+not been run."
+
+Forbidden statement:
+"The paper is submission-ready."
+
+Required next checks:
+1. Run a clean LaTeX build and inspect warnings/errors.
+2. Verify citation metadata and reference existence.
+3. Check figure/table captions against source data.
+4. Check current official venue instructions.
+5. Verify final line numbers after compiling the revised manuscript.
+```
 
 ## Installation
 
@@ -470,6 +708,24 @@ The skills are organized around five writing constraints:
 5. **Validation before readiness**: do not call a paper ready without fresh
    checks of the live draft, evidence, citations, figures, tables, and build
    state.
+
+## Quality Evidence for Maintainers and Reviewers
+
+These links are review evidence for the repository. They are useful for
+maintainers, external reviewers, and contributors, but they are not required for
+a first-time user to understand how to use the skills.
+
+- [Demo gallery](https://169884902hzl.github.io/engineering-paper-skills/demo.html)
+- [Quality gates](https://169884902hzl.github.io/engineering-paper-skills/quality-gates.html)
+- [Discovery checklist](https://169884902hzl.github.io/engineering-paper-skills/discovery.html)
+- [Full-paper realistic audit](tests/outputs/golden/full_paper_realistic_audit.md)
+- [Structured JSON audit](tests/outputs/golden/full_paper_realistic_structured_audit.json)
+- [Sentence-level claim and evidence audit](tests/outputs/golden/full_paper_realistic_sentence_audit.md)
+- [AI-smell polishing example](tests/outputs/golden/polishing_ai_smell.md)
+- [Figure/table panel-claim audit](tests/outputs/golden/figure_table_panel_claim.md)
+- [Recorded local model-run artifact](tests/outputs/model_runs/full_paper_realistic_audit_8da3ceb.md)
+- [Known-good commit matrix](KNOWN_GOOD.md)
+- [No-release beta changelog](CHANGELOG.md)
 
 ## Files
 
