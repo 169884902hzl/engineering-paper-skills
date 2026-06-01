@@ -4,6 +4,10 @@ Evidence-bound Codex skills for English engineering research papers.
 
 > **Statement**
 >
+> - This is a beta engineering-paper skill suite, not a guarantee of
+>   top-tier-paper readiness. It provides strict writing and validation
+>   workflows, but final claims, experiments, citations, venue compliance, and
+>   AI-use disclosure remain the author's responsibility.
 > - This project provides six task skills plus a routing skill for English
 >   engineering paper auditing, writing, polishing, figures and tables,
 >   revision responses, and validation.
@@ -49,6 +53,7 @@ For repository QA:
 ```bash
 python scripts/validate_repo.py
 python scripts/check_expected_behavior.py --spec-dir tests/expected
+python scripts/check_quality_assets.py
 for s in skills/engineering-*; do
   python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
 done
@@ -202,6 +207,7 @@ induce unsupported claims.
 ```bash
 python scripts/validate_repo.py
 python scripts/check_expected_behavior.py --spec-dir tests/expected
+python scripts/check_quality_assets.py
 for s in skills/engineering-*; do
   python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
 done
@@ -301,8 +307,8 @@ The skills are organized around five writing constraints:
 ## Files
 
 - `skills/_shared/`: shared evidence-bound, citation-boundary, claim-strength,
-  sentence-role, list-to-argument, terminology-ledger, source-note, and
-  output-mode rules
+  sentence-role, story-spine, AI-writing, list-to-argument,
+  terminology-ledger, source-note, and output-mode rules
 - `skills/engineering-paper-router/`: routing skill for ambiguous or mixed paper
   tasks
 - `skills/engineering-paper-auditor/`: reviewer-like paper audit skill for
@@ -317,12 +323,17 @@ The skills are organized around five writing constraints:
   coverage checks
 - `scripts/check_expected_behavior.py`: structured expected-behavior validation
 - `scripts/run_prompt_regression.py`: optional prompt regression runner
+- `scripts/check_quality_assets.py`: long-fixture, rubric, and quality-asset
+  validation
 - `tests/prompts/`: minimal, realistic, and adversarial prompt specs for each
   skill
+- `tests/fixtures/long/`: longer flawed manuscript fixtures for story,
+  sentence, AI-smell, and validation review
 - `tests/outputs/golden/`: golden output snapshots for expected-behavior checks
 - `tests/expected/`: structured expected-behavior specs for prompt checks,
   including forbidden regexes, forbidden claim patterns, and required output
   sections
+- `evals/`: manual top-tier paper quality rubric
 - `NOTICE.md`: third-party license notices
 - `OPEN_SOURCE_QA.md`: validation commands and release checks
 

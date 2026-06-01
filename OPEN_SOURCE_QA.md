@@ -8,6 +8,7 @@ Run these checks before publishing, tagging, or accepting a pull request.
 python scripts/validate_repo.py
 python scripts/check_expected_behavior.py --spec-dir tests/expected
 python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-dir tests/outputs/golden
+python scripts/check_quality_assets.py
 python scripts/run_prompt_regression.py
 ```
 
@@ -21,6 +22,8 @@ This checks:
 - structured expected minimal, realistic, and adversarial prompt specs
 - optional prompt regression output checks when outputs are provided
 - golden output snapshots under `tests/outputs/golden`
+- long-form flawed manuscript fixtures under `tests/fixtures/long`
+- manual top-tier writing rubric under `evals/`
 
 ## Codex Skill Validation
 

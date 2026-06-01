@@ -1,7 +1,7 @@
 {
   "case": "figure_table_realistic",
   "prompt": "figure_table_realistic.md",
-  "must_include": ["Visual audit", "Must not claim", "Consistency"],
+  "must_include": ["Visual audit", "Panel-claim map", "Must not claim", "Consistency"],
   "must_not_include": ["Fig. 5 validates robustness", "Table II proves"],
   "required_status": {},
   "forbidden_claims": [
@@ -10,7 +10,7 @@
     "partial category rename"
   ],
   "forbidden_regex": ["(?i)proves the guarded controller is the causal mechanism"],
-  "required_sections": ["Visual audit", "Caption/table revision", "Consistency actions"],
+  "required_sections": ["Visual audit", "Panel-claim map", "Caption/table revision", "Consistency actions"],
   "required_table_columns": ["Visible/tabulated evidence", "Must not claim", "Related prose action"],
   "allowed_behavior": [
     "describe Fig. 5 as workflow only",

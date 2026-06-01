@@ -1,7 +1,7 @@
 {
   "case": "writing_realistic",
   "prompt": "writing_realistic.md",
-  "must_include": ["Source-note triage", "Methods reader path", "Result paragraph"],
+  "must_include": ["Story spine", "Sentence role audit", "Source-note triage", "Methods reader path", "Result paragraph"],
   "must_not_include": ["state-of-the-art", "proves robustness", "stress test shows"],
   "required_status": {},
   "forbidden_claims": [
@@ -12,7 +12,7 @@
     "module directory Methods"
   ],
   "forbidden_regex": ["(?i)the method consists of perception, control, and safety modules\\."],
-  "required_sections": ["One-sentence thesis", "Source-note triage", "Claim-evidence map", "Unsupported or downgraded claims"],
+  "required_sections": ["One-sentence thesis", "Story spine", "Sentence role audit", "Source-note triage", "Claim-evidence map", "Unsupported or downgraded claims"],
   "required_table_columns": ["Claim", "Evidence support", "Boundary/overclaim risk"],
   "allowed_behavior": [
     "build Methods worksheet before prose",

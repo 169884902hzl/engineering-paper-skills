@@ -4,6 +4,7 @@ always_load:
   - ../_shared/evidence-boundary.md
   - ../_shared/claim-strength.md
   - ../_shared/sentence-role-and-story-flow.md
+  - ../_shared/story-spine.md
   - ../_shared/output-mode.md
 axes:
   section:
@@ -45,6 +46,23 @@ axes:
       load:
         - references/bad-sentence-repairs.md
         - ../_shared/sentence-role-and-story-flow.md
+  venue_family:
+    nature_science_cell:
+      load:
+        - references/venue-aware-writing.md
+        - ../_shared/ai-assisted-writing-policy.md
+    ml_conference:
+      load:
+        - references/venue-aware-writing.md
+        - references/paper-level-narrative-map.md
+    robotics_conference:
+      load:
+        - references/venue-aware-writing.md
+        - references/experiments-worksheet.md
+    systems_conference:
+      load:
+        - references/venue-aware-writing.md
+        - references/methods-worksheet.md
 notes:
   - This manifest is an explicit routing map for humans and agents. Codex still
     follows SKILL.md as the entrypoint.

@@ -37,6 +37,9 @@ Use this skill to make figures and tables serve the manuscript argument.
 | [references/figure-roles.md](references/figure-roles.md) | Deciding what motivation, framework, workflow, gallery, or evidence figures should do |
 | [references/captions.md](references/captions.md) | Writing or auditing captions and table notes |
 | [references/tables.md](references/tables.md) | Designing setup, main results, ablation, or stress-test tables |
+| [references/panel-claim-map.md](references/panel-claim-map.md) | Mapping every panel, row, or column to a manuscript claim |
+| [references/figure-source-data-consistency.md](references/figure-source-data-consistency.md) | Checking that plotted values, source data, captions, and prose agree |
+| [references/venue-figure-standards.md](references/venue-figure-standards.md) | Target venue family changes figure resolution, source data, or caption expectations |
 | [references/consistency.md](references/consistency.md) | Checking category names, metrics, labels, caption style, and prose alignment |
 | [references/page-budget.md](references/page-budget.md) | Cutting visual space, caption length, or table detail without damaging evidence |
 | [references/examples.md](references/examples.md) | Needing concrete figure/table role examples and caption behavior |
@@ -51,12 +54,14 @@ Use this skill to make figures and tables serve the manuscript argument.
 1. State the paper claim the visual supports.
 2. Assign one responsibility to each figure/table.
 3. Map each panel, row, or column to a piece of evidence.
-4. Check whether the caption states only visible or tabulated information.
-5. Check consistency across prose, caption, labels, and notes.
-6. Check whether any category/metric rename needs coordinated changes.
-7. Remove or redesign a visual if it has no claim, setup fact, evidence axis, or
+4. Check source-data and caption consistency when values, metrics, or panels
+   are provided.
+5. Check whether the caption states only visible or tabulated information.
+6. Check consistency across prose, caption, labels, and notes.
+7. Check whether any category/metric rename needs coordinated changes.
+8. Remove or redesign a visual if it has no claim, setup fact, evidence axis, or
    reader action.
-8. If editing LaTeX, preserve labels and references unless there is a direct
+9. If editing LaTeX, preserve labels and references unless there is a direct
    reason to change them.
 
 ## Default Output
@@ -64,6 +69,9 @@ Use this skill to make figures and tables serve the manuscript argument.
 ```text
 Visual audit
 | Item | Responsibility | Visible/tabulated evidence | Claim supported | Must not claim | Placement | Related prose action | Risk | Action |
+
+Panel-claim map
+| Panel/row/column | Claim served | Evidence shown | Source-data check | Caption boundary |
 
 Caption/table revision
 [English caption or table plan]

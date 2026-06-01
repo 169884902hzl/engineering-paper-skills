@@ -55,11 +55,16 @@ overall readiness must be `NOT_READY` or `CANNOT_DETERMINE`.
 | [references/final-readonly-check.md](references/final-readonly-check.md) | Running the final 30-minute style read-only inspection |
 | [references/error-archive.md](references/error-archive.md) | Diagnosing common manuscript failure symptoms and the first section to inspect |
 | [references/submission-checklist.md](references/submission-checklist.md) | Final read-only inspection before submission |
+| [references/venue-checklist.md](references/venue-checklist.md) | Venue family changes limits, reproducibility, checklist, or AI-disclosure requirements |
+| [references/citation-metadata-check.md](references/citation-metadata-check.md) | Citation existence, DOI, venue, year, or BibTeX consistency needs verification |
+| [references/ai-disclosure-check.md](references/ai-disclosure-check.md) | AI-assisted writing, citation, or figure generation may require author verification or disclosure |
 | [references/examples.md](references/examples.md) | Needing concrete validation report examples |
 | [references/failure-modes.md](references/failure-modes.md) | Handling requests to certify readiness without running checks |
+| [../_shared/story-spine.md](../_shared/story-spine.md) | Checking whether Abstract/Conclusion claims match Methods/Experiments evidence |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Validation touches claims, citations, results, or completion status |
 | [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | Citation existence, citation placement, or reference claims are part of the check |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | High-risk claim verbs need audit during validation |
+| [../_shared/ai-assisted-writing-policy.md](../_shared/ai-assisted-writing-policy.md) | Venue disclosure or author-verification status is part of readiness |
 | [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for a short validation result only |
 
 ## Workflow
@@ -69,11 +74,13 @@ overall readiness must be `NOT_READY` or `CANNOT_DETERMINE`.
 3. Read local instructions and relevant build files.
 4. Check structure anchors: thesis, contribution list, main results, ablation,
    limitations.
-5. Check figures, tables, captions, labels, and category/metric names.
-6. Run the smallest relevant build and consistency commands.
-7. If tools or files are unavailable, mark command-dependent checks `NOT_RUN`
+5. Check story spine: Abstract and Conclusion claims must have Methods,
+   Experiments, figure/table, and boundary anchors.
+6. Check figures, tables, captions, labels, and category/metric names.
+7. Run the smallest relevant build and consistency commands.
+8. If tools or files are unavailable, mark command-dependent checks `NOT_RUN`
    and perform only the file-based or local-text audit that evidence allows.
-8. Report evidence, failures, and unverified items.
+9. Report evidence, failures, and unverified items.
 
 ## Default Output
 
@@ -84,6 +91,8 @@ Validation result
 - References: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
 - Figures/tables: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
 - Claim-evidence audit: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
+- Story-spine audit: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
+- AI/disclosure check: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
 - Private/stale wording scan: PASS / FAIL / NOT_RUN / UNKNOWN
 - Overall readiness: READY / NOT_READY / CANNOT_DETERMINE
 

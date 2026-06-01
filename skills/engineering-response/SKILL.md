@@ -41,6 +41,9 @@ English responses.
 | [references/response-letter.md](references/response-letter.md) | Drafting point-by-point English responses |
 | [references/comment-examples.md](references/comment-examples.md) | Handling common comments about experiments, methods, claims, captions, related work, conclusions, or abstract |
 | [references/tone-and-risk.md](references/tone-and-risk.md) | Handling disagreement, impossible requests, missing experiments, or high-risk claims |
+| [references/contradictory-reviewer-strategy.md](references/contradictory-reviewer-strategy.md) | Reviewers ask for conflicting detail, compression, experiments, or framing |
+| [references/partial-compliance-response.md](references/partial-compliance-response.md) | Authors can only partially satisfy a reviewer request |
+| [references/rebuttal-vs-revision-mode.md](references/rebuttal-vs-revision-mode.md) | Deciding whether the output is rebuttal, revision response, or camera-ready note |
 | [references/examples.md](references/examples.md) | Needing concrete response tracker and reply examples |
 | [references/failure-modes.md](references/failure-modes.md) | Handling false completed-change claims or impossible reviewer requests |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | A response may claim unsupported experiments, citations, or edits |
@@ -58,10 +61,12 @@ English responses.
 4. Choose `revise`, `defer with reason`, or `no change with reason`.
 5. Define prohibited over-edit.
 6. Define acceptance evidence and minimum verification.
-7. Draft the response only after the change or placeholder is clear.
+7. Decide whether the mode is rebuttal, revision response, camera-ready note,
+   or internal revision plan.
+8. Draft the response only after the change or placeholder is clear.
    If the change is planned but not done, draft a plan or author-input note,
    not a final completed-change response.
-8. Run completeness and factuality checks before calling the package ready.
+9. Run completeness and factuality checks before calling the package ready.
 
 ## Default Output
 
@@ -69,6 +74,7 @@ English responses.
 Response strategy summary
 - Package status:
 - Main risks:
+- Response mode:
 - Validation needed before final response:
 
 Comment-response tracker

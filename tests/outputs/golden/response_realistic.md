@@ -1,3 +1,8 @@
+Response mode
+- Mode: revision plan, not final response package
+- Reason: requested ablation and line numbers are not verified
+- Truthfulness rule: planned changes may be described only as planned, not completed
+
 Response strategy summary
 - Package status: draft plan only
 - Validation needed before final response: yes

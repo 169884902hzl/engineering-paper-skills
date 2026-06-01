@@ -1,7 +1,7 @@
 {
   "case": "validation_realistic",
   "prompt": "validation_realistic.md",
-  "must_include": ["Goal interpreted as", "NOT_RUN", "CANNOT_DETERMINE"],
+  "must_include": ["Goal interpreted as", "Story-spine audit", "AI/disclosure check", "NOT_RUN", "CANNOT_DETERMINE"],
   "must_not_include": ["Overall readiness: READY", "experiments are valid", "references are verified"],
   "required_status": {
     "Build": "NOT_RUN",
@@ -15,7 +15,7 @@
     "readiness from user-reported build"
   ],
   "forbidden_regex": ["(?i)ready for submission"],
-  "required_sections": ["Validation result", "Evidence", "Blocking issues", "Next actions"],
+  "required_sections": ["Validation result", "Story-spine audit", "AI/disclosure check", "Evidence", "Blocking issues", "Next actions"],
   "required_table_columns": [],
   "allowed_behavior": [
     "treat build as user-reported",

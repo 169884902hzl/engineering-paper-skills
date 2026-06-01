@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "criteria": {
+    "claim_evidence_alignment": {
+      "pass": "Every major claim has a method, experiment, figure/table, citation, or limitation anchor.",
+      "fail": "A major claim remains unsupported or stronger than its evidence."
+    },
+    "story_spine": {
+      "pass": "Problem, gap, insight, method, evidence, boundary, and implication form a dependency chain.",
+      "fail": "Sections are individually plausible but the paper story breaks."
+    },
+    "sentence_necessity": {
+      "pass": "Each sentence has function, necessity, placement, connection, and evidence boundary.",
+      "fail": "Decorative, redundant, misplaced, or disconnected sentences remain."
+    },
+    "ai_smell": {
+      "pass": "Generic importance, adjective stacks, vague subjects, and mechanical connectors are removed or justified.",
+      "fail": "The output is fluent but generic, promotional, or template-like."
+    },
+    "venue_awareness": {
+      "pass": "Target venue family affects limitations, reproducibility, figures, citations, and disclosure checks.",
+      "fail": "Venue needs are ignored or only named."
+    },
+    "response_truthfulness": {
+      "pass": "Every response claim maps to completed evidence, planned work, or author input needed.",
+      "fail": "The response implies unverified manuscript changes."
+    },
+    "validation_honesty": {
+      "pass": "All readiness claims use verified status vocabulary and name checks not run.",
+      "fail": "Dry reading or partial checks are upgraded to ready."
+    }
+  }
+}

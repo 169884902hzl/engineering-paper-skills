@@ -6,7 +6,8 @@ argument.
 
 ## Core Rule
 
-Every sentence must pass five gates:
+Every sentence must pass the full top-tier sentence audit. A sentence that
+sounds fluent but fails one of these checks is not ready for manuscript prose.
 
 | Gate | Question | If the answer is weak |
 |---|---|---|
@@ -15,6 +16,10 @@ Every sentence must pass five gates:
 | Placement | Why does it belong here rather than another section or paragraph? | move it |
 | Connection | How does it follow from the previous sentence and prepare the next one? | add a bridge or reorder |
 | Evidence boundary | What fact, method detail, result, figure/table, citation, or limitation supports it? | hedge, mark unsupported, or remove |
+| Ambiguity | Could a reader misread actor, object, scope, causality, robustness, or generalization? | name the ambiguity and rewrite |
+| Redundancy source | Does it repeat the previous sentence, heading, table, caption, or common background? | delete, merge, or make it do new work |
+| AI-smell pattern | Does it use empty importance, adjective stacking, vague subjects, or mechanical connectors? | replace with concrete paper function |
+| Claim-strength delta | Did the rewrite make the claim stronger than the source? | restore the original boundary |
 
 If a sentence can be removed without losing meaning, evidence, transition, or
 boundary, it is redundant. If a sentence is missing and the reader can
@@ -40,6 +45,23 @@ Use one primary job per sentence:
 
 Do not let one sentence do unrelated jobs, such as opening a gap while also
 claiming a result and adding a limitation. Split or move it.
+
+## Claim Types
+
+Every claim-bearing sentence should be tagged with one primary type:
+
+| Claim type | Required support |
+|---|---|
+| Background | source, accepted field fact, or clearly local framing |
+| Method | method section detail, algorithm, system object, or implementation note |
+| Result | protocol, metric, comparison, figure, or table |
+| Comparative | named baseline, fairness condition, metric, and boundary |
+| Causal/mechanistic | ablation, intervention, direct measurement, or explicit hypothesis wording |
+| Robustness/generalization | stress test, held-out condition, cross-domain trial, or downgrade |
+| Limitation | observed failure, untested condition, or declared assumption |
+
+If support is absent, the action is not `keep`; it is `downgrade`, `delete`,
+`move`, or `mark evidence needed`.
 
 ## Paragraph Story Test
 
@@ -81,8 +103,13 @@ Examples:
 
 ```text
 Sentence role audit
-| Sentence/span | Job | Needed because | Connection to previous/next | Evidence boundary | Action |
+| SID | Sentence/span | Job | Claim type | Evidence anchor | Needed because | Placement | Previous link | Next obligation | Ambiguity risk | Redundancy source | AI-smell pattern | Claim-strength risk | Action | Safe rewrite | Evidence needed for stronger wording |
 ```
 
 Actions are `keep`, `merge`, `move`, `split`, `add bridge`, `downgrade`, or
 `delete`.
+
+Do not hide this audit when the user asks for stronger wording, shorter prose,
+top-tier polish, or reviewer-like critique. If the user asks for prose only,
+include at least a minimal unsupported/ambiguity note when any sentence would
+otherwise mislead the reader.

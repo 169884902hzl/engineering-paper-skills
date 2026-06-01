@@ -35,9 +35,14 @@ produce final paper prose; it produces a prioritized audit and repair plan.
 | [references/audit-rubric.md](references/audit-rubric.md) | Running a full manuscript or section audit |
 | [references/examples.md](references/examples.md) | Needing concrete audit output examples |
 | [references/failure-modes.md](references/failure-modes.md) | Avoiding audit overreach, rewriting, or unsupported conclusions |
+| [references/story-continuity-audit.md](references/story-continuity-audit.md) | Auditing whether paper sections form a coherent story |
+| [references/paragraph-to-paragraph-transition-audit.md](references/paragraph-to-paragraph-transition-audit.md) | Paragraphs are individually plausible but the section feels jumpy |
+| [references/claim-resurrection-audit.md](references/claim-resurrection-audit.md) | Abstract, Discussion, or Conclusion may revive unsupported claims |
+| [../_shared/story-spine.md](../_shared/story-spine.md) | Full-paper or multi-section audit needs story dependency checks |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Any claim may exceed available evidence |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | Auditing novelty, robustness, causality, or generalization language |
 | [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | Related Work, citations, or source support are part of the audit |
+| [../_shared/ai-assisted-writing-policy.md](../_shared/ai-assisted-writing-policy.md) | The audit may need to flag AI-smell, disclosure, or author-verification risk |
 | [../_shared/list-to-argument.md](../_shared/list-to-argument.md) | A section reads like a list rather than an argument |
 | [../_shared/sentence-role-and-story-flow.md](../_shared/sentence-role-and-story-flow.md) | A paragraph may contain redundant, misplaced, missing, or disconnected sentences |
 | [../_shared/terminology-ledger.md](../_shared/terminology-ledger.md) | Terms, metrics, categories, or method names drift across sections |
@@ -47,18 +52,19 @@ produce final paper prose; it produces a prioritized audit and repair plan.
 1. Identify the audit scope: full paper, section, figure/table set, response
    package, or claim-evidence map.
 2. Extract the paper's one-sentence thesis and stated contributions if present.
-3. Build a claim-evidence audit table.
-4. Check section jobs: Abstract, Introduction, Related Work, Methods,
+3. Build a story-spine audit before local style findings.
+4. Build a claim-evidence audit table.
+5. Check section jobs: Abstract, Introduction, Related Work, Methods,
    Experiments, Discussion, Conclusion.
-5. Check figure/table responsibility against the claims they are asked to
+6. Check figure/table responsibility against the claims they are asked to
    support.
-6. Audit sentence roles when a paragraph is unclear: every sentence must be
+7. Audit sentence roles when a paragraph is unclear: every sentence must be
    necessary, placed correctly, connected to neighboring sentences, and bounded
    by evidence.
-7. Flag overclaims, missing anchors, section drift, table narration, caption
+8. Flag overclaims, missing anchors, section drift, table narration, caption
    overreach, sentence redundancy, terminology drift, and unsupported readiness
    claims.
-8. Produce a prioritized action list and route each action to the correct skill.
+9. Produce a prioritized action list and route each action to the correct skill.
 
 ## Default Output
 
@@ -70,6 +76,9 @@ Audit verdict
 
 Claim-evidence audit
 | Claim | First stated | Method anchor | Experiment anchor | Figure/table anchor | Status | Repair route |
+
+Story-spine findings
+| Node | Present? | Evidence anchor | Break risk | Repair route |
 
 Section-boundary findings
 | Location | Symptom | Why it matters | Repair route |

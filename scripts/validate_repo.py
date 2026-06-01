@@ -106,6 +106,31 @@ def read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
+def parse_simple_agent_yaml(path: Path) -> dict[str, str]:
+    """Parse the tiny agents/openai.yaml schema without third-party packages."""
+    values: dict[str, str] = {}
+    in_interface = False
+    for raw_line in read(path).splitlines():
+        line = raw_line.rstrip()
+        if not line or line.lstrip().startswith("#"):
+            continue
+        if line == "interface:":
+            in_interface = True
+            continue
+        if not in_interface:
+            raise ValueError(f"{rel(path)} only supports an interface mapping")
+        if not line.startswith("  ") or ":" not in line:
+            raise ValueError(f"{rel(path)} invalid interface field: {line}")
+        key, value = line.strip().split(":", 1)
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] == '"':
+            value = value[1:-1]
+        if not value:
+            raise ValueError(f"{rel(path)} field {key} is empty")
+        values[key] = value
+    return values
+
+
 def md_files() -> list[Path]:
     return [
         p
@@ -154,10 +179,17 @@ def check_structure(errors: list[str]) -> None:
 
         agent = skill / "agents/openai.yaml"
         if agent.exists():
-            agent_text = read(agent)
-            for key in ("display_name:", "short_description:", "default_prompt:"):
-                if key not in agent_text:
+            try:
+                agent_values = parse_simple_agent_yaml(agent)
+            except ValueError as exc:
+                errors.append(str(exc))
+                continue
+            for key in ("display_name", "short_description", "default_prompt"):
+                if key not in agent_values:
                     errors.append(f"{rel(agent)} missing {key}")
+            for key, value in agent_values.items():
+                if "\n" in value or len(value) > 240:
+                    errors.append(f"{rel(agent)} field {key} is too long or multiline")
 
 
 def check_links(errors: list[str]) -> None:

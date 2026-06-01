@@ -32,6 +32,8 @@ routing.
 | [references/examples.md](references/examples.md) | Needing routing examples |
 | [references/failure-modes.md](references/failure-modes.md) | Avoiding router overreach or single-skill bias |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Routing tasks that request strong claims, citations, validation, or missing-evidence work |
+| [../_shared/story-spine.md](../_shared/story-spine.md) | Full-paper, abstract, introduction, or major revision tasks need story-first ordering |
+| [../_shared/ai-assisted-writing-policy.md](../_shared/ai-assisted-writing-policy.md) | User requests AI-polished or venue-ready prose where author responsibility or disclosure may matter |
 | [../_shared/output-mode.md](../_shared/output-mode.md) | User asks for a short route only |
 
 ## Routing Table
@@ -59,13 +61,16 @@ routing.
 
 For full-paper work, use this order unless the user gives a narrower task:
 
-1. `engineering-writing`: one-sentence thesis and contribution-evidence map.
-2. `engineering-figure-table`: visual responsibility and evidence roles.
-3. `engineering-writing`: Methods and Experiments before Introduction.
-4. `engineering-writing`: Introduction, Abstract, Conclusion.
-5. `engineering-polishing`: paragraph flow, terminology, and claim strength.
-6. `engineering-response`: only if comments exist.
-7. `engineering-validation`: before claiming complete, fixed, or ready.
+1. `engineering-paper-auditor`: story-spine and blocker audit if the draft is
+   already written or the task is broad.
+2. `engineering-writing`: one-sentence thesis, story spine, and
+   contribution-evidence map.
+3. `engineering-figure-table`: visual responsibility and evidence roles.
+4. `engineering-writing`: Methods and Experiments before Introduction.
+5. `engineering-writing`: Introduction, Abstract, Conclusion.
+6. `engineering-polishing`: paragraph flow, terminology, and claim strength.
+7. `engineering-response`: only if comments exist.
+8. `engineering-validation`: before claiming complete, fixed, or ready.
 
 ## Default Output
 

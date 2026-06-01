@@ -59,9 +59,13 @@ for writing the paper's argument, not merely polishing sentences.
 | [manifest.yaml](manifest.yaml) | Planning which references to load for section, input-state, or failure-repair tasks |
 | [references/examples.md](references/examples.md) | Needing concrete prompt and output behavior examples |
 | [references/failure-modes.md](references/failure-modes.md) | Handling thin evidence, invented-citation requests, or overclaim pressure |
+| [references/venue-aware-writing.md](references/venue-aware-writing.md) | Target venue family may change abstract, limitation, reproducibility, or contribution framing |
+| [references/paper-level-narrative-map.md](references/paper-level-narrative-map.md) | Full-paper or multi-section writing needs story dependency checks |
+| [../_shared/story-spine.md](../_shared/story-spine.md) | Building problem-to-evidence-to-boundary logic before drafting |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Any task asks for stronger claims, missing evidence, or manuscript facts |
 | [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | Related Work or citations are requested without provided sources |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | Calibrating verbs, novelty, robustness, generalization, or causal language |
+| [../_shared/ai-assisted-writing-policy.md](../_shared/ai-assisted-writing-policy.md) | AI-assisted prose or venue disclosure risk is relevant |
 | [../_shared/list-to-argument.md](../_shared/list-to-argument.md) | Source material is a bullet list, module list, result-row list, or contribution list |
 | [../_shared/non-english-source-notes.md](../_shared/non-english-source-notes.md) | Non-English notes must become English manuscript prose |
 | [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for output only |
@@ -90,17 +94,19 @@ drafting. You may still provide a scaffold.
 
 1. Build a one-sentence thesis:
    `In [task/setting], we address [gap] by [method/formulation], supported by [evidence], within [boundary].`
-2. Create a contribution-evidence map before writing strong claims. Use columns:
+2. Build the story spine: problem, gap, insight, method, evidence, boundary,
+   and implication.
+3. Create a contribution-evidence map before writing strong claims. Use columns:
    `Claim`, `First stated in`, `Mechanism support`, `Evidence`, and
    `Boundary/overclaim risk`.
-3. Choose the section reference and assign one job to each paragraph.
-4. Draft from evidence outward.
-5. Calibrate claim verbs: `show`, `indicate`, `suggest`, `support`, `enable`,
+4. Choose the section reference and assign one job to each paragraph.
+5. Draft from evidence outward.
+6. Calibrate claim verbs: `show`, `indicate`, `suggest`, `support`, `enable`,
    `demonstrate` only when directly supported.
-6. Remove unsupported novelty, universal claims, and vague adjectives.
-7. Check sentence roles: every sentence must have a function, necessity,
+7. Remove unsupported novelty, universal claims, and vague adjectives.
+8. Check sentence roles: every sentence must have a function, necessity,
    placement, connection, and evidence boundary.
-8. Return prose plus assumptions, missing evidence, and a short claim-evidence
+9. Return prose plus assumptions, missing evidence, and a short claim-evidence
    map unless prose-only output was requested and no unsupported-risk note would
    be hidden.
 
@@ -109,6 +115,9 @@ drafting. You may still provide a scaffold.
 ```text
 One-sentence thesis
 [In task/setting, we address gap by method/formulation, supported by evidence, within boundary.]
+
+Story spine
+| Node | Section location | Claim | Evidence anchor | Boundary | If removed, what breaks? |
 
 Section job map
 | Section/paragraph | Job | Evidence anchor | Boundary |

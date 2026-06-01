@@ -1,7 +1,7 @@
 {
   "case": "polishing_realistic",
   "prompt": "polishing_realistic.md",
-  "must_include": ["Terminology", "Unsupported", "71%", "86%"],
+  "must_include": ["Claim-strength diff", "Sentence role audit", "Terminology", "Unsupported", "71%", "86%"],
   "must_not_include": ["proves that the robot can reason better", "robust, efficient, and general"],
   "required_status": {},
   "forbidden_claims": [
@@ -10,7 +10,7 @@
     "terminology variation for the same camera component"
   ],
   "forbidden_regex": ["(?i)proves.*reason", "(?i)fully robust"],
-  "required_sections": ["Diagnosis", "Before / After / Rationale", "Polished version", "Unsupported claims"],
+  "required_sections": ["Diagnosis", "Claim-strength diff", "Sentence role audit", "Before / After / Rationale", "Polished version", "Unsupported claims"],
   "required_table_columns": ["Fact/evidence risk"],
   "allowed_behavior": [
     "lock observer camera terminology",
