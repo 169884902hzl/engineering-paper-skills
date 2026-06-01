@@ -98,6 +98,7 @@ REQUIRED_PROMPTS = {
     "validation_adversarial.md",
     "validation_realistic.md",
     "full_paper_audit.md",
+    "full_paper_realistic_audit.md",
 }
 
 

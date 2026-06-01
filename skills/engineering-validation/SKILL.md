@@ -80,7 +80,10 @@ overall readiness must be `NOT_READY` or `CANNOT_DETERMINE`.
 7. Run the smallest relevant build and consistency commands.
 8. If tools or files are unavailable, mark command-dependent checks `NOT_RUN`
    and perform only the file-based or local-text audit that evidence allows.
-9. Report evidence, failures, and unverified items.
+9. For venue readiness, report whether official policy was checked, including
+   source URL and source date. If not checked, venue compliance is `NOT_RUN` or
+   `PARTIAL`.
+10. Report evidence, failures, and unverified items.
 
 ## Default Output
 
@@ -93,6 +96,7 @@ Validation result
 - Claim-evidence audit: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
 - Story-spine audit: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
 - AI/disclosure check: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
+- Venue readiness: PASS / FAIL / PARTIAL / NOT_RUN / UNKNOWN
 - Private/stale wording scan: PASS / FAIL / NOT_RUN / UNKNOWN
 - Overall readiness: READY / NOT_READY / CANNOT_DETERMINE
 
@@ -102,6 +106,8 @@ Evidence
 - Outputs observed:
 - Failures:
 - Not verified:
+- Official policy checked:
+- Official policy source/date:
 
 Blocking issues
 - ...

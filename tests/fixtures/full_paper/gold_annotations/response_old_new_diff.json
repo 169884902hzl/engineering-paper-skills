@@ -1,0 +1,15 @@
+{
+  "fixture": "tests/fixtures/full_paper/response_old_new_diff.md",
+  "verified_changes": [
+    "method no longer reads only as a module list",
+    "Figure 2 robustness claim is narrowed",
+    "Table 1 result is bounded to the evaluated fixture"
+  ],
+  "unsupported_response_claims": [
+    "added stress tests",
+    "added Table 3",
+    "Lines 118-134",
+    "validate robust execution",
+    "ready for submission"
+  ]
+}

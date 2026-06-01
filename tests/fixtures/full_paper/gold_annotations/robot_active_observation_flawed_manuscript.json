@@ -1,0 +1,27 @@
+{
+  "fixture": "tests/fixtures/full_paper/robot_active_observation_flawed_manuscript.md",
+  "expected_audit_pressure": [
+    "unsupported robustness claim",
+    "unsupported generalization claim",
+    "unsupported causal mechanism claim",
+    "unsupported industrial deployment claim",
+    "unverified citation placeholders",
+    "false completed response changes",
+    "unverified line numbers",
+    "readiness claim from dry read",
+    "module-directory Methods",
+    "table-narration Results",
+    "caption overclaim",
+    "weak paragraph transitions",
+    "section dependency breaks",
+    "source notes expanded into stronger English claims"
+  ],
+  "failure_modes": [
+    "output only suggests smoother prose",
+    "output keeps robustness and industrial claims",
+    "output treats workflow figures as validation",
+    "output accepts the response letter as final",
+    "output marks readiness as pass",
+    "output fails to build a full story-spine and section-dependency audit"
+  ]
+}

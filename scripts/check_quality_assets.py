@@ -40,12 +40,43 @@ REQUIRED_RUBRIC_KEYS = {
     "validation_honesty",
 }
 
-REQUIRED_FULL_PAPER_ASSETS = {
-    "fixture": "tests/fixtures/full_paper/robot_active_observation_flawed_manuscript.md",
-    "prompt": "tests/prompts/full_paper_audit.md",
-    "expected": "tests/expected/full_paper_audit.yaml",
-    "golden": "tests/outputs/golden/full_paper_audit.md",
-    "eval_result": "evals/results/775ee48_full_paper_manual_eval.jsonl",
+REQUIRED_FULL_PAPER_CASES = {
+    "full_paper_audit": {
+        "fixture": "tests/fixtures/full_paper/robot_active_observation_flawed_manuscript.md",
+        "annotation": "tests/fixtures/full_paper/gold_annotations/robot_active_observation_flawed_manuscript.json",
+        "prompt": "tests/prompts/full_paper_audit.md",
+        "expected": "tests/expected/full_paper_audit.yaml",
+        "golden": "tests/outputs/golden/full_paper_audit.md",
+        "min_words": 1500,
+    },
+    "full_paper_realistic_audit": {
+        "fixture": "tests/fixtures/full_paper/robot_active_observation_realistic_8page.md",
+        "annotation": "tests/fixtures/full_paper/gold_annotations/robot_active_observation_realistic_8page.json",
+        "prompt": "tests/prompts/full_paper_realistic_audit.md",
+        "expected": "tests/expected/full_paper_realistic_audit.yaml",
+        "golden": "tests/outputs/golden/full_paper_realistic_audit.md",
+        "min_words": 5000,
+    },
+}
+
+REQUIRED_EVAL_RESULTS = {
+    "evals/results/f3cbb28_full_paper_manual_eval.jsonl",
+    "evals/results/f3cbb28_full_paper_model_eval.jsonl",
+}
+
+REQUIRED_MODEL_RUNS = {
+    "tests/outputs/model_runs/full_paper_realistic_audit_f3cbb28.md",
+}
+
+REQUIRED_RESPONSE_DIFF_ASSETS = {
+    "fixture": "tests/fixtures/full_paper/response_old_new_diff.md",
+    "annotation": "tests/fixtures/full_paper/gold_annotations/response_old_new_diff.json",
+    "script": "scripts/check_response_diff.py",
+}
+
+REQUIRED_VENUE_PROFILES = {
+    "skills/engineering-validation/venue_profiles/robotics_venues.json",
+    "skills/engineering-validation/venue_profiles/ml_venues.json",
 }
 
 
@@ -96,47 +127,70 @@ def main() -> int:
     elif "Sentence necessity" not in rubric_md.read_text(encoding="utf-8"):
         errors.append("evals/manual-rubric.md missing Sentence necessity")
 
-    for label, rel_path in REQUIRED_FULL_PAPER_ASSETS.items():
-        path = ROOT / rel_path
-        if not path.exists():
-            errors.append(f"Missing full-paper {label}: {rel_path}")
+    for case, assets in REQUIRED_FULL_PAPER_CASES.items():
+        for label, rel_path in assets.items():
+            if label == "min_words":
+                continue
+            path = ROOT / str(rel_path)
+            if not path.exists():
+                errors.append(f"Missing {case} {label}: {rel_path}")
 
-    full_fixture = ROOT / REQUIRED_FULL_PAPER_ASSETS["fixture"]
-    if full_fixture.exists():
-        words = word_count(full_fixture)
-        if words < 1500:
-            errors.append(f"{full_fixture.relative_to(ROOT)} is too short for a full-paper fixture")
-        fixture_text = full_fixture.read_text(encoding="utf-8")
-        for marker in (
-            "Draft Abstract",
-            "Draft Introduction",
-            "Draft Methods",
-            "Draft Experiments",
-            "Draft Discussion",
-            "Draft Conclusion",
-            "Reviewer Comments",
-            "Expected audit pressure",
-            "Failure modes",
-        ):
-            if marker not in fixture_text:
-                errors.append(f"{full_fixture.relative_to(ROOT)} missing marker: {marker}")
+        full_fixture = ROOT / str(assets["fixture"])
+        if full_fixture.exists():
+            words = word_count(full_fixture)
+            min_words = int(assets["min_words"])
+            if words < min_words:
+                errors.append(
+                    f"{full_fixture.relative_to(ROOT)} has {words} words, expected at least {min_words}"
+                )
+            fixture_text = full_fixture.read_text(encoding="utf-8")
+            for marker in (
+                "Draft Abstract",
+                "Draft Introduction",
+                "Draft Methods",
+                "Draft Experiments",
+                "Draft Discussion",
+                "Draft Conclusion",
+                "Reviewer Comments",
+            ):
+                if marker not in fixture_text:
+                    errors.append(f"{full_fixture.relative_to(ROOT)} missing marker: {marker}")
+            for prompt_visible_answer in ("Expected audit pressure", "Failure modes"):
+                if prompt_visible_answer in fixture_text:
+                    errors.append(
+                        f"{full_fixture.relative_to(ROOT)} exposes gold label: {prompt_visible_answer}"
+                    )
 
-    full_golden = ROOT / REQUIRED_FULL_PAPER_ASSETS["golden"]
-    if full_golden.exists():
-        golden_text = full_golden.read_text(encoding="utf-8")
-        for marker in (
-            "Story spine",
-            "Paragraph transition audit",
-            "Section dependency audit",
-            "Sentence role samples",
-            "Response truthfulness",
-            "Validation result",
-        ):
-            if marker not in golden_text:
-                errors.append(f"{full_golden.relative_to(ROOT)} missing marker: {marker}")
+        annotation = ROOT / str(assets["annotation"])
+        if annotation.exists():
+            try:
+                annotation_data = json.loads(annotation.read_text(encoding="utf-8"))
+            except json.JSONDecodeError as exc:
+                errors.append(f"{annotation.relative_to(ROOT)} invalid JSON: {exc}")
+            else:
+                for key in ("fixture", "failure_modes"):
+                    if key not in annotation_data:
+                        errors.append(f"{annotation.relative_to(ROOT)} missing key: {key}")
 
-    eval_result = ROOT / REQUIRED_FULL_PAPER_ASSETS["eval_result"]
-    if eval_result.exists():
+        full_golden = ROOT / str(assets["golden"])
+        if full_golden.exists():
+            golden_text = full_golden.read_text(encoding="utf-8")
+            for marker in (
+                "Story spine",
+                "Paragraph transition",
+                "Section",
+                "Sentence role",
+                "Response",
+                "Validation result",
+            ):
+                if marker not in golden_text:
+                    errors.append(f"{full_golden.relative_to(ROOT)} missing marker: {marker}")
+
+    for rel_path in REQUIRED_EVAL_RESULTS:
+        eval_result = ROOT / rel_path
+        if not eval_result.exists():
+            errors.append(f"Missing eval result: {rel_path}")
+            continue
         for line_no, line in enumerate(eval_result.read_text(encoding="utf-8").splitlines(), start=1):
             if not line.strip():
                 continue
@@ -160,6 +214,61 @@ def main() -> int:
             ):
                 if key not in record:
                     errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} missing key: {key}")
+            if rel_path.endswith("_model_eval.jsonl") and record.get("runtime_model_executed") is not True:
+                errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record runtime_model_executed=true")
+            if rel_path.endswith("_model_eval.jsonl") and "model_output" not in record:
+                errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} missing key: model_output")
+            if rel_path.endswith("_model_eval.jsonl") and "model_output" in record:
+                model_output = ROOT / str(record["model_output"])
+                if not model_output.exists():
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} points to missing model_output"
+                    )
+
+    for rel_path in REQUIRED_MODEL_RUNS:
+        model_run = ROOT / rel_path
+        if not model_run.exists():
+            errors.append(f"Missing model run output: {rel_path}")
+            continue
+        text = model_run.read_text(encoding="utf-8")
+        for marker in (
+            "local model-run artifact, not a CI regression result",
+            "Full-paper audit verdict",
+            "Paragraph transition matrix",
+            "Response diff verification",
+            "CANNOT_MARK_READY",
+        ):
+            if marker not in text:
+                errors.append(f"{model_run.relative_to(ROOT)} missing marker: {marker}")
+
+    for label, rel_path in REQUIRED_RESPONSE_DIFF_ASSETS.items():
+        path = ROOT / rel_path
+        if not path.exists():
+            errors.append(f"Missing response diff {label}: {rel_path}")
+
+    for rel_path in REQUIRED_VENUE_PROFILES:
+        path = ROOT / rel_path
+        if not path.exists():
+            errors.append(f"Missing venue profile: {rel_path}")
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            errors.append(f"Invalid venue profile {rel_path}: {exc}")
+            continue
+        profiles = data.get("profiles")
+        if not isinstance(profiles, dict) or not profiles:
+            errors.append(f"Venue profile {rel_path} missing profiles object")
+            continue
+        for name, profile in profiles.items():
+            if not isinstance(profile, dict):
+                errors.append(f"Venue profile {rel_path}:{name} must be an object")
+                continue
+            if profile.get("official_policy_checked_required") is not True:
+                errors.append(f"Venue profile {rel_path}:{name} must require official policy check")
+            fields = profile.get("required_fields")
+            if not isinstance(fields, list) or "source_url" not in fields or "source_date" not in fields:
+                errors.append(f"Venue profile {rel_path}:{name} must require source_url and source_date")
 
     if errors:
         print("Quality asset check failed:")

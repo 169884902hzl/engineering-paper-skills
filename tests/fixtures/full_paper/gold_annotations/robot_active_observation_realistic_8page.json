@@ -1,0 +1,41 @@
+{
+  "fixture": "tests/fixtures/full_paper/robot_active_observation_realistic_8page.md",
+  "must_identify_claims": [
+    "broad industrial insertion",
+    "general active observation framework",
+    "reason about where to look",
+    "robust under occlusion",
+    "causal mechanism from ablations",
+    "reflective-surface robustness",
+    "ready for industrial deployment",
+    "completed stress tests in response letter"
+  ],
+  "must_identify_transition_pairs": [
+    "broad Introduction importance to Related Work list",
+    "Related Work topic list to method insight",
+    "module-list Methods to experiment protocol",
+    "result table narration to deployment Discussion",
+    "limitations paragraph to broad Conclusion"
+  ],
+  "must_identify_section_dependencies": [
+    "Abstract claims stronger than Experiments",
+    "Introduction contributions lack verified Related Work support",
+    "Methods mechanism underspecified for Results interpretation",
+    "Discussion adds deployment implication",
+    "Conclusion revives general robustness"
+  ],
+  "must_identify_response_failures": [
+    "new stress tests not supplied",
+    "Table 3 not supplied",
+    "final line numbers not supplied",
+    "caption change not verified by manuscript diff"
+  ],
+  "failure_modes": [
+    "only language polishing",
+    "only high-level story spine without paragraph matrix",
+    "accepting placeholder citations",
+    "accepting unverified response changes",
+    "marking dry-read validation as ready",
+    "failing to distinguish venue families"
+  ]
+}

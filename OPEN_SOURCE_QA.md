@@ -9,6 +9,7 @@ python scripts/validate_repo.py
 python scripts/check_expected_behavior.py --spec-dir tests/expected
 python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-dir tests/outputs/golden
 python scripts/check_quality_assets.py
+python scripts/check_response_diff.py
 python scripts/run_prompt_regression.py
 ```
 
@@ -25,7 +26,17 @@ This checks:
 - long-form flawed manuscript fixtures under `tests/fixtures/long`
 - full-paper flawed manuscript fixture and full-paper golden audit
 - recorded gold-fixture review results under `evals/results`
+- recorded local model-run outputs under `tests/outputs/model_runs`
+- model-run review records under `evals/results`
+- response diff fixture and response-truthfulness sanity check
+- venue profile JSON files that require official source URL and source date
 - manual top-tier writing rubric under `evals/`
+
+These checks are repository-quality checks. Golden outputs and recorded model
+runs are review artifacts; they do not prove stable behavior on arbitrary
+unseen full manuscripts. Treat prompt regression as behavior evidence only when
+`scripts/run_prompt_regression.py` is executed with a real command template and
+the resulting outputs are scored.
 
 ## Codex Skill Validation
 

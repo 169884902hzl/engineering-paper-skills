@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "profiles": {
+    "corl_icra_iros": {
+      "official_policy_checked_required": true,
+      "required_fields": [
+        "source_url",
+        "source_date",
+        "page_limit",
+        "anonymity",
+        "limitations",
+        "reproducibility_details",
+        "ai_disclosure",
+        "supplement_policy",
+        "rebuttal_or_revision_constraints"
+      ],
+      "claim_risks": [
+        "single robot written as general robotics",
+        "single fixture written as industrial robustness",
+        "workflow figure written as validation",
+        "demo written as deployment readiness"
+      ]
+    },
+    "ral": {
+      "official_policy_checked_required": true,
+      "required_fields": [
+        "source_url",
+        "source_date",
+        "page_limit",
+        "extra_page_policy",
+        "multimedia_or_supplement_policy",
+        "ai_disclosure",
+        "final_pdf_checks"
+      ],
+      "claim_risks": [
+        "essential claims moved outside main paper",
+        "page budget cuts remove evidence anchors",
+        "supplement text used to carry required proof"
+      ]
+    }
+  }
+}

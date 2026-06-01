@@ -18,6 +18,10 @@ Evidence-bound Codex skills for English engineering research papers.
 >   data, references, metrics, limitations, or conclusions.
 > - If the input evidence is thin, the skills should expose the gap instead of
 >   producing overconfident manuscript prose.
+> - Current repository checks include structure checks, golden-output snapshots,
+>   static quality-asset checks, and one recorded local model run. They are not
+>   proof that the skills can reliably produce top-tier manuscript guidance on
+>   arbitrary long papers.
 
 ---
 
@@ -54,10 +58,15 @@ For repository QA:
 python scripts/validate_repo.py
 python scripts/check_expected_behavior.py --spec-dir tests/expected
 python scripts/check_quality_assets.py
+python scripts/check_response_diff.py
 for s in skills/engineering-*; do
   python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
 done
 ```
+
+These commands validate repository structure, prompt specs, curated golden
+outputs, evaluation assets, and response-diff fixtures. They do not by
+themselves prove stable model behavior on unseen 8--12 page manuscripts.
 
 ## Project Overview
 
@@ -208,10 +217,15 @@ induce unsupported claims.
 python scripts/validate_repo.py
 python scripts/check_expected_behavior.py --spec-dir tests/expected
 python scripts/check_quality_assets.py
+python scripts/check_response_diff.py
 for s in skills/engineering-*; do
   python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
 done
 ```
+
+`tests/outputs/golden/` contains expected snapshots. `tests/outputs/model_runs/`
+contains recorded local model-run artifacts when available. Treat both as review
+evidence, not as automatic certification of top-tier paper quality.
 
 ## Basic Usage
 
@@ -325,6 +339,8 @@ The skills are organized around five writing constraints:
 - `scripts/run_prompt_regression.py`: optional prompt regression runner
 - `scripts/check_quality_assets.py`: long-fixture, rubric, and quality-asset
   validation
+- `scripts/check_response_diff.py`: response old/new manuscript fixture sanity
+  check
 - `tests/prompts/`: minimal, realistic, and adversarial prompt specs for each
   skill
 - `tests/fixtures/long/`: longer flawed manuscript fixtures for story,

@@ -1,0 +1,85 @@
+{
+  "case": "full_paper_realistic_audit",
+  "prompt": "full_paper_realistic_audit.md",
+  "must_include": [
+    "Full-paper audit verdict",
+    "Story spine",
+    "Section claim inventory",
+    "Paragraph transition matrix",
+    "Paragraph job and deletion-damage table",
+    "Sentence role samples",
+    "Source-note expansion audit",
+    "Response diff verification",
+    "Venue readiness",
+    "Validation result",
+    "NOT_RUN",
+    "CANNOT_DETERMINE"
+  ],
+  "must_not_include": [
+    "ready for submission",
+    "validated robustness",
+    "verified industrial deployment",
+    "completed stress tests",
+    "exact line numbers are verified"
+  ],
+  "required_status": {
+    "Build": "NOT_RUN",
+    "References": "NOT_RUN",
+    "Overall readiness": "CANNOT_DETERMINE"
+  },
+  "forbidden_claims": [
+    "full industrial robustness",
+    "completed stress tests",
+    "verified citations",
+    "final response package",
+    "official venue compliance"
+  ],
+  "forbidden_regex": [
+    "(?i)ready for submission",
+    "(?i)validated robustness",
+    "(?i)verified industrial deployment",
+    "(?i)completed stress tests",
+    "(?i)exact line numbers are verified"
+  ],
+  "required_sections": [
+    "Full-paper audit verdict",
+    "Story spine",
+    "Claim-evidence audit",
+    "Section claim inventory",
+    "Paragraph transition matrix",
+    "Paragraph job and deletion-damage table",
+    "Sentence role samples",
+    "Figure/table audit",
+    "Source-note expansion audit",
+    "Response diff verification",
+    "Venue readiness",
+    "Validation result",
+    "Prioritized repair plan"
+  ],
+  "required_table_columns": [
+    "Claim",
+    "Evidence anchor",
+    "Status",
+    "Repair",
+    "From",
+    "To",
+    "Missing link",
+    "If deleted, what breaks?"
+  ],
+  "manual_rubric": {
+    "claim_evidence_alignment": "required",
+    "story_spine": "required",
+    "sentence_necessity": "required",
+    "paragraph_transition": "required",
+    "section_dependency": "required",
+    "venue_awareness": "required",
+    "response_truthfulness": "required",
+    "validation_honesty": "required"
+  },
+  "allowed_behavior": [
+    "downgrade deployment, robustness, generalization, and causality claims",
+    "flag placeholder citations",
+    "separate completed text edits from author-input requirements",
+    "mark official venue checks as not run unless sources were inspected"
+  ]
+}

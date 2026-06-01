@@ -8,3 +8,5 @@ __pycache__/
 tests/outputs/*
 !tests/outputs/golden/
 !tests/outputs/golden/*.md
+!tests/outputs/model_runs/
+!tests/outputs/model_runs/*.md

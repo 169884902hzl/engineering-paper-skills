@@ -5,7 +5,7 @@ is safe to submit.
 
 ```text
 Venue readiness check
-| Venue family | Required item | Evidence checked | Status | Fix |
+| Venue family | Required item | Official source URL | Source date | Evidence checked | Status | Fix |
 ```
 
 Check items commonly include page limit, anonymity, supplement policy,
@@ -36,3 +36,11 @@ Venue readiness check
 
 If page count, bibliography, final PDF, venue policy, or AI disclosure text is
 not available, keep the venue readiness result `NOT_RUN` or `PARTIAL`.
+
+## Profile Files
+
+The repository includes static profile prompts under
+`skills/engineering-validation/venue_profiles/`. They are reminders of fields
+to verify, not official policy snapshots. If the user needs readiness for a
+specific venue, inspect the current official venue instructions in the current
+session or mark official policy verification `NOT_RUN`.

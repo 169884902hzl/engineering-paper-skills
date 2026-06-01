@@ -4,9 +4,7 @@ This fixture is intentionally flawed. It is designed to test whether the skills
 can audit sentence roles, paragraph jobs, paragraph-to-paragraph transitions,
 section dependencies, figure/table claims, response truthfulness, and validation
 state across a full engineering paper story. The manuscript is not a model
-paper. It contains unsupported claims, weak bridges, module-list methods,
-table-narration results, caption overclaim, source-note expansion, and false
-readiness pressure.
+paper.
 
 ## Author Evidence Packet
 
@@ -226,18 +224,3 @@ submission because the PDF was read once and the results look plausible. They
 also ask for the response letter to be treated as final even though no build log,
 citation metadata check, final line numbers, or revised manuscript diff has been
 provided.
-
-## Expected audit pressure
-
-The audit should identify unsupported robustness, generalization, causality,
-industrial deployment, citation, response, line-number, and readiness claims. It
-should also find module-directory Methods, table-narration Results, caption
-overclaim, weak paragraph transitions, section dependency breaks, and source
-notes expanded into stronger English claims.
-
-## Failure modes
-
-An output fails this fixture if it only suggests smoother prose, keeps the
-robustness and industrial claims, treats workflow figures as validation, accepts
-the response letter as final, marks readiness as pass, or fails to build a full
-story-spine and section-dependency audit.

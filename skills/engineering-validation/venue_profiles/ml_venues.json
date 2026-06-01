@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "profiles": {
+    "neurips_iclr_icml": {
+      "official_policy_checked_required": true,
+      "required_fields": [
+        "source_url",
+        "source_date",
+        "checklist",
+        "limitations",
+        "assumptions",
+        "reproducibility",
+        "baselines",
+        "statistics_or_uncertainty",
+        "data_code_policy",
+        "ai_disclosure"
+      ],
+      "claim_risks": [
+        "benchmark result written as deployment reliability",
+        "missing baselines written as superiority",
+        "missing uncertainty written as significant improvement",
+        "limitations hidden after strong claims"
+      ]
+    }
+  }
+}
