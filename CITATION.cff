@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use Engineering Paper Skills, please cite this repository."
+title: "Engineering Paper Skills"
+version: "0.1.0-beta"
+date-released: "2026-06-01"
+type: software
+license: MIT
+authors:
+  - name: "Engineering Paper Skills contributors"
+  - given-names: "Yuqi"
+    family-names: "Cheng"
+repository-code: "https://github.com/169884902hzl/engineering-paper-skills"
+url: "https://169884902hzl.github.io/engineering-paper-skills/"
+abstract: "Evidence-bound Codex skills for engineering paper writing, manuscript audit, reviewer response, figure/table claim checks, and research paper validation."
+keywords:
+  - codex-skills
+  - engineering-paper
+  - academic-writing
+  - manuscript-audit
+  - reviewer-response
+  - research-paper-validation
+  - robotics
+  - machine-learning

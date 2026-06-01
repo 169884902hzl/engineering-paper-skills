@@ -1,26 +1,29 @@
-name: Behavior Regression
+name: Release Gate
 
 on:
+  push:
+    tags:
+      - "v*"
   workflow_dispatch:
-    inputs:
-      case:
-        description: "Expected-behavior case to run"
-        required: true
-        default: "full_paper_realistic_audit"
 
 jobs:
-  prompt-regression:
+  release-gate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
-      - name: Run prompt regression with configured model command
+      - run: python scripts/validate_repo.py
+      - run: python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-dir tests/outputs/golden
+      - run: python scripts/check_quality_assets.py
+      - run: python scripts/check_response_diff.py
+      - run: python scripts/check_venue_profiles.py --refresh
+      - name: Behavior regression must run for release gate
         run: |
           python scripts/run_prompt_regression.py \
             --require-command \
-            --case "${{ inputs.case }}" \
+            --case full_paper_realistic_audit \
             --output-dir /tmp/engineering-paper-skill-regression \
             --command-template "$PROMPT_REGRESSION_COMMAND_TEMPLATE"
         env:
@@ -28,5 +31,5 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: behavior-regression-output
+          name: release-gate-behavior-regression-output
           path: /tmp/engineering-paper-skill-regression

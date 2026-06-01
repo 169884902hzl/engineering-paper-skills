@@ -17,6 +17,7 @@ jobs:
       - run: python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-dir tests/outputs/golden
       - run: python scripts/check_quality_assets.py
       - run: python scripts/check_response_diff.py
+      - run: python scripts/check_venue_profiles.py
       - name: Optional prompt behavior regression
         run: |
           if [ -z "${PROMPT_REGRESSION_COMMAND_TEMPLATE:-}" ]; then
@@ -30,3 +31,9 @@ jobs:
           fi
         env:
           PROMPT_REGRESSION_COMMAND_TEMPLATE: ${{ secrets.PROMPT_REGRESSION_COMMAND_TEMPLATE }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: optional-behavior-regression-output
+          path: /tmp/engineering-paper-skill-regression
+          if-no-files-found: ignore

@@ -1,0 +1,37 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "Engineering Paper Skills",
+  "version": "0.1.0-beta",
+  "description": "Evidence-bound Codex skills for engineering paper writing, manuscript audit, reviewer response, figure/table claim checks, and research paper validation.",
+  "codeRepository": "https://github.com/169884902hzl/engineering-paper-skills",
+  "url": "https://169884902hzl.github.io/engineering-paper-skills/",
+  "license": "https://spdx.org/licenses/MIT",
+  "programmingLanguage": [
+    "Markdown",
+    "Python"
+  ],
+  "keywords": [
+    "codex-skills",
+    "engineering-paper",
+    "academic-writing",
+    "manuscript-audit",
+    "reviewer-response",
+    "research-paper-validation",
+    "robotics",
+    "machine-learning"
+  ],
+  "author": [
+    {
+      "@type": "Organization",
+      "name": "Engineering Paper Skills contributors"
+    },
+    {
+      "@type": "Person",
+      "name": "Yuqi Cheng",
+      "identifier": "https://github.com/hustCYQ"
+    }
+  ],
+  "datePublished": "2026-06-01",
+  "isAccessibleForFree": true
+}

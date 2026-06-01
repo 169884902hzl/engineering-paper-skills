@@ -1,6 +1,26 @@
 # Engineering Paper Skills
 
-Evidence-bound Codex skills for English engineering research papers.
+Evidence-bound Codex skills for engineering paper writing, manuscript audit,
+reviewer response, figure/table claim checks, and research paper validation.
+
+This beta skill suite is designed for robotics, machine learning, control,
+systems, and other experiment-heavy engineering papers where claims must stay
+tied to concrete methods, results, figures, tables, citations, and limitations.
+
+## What It Helps With
+
+- Audit a draft manuscript for unsupported claims, weak story flow, paragraph
+  jumps, section drift, and conclusion overreach.
+- Draft or revise Abstract, Introduction, Related Work, Methods, Experiments,
+  Discussion, and Conclusion from author-provided evidence.
+- Polish English academic prose without making claims stronger than the supplied
+  evidence.
+- Check whether figures, tables, captions, and result narratives actually
+  support the paper's claims.
+- Prepare reviewer or advisor responses without inventing completed edits,
+  experiments, citations, tables, or line numbers.
+- Validate manuscript readiness using explicit `PASS`, `FAIL`, `PARTIAL`,
+  `NOT_RUN`, and `UNKNOWN` states.
 
 > **Statement**
 >
@@ -34,6 +54,14 @@ source material and verification tools are provided. When evidence is missing,
 the skills should ask for the missing evidence, downgrade the claim, or mark the
 output as unsupported.
 
+## What Output Looks Like
+
+- [Full-paper realistic audit](tests/outputs/golden/full_paper_realistic_audit.md)
+- [Sentence-level claim and evidence audit](tests/outputs/golden/full_paper_realistic_sentence_audit.md)
+- [AI-smell polishing example](tests/outputs/golden/polishing_ai_smell.md)
+- [Figure/table panel-claim audit](tests/outputs/golden/figure_table_panel_claim.md)
+- [Recorded local model-run artifact](tests/outputs/model_runs/full_paper_realistic_audit_f383bb9.md)
+
 ## Quick Start
 
 ```bash
@@ -59,6 +87,7 @@ python scripts/validate_repo.py
 python scripts/check_expected_behavior.py --spec-dir tests/expected
 python scripts/check_quality_assets.py
 python scripts/check_response_diff.py
+python scripts/check_venue_profiles.py
 for s in skills/engineering-*; do
   python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
 done
@@ -74,7 +103,11 @@ For behavior regression, configure the GitHub Actions secret
 and check the resulting output against structured semantic expectations. Without
 that secret, CI reports that behavior regression was not run.
 The repository also includes a manual `Behavior Regression` workflow that fails
-closed when the command-template secret is absent.
+closed when the command-template secret is absent and uploads the generated
+model outputs as an artifact.
+Release tags also run a stricter `Release Gate` workflow that requires venue URL
+refresh, configured behavior regression, and uploaded regression outputs for
+human scoring.
 
 ## Project Overview
 
@@ -226,6 +259,7 @@ python scripts/validate_repo.py
 python scripts/check_expected_behavior.py --spec-dir tests/expected
 python scripts/check_quality_assets.py
 python scripts/check_response_diff.py
+python scripts/check_venue_profiles.py
 for s in skills/engineering-*; do
   python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
 done

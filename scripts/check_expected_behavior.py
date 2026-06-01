@@ -39,6 +39,7 @@ OPTIONAL_DICT_KEYS = {
 
 OPTIONAL_COMPLEX_DICT_KEYS = {
     "semantic_expectations",
+    "structured_expectations",
 }
 
 
@@ -106,6 +107,40 @@ def _expect_semantic_expectations(path: Path, data: dict[str, Any]) -> dict[str,
     return parsed
 
 
+def _expect_structured_expectations(path: Path, data: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+    value = data.get("structured_expectations")
+    if not isinstance(value, dict):
+        raise ValueError(f"{path}: structured_expectations must be an object")
+    parsed: dict[str, list[dict[str, Any]]] = {}
+    for group, rows in value.items():
+        if not isinstance(group, str):
+            raise ValueError(f"{path}: structured_expectations group names must be strings")
+        if not isinstance(rows, list):
+            raise ValueError(f"{path}: structured_expectations.{group} must be a list")
+        parsed_rows: list[dict[str, Any]] = []
+        for row in rows:
+            if not isinstance(row, dict):
+                raise ValueError(f"{path}: structured_expectations.{group} entries must be objects")
+            name = row.get("name")
+            required_terms = row.get("required_terms")
+            forbidden_terms = row.get("forbidden_terms", [])
+            if not isinstance(name, str) or not name:
+                raise ValueError(f"{path}: structured_expectations.{group} object missing name")
+            if not isinstance(required_terms, list) or not all(
+                isinstance(term, str) and term for term in required_terms
+            ):
+                raise ValueError(
+                    f"{path}: structured_expectations.{group}.{name} required_terms must be non-empty strings"
+                )
+            if not isinstance(forbidden_terms, list) or not all(
+                isinstance(term, str) and term for term in forbidden_terms
+            ):
+                raise ValueError(f"{path}: structured_expectations.{group}.{name} forbidden_terms must be strings")
+            parsed_rows.append(row)
+        parsed[group] = parsed_rows
+    return parsed
+
+
 def validate_specs(spec_dir: Path) -> list[str]:
     errors: list[str] = []
 
@@ -156,7 +191,10 @@ def validate_specs(spec_dir: Path) -> list[str]:
                     _expect_dict(path, data, key)
             for key in OPTIONAL_COMPLEX_DICT_KEYS:
                 if key in data:
-                    _expect_semantic_expectations(path, data)
+                    if key == "semantic_expectations":
+                        _expect_semantic_expectations(path, data)
+                    elif key == "structured_expectations":
+                        _expect_structured_expectations(path, data)
 
             if data["forbidden_claims"] and not (
                 data["must_not_include"]
@@ -201,6 +239,7 @@ def check_outputs(spec_dir: Path, outputs_dir: Path, cases: set[str] | None = No
 
         output = output_path.read_text(encoding="utf-8")
         output_lower = output.lower()
+        normalized_lines = [" ".join(line.lower().split()) for line in output.splitlines()]
 
         for item in data["must_include"]:
             if item.lower() not in output_lower:
@@ -250,6 +289,29 @@ def check_outputs(spec_dir: Path, outputs_dir: Path, cases: set[str] | None = No
                 for term in item.get("forbidden_terms", []):
                     if term.lower() in output_lower:
                         errors.append(f"{case}: semantic expectation {group}.{name} forbidden term found: {term}")
+
+        for group, rows in data.get("structured_expectations", {}).items():
+            for row in rows:
+                name = row["name"]
+                required_terms = [" ".join(term.lower().split()) for term in row["required_terms"]]
+                forbidden_terms = [" ".join(term.lower().split()) for term in row.get("forbidden_terms", [])]
+                matches = [
+                    line
+                    for line in normalized_lines
+                    if all(term in line for term in required_terms)
+                ]
+                if not matches:
+                    errors.append(
+                        f"{case}: structured expectation {group}.{name} missing row with terms: "
+                        f"{', '.join(row['required_terms'])}"
+                    )
+                    continue
+                for line in matches:
+                    for term in forbidden_terms:
+                        if term in line:
+                            errors.append(
+                                f"{case}: structured expectation {group}.{name} forbidden term in matched row: {term}"
+                            )
 
     return errors
 

@@ -62,10 +62,25 @@ REQUIRED_FULL_PAPER_CASES = {
 REQUIRED_EVAL_RESULTS = {
     "evals/results/f3cbb28_full_paper_manual_eval.jsonl",
     "evals/results/f3cbb28_full_paper_model_eval.jsonl",
+    "evals/results/f383bb9_full_paper_model_eval.jsonl",
 }
 
 REQUIRED_MODEL_RUNS = {
-    "tests/outputs/model_runs/full_paper_realistic_audit_f3cbb28.md",
+    "tests/outputs/model_runs/full_paper_realistic_audit_f3cbb28.md": [
+        "local model-run artifact, not a CI regression result",
+        "Full-paper audit verdict",
+        "Paragraph transition matrix",
+        "Response diff verification",
+        "CANNOT_MARK_READY",
+    ],
+    "tests/outputs/model_runs/full_paper_realistic_audit_f383bb9.md": [
+        "Runtime model executed: true",
+        "CI-controlled behavior regression: no",
+        "Full-paper audit verdict",
+        "Paragraph transition matrix",
+        "Response diff verification",
+        "CANNOT_VALIDATE_AS_READY",
+    ],
 }
 
 REQUIRED_SENTENCE_AUDITS = {
@@ -81,6 +96,55 @@ REQUIRED_RESPONSE_DIFF_ASSETS = {
 REQUIRED_VENUE_PROFILES = {
     "skills/engineering-validation/venue_profiles/robotics_venues.json",
     "skills/engineering-validation/venue_profiles/ml_venues.json",
+}
+
+REQUIRED_DISCOVERY_ASSETS = {
+    ".github/workflows/release-gate.yml": [
+        "on:",
+        "v*",
+        "--require-command",
+        "check_venue_profiles.py --refresh",
+        "actions/upload-artifact@v4",
+    ],
+    ".github/workflows/behavior-regression.yml": [
+        "--require-command",
+        "actions/upload-artifact@v4",
+        "behavior-regression-output",
+    ],
+    ".github/workflows/qa.yml": [
+        "check_venue_profiles.py",
+        "optional-behavior-regression-output",
+        "if-no-files-found: ignore",
+    ],
+    "scripts/check_venue_profiles.py": [
+        "Validate venue profile JSON files",
+        "--refresh",
+        "official source URLs",
+    ],
+    "docs/index.html": [
+        "Engineering Paper Skills",
+        "manuscript audit",
+        "Example Outputs",
+    ],
+    "docs/robots.txt": [
+        "Sitemap: https://169884902hzl.github.io/engineering-paper-skills/sitemap.xml",
+    ],
+    "docs/sitemap.xml": [
+        "https://169884902hzl.github.io/engineering-paper-skills/",
+    ],
+    "docs/release-notes-v0.1.0-beta.md": [
+        "v0.1.0-beta",
+        "Evidence Boundary",
+        "Known Limitations",
+    ],
+    "CITATION.cff": [
+        "Engineering Paper Skills",
+        "0.1.0-beta",
+    ],
+    "codemeta.json": [
+        "Engineering Paper Skills",
+        "research paper validation",
+    ],
 }
 
 REQUIRED_REFERENCE_MARKERS = {
@@ -258,20 +322,29 @@ def main() -> int:
                     errors.append(
                         f"{eval_result.relative_to(ROOT)} line {line_no} points to missing model_output"
                     )
+            if rel_path.endswith("_model_eval.jsonl") and not isinstance(
+                record.get("blocking_failures"), list
+            ):
+                errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} missing list: blocking_failures")
+            if "f383bb9" in rel_path:
+                if record.get("commit") != "f383bb9":
+                    errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record commit=f383bb9")
+                if record.get("ci_controlled") is not False:
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must explicitly record ci_controlled=false"
+                    )
+                if not isinstance(record.get("residual_limitations"), list) or not record["residual_limitations"]:
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must record residual_limitations"
+                    )
 
-    for rel_path in REQUIRED_MODEL_RUNS:
+    for rel_path, markers in REQUIRED_MODEL_RUNS.items():
         model_run = ROOT / rel_path
         if not model_run.exists():
             errors.append(f"Missing model run output: {rel_path}")
             continue
         text = model_run.read_text(encoding="utf-8")
-        for marker in (
-            "local model-run artifact, not a CI regression result",
-            "Full-paper audit verdict",
-            "Paragraph transition matrix",
-            "Response diff verification",
-            "CANNOT_MARK_READY",
-        ):
+        for marker in markers:
             if marker not in text:
                 errors.append(f"{model_run.relative_to(ROOT)} missing marker: {marker}")
 
@@ -331,6 +404,16 @@ def main() -> int:
         path = ROOT / rel_path
         if not path.exists():
             errors.append(f"Missing reference file: {rel_path}")
+            continue
+        text = path.read_text(encoding="utf-8")
+        for marker in markers:
+            if marker not in text:
+                errors.append(f"{rel_path} missing marker: {marker}")
+
+    for rel_path, markers in REQUIRED_DISCOVERY_ASSETS.items():
+        path = ROOT / rel_path
+        if not path.exists():
+            errors.append(f"Missing discovery/release asset: {rel_path}")
             continue
         text = path.read_text(encoding="utf-8")
         for marker in markers:

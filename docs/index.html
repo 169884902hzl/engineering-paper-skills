@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Engineering Paper Skills - Codex skills for engineering paper writing and manuscript audit</title>
+    <meta name="description" content="Evidence-bound Codex skills for engineering paper writing, manuscript audit, reviewer response, figure/table claim checks, and research paper validation for robotics, machine learning, and systems papers.">
+    <link rel="canonical" href="https://169884902hzl.github.io/engineering-paper-skills/">
+    <style>
+      :root {
+        color-scheme: light;
+        --text: #172033;
+        --muted: #526070;
+        --line: #d9e1ea;
+        --bg: #f7f9fc;
+        --panel: #ffffff;
+        --accent: #0f766e;
+      }
+
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.6;
+      }
+
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 48px 20px 72px;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 28px;
+        margin-bottom: 32px;
+      }
+
+      h1 {
+        font-size: clamp(2.1rem, 5vw, 4rem);
+        line-height: 1.05;
+        margin: 0 0 16px;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        font-size: 1.35rem;
+        margin: 32px 0 12px;
+        letter-spacing: 0;
+      }
+
+      p {
+        margin: 0 0 14px;
+      }
+
+      .subtitle {
+        max-width: 760px;
+        font-size: 1.18rem;
+        color: var(--muted);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 3px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+        padding: 0 14px;
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 650;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 14px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 18px;
+      }
+
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+
+      code {
+        background: #eef3f7;
+        border-radius: 4px;
+        padding: 2px 5px;
+      }
+
+      pre {
+        overflow-x: auto;
+        background: #101826;
+        color: #edf3fb;
+        padding: 16px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Engineering Paper Skills</h1>
+        <p class="subtitle">Evidence-bound Codex skills for engineering paper writing, manuscript audit, reviewer response, figure/table claim checks, and validation.</p>
+        <div class="actions">
+          <a class="button" href="https://github.com/169884902hzl/engineering-paper-skills">GitHub repository</a>
+          <a class="button" href="https://github.com/169884902hzl/engineering-paper-skills/tree/main/tests/outputs/golden">Example outputs</a>
+        </div>
+      </header>
+
+      <section>
+        <h2>What This Is</h2>
+        <p>This beta skill suite is designed for robotics, machine learning, control, systems, and other experiment-heavy engineering papers where claims must stay tied to concrete methods, results, figures, tables, citations, and limitations.</p>
+        <p>It is conservative by default. It should expose missing evidence, downgrade unsupported claims, and avoid inventing experiments, citations, metrics, tables, line numbers, or venue readiness.</p>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <div class="grid">
+          <div class="card"><h3>Router</h3><p>Routes mixed paper tasks to the right audit, writing, figure, response, or validation workflow.</p></div>
+          <div class="card"><h3>Auditor</h3><p>Checks claim-evidence gaps, story flow, paragraph transitions, section dependencies, and overclaims.</p></div>
+          <div class="card"><h3>Writing</h3><p>Drafts or restructures sections from author-provided evidence without expanding the facts.</p></div>
+          <div class="card"><h3>Polishing</h3><p>Improves English prose while preserving claim strength and evidence boundaries.</p></div>
+          <div class="card"><h3>Figure/Table</h3><p>Audits whether panels, tables, captions, and result prose support visible or tabulated evidence.</p></div>
+          <div class="card"><h3>Response</h3><p>Turns reviewer or advisor comments into traceable revision plans without false completion claims.</p></div>
+          <div class="card"><h3>Validation</h3><p>Reports readiness using explicit PASS, FAIL, PARTIAL, NOT_RUN, and UNKNOWN states.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Example Outputs</h2>
+        <ul>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_audit.md">Full-paper realistic audit</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_sentence_audit.md">Sentence-level claim and evidence audit</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/polishing_ai_smell.md">AI-smell polishing example</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/figure_table_panel_claim.md">Figure/table panel-claim audit</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/full_paper_realistic_audit_f383bb9.md">Recorded local model-run artifact</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Install</h2>
+        <pre><code>git clone https://github.com/169884902hzl/engineering-paper-skills.git
+cd engineering-paper-skills
+cp -a skills/_shared skills/engineering-* ~/.codex/skills/</code></pre>
+      </section>
+
+      <section>
+        <h2>Quality Evidence</h2>
+        <p>The repository includes structure checks, golden-output snapshots, static quality-asset checks, response-diff fixtures, venue profiles, a manual rubric, and recorded local model-run artifacts.</p>
+        <p>These are review evidence, not automatic certification of top-tier paper quality. Behavior regression requires a configured model command template and scored model outputs.</p>
+      </section>
+    </main>
+  </body>
+</html>

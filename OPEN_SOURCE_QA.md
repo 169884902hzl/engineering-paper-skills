@@ -10,6 +10,7 @@ python scripts/check_expected_behavior.py --spec-dir tests/expected
 python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-dir tests/outputs/golden
 python scripts/check_quality_assets.py
 python scripts/check_response_diff.py
+python scripts/check_venue_profiles.py
 python scripts/run_prompt_regression.py
 ```
 
@@ -30,6 +31,7 @@ This checks:
 - model-run review records under `evals/results`
 - response diff fixture and response-truthfulness sanity check
 - venue profile JSON files that require official source URL and source date
+- venue profile structure through `scripts/check_venue_profiles.py`
 - manual top-tier writing rubric under `evals/`
 - structured semantic expectations in selected `tests/expected/*.yaml` specs
 
@@ -44,7 +46,13 @@ the resulting outputs are scored.
 Main CI includes an optional prompt-regression step. It runs only when the
 repository has a `PROMPT_REGRESSION_COMMAND_TEMPLATE` GitHub Actions secret.
 The separate `Behavior Regression` workflow can also be triggered manually; it
-fails if the command template secret is missing.
+fails if the command template secret is missing and uploads the generated
+regression outputs as a workflow artifact.
+
+The separate `Release Gate` workflow runs on `v*` tags and requires both
+official venue URL refresh and prompt behavior regression. A release tag should
+not be treated as fully checked until this workflow passes. It also uploads the
+release-gate behavior-regression outputs for later human scoring.
 
 The command template must accept `{prompt}`, `{output}`, and `{name}`
 placeholders. Example shape:

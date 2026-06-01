@@ -43,7 +43,7 @@ def main() -> int:
         if args.require_command:
             print("Prompt command template is required but was not provided.")
             return 2
-        print("Expected-behavior specs are valid. No prompt command was run.")
+        print("Spec validation passed; prompt regression NOT_RUN because no command template was provided.")
         return 0
 
     args.output_dir.mkdir(parents=True, exist_ok=True)

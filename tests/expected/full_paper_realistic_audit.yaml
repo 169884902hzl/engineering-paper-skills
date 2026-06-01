@@ -118,6 +118,48 @@
       }
     ]
   },
+  "structured_expectations": {
+    "claim_evidence_rows": [
+      {
+        "name": "industrial reliability fails",
+        "required_terms": ["industrial", "no deployment evidence", "FAIL", "delete"]
+      },
+      {
+        "name": "full system bounded pass",
+        "required_terms": ["full system", "84 percent", "PASS with boundary"]
+      },
+      {
+        "name": "causal mechanism downgraded",
+        "required_terms": ["causal", "component variants", "PARTIAL", "consistent"]
+      }
+    ],
+    "transition_rows": [
+      {
+        "name": "related work to method bridge missing",
+        "required_terms": ["Related Work active perception", "guarded execution", "execution missing"]
+      },
+      {
+        "name": "discussion to conclusion boundary drift",
+        "required_terms": ["Discussion", "Conclusion", "boundary", "fail"]
+      }
+    ],
+    "response_rows": [
+      {
+        "name": "stress test completion unsupported",
+        "required_terms": ["stress", "Not supported"]
+      },
+      {
+        "name": "table three not supported",
+        "required_terms": ["Table 3", "Not supported"]
+      }
+    ],
+    "validation_rows": [
+      {
+        "name": "official venue policy not run",
+        "required_terms": ["official venue policy", "NOT_RUN"]
+      }
+    ]
+  },
   "allowed_behavior": [
     "downgrade deployment, robustness, generalization, and causality claims",
     "flag placeholder citations",
