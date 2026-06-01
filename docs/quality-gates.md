@@ -41,6 +41,20 @@ The repository also keeps failed local behavior attempts when they reveal a real
 contract gap. For example, the `6bec865` and `80d9c23` structured-audit attempts
 are recorded as `local_single_run_failed`, not as passing model runs.
 
+## Example Provenance
+
+README and Pages examples must not blur hand-written examples with model-run
+artifacts:
+
+- Hand-written examples must be labeled as illustrative and not recorded
+  model-run outputs.
+- Recorded examples must link to prompt fixtures, raw output artifacts, and a
+  manifest containing hashes and evidence level.
+- Current recorded user-facing demos are listed in
+  `tests/outputs/model_runs/demo/manifest.json`.
+- Current demo-output eval provenance is recorded in
+  `evals/results/681d305_demo_outputs_model_eval.jsonl`.
+
 ## Versioning Without Releases
 
 - Use commit hashes in external reviews and model-run records.

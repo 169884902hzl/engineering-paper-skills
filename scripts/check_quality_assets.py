@@ -8,6 +8,7 @@ needed to test story, sentence, AI-smell, and validation behavior.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -84,6 +85,7 @@ REQUIRED_FULL_PAPER_CASES = {
 }
 
 REQUIRED_EVAL_RESULTS = {
+    "evals/results/681d305_demo_outputs_model_eval.jsonl",
     "evals/results/38b3d4d_full_paper_model_eval.jsonl",
     "evals/results/80d9c23_full_paper_model_eval.jsonl",
     "evals/results/6bec865_full_paper_model_eval.jsonl",
@@ -183,11 +185,17 @@ REQUIRED_DISCOVERY_ASSETS = {
         "Engineering Paper Skills",
         "manuscript audit",
         "Start With The Coach",
+        "Illustrative example",
+        "not a recorded model-run output",
         "Example Outputs",
         "SoftwareSourceCode",
     ],
     "docs/demo.html": [
         "Demo Gallery",
+        "Example Provenance",
+        "Illustrative examples",
+        "Recorded local Codex outputs",
+        "Recorded Demo Outputs",
         "Use Case Examples",
         "Conservative Claim Audit",
         "Research Notes To Paper Skeleton",
@@ -251,6 +259,7 @@ REQUIRED_DISCOVERY_ASSETS = {
     "KNOWN_GOOD.md": [
         "Commit anchors",
         "Behavior evidence",
+        "Demo output provenance",
         "Known limitations",
     ],
     "scripts/check_metadata_files.py": [
@@ -303,6 +312,57 @@ REQUIRED_DISCOVERY_ASSETS = {
     ],
 }
 
+REQUIRED_DEMO_CASES = {
+    "demo_claim_audit": {
+        "prompt": "tests/prompts/demo_claim_audit.md",
+        "output": "tests/outputs/model_runs/demo/demo_claim_audit_681d305.md",
+        "skill": "engineering-paper-coach",
+        "markers": ["Claim-strength audit", "Safe rewrite", "What stronger claims would require"],
+    },
+    "demo_results_paragraph": {
+        "prompt": "tests/prompts/demo_results_paragraph.md",
+        "output": "tests/outputs/model_runs/demo/demo_results_paragraph_681d305.md",
+        "skill": "engineering-writing",
+        "markers": ["Experiment question", "Manuscript paragraph", "Claim-evidence note"],
+    },
+    "demo_polishing_claim_inflation": {
+        "prompt": "tests/prompts/demo_polishing_claim_inflation.md",
+        "output": "tests/outputs/model_runs/demo/demo_polishing_claim_inflation_681d305.md",
+        "skill": "engineering-polishing",
+        "markers": ["Claim-strength diff", "Polished paragraph", "Remaining evidence needed"],
+    },
+    "demo_figure_source_data_consistency": {
+        "prompt": "tests/prompts/demo_figure_source_data_consistency.md",
+        "output": "tests/outputs/model_runs/demo/demo_figure_source_data_consistency_681d305.md",
+        "skill": "engineering-figure-table",
+        "markers": ["Panel/table responsibility map", "Safe caption", "Source-data checks required"],
+    },
+    "demo_response_truthfulness": {
+        "prompt": "tests/prompts/demo_response_truthfulness.md",
+        "output": "tests/outputs/model_runs/demo/demo_response_truthfulness_681d305.md",
+        "skill": "engineering-response",
+        "markers": ["Comment-response tracker", "Prohibited final-response claims", "Verification needed"],
+    },
+    "demo_validation_readiness": {
+        "prompt": "tests/prompts/demo_validation_readiness.md",
+        "output": "tests/outputs/model_runs/demo/demo_validation_readiness_681d305.md",
+        "skill": "engineering-validation",
+        "markers": ["Overall readiness: NOT_READY", "Check table", "Required next actions"],
+    },
+    "demo_related_work_nearest_neighbor": {
+        "prompt": "tests/prompts/demo_related_work_nearest_neighbor.md",
+        "output": "tests/outputs/model_runs/demo/demo_related_work_nearest_neighbor_681d305.md",
+        "skill": "engineering-writing",
+        "markers": ["Technical axes table", "Nearest-neighbor distinction", "Citation/evidence still needed"],
+    },
+    "demo_methods_execution_path": {
+        "prompt": "tests/prompts/demo_methods_execution_path.md",
+        "output": "tests/outputs/model_runs/demo/demo_methods_execution_path_681d305.md",
+        "skill": "engineering-writing",
+        "markers": ["Execution-Path Paragraph Scaffold", "Placeholders That Must Not Be Invented", "Safe Methods Paragraph"],
+    },
+}
+
 REQUIRED_REFERENCE_MARKERS = {
     "skills/_shared/story-spine.md": [
         "Complete Claim Inventory",
@@ -330,6 +390,17 @@ def word_count(path: Path) -> int:
 
 def main() -> int:
     errors: list[str] = []
+
+    for rel_path in ("README.md", "docs/index.html", "docs/demo.html"):
+        path = ROOT / rel_path
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for forbidden in ("**Output**", "<pre><code>Output:"):
+            if forbidden in text:
+                errors.append(
+                    f"{rel_path} uses unqualified output label; use illustrative or recorded provenance"
+                )
 
     fixture_dir = ROOT / "tests/fixtures/long"
     if not fixture_dir.exists():
@@ -596,6 +667,67 @@ def main() -> int:
         for marker in markers:
             if marker not in text:
                 errors.append(f"{model_run.relative_to(ROOT)} missing marker: {marker}")
+
+    demo_manifest = ROOT / "tests/outputs/model_runs/demo/manifest.json"
+    if not demo_manifest.exists():
+        errors.append("Missing recorded demo manifest: tests/outputs/model_runs/demo/manifest.json")
+    else:
+        try:
+            manifest = json.loads(demo_manifest.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            errors.append(f"{demo_manifest.relative_to(ROOT)} invalid JSON: {exc}")
+            manifest = {}
+        if manifest:
+            if manifest.get("manifest_type") != "recorded_local_demo_outputs":
+                errors.append(f"{demo_manifest.relative_to(ROOT)} must record manifest_type=recorded_local_demo_outputs")
+            if manifest.get("runtime_model_executed") is not True:
+                errors.append(f"{demo_manifest.relative_to(ROOT)} must record runtime_model_executed=true")
+            if manifest.get("ci_controlled") is not False:
+                errors.append(f"{demo_manifest.relative_to(ROOT)} must record ci_controlled=false")
+            if manifest.get("evidence_level") != "local_single_run":
+                errors.append(f"{demo_manifest.relative_to(ROOT)} must record evidence_level=local_single_run")
+            outputs = manifest.get("outputs")
+            if not isinstance(outputs, list):
+                errors.append(f"{demo_manifest.relative_to(ROOT)} missing outputs list")
+                outputs = []
+            manifest_by_case = {
+                item.get("case"): item
+                for item in outputs
+                if isinstance(item, dict) and isinstance(item.get("case"), str)
+            }
+            for case, assets in REQUIRED_DEMO_CASES.items():
+                entry = manifest_by_case.get(case)
+                if not entry:
+                    errors.append(f"{demo_manifest.relative_to(ROOT)} missing demo case: {case}")
+                    continue
+                for key in ("prompt", "output", "sha256", "skill"):
+                    if not isinstance(entry.get(key), str) or not entry[key]:
+                        errors.append(f"{demo_manifest.relative_to(ROOT)} case {case} missing {key}")
+                if entry.get("skill") != assets["skill"]:
+                    errors.append(f"{demo_manifest.relative_to(ROOT)} case {case} records unexpected skill")
+                if entry.get("prompt") != assets["prompt"]:
+                    errors.append(f"{demo_manifest.relative_to(ROOT)} case {case} records unexpected prompt path")
+                if entry.get("output") != assets["output"]:
+                    errors.append(f"{demo_manifest.relative_to(ROOT)} case {case} records unexpected output path")
+                output_path = ROOT / str(entry.get("output", ""))
+                if output_path.exists() and isinstance(entry.get("sha256"), str):
+                    actual = hashlib.sha256(output_path.read_bytes()).hexdigest()
+                    if actual != entry["sha256"]:
+                        errors.append(f"{output_path.relative_to(ROOT)} sha256 does not match manifest")
+
+    for case, assets in REQUIRED_DEMO_CASES.items():
+        for label in ("prompt", "output"):
+            path = ROOT / assets[label]
+            if not path.exists():
+                errors.append(f"Missing recorded demo {label} for {case}: {assets[label]}")
+                continue
+            text = path.read_text(encoding="utf-8")
+            if label == "prompt" and assets["skill"] not in text:
+                errors.append(f"{path.relative_to(ROOT)} missing skill marker: {assets['skill']}")
+            if label == "output":
+                for marker in assets["markers"]:
+                    if marker not in text:
+                        errors.append(f"{path.relative_to(ROOT)} missing marker: {marker}")
 
     for rel_path in REQUIRED_SENTENCE_AUDITS:
         audit = ROOT / rel_path

@@ -15,6 +15,25 @@ review and reuse.
   triage.
 - Reordered the Pages demo so practical Markdown examples appear before
   structured JSON artifacts and model-run evidence.
+- GPTPro later flagged these examples as ambiguous because they looked like
+  unlabelled model outputs. The follow-up fix labels hand-written examples as
+  illustrative and adds recorded local demo outputs with prompt fixtures,
+  artifact paths, and hashes.
+
+## Record user-facing local demo outputs
+
+- Added demo prompt fixtures for claim audit, Results writing, conservative
+  polishing, figure/table source-data consistency, response truthfulness,
+  validation readiness, Related Work nearest-neighbor distinction, and Methods
+  execution path.
+- Ran local Codex in read-only mode to generate raw demo final-message outputs
+  under `tests/outputs/model_runs/demo/`.
+- Added `tests/outputs/model_runs/demo/manifest.json` with prompt paths, output
+  paths, command strings, SHA-256 hashes, evidence level, and CI-control status.
+- Added `evals/results/681d305_demo_outputs_model_eval.jsonl` to record that these are
+  local single-run demo outputs, not CI-controlled behavior proof.
+- Updated README and Pages so hand-written examples are explicitly labeled as
+  illustrative and recorded outputs are linked separately.
 
 ## Add README and Pages use-case examples
 

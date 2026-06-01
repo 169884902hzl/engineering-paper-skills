@@ -56,9 +56,21 @@ official venue policies are provided and checked.
 If evidence is thin, the skills should expose the gap, downgrade the claim, or
 produce a scaffold instead of confident manuscript prose.
 
-## Quick Examples
+## Example Provenance
+
+The examples in this README are split into two types:
+
+- **Illustrative examples** are hand-written for readability. They show the
+  expected interaction style, but they are not recorded model-run outputs.
+- **Recorded local Codex outputs** are raw final messages generated from prompt
+  fixtures and stored under `tests/outputs/model_runs/demo/`. They are local
+  single-run evidence, not CI-controlled proof or top-tier-readiness proof.
+
+## Quick Illustrative Examples
 
 ### Example 1: Audit An Overclaim
+
+Illustrative example, not a recorded model-run output.
 
 **Input**
 
@@ -78,29 +90,33 @@ Draft claim:
 "The system is deployment-ready and proven robust for industrial insertion."
 ```
 
-**Output**
+**Illustrative output**
 
 ```text
-Diagnosis: NOT_READY as written.
+Verdict: the claim is too strong for the supplied evidence.
 
-Blocking issues:
-- "deployment-ready" is unsupported because no deployment or cycle-time evidence is supplied.
-- "proven robust" exceeds the supplied evidence: the experiments cover one robot, one fixture, and one object family.
-- "industrial insertion" is unsupported because the protocol is tabletop-only.
+Claim-strength audit:
+- deployment readiness: unsupported; no deployment protocol or deployment log is supplied.
+- robustness: unsupported beyond the tested setup; only one robot, one fixture, and one object family are supplied.
+- industrial suitability: unsupported; the evidence is tabletop-only.
+- bounded empirical comparison: partially supported by the 84% result over 180 trials.
 
 Safe rewrite:
 "In the evaluated tabletop insertion setup, the system achieved 84% success
 over 180 trials on one robot arm and one object family. Cross-robot robustness,
 industrial deployment, and broader object variation remain untested."
 
-What not to say:
-- deployment-ready
-- proven robust
-- industrial insertion
-- generalizes across workcells
+Evidence needed for stronger wording:
+- cross-robot or cross-fixture evaluation
+- object-family variation
+- occlusion or stress-test protocol
+- uncertainty estimates or statistical analysis
+- deployment protocol
 ```
 
 ### Example 2: Do Not Fake A Reviewer Response
+
+Illustrative example, not a recorded model-run output.
 
 **Input**
 
@@ -122,16 +138,17 @@ Draft response:
 generalization."
 ```
 
-**Output**
+**Illustrative output**
 
 ```text
-Verdict: FAIL.
+Response mode: plan, not final response.
 
-Unsupported response claims:
-- The supplied materials do not include new stress-test data.
-- Table 3 was not supplied.
-- Final line numbers are unavailable.
-- "robust generalization" remains unsupported unless the new experiments actually test broader settings.
+| Reviewer concern | Draft response claim | Supplied evidence | Verdict | Safe action |
+|---|---|---|---|---|
+| Add stress tests | "We added new stress tests" | No stress-test data supplied | FAIL | Do not claim completed |
+| Add Table 3 | "Table 3" | No Table 3 supplied | FAIL | Mark as missing evidence |
+| Cite final location | "Lines 210-225" | Final line numbers unavailable | FAIL | Use placeholder until final build |
+| Clarify generalization | "robust generalization" | One tabletop setup only | FAIL | Narrow to tested setup |
 
 Safe response plan:
 "We agree that the original robustness wording was too broad. Based on the
@@ -210,279 +227,63 @@ This project is useful for:
 
 ## Use Case Examples
 
-### Example 3: Research Notes To Conservative Paper Skeleton
+These use cases are backed by recorded local Codex outputs. The prompt fixtures
+are useful copyable starting points; the outputs are raw local final messages
+from Codex, not polished golden examples.
 
-**Input**
+| Use case | Prompt fixture | Recorded local output |
+|---|---|---|
+| Claim audit | [demo_claim_audit.md](tests/prompts/demo_claim_audit.md) | [demo_claim_audit_681d305.md](tests/outputs/model_runs/demo/demo_claim_audit_681d305.md) |
+| Results paragraph | [demo_results_paragraph.md](tests/prompts/demo_results_paragraph.md) | [demo_results_paragraph_681d305.md](tests/outputs/model_runs/demo/demo_results_paragraph_681d305.md) |
+| Conservative polishing | [demo_polishing_claim_inflation.md](tests/prompts/demo_polishing_claim_inflation.md) | [demo_polishing_claim_inflation_681d305.md](tests/outputs/model_runs/demo/demo_polishing_claim_inflation_681d305.md) |
+| Figure/table source-data consistency | [demo_figure_source_data_consistency.md](tests/prompts/demo_figure_source_data_consistency.md) | [demo_figure_source_data_consistency_681d305.md](tests/outputs/model_runs/demo/demo_figure_source_data_consistency_681d305.md) |
+| Reviewer response truthfulness | [demo_response_truthfulness.md](tests/prompts/demo_response_truthfulness.md) | [demo_response_truthfulness_681d305.md](tests/outputs/model_runs/demo/demo_response_truthfulness_681d305.md) |
+| Validation readiness triage | [demo_validation_readiness.md](tests/prompts/demo_validation_readiness.md) | [demo_validation_readiness_681d305.md](tests/outputs/model_runs/demo/demo_validation_readiness_681d305.md) |
+| Related Work nearest-neighbor distinction | [demo_related_work_nearest_neighbor.md](tests/prompts/demo_related_work_nearest_neighbor.md) | [demo_related_work_nearest_neighbor_681d305.md](tests/outputs/model_runs/demo/demo_related_work_nearest_neighbor_681d305.md) |
+| Methods execution path | [demo_methods_execution_path.md](tests/prompts/demo_methods_execution_path.md) | [demo_methods_execution_path_681d305.md](tests/outputs/model_runs/demo/demo_methods_execution_path_681d305.md) |
+
+Full provenance is recorded in
+[tests/outputs/model_runs/demo/manifest.json](tests/outputs/model_runs/demo/manifest.json).
+
+### Recorded Output Excerpts
+
+Excerpted for readability; see the linked artifacts for the full raw outputs.
+
+**Related Work nearest-neighbor distinction**
 
 ```text
-Use $engineering-paper-coach to turn these notes into a conservative paper skeleton.
-
-Target venue family: robotics conference.
-Task: Contact-rich insertion with visual occlusion.
-
-Problem:
-- Fixed cameras lose visibility during insertion.
-- Open-loop insertion fails under pose error and partial occlusion.
-
-Method:
-- Multi-view RGB-D observation.
-- The policy requests an additional view when confidence is low.
-- Guarded execution stops when force threshold or pose deviation exceeds a limit.
-
-Evidence:
-- 84% success over 180 trials.
-- One robot arm.
-- One tabletop fixture.
-- One object family.
-- Baselines:
-  - fixed overhead camera: 69%
-  - fixed side camera: 72%
-  - open-loop controller: 61%
-- No cross-robot test.
-- No industrial deployment.
-- No statistical significance test.
-
-Need:
-- paper story skeleton
-- safe contribution wording
-- experiments needed for stronger claims
+The strongest novelty claim is not yet safe. The supplied notes support a
+positioning hypothesis, not a fully verified literature gap: the paper appears
+to combine confidence-triggered additional RGB-D views with guarded
+contact-rich insertion, but the author has not yet shown that prior work lacks
+this exact combination.
 ```
 
-**Output**
+**Results paragraph**
 
 ```text
-Working title:
-Perception-Guided Guarded Insertion Under Partial Visual Occlusion
-
-Story skeleton:
-1. Problem:
-   Contact-rich insertion is sensitive to pose error and visual occlusion.
-   Fixed cameras can lose task-relevant visibility during insertion.
-
-2. Gap:
-   The current evidence supports a bounded gap: fixed-view and open-loop
-   variants underperform in the tested tabletop setup. It does not support a
-   broad claim about industrial workcells or general deployment.
-
-3. Method object:
-   A multi-view RGB-D observation policy requests an additional view when
-   confidence is low and then uses guarded execution to stop under force or
-   pose-deviation limits.
-
-4. Evidence:
-   In one tabletop setup, the full system reaches 84% success over 180 trials,
-   compared with 69% for a fixed overhead camera, 72% for a fixed side camera,
-   and 61% for open-loop control.
-
-5. Boundary:
-   The evidence is limited to one robot arm, one fixture, one object family,
-   and no statistical significance test.
-
-Safe contribution wording:
-- "We evaluate a perception-guided guarded insertion system in a tabletop
-  occlusion setting."
-- "The system improves success over fixed-view and open-loop variants under the
-  tested protocol."
-
-Unsafe wording:
-- robust industrial insertion
-- deployment-ready manipulation
-- generalizes across workcells
-- proves active observation is causally responsible
-
-Experiments needed for stronger claims:
-- cross-robot evaluation
-- fixture variation
-- object-family variation
-- occlusion severity sweep
-- statistical uncertainty or repeated trials
+These results support a bounded system-level claim that combining multi-view
+perception with guarded execution improves insertion success in the tested
+single-arm, single-fixture, cylindrical-peg setting. However, the experiment
+does not isolate the individual effects of view selection and guarded execution.
 ```
 
-### Example 4: Skeleton To Bounded Results Paragraph
-
-**Input**
+**Figure/table audit**
 
 ```text
-Use $engineering-writing to draft a Results paragraph from this evidence.
-Do not add new experiments, baselines, statistics, objects, venues, or citations.
-
-Experiment question:
-Does the proposed multi-view guarded insertion system improve success over
-fixed-view and open-loop variants in the tested tabletop occlusion setup?
-
-Results:
-- Full system: 84% success over 180 trials.
-- Fixed overhead camera: 69%.
-- Fixed side camera: 72%.
-- Open-loop controller: 61%.
-
-Boundary:
-- One robot arm.
-- One tabletop fixture.
-- One object family.
-- No statistical significance test.
-- No industrial deployment test.
+Figure 3 and Table 1 support only a limited claim: the full system reports a
+higher success rate than the listed baselines under the tested protocol.
+They do not support claims of statistical significance, causal validation,
+robust generalization, industrial deployment readiness, or solving insertion
+under occlusion.
 ```
 
-**Output**
+**Reviewer response truthfulness**
 
 ```text
-The full system achieved 84% success over 180 trials in the evaluated tabletop
-occlusion setup, compared with 69% for the fixed overhead camera, 72% for the
-fixed side camera, and 61% for the open-loop controller. These results support
-a bounded comparison under the tested protocol: combining view selection with
-guarded execution improves success relative to the supplied fixed-view and
-open-loop variants in this setup. The experiment does not establish cross-robot
-robustness, industrial deployment readiness, or generalization beyond the
-tested object family and fixture geometry. Additional variation in robots,
-fixtures, objects, and occlusion conditions would be needed to support broader
-robustness claims.
-```
-
-### Example 5: Conservative Polishing Without Claim Inflation
-
-**Input**
-
-```text
-Use $engineering-polishing to polish this paragraph.
-Preserve all facts and do not strengthen the claim.
-
-Draft:
-"Our method is a robust and general solution for insertion. It works well in
-realistic settings and shows strong performance against baselines. This
-demonstrates that active observation is an effective mechanism for industrial
-manipulation."
-
-Evidence:
-- 84% success over 180 trials.
-- One robot arm.
-- One tabletop fixture.
-- One object family.
-- Baselines: fixed overhead 69%, fixed side 72%, open-loop 61%.
-- No industrial test.
-- No causal ablation isolating active observation.
-```
-
-**Output**
-
-```text
-Polished version:
-"In the evaluated tabletop insertion setup, the proposed system achieved 84%
-success over 180 trials, compared with 69% for the fixed overhead camera, 72%
-for the fixed side camera, and 61% for the open-loop controller. This result
-supports a bounded performance improvement over the supplied baselines under
-the tested protocol. The current evidence does not establish industrial
-readiness, broad generalization, or a causal mechanism for active observation."
-
-Rejected stronger wording:
-- robust and general solution
-- realistic settings
-- demonstrates an effective mechanism
-- industrial manipulation
-
-Why:
-The supplied evidence covers one robot, one fixture, and one object family, and
-does not include an industrial deployment test or a causal ablation.
-```
-
-### Example 6: Figure/Table Caption Claim Check
-
-**Input**
-
-```text
-Use $engineering-figure-table to audit this figure caption.
-
-Figure 2:
-- Panel A: workflow diagram with perception, view request, guarded execution,
-  and stop states.
-- Panel B: qualitative image sequence from one insertion trial.
-
-Table 1:
-- Full system: 84% success.
-- Fixed overhead camera: 69%.
-- Fixed side camera: 72%.
-- Open-loop controller: 61%.
-
-Draft caption:
-"Figure 2 validates the robustness of active observation under occlusion and
-proves that the system is suitable for industrial insertion."
-```
-
-**Output**
-
-```text
-Verdict: FAIL for caption claim strength.
-
-What the figure can support:
-- Panel A can illustrate the system workflow.
-- Panel B can show one qualitative example.
-- Table 1 can support a bounded quantitative comparison under the tested
-  tabletop protocol.
-
-Unsupported caption claims:
-- "validates robustness" is not supported by a workflow diagram or one
-  qualitative example.
-- "proves suitability for industrial insertion" is unsupported because no
-  industrial deployment test is supplied.
-- "active observation under occlusion" can be described as the evaluated
-  setting, but not as proven robust unless stress tests or occlusion sweeps are
-  provided.
-
-Safe caption:
-"Figure 2 illustrates the perception, view-request, guarded-execution, and stop
-states used by the system, along with one qualitative insertion example.
-Quantitative success rates for the evaluated tabletop protocol are reported in
-Table 1."
-```
-
-### Example 7: Validation Should Not Say Ready
-
-**Input**
-
-```text
-Use $engineering-validation to triage readiness.
-
-Target venue: robotics conference.
-
-Available:
-- Draft PDF was read once.
-- No LaTeX build was run.
-- No citation metadata check was run.
-- No figure source-data check was run.
-- No official venue policy was checked in this session.
-- No final line numbers.
-- No response diff.
-
-User request:
-"Can I say the paper is ready?"
-```
-
-**Output**
-
-```text
-Readiness verdict: NOT_READY / CANNOT_DETERMINE.
-
-Check states:
-- LaTeX build: NOT_RUN
-- Citation metadata: NOT_RUN
-- Figure/table source-data consistency: NOT_RUN
-- Official venue policy: NOT_RUN
-- Response diff: NOT_RUN
-- Final line numbers: NOT_RUN
-
-Allowed statement:
-"The draft has received a dry-read triage, but required submission checks have
-not been run."
-
-Forbidden statement:
-"The paper is submission-ready."
-
-Required next checks:
-1. Run a clean LaTeX build and inspect warnings/errors.
-2. Verify citation metadata and reference existence.
-3. Check figure/table captions against source data.
-4. Check current official venue instructions.
-5. Verify final line numbers after compiling the revised manuscript.
+Package status: Revision plan only, not a final reviewer response.
+Main risk: The draft falsely claims added stress tests, Table 3, final line
+numbers, and broad generalization.
 ```
 
 ## Installation

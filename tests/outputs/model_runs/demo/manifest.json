@@ -1,0 +1,77 @@
+{
+  "manifest_type": "recorded_local_demo_outputs",
+  "base_commit": "681d305",
+  "generated_on": "2026-06-01",
+  "codex_cli_version": "codex-cli 0.135.0",
+  "runtime_model_executed": true,
+  "ci_controlled": false,
+  "evidence_level": "local_single_run",
+  "edited_for_readme": false,
+  "note": "These are raw local Codex final-message outputs generated from demo prompt fixtures. They are not CI-controlled behavior proof and not top-tier-readiness proof.",
+  "outputs": [
+    {
+      "case": "demo_claim_audit",
+      "skill": "engineering-paper-coach",
+      "prompt": "tests/prompts/demo_claim_audit.md",
+      "output": "tests/outputs/model_runs/demo/demo_claim_audit_681d305.md",
+      "sha256": "b8a64e972efa4002fe0c3e5c5c14a5a33d0acb6529478a1b7fd34a586e199806",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C /home/agilex/engineering-paper-skills-open-source -o tests/outputs/model_runs/demo/demo_claim_audit_681d305.md \"Read tests/prompts/demo_claim_audit.md and produce the requested demo output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "demo_results_paragraph",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/demo_results_paragraph.md",
+      "output": "tests/outputs/model_runs/demo/demo_results_paragraph_681d305.md",
+      "sha256": "d8919e3f3f8a3b7acd0a3be5c97d3f71f1ff5f644bff6c790f3e8c8f1bf679f8",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C /home/agilex/engineering-paper-skills-open-source -o tests/outputs/model_runs/demo/demo_results_paragraph_681d305.md \"Read tests/prompts/demo_results_paragraph.md and produce the requested demo output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "demo_polishing_claim_inflation",
+      "skill": "engineering-polishing",
+      "prompt": "tests/prompts/demo_polishing_claim_inflation.md",
+      "output": "tests/outputs/model_runs/demo/demo_polishing_claim_inflation_681d305.md",
+      "sha256": "9b3a292f46646e6f0b38ad0e3b3876d2356642234d81947ceeec15392fcfd1ce",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C /home/agilex/engineering-paper-skills-open-source -o tests/outputs/model_runs/demo/demo_polishing_claim_inflation_681d305.md \"Read tests/prompts/demo_polishing_claim_inflation.md and produce the requested demo output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "demo_figure_source_data_consistency",
+      "skill": "engineering-figure-table",
+      "prompt": "tests/prompts/demo_figure_source_data_consistency.md",
+      "output": "tests/outputs/model_runs/demo/demo_figure_source_data_consistency_681d305.md",
+      "sha256": "664bf13fe69e3d99651986cebd67f4e0e8b1d7e31758e641b3a99e2589c3c73b",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C /home/agilex/engineering-paper-skills-open-source -o tests/outputs/model_runs/demo/demo_figure_source_data_consistency_681d305.md \"Read tests/prompts/demo_figure_source_data_consistency.md and produce the requested demo output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "demo_response_truthfulness",
+      "skill": "engineering-response",
+      "prompt": "tests/prompts/demo_response_truthfulness.md",
+      "output": "tests/outputs/model_runs/demo/demo_response_truthfulness_681d305.md",
+      "sha256": "e14782bddffdf2fa2c42ebd5393628a15a25978bab9d8488a3cd564b5fec847d",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C /home/agilex/engineering-paper-skills-open-source -o tests/outputs/model_runs/demo/demo_response_truthfulness_681d305.md \"Read tests/prompts/demo_response_truthfulness.md and produce the requested demo output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "demo_validation_readiness",
+      "skill": "engineering-validation",
+      "prompt": "tests/prompts/demo_validation_readiness.md",
+      "output": "tests/outputs/model_runs/demo/demo_validation_readiness_681d305.md",
+      "sha256": "52b8d8edbdb457738034bab4669beeb4fac8ccafc40dcd368c16ed86242faed1",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C /home/agilex/engineering-paper-skills-open-source -o tests/outputs/model_runs/demo/demo_validation_readiness_681d305.md \"Read tests/prompts/demo_validation_readiness.md and produce the requested demo output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "demo_related_work_nearest_neighbor",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/demo_related_work_nearest_neighbor.md",
+      "output": "tests/outputs/model_runs/demo/demo_related_work_nearest_neighbor_681d305.md",
+      "sha256": "6b5a0f587eeb565c55218c370504c89837582323366b6e66cd30be9a19d593dd",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C /home/agilex/engineering-paper-skills-open-source -o tests/outputs/model_runs/demo/demo_related_work_nearest_neighbor_681d305.md \"Read tests/prompts/demo_related_work_nearest_neighbor.md and produce the requested demo output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "demo_methods_execution_path",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/demo_methods_execution_path.md",
+      "output": "tests/outputs/model_runs/demo/demo_methods_execution_path_681d305.md",
+      "sha256": "a2448245bc0327e6bd597c9c61b09a8dc7dc1256dbb19cddecdcb74eafa118ea",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C /home/agilex/engineering-paper-skills-open-source -o tests/outputs/model_runs/demo/demo_methods_execution_path_681d305.md \"Read tests/prompts/demo_methods_execution_path.md and produce the requested demo output. Do not edit files. Final answer only.\""
+    }
+  ]
+}

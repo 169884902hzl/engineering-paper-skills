@@ -63,6 +63,10 @@ python scripts/write_behavior_eval_stub.py --help</code></pre>
       <p>A successful manual behavior run writes <code>behavior_eval_stub.jsonl</code> with the commit hash, output hash, artifact name, and <code>ci_single_run</code> evidence level. It remains unscored until human or semantic review is added.</p>
       <p>Failed local behavior attempts are kept when they expose a real contract gap. The <code>6bec865</code> and <code>80d9c23</code> structured-audit attempts are recorded as <code>local_single_run_failed</code>, not as passing model runs.</p>
 
+      <h2>Example Provenance</h2>
+      <p>README and Pages examples are split into illustrative examples and recorded local Codex outputs. Illustrative examples are hand-written and must be labeled as not recorded model-run outputs. Recorded examples must link to prompt fixtures, raw output artifacts, and a manifest with hashes.</p>
+      <p>Current recorded demo outputs are tracked in <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/manifest.json">tests/outputs/model_runs/demo/manifest.json</a> and <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/681d305_demo_outputs_model_eval.jsonl">evals/results/681d305_demo_outputs_model_eval.jsonl</a>.</p>
+
       <h2>Evidence Boundary</h2>
       <p>Golden outputs, static checks, and local model-run artifacts are review evidence. They are not proof of stable top-tier behavior on arbitrary unseen manuscripts.</p>
 

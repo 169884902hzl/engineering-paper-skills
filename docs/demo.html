@@ -83,8 +83,14 @@
       <p>These examples show how to use Engineering Paper Skills on common engineering-paper tasks. They are practical usage examples, not proof that every unseen manuscript will receive the same review quality.</p>
 
       <section>
+        <h2>Example Provenance</h2>
+        <p><strong>Illustrative examples</strong> are hand-written for readability and are marked as illustrative. They are not recorded model-run outputs.</p>
+        <p><strong>Recorded local Codex outputs</strong> are raw final messages generated from prompt fixtures and stored in the repository. They are local single-run evidence, not CI-controlled behavior proof.</p>
+      </section>
+
+      <section>
         <h2>Use Case Examples</h2>
-        <p>Start with Markdown examples. Structured JSON artifacts and model-run records are listed later for maintainers and reviewers.</p>
+        <p>Start with short illustrative Markdown examples. Recorded local Codex outputs and structured artifacts are listed later for maintainers and reviewers.</p>
 
         <article class="card">
           <h3>Conservative Claim Audit</h3>
@@ -102,7 +108,7 @@ Evidence:
 Draft:
 "The system is deployment-ready and proven robust
 for industrial insertion."</code></pre>
-            <pre><code>Output:
+            <pre><code>Illustrative output:
 Diagnosis: NOT_READY as written.
 
 Blocking issues:
@@ -141,7 +147,7 @@ open-loop 61%.
 Boundary:
 One robot, one tabletop fixture, one object family.
 No industrial deployment or significance test.</code></pre>
-            <pre><code>Output:
+            <pre><code>Illustrative output:
 Story skeleton:
 1. Problem: fixed views can lose visibility during
    contact-rich insertion.
@@ -182,7 +188,7 @@ Open-loop: 61%.
 Boundary:
 One robot, one fixture, one object family.
 No statistical significance test.</code></pre>
-            <pre><code>Output:
+            <pre><code>Illustrative output:
 The full system achieved 84% success over 180
 trials in the evaluated tabletop occlusion setup,
 compared with 69% for the fixed overhead camera,
@@ -217,7 +223,7 @@ Evidence:
 84% over 180 trials; one robot; one fixture;
 one object family; fixed-view and open-loop
 baselines; no industrial or causal ablation test.</code></pre>
-            <pre><code>Output:
+            <pre><code>Illustrative output:
 Polished version:
 "In the evaluated tabletop insertion setup, the
 proposed system achieved 84% success over 180
@@ -254,7 +260,7 @@ Open-loop controller: 61%.
 Draft caption:
 "Figure 2 validates robust active observation and
 proves industrial suitability."</code></pre>
-            <pre><code>Output:
+            <pre><code>Illustrative output:
 Verdict: FAIL for caption claim strength.
 
 Supported:
@@ -291,7 +297,7 @@ Final line numbers are unavailable.
 Draft response:
 "We added Table 3, new stress tests, and final
 line numbers."</code></pre>
-            <pre><code>Output:
+            <pre><code>Illustrative output:
 Verdict: FAIL.
 
 Unsupported response claims:
@@ -325,7 +331,7 @@ Available:
 
 User request:
 "Can I say the paper is ready?"</code></pre>
-            <pre><code>Output:
+            <pre><code>Illustrative output:
 Readiness verdict: NOT_READY / CANNOT_DETERMINE.
 
 Check states:
@@ -344,6 +350,38 @@ Forbidden statement:
 "The paper is submission-ready."</code></pre>
           </div>
         </article>
+      </section>
+
+      <section id="recorded-demo-outputs">
+        <h2>Recorded Demo Outputs</h2>
+        <p>These are raw local Codex final messages generated from prompt fixtures at base commit <code>681d305</code>. They are excerpted here for readability; the full artifacts and hashes are recorded in the manifest.</p>
+        <ul>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/manifest.json">Recorded demo manifest</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_claim_audit_681d305.md">Claim audit output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_results_paragraph_681d305.md">Results paragraph output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_polishing_claim_inflation_681d305.md">Conservative polishing output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_figure_source_data_consistency_681d305.md">Figure/table consistency output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_response_truthfulness_681d305.md">Reviewer response truthfulness output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_validation_readiness_681d305.md">Validation readiness output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_related_work_nearest_neighbor_681d305.md">Related Work nearest-neighbor output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_methods_execution_path_681d305.md">Methods execution-path output</a></li>
+        </ul>
+        <pre><code>Recorded excerpt: Related Work nearest-neighbor
+The strongest novelty claim is not yet safe. The supplied notes support a
+positioning hypothesis, not a fully verified literature gap: the paper appears
+to combine confidence-triggered additional RGB-D views with guarded
+contact-rich insertion, but the author has not yet shown that prior work lacks
+this exact combination.</code></pre>
+        <pre><code>Recorded excerpt: Figure/table consistency
+Figure 3 and Table 1 support only a limited claim: the full system reports a
+higher success rate than the listed baselines under the tested protocol.
+They do not support claims of statistical significance, causal validation,
+robust generalization, industrial deployment readiness, or solving insertion
+under occlusion.</code></pre>
+        <pre><code>Recorded excerpt: Reviewer response truthfulness
+Package status: Revision plan only, not a final reviewer response.
+Main risk: The draft falsely claims added stress tests, Table 3, final line
+numbers, and broad generalization.</code></pre>
       </section>
 
       <section>
