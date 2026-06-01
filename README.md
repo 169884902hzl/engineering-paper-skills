@@ -69,6 +69,89 @@ output as unsupported.
 - [Figure/table panel-claim audit](tests/outputs/golden/figure_table_panel_claim.md)
 - [Recorded local model-run artifact](tests/outputs/model_runs/full_paper_realistic_audit_8da3ceb.md)
 
+## Use Case Examples
+
+### Example 1: Conservative Claim Audit
+
+Input:
+
+```text
+Use $engineering-paper-coach to audit this paper claim and give a safe rewrite.
+
+Evidence:
+- 84% success over 180 trials.
+- One robot arm.
+- One tabletop fixture.
+- One object family.
+- No cross-robot test, no industrial deployment test, no statistical test.
+
+Draft:
+"The system is deployment-ready and proven robust for industrial insertion."
+```
+
+Output:
+
+```text
+Diagnosis:
+NOT_READY as written. The draft claim is stronger than the supplied evidence.
+
+Blocking issues:
+- "deployment-ready" is unsupported because no deployment or cycle-time evidence is supplied.
+- "proven robust" is unsupported because the evidence covers one robot, one fixture, and one object family.
+- "industrial insertion" is unsupported because the experiment is a tabletop protocol.
+
+Safe rewrite:
+"In the evaluated tabletop insertion setup, the system achieved 84% success
+over 180 trials on one robot arm and one object family. Broader industrial
+deployment and cross-platform robustness remain untested."
+
+What not to say:
+- deployment-ready
+- proven robust
+- general industrial insertion
+```
+
+### Example 2: Figure/Table Claim Check
+
+Input:
+
+```text
+Use $engineering-figure-table to audit this caption.
+
+Figure 2 content:
+A workflow diagram showing perception, view request, guarded execution, and stop states.
+
+Table 1 content:
+Full system: 84% success.
+Fixed overhead camera: 69% success.
+Fixed side camera: 72% success.
+Open-loop controller: 61% success.
+
+Draft caption:
+"Figure 2 validates robust active observation under occlusion and proves the
+system is suitable for industrial insertion."
+```
+
+Output:
+
+```text
+Verdict:
+FAIL for caption claim strength.
+
+Supported:
+- Figure 2 can illustrate the workflow states.
+- Table 1 can support a bounded comparison in the tested tabletop protocol.
+
+Unsupported:
+- Figure 2 does not validate robustness because it is a workflow diagram.
+- The supplied table does not prove industrial suitability.
+
+Safe caption:
+"Figure 2 illustrates the perception, view-request, guarded-execution, and stop
+states used by the system. Quantitative success rates for the evaluated
+tabletop protocol are reported in Table 1."
+```
+
 ## Quick Start
 
 ```bash

@@ -4,6 +4,16 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Add README and Pages use-case examples
+
+- Added README input/output examples that show conservative claim audit and
+  figure/table claim checking without requiring readers to inspect quality-gate
+  artifacts first.
+- Added Pages demo input/output cards for coach auditing, figure/table
+  caption checks, and reviewer response truthfulness.
+- Kept examples evidence-bound: they show `NOT_READY`, unsupported response
+  claims, and safe rewrites rather than top-tier-readiness claims.
+
 ## 38b3d4d - Split behavior contract and add coach skill
 
 - Added `engineering-paper-coach` as a lightweight Markdown-first user entry

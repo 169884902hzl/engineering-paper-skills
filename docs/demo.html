@@ -56,6 +56,24 @@
         padding: 16px;
         border-radius: 8px;
       }
+      .example {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+        gap: 14px;
+        margin: 14px 0 22px;
+      }
+      .example h3 {
+        margin: 0 0 8px;
+      }
+      .example pre {
+        margin: 0;
+        height: 100%;
+      }
+      @media (max-width: 760px) {
+        .example {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body>
@@ -121,6 +139,115 @@
     "response_diff": "NOT_RUN"
   }
 }</code></pre>
+      </section>
+
+      <section>
+        <h2>Use Case Examples</h2>
+        <p>These compact input-to-output examples show the practical behavior before readers open the longer artifacts.</p>
+
+        <article class="card">
+          <h3>Conservative Claim Audit</h3>
+          <div class="example">
+            <pre><code>Input:
+Use $engineering-paper-coach to audit this claim.
+
+Evidence:
+- 84% success over 180 trials.
+- One robot arm.
+- One tabletop fixture.
+- One object family.
+- No cross-robot or deployment test.
+
+Draft:
+"The system is deployment-ready and proven robust
+for industrial insertion."</code></pre>
+            <pre><code>Output:
+Diagnosis: NOT_READY as written.
+
+Blocking issues:
+- "deployment-ready" is unsupported.
+- "proven robust" exceeds one-setup evidence.
+- "industrial insertion" is not tested.
+
+Safe rewrite:
+"In the evaluated tabletop insertion setup, the
+system achieved 84% success over 180 trials on
+one robot arm and one object family. Broader
+industrial deployment remains untested."</code></pre>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Figure/Table Claim Check</h3>
+          <div class="example">
+            <pre><code>Input:
+Use $engineering-figure-table to audit this caption.
+
+Figure 2:
+Workflow diagram only.
+
+Table 1:
+Full system: 84%.
+Fixed overhead camera: 69%.
+Fixed side camera: 72%.
+Open-loop controller: 61%.
+
+Draft caption:
+"Figure 2 validates robust active observation and
+proves industrial suitability."</code></pre>
+            <pre><code>Output:
+Verdict: FAIL for caption claim strength.
+
+Supported:
+- Figure 2 can illustrate workflow states.
+- Table 1 can support a bounded comparison in
+  the tested tabletop protocol.
+
+Unsupported:
+- Figure 2 does not validate robustness.
+- The supplied data do not prove industrial use.
+
+Safe caption:
+"Figure 2 illustrates the perception, view-request,
+guarded-execution, and stop states. Quantitative
+success rates are reported in Table 1."</code></pre>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Reviewer Response Truthfulness</h3>
+          <div class="example">
+            <pre><code>Input:
+Use $engineering-response to audit this response.
+
+Reviewer:
+"The paper overclaims robustness and has no
+stress-test evidence."
+
+Supplied material:
+No revised manuscript diff.
+No source data for a new stress-test table.
+Final line numbers are unavailable.
+
+Draft response:
+"We added Table 3, new stress tests, and final
+line numbers."</code></pre>
+            <pre><code>Output:
+Verdict: FAIL.
+
+Unsupported response claims:
+- Table 3 was not supplied.
+- New stress-test data were not supplied.
+- Final line numbers are not available.
+
+Safe response plan:
+"We will narrow the robustness claim to the
+evaluated tabletop protocol and mark the planned
+stress-test table as not yet completed. Final line
+numbers will be added after the compiled revision
+is available."</code></pre>
+          </div>
+        </article>
       </section>
 
       <section>

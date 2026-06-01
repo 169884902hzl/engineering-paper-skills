@@ -187,6 +187,9 @@ REQUIRED_DISCOVERY_ASSETS = {
     ],
     "docs/demo.html": [
         "Demo Gallery",
+        "Use Case Examples",
+        "Conservative Claim Audit",
+        "Reviewer Response Truthfulness",
         "Structured JSON Audit",
         "Response Diff Verification",
         "Inline Audit Snippets",
