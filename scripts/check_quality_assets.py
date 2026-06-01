@@ -68,6 +68,10 @@ REQUIRED_MODEL_RUNS = {
     "tests/outputs/model_runs/full_paper_realistic_audit_f3cbb28.md",
 }
 
+REQUIRED_SENTENCE_AUDITS = {
+    "tests/outputs/golden/full_paper_realistic_sentence_audit.md",
+}
+
 REQUIRED_RESPONSE_DIFF_ASSETS = {
     "fixture": "tests/fixtures/full_paper/response_old_new_diff.md",
     "annotation": "tests/fixtures/full_paper/gold_annotations/response_old_new_diff.json",
@@ -77,6 +81,26 @@ REQUIRED_RESPONSE_DIFF_ASSETS = {
 REQUIRED_VENUE_PROFILES = {
     "skills/engineering-validation/venue_profiles/robotics_venues.json",
     "skills/engineering-validation/venue_profiles/ml_venues.json",
+}
+
+REQUIRED_REFERENCE_MARKERS = {
+    "skills/_shared/story-spine.md": [
+        "Complete Claim Inventory",
+        "Contribution dependency map",
+    ],
+    "skills/engineering-paper-auditor/references/paragraph-to-paragraph-transition-audit.md": [
+        "Terminology drift",
+        "Claim-strength drift",
+        "False evidence escalation",
+    ],
+    "skills/engineering-response/references/diff-verification.md": [
+        "Semantic Match Check",
+        "Semantic diff verification",
+    ],
+    "skills/engineering-polishing/references/anti-ai-prose.md": [
+        "Unsafe stronger wording rejected",
+        "claim-strength inflation",
+    ],
 }
 
 
@@ -121,6 +145,16 @@ def main() -> int:
                 missing = REQUIRED_RUBRIC_KEYS - set(criteria)
                 if missing:
                     errors.append(f"Rubric missing criteria: {', '.join(sorted(missing))}")
+            thresholds = data.get("thresholds")
+            if not isinstance(thresholds, dict):
+                errors.append("evals/top_tier_rubric.json missing thresholds object")
+            else:
+                for threshold in ("top_tier_candidate", "top_tier_ready"):
+                    if threshold not in thresholds:
+                        errors.append(f"evals/top_tier_rubric.json missing threshold: {threshold}")
+            blocking_failure_types = data.get("blocking_failure_types")
+            if not isinstance(blocking_failure_types, list) or len(blocking_failure_types) < 5:
+                errors.append("evals/top_tier_rubric.json must define blocking_failure_types")
 
     if not rubric_md.exists():
         errors.append("Missing evals/manual-rubric.md")
@@ -241,6 +275,22 @@ def main() -> int:
             if marker not in text:
                 errors.append(f"{model_run.relative_to(ROOT)} missing marker: {marker}")
 
+    for rel_path in REQUIRED_SENTENCE_AUDITS:
+        audit = ROOT / rel_path
+        if not audit.exists():
+            errors.append(f"Missing sentence audit artifact: {rel_path}")
+            continue
+        text = audit.read_text(encoding="utf-8")
+        for marker in (
+            "Abstract Sentence Audit",
+            "Results Sentence Audit",
+            "Conclusion Sentence Audit",
+            "Response Sentence Audit",
+            "Required Model Behavior",
+        ):
+            if marker not in text:
+                errors.append(f"{audit.relative_to(ROOT)} missing marker: {marker}")
+
     for label, rel_path in REQUIRED_RESPONSE_DIFF_ASSETS.items():
         path = ROOT / rel_path
         if not path.exists():
@@ -266,9 +316,26 @@ def main() -> int:
                 continue
             if profile.get("official_policy_checked_required") is not True:
                 errors.append(f"Venue profile {rel_path}:{name} must require official policy check")
+            if not isinstance(profile.get("source_url"), str) or not profile["source_url"].startswith("https://"):
+                errors.append(f"Venue profile {rel_path}:{name} must include https source_url")
+            if not isinstance(profile.get("source_date"), str) or not profile["source_date"]:
+                errors.append(f"Venue profile {rel_path}:{name} must include source_date")
             fields = profile.get("required_fields")
             if not isinstance(fields, list) or "source_url" not in fields or "source_date" not in fields:
                 errors.append(f"Venue profile {rel_path}:{name} must require source_url and source_date")
+            policy_checks = profile.get("policy_checks")
+            if not isinstance(policy_checks, list) or len(policy_checks) < 3:
+                errors.append(f"Venue profile {rel_path}:{name} must include at least three policy_checks")
+
+    for rel_path, markers in REQUIRED_REFERENCE_MARKERS.items():
+        path = ROOT / rel_path
+        if not path.exists():
+            errors.append(f"Missing reference file: {rel_path}")
+            continue
+        text = path.read_text(encoding="utf-8")
+        for marker in markers:
+            if marker not in text:
+                errors.append(f"{rel_path} missing marker: {marker}")
 
     if errors:
         print("Quality asset check failed:")

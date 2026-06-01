@@ -68,6 +68,14 @@ These commands validate repository structure, prompt specs, curated golden
 outputs, evaluation assets, and response-diff fixtures. They do not by
 themselves prove stable model behavior on unseen 8--12 page manuscripts.
 
+For behavior regression, configure the GitHub Actions secret
+`PROMPT_REGRESSION_COMMAND_TEMPLATE`. The CI will then run the
+`full_paper_realistic_audit` prompt through `scripts/run_prompt_regression.py`
+and check the resulting output against structured semantic expectations. Without
+that secret, CI reports that behavior regression was not run.
+The repository also includes a manual `Behavior Regression` workflow that fails
+closed when the command-template secret is absent.
+
 ## Project Overview
 
 Engineering Paper Skills is a Codex skill suite for experiment-heavy engineering

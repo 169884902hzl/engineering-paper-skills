@@ -17,6 +17,10 @@ FIXTURE = ROOT / "tests/fixtures/full_paper/response_old_new_diff.md"
 ANNOTATION = ROOT / "tests/fixtures/full_paper/gold_annotations/response_old_new_diff.json"
 
 
+def contains_phrase(text: str, phrase: str) -> bool:
+    return " ".join(phrase.lower().split()) in " ".join(text.lower().split())
+
+
 def main() -> int:
     errors: list[str] = []
     if not FIXTURE.exists():
@@ -45,13 +49,49 @@ def main() -> int:
         if not isinstance(claim, str) or not claim:
             errors.append("verified_changes must contain non-empty strings")
 
+    old_excerpt = fixture.split("## Old Manuscript Excerpt", 1)[-1].split("## New Manuscript Excerpt", 1)[0]
+    new_excerpt = fixture.split("## New Manuscript Excerpt", 1)[-1].split("## Draft Response", 1)[0]
     draft_response = fixture.split("## Draft Response", 1)[-1]
     for claim in annotation.get("unsupported_response_claims", []):
         if not isinstance(claim, str) or not claim:
             errors.append("unsupported_response_claims must contain non-empty strings")
             continue
-        if claim.lower() not in draft_response.lower():
+        if not contains_phrase(draft_response, claim):
             errors.append(f"Draft response missing unsupported claim trigger: {claim}")
+        if contains_phrase(new_excerpt, claim):
+            errors.append(f"Unsupported response claim appears in new manuscript excerpt: {claim}")
+
+    for check in annotation.get("semantic_change_checks", []):
+        if not isinstance(check, dict):
+            errors.append("semantic_change_checks entries must be objects")
+            continue
+        name = check.get("name")
+        if not isinstance(name, str) or not name:
+            errors.append("semantic_change_checks entries must have a name")
+            continue
+        for term in check.get("new_excerpt_terms", []):
+            if not isinstance(term, str) or not term:
+                errors.append(f"{name}: new_excerpt_terms must be non-empty strings")
+                continue
+            if not contains_phrase(new_excerpt, term):
+                errors.append(f"{name}: new manuscript excerpt missing term: {term}")
+        for term in check.get("draft_response_terms", []):
+            if not isinstance(term, str) or not term:
+                errors.append(f"{name}: draft_response_terms must be non-empty strings")
+                continue
+            if not contains_phrase(draft_response, term):
+                errors.append(f"{name}: draft response missing term: {term}")
+        for term in check.get("draft_response_forbidden_terms", []):
+            if not isinstance(term, str) or not term:
+                errors.append(f"{name}: draft_response_forbidden_terms must be non-empty strings")
+                continue
+            if not contains_phrase(draft_response, term):
+                errors.append(f"{name}: draft response should contain unsafe term for fixture pressure: {term}")
+            if contains_phrase(new_excerpt, term):
+                errors.append(f"{name}: unsafe response term appears in new manuscript excerpt: {term}")
+
+    if "complete pipeline for robust insertion" not in old_excerpt:
+        errors.append("Old manuscript excerpt no longer contains the original overclaim pressure")
 
     if errors:
         print("Response diff check failed:")

@@ -18,3 +18,19 @@ checks and golden strings are smoke tests only; this rubric judges paper quality
 Reviewers should record the fixture, skill route, output path, score for each
 criterion, blocking failures, and one concrete repository change suggested by
 the failure.
+
+## Release Thresholds
+
+Use these thresholds when claiming repository quality:
+
+- `top-tier candidate`: every criterion is at least 3, average score is at
+  least 4, and there are no blocking failures.
+- `top-tier ready`: every criterion is at least 4, average score is at least
+  4.5, there are no blocking failures, the output comes from a real model run,
+  and a human reviewer has scored it.
+
+Blocking failures include accepting unsupported major claims, marking a dry read
+as ready, treating unverified response changes as complete, accepting
+placeholder citations, claiming venue compliance without an official source,
+using figures/tables to support invisible evidence, or letting the conclusion
+revive an unsupported claim.

@@ -33,6 +33,11 @@ avoid journal-scale significance language.
 - Figure legends must explain visible evidence; they cannot replace Methods.
 - Discussion may interpret significance but must not introduce untested
   mechanisms or revive deleted claims.
+- Methods must be sufficient for interpretation and replication; if the source
+  does not include enough method detail, output a scaffold rather than
+  high-impact prose.
+- AI-assisted writing cannot expand facts, citations, mechanisms, figures, or
+  data beyond author-provided evidence.
 
 ### NeurIPS / ICML / ICLR
 
@@ -43,6 +48,10 @@ avoid journal-scale significance language.
 - Limitations should be visible, not buried after strong generalization claims.
 - Do not imply deployment reliability from benchmark-only or simulation-only
   results.
+- If the venue asks for checklist, ethics, reproducibility, or LLM-use
+  statements, draft only from supplied evidence and mark missing items.
+- Author-response or discussion-stage text must not claim manuscript changes
+  outside the allowed stage.
 
 ### CoRL / ICRA / IROS / RA-L / RSS
 
@@ -54,6 +63,11 @@ avoid journal-scale significance language.
   or industrial deployment claims.
 - Page budget makes deletion-damage testing mandatory: every paragraph must
   support a claim, method mechanism, evidence, boundary, or transition.
+- Rebuttal and response text must distinguish completed manuscript changes from
+  planned experiments or author-input needs.
+- If official instructions require limitations, AI disclosure, graphical
+  abstracts, font embedding, or supplement boundaries, validation must confirm
+  those items before writing `ready`.
 
 ### IEEE / ACM Systems
 

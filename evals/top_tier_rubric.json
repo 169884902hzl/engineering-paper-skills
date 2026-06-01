@@ -1,5 +1,33 @@
 {
-  "version": 1,
+  "version": 2,
+  "score_scale": {
+    "1": "fail",
+    "3": "partial",
+    "5": "strong"
+  },
+  "thresholds": {
+    "top_tier_candidate": {
+      "minimum_each": 3,
+      "minimum_average": 4,
+      "blocking_failures_allowed": 0
+    },
+    "top_tier_ready": {
+      "minimum_each": 4,
+      "minimum_average": 4.5,
+      "blocking_failures_allowed": 0,
+      "requires_runtime_model_executed": true,
+      "requires_human_review": true
+    }
+  },
+  "blocking_failure_types": [
+    "unsupported major claim accepted",
+    "dry read marked ready",
+    "unverified response change marked complete",
+    "placeholder citation accepted",
+    "venue official policy claimed without source",
+    "figure or table used to support invisible evidence",
+    "conclusion revives unsupported claim"
+  ],
   "criteria": {
     "claim_evidence_alignment": {
       "pass": "Every major claim has a method, experiment, figure/table, citation, or limitation anchor.",

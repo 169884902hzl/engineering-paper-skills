@@ -15,6 +15,26 @@ disclosure, citation integrity, and figure/table formatting.
 If the official venue instructions were not inspected in this session, mark the
 venue check `NOT_RUN` or `PARTIAL`.
 
+## Official-Policy Mode
+
+For a named venue, do not rely only on the static profile files. Inspect the
+current official venue page or state that the official policy check was not run.
+
+```text
+Official policy check
+| Venue | Source URL | Source date | Requirement | Evidence in manuscript | Status | Fix |
+```
+
+Required statuses:
+
+- `PASS`: the official page was inspected in this session and the manuscript
+  evidence satisfies the requirement.
+- `FAIL`: the official page was inspected and the manuscript conflicts with the
+  requirement.
+- `PARTIAL`: the official page was inspected but manuscript evidence is
+  incomplete.
+- `NOT_RUN`: the official page was not inspected.
+
 ## Venue Profiles To Instantiate
 
 Use these as conservative prompts for what to verify. They are not substitutes
@@ -22,9 +42,9 @@ for current official venue instructions.
 
 | Venue family | Required checks | Common failure |
 |---|---|---|
-| Nature / Science / Cell style | summary claim scope, Methods sufficiency, figure legend clarity, data availability, AI-use disclosure | broad significance stated without independent evidence |
-| NeurIPS / ICML / ICLR | checklist, limitations, assumptions, reproducibility, baselines, variance/statistics, data/code policy | benchmark result written as deployment reliability |
-| CoRL / ICRA / IROS / RA-L / RSS | page limit, anonymity when applicable, real-robot protocol, trial count, failure modes, hardware/task scope, AI-use policy | one robot or one fixture written as general robustness |
+| Nature / Science / Cell style | summary claim scope, Methods sufficiency, figure legend clarity, data/code availability, AI-use disclosure and human accountability | broad significance stated without independent evidence |
+| NeurIPS / ICML / ICLR | checklist, limitations, assumptions, reproducibility, baselines, variance/statistics, data/code policy, ethics/LLM-use statement when applicable | benchmark result written as deployment reliability |
+| CoRL / ICRA / IROS / RA-L / RSS | page limit, anonymity when applicable, real-robot protocol, trial count, failure modes, hardware/task scope, AI-use policy, rebuttal/revision stage boundary | one robot or one fixture written as general robustness |
 | IEEE / ACM systems | artifact/reproducibility policy, workload, baseline fairness, measured tradeoffs, configuration details | architecture described like product reliability |
 
 ## Output Expansion

@@ -1,0 +1,51 @@
+{
+  "case": "polishing_ai_smell",
+  "prompt": "polishing_ai_smell.md",
+  "must_include": [
+    "Diagnosis",
+    "Claim-strength diff",
+    "Unsafe stronger wording rejected",
+    "Safe polished version",
+    "one robot",
+    "one tabletop fixture"
+  ],
+  "must_not_include": [],
+  "required_status": {},
+  "forbidden_claims": [
+    "industrial deployment",
+    "general robustness",
+    "diverse settings"
+  ],
+  "forbidden_regex": [
+    "(?i)Safe polished version[\\s\\S]*deployment-ready",
+    "(?i)Safe polished version[\\s\\S]*diverse settings",
+    "(?i)Safe polished version[\\s\\S]*robust, efficient, and general"
+  ],
+  "required_sections": [
+    "Diagnosis",
+    "Claim-strength diff",
+    "Unsafe stronger wording rejected",
+    "Safe polished version"
+  ],
+  "semantic_expectations": {
+    "ai_smell": [
+      {
+        "name": "adjective stack rejected",
+        "required_terms": ["robust", "general", "unsupported"]
+      },
+      {
+        "name": "claim boundary retained",
+        "required_terms": ["one robot", "one tabletop fixture", "one object family"]
+      },
+      {
+        "name": "safe wording avoids deployment",
+        "required_terms": ["tested", "84 percent"]
+      }
+    ]
+  },
+  "allowed_behavior": [
+    "shorten the paragraph instead of inventing support",
+    "downgrade robustness, generality, and deployment claims",
+    "preserve the 84 percent result and tested scope"
+  ]
+}

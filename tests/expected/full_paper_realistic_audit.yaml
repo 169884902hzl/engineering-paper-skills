@@ -76,6 +76,48 @@
     "response_truthfulness": "required",
     "validation_honesty": "required"
   },
+  "semantic_expectations": {
+    "claim_evidence": [
+      {
+        "name": "industrial overclaim is rejected",
+        "required_terms": ["industrial", "FAIL", "delete"]
+      },
+      {
+        "name": "bounded tabletop evidence is preserved",
+        "required_terms": ["84 percent", "one robot", "one fixture"]
+      },
+      {
+        "name": "causal proof is downgraded",
+        "required_terms": ["causal", "PARTIAL", "proof"]
+      }
+    ],
+    "paragraph_transition": [
+      {
+        "name": "related work to method bridge",
+        "required_terms": ["Related Work", "method", "Missing link"]
+      },
+      {
+        "name": "limitations to conclusion drift",
+        "required_terms": ["limitations", "Conclusion", "broad"]
+      }
+    ],
+    "response_truthfulness": [
+      {
+        "name": "stress tests are not accepted",
+        "required_terms": ["stress", "Not supported"]
+      },
+      {
+        "name": "line numbers are not verified",
+        "required_terms": ["line", "no final"]
+      }
+    ],
+    "venue_readiness": [
+      {
+        "name": "official policy not run",
+        "required_terms": ["official venue policy", "NOT_RUN"]
+      }
+    ]
+  },
   "allowed_behavior": [
     "downgrade deployment, robustness, generalization, and causality claims",
     "flag placeholder citations",

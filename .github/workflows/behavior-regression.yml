@@ -1,0 +1,27 @@
+name: Behavior Regression
+
+on:
+  workflow_dispatch:
+    inputs:
+      case:
+        description: "Expected-behavior case to run"
+        required: true
+        default: "full_paper_realistic_audit"
+
+jobs:
+  prompt-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Run prompt regression with configured model command
+        run: |
+          python scripts/run_prompt_regression.py \
+            --require-command \
+            --case "${{ inputs.case }}" \
+            --output-dir /tmp/engineering-paper-skill-regression \
+            --command-template "$PROMPT_REGRESSION_COMMAND_TEMPLATE"
+        env:
+          PROMPT_REGRESSION_COMMAND_TEMPLATE: ${{ secrets.PROMPT_REGRESSION_COMMAND_TEMPLATE }}

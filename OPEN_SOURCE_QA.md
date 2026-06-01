@@ -31,12 +31,34 @@ This checks:
 - response diff fixture and response-truthfulness sanity check
 - venue profile JSON files that require official source URL and source date
 - manual top-tier writing rubric under `evals/`
+- structured semantic expectations in selected `tests/expected/*.yaml` specs
 
 These checks are repository-quality checks. Golden outputs and recorded model
 runs are review artifacts; they do not prove stable behavior on arbitrary
 unseen full manuscripts. Treat prompt regression as behavior evidence only when
 `scripts/run_prompt_regression.py` is executed with a real command template and
 the resulting outputs are scored.
+
+## Behavior Regression
+
+Main CI includes an optional prompt-regression step. It runs only when the
+repository has a `PROMPT_REGRESSION_COMMAND_TEMPLATE` GitHub Actions secret.
+The separate `Behavior Regression` workflow can also be triggered manually; it
+fails if the command template secret is missing.
+
+The command template must accept `{prompt}`, `{output}`, and `{name}`
+placeholders. Example shape:
+
+```bash
+python scripts/run_prompt_regression.py \
+  --require-command \
+  --case full_paper_realistic_audit \
+  --output-dir /tmp/engineering-paper-skill-regression \
+  --command-template "$PROMPT_REGRESSION_COMMAND_TEMPLATE"
+```
+
+If the secret is not configured, CI prints that behavior regression was not run.
+That state must not be described as behavior proof.
 
 ## Codex Skill Validation
 

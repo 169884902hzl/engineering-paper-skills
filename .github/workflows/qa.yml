@@ -17,3 +17,16 @@ jobs:
       - run: python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-dir tests/outputs/golden
       - run: python scripts/check_quality_assets.py
       - run: python scripts/check_response_diff.py
+      - name: Optional prompt behavior regression
+        run: |
+          if [ -z "${PROMPT_REGRESSION_COMMAND_TEMPLATE:-}" ]; then
+            echo "PROMPT_REGRESSION_COMMAND_TEMPLATE is not configured; behavior regression was not run."
+          else
+            python scripts/run_prompt_regression.py \
+              --require-command \
+              --case full_paper_realistic_audit \
+              --output-dir /tmp/engineering-paper-skill-regression \
+              --command-template "$PROMPT_REGRESSION_COMMAND_TEMPLATE"
+          fi
+        env:
+          PROMPT_REGRESSION_COMMAND_TEMPLATE: ${{ secrets.PROMPT_REGRESSION_COMMAND_TEMPLATE }}

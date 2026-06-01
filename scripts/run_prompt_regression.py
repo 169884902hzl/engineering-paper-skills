@@ -17,6 +17,12 @@ def main() -> int:
     parser.add_argument("--prompt-dir", default="tests/prompts", type=Path)
     parser.add_argument("--expected-dir", default="tests/expected", type=Path)
     parser.add_argument("--output-dir", default="tests/outputs", type=Path)
+    parser.add_argument("--case", action="append", help="Run only the named case; may be repeated")
+    parser.add_argument(
+        "--require-command",
+        action="store_true",
+        help="Fail if --command-template is not provided. Use in behavior-regression CI.",
+    )
     parser.add_argument(
         "--command-template",
         help=(
@@ -34,14 +40,20 @@ def main() -> int:
         return 1
 
     if not args.command_template:
+        if args.require_command:
+            print("Prompt command template is required but was not provided.")
+            return 2
         print("Expected-behavior specs are valid. No prompt command was run.")
         return 0
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     failures: list[str] = []
+    selected_cases = set(args.case) if args.case else None
 
     for prompt in sorted(args.prompt_dir.glob("*.md")):
         name = prompt.stem
+        if selected_cases is not None and name not in selected_cases:
+            continue
         output = args.output_dir / f"{name}.out"
         command = args.command_template.format(
             prompt=shlex.quote(str(prompt)),
@@ -55,7 +67,7 @@ def main() -> int:
             stderr = result.stderr.strip()
             failures.append(f"{name}: command failed with {result.returncode}: {stderr}")
 
-    failures.extend(check_outputs(args.expected_dir, args.output_dir))
+    failures.extend(check_outputs(args.expected_dir, args.output_dir, selected_cases))
 
     if failures:
         print("Prompt regression failed:")

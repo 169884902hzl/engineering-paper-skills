@@ -1,25 +1,114 @@
 {
-  "version": 1,
+  "version": 2,
+  "source_date": "2026-06-01",
   "profiles": {
-    "neurips_iclr_icml": {
+    "neurips_checklist": {
       "official_policy_checked_required": true,
+      "source_url": "https://nips.cc/public/guides/PaperChecklist",
+      "source_date": "2026-06-01",
       "required_fields": [
         "source_url",
         "source_date",
-        "checklist",
+        "claims_scope",
         "limitations",
         "assumptions",
         "reproducibility",
         "baselines",
         "statistics_or_uncertainty",
         "data_code_policy",
-        "ai_disclosure"
+        "ethics_or_societal_impact"
+      ],
+      "policy_checks": [
+        "main claims match theoretical and experimental results",
+        "limitations are discussed",
+        "assumptions and reproducibility details are visible",
+        "dataset, benchmark, and code availability status is clear"
       ],
       "claim_risks": [
         "benchmark result written as deployment reliability",
         "missing baselines written as superiority",
         "missing uncertainty written as significant improvement",
         "limitations hidden after strong claims"
+      ]
+    },
+    "iclr_2026": {
+      "official_policy_checked_required": true,
+      "source_url": "https://iclr.cc/Conferences/2026/AuthorGuide",
+      "source_date": "2026-06-01",
+      "required_fields": [
+        "source_url",
+        "source_date",
+        "page_limit",
+        "ethics_statement",
+        "reproducibility_statement",
+        "llm_usage_statement",
+        "openreview_anonymity",
+        "reviewer_discussion_constraints"
+      ],
+      "policy_checks": [
+        "LLM usage statement when LLMs substantially contributed",
+        "ethics statement when applicable",
+        "reproducibility statement visibility",
+        "OpenReview anonymity and citation constraints"
+      ],
+      "claim_risks": [
+        "LLM role omitted when material",
+        "limitations absent despite broad claims",
+        "claims written beyond benchmark or theoretical scope"
+      ]
+    },
+    "icml_2026": {
+      "official_policy_checked_required": true,
+      "source_url": "https://icml.cc/Conferences/2026/AuthorInstructions",
+      "source_date": "2026-06-01",
+      "required_fields": [
+        "source_url",
+        "source_date",
+        "page_limit",
+        "author_response_constraints",
+        "anonymous_submission",
+        "reproducibility",
+        "ethics_or_impact",
+        "supplement_policy"
+      ],
+      "policy_checks": [
+        "author response stage constraints",
+        "anonymous submission state",
+        "reproducibility and supplemental material boundary",
+        "claims versus empirical evidence"
+      ],
+      "claim_risks": [
+        "response claims manuscript changes outside allowed stage",
+        "supplement used to carry main proof",
+        "missing baselines written as superiority"
+      ]
+    },
+    "nature_portfolio": {
+      "official_policy_checked_required": true,
+      "source_url": "https://www.nature.com/nature-portfolio/editorial-policies/ai",
+      "source_date": "2026-06-01",
+      "formatting_source_url": "https://www.nature.com/nature/for-authors/formatting-guide",
+      "required_fields": [
+        "source_url",
+        "source_date",
+        "summary_claim_scope",
+        "methods_sufficiency",
+        "data_availability",
+        "code_availability",
+        "figure_legend_clarity",
+        "ai_use_disclosure",
+        "human_accountability"
+      ],
+      "policy_checks": [
+        "LLM cannot be listed as author",
+        "human authors remain accountable for final text",
+        "AI-assisted content and accessory content require fact checking",
+        "summary and Methods match evidence and reproducibility needs"
+      ],
+      "claim_risks": [
+        "broad significance without independent evidence",
+        "Methods too thin for interpretation or replication",
+        "AI-assisted text expands facts beyond source material"
       ]
     }
   }

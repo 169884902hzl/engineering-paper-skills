@@ -37,6 +37,10 @@ OPTIONAL_DICT_KEYS = {
     "manual_rubric",
 }
 
+OPTIONAL_COMPLEX_DICT_KEYS = {
+    "semantic_expectations",
+}
+
 
 def _load_spec(path: Path) -> dict[str, Any]:
     try:
@@ -63,6 +67,43 @@ def _expect_dict(path: Path, data: dict[str, Any], key: str) -> dict[str, str]:
     ):
         raise ValueError(f"{path}: {key} must be an object of string values")
     return value
+
+
+def _expect_semantic_expectations(path: Path, data: dict[str, Any]) -> dict[str, list[Any]]:
+    value = data.get("semantic_expectations")
+    if not isinstance(value, dict):
+        raise ValueError(f"{path}: semantic_expectations must be an object")
+    parsed: dict[str, list[Any]] = {}
+    for group, expectations in value.items():
+        if not isinstance(group, str):
+            raise ValueError(f"{path}: semantic_expectations group names must be strings")
+        if not isinstance(expectations, list):
+            raise ValueError(f"{path}: semantic_expectations.{group} must be a list")
+        for item in expectations:
+            if isinstance(item, str):
+                continue
+            if not isinstance(item, dict):
+                raise ValueError(f"{path}: semantic_expectations.{group} entries must be strings or objects")
+            name = item.get("name")
+            required_terms = item.get("required_terms")
+            any_terms = item.get("any_terms", [])
+            forbidden_terms = item.get("forbidden_terms", [])
+            if not isinstance(name, str) or not name:
+                raise ValueError(f"{path}: semantic_expectations.{group} object missing name")
+            if not isinstance(required_terms, list) or not all(
+                isinstance(term, str) and term for term in required_terms
+            ):
+                raise ValueError(
+                    f"{path}: semantic_expectations.{group}.{name} required_terms must be non-empty strings"
+                )
+            if not isinstance(any_terms, list) or not all(isinstance(term, str) and term for term in any_terms):
+                raise ValueError(f"{path}: semantic_expectations.{group}.{name} any_terms must be strings")
+            if not isinstance(forbidden_terms, list) or not all(
+                isinstance(term, str) and term for term in forbidden_terms
+            ):
+                raise ValueError(f"{path}: semantic_expectations.{group}.{name} forbidden_terms must be strings")
+        parsed[group] = expectations
+    return parsed
 
 
 def validate_specs(spec_dir: Path) -> list[str]:
@@ -113,6 +154,9 @@ def validate_specs(spec_dir: Path) -> list[str]:
             for key in OPTIONAL_DICT_KEYS:
                 if key in data:
                     _expect_dict(path, data, key)
+            for key in OPTIONAL_COMPLEX_DICT_KEYS:
+                if key in data:
+                    _expect_semantic_expectations(path, data)
 
             if data["forbidden_claims"] and not (
                 data["must_not_include"]
@@ -140,7 +184,7 @@ def _find_output(outputs_dir: Path, case: str) -> Path | None:
     return None
 
 
-def check_outputs(spec_dir: Path, outputs_dir: Path) -> list[str]:
+def check_outputs(spec_dir: Path, outputs_dir: Path, cases: set[str] | None = None) -> list[str]:
     errors = validate_specs(spec_dir)
     if errors:
         return errors
@@ -148,6 +192,8 @@ def check_outputs(spec_dir: Path, outputs_dir: Path) -> list[str]:
     for spec_path in sorted(spec_dir.glob("*.yaml")):
         data = _load_spec(spec_path)
         case = data["case"]
+        if cases is not None and case not in cases:
+            continue
         output_path = _find_output(outputs_dir, case)
         if output_path is None:
             errors.append(f"{case}: missing output file in {outputs_dir}")
@@ -186,6 +232,25 @@ def check_outputs(spec_dir: Path, outputs_dir: Path) -> list[str]:
             if status.lower() not in output_lower:
                 errors.append(f"{case}: missing expected status value: {status}")
 
+        for group, expectations in data.get("semantic_expectations", {}).items():
+            for item in expectations:
+                if isinstance(item, str):
+                    if item.lower() not in output_lower:
+                        errors.append(f"{case}: missing semantic expectation {group}: {item}")
+                    continue
+                name = item["name"]
+                for term in item.get("required_terms", []):
+                    if term.lower() not in output_lower:
+                        errors.append(f"{case}: semantic expectation {group}.{name} missing term: {term}")
+                any_terms = item.get("any_terms", [])
+                if any_terms and not any(term.lower() in output_lower for term in any_terms):
+                    errors.append(
+                        f"{case}: semantic expectation {group}.{name} missing any term: {', '.join(any_terms)}"
+                    )
+                for term in item.get("forbidden_terms", []):
+                    if term.lower() in output_lower:
+                        errors.append(f"{case}: semantic expectation {group}.{name} forbidden term found: {term}")
+
     return errors
 
 
@@ -193,10 +258,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--spec-dir", default="tests/expected", type=Path)
     parser.add_argument("--outputs-dir", type=Path)
+    parser.add_argument("--case", action="append", help="Only check the named case; may be repeated")
     args = parser.parse_args()
 
     errors = (
-        check_outputs(args.spec_dir, args.outputs_dir)
+        check_outputs(args.spec_dir, args.outputs_dir, set(args.case) if args.case else None)
         if args.outputs_dir
         else validate_specs(args.spec_dir)
     )

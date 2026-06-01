@@ -1,0 +1,54 @@
+{
+  "case": "figure_table_panel_claim",
+  "prompt": "figure_table_panel_claim.md",
+  "must_include": [
+    "Panel-claim map",
+    "Table-claim map",
+    "Unsupported caption claims",
+    "Safe caption",
+    "one robot",
+    "one fixture"
+  ],
+  "must_not_include": [
+    "Safe caption: Figure 1 proves",
+    "Safe table note: Table 1 confirms"
+  ],
+  "required_status": {},
+  "forbidden_claims": [
+    "statistical significance",
+    "deployment reliability",
+    "industrial generalization"
+  ],
+  "forbidden_regex": [
+    "(?i)Safe caption[\\s\\S]*robustly generalizes",
+    "(?i)Safe table note[\\s\\S]*confirms a statistically significant improvement",
+    "(?i)Safe table note[\\s\\S]*validates deployment reliability"
+  ],
+  "required_sections": [
+    "Panel-claim map",
+    "Table-claim map",
+    "Unsupported caption claims",
+    "Safe caption"
+  ],
+  "semantic_expectations": {
+    "figure_table": [
+      {
+        "name": "workflow figure limited",
+        "required_terms": ["Figure 1", "workflow", "must not claim"]
+      },
+      {
+        "name": "statistics rejected",
+        "required_terms": ["p-values", "confidence intervals", "not supplied"]
+      },
+      {
+        "name": "table boundary retained",
+        "required_terms": ["one robot", "one fixture", "one object family"]
+      }
+    ]
+  },
+  "allowed_behavior": [
+    "treat Figure 1 as visible process evidence only",
+    "treat Table 1 as bounded success-rate evidence only",
+    "reject statistical and deployment claims without supplied evidence"
+  ]
+}

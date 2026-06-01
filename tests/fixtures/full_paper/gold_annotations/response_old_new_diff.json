@@ -5,6 +5,23 @@
     "Figure 2 robustness claim is narrowed",
     "Table 1 result is bounded to the evaluated fixture"
   ],
+  "semantic_change_checks": [
+    {
+      "name": "method mechanism replaces module list",
+      "new_excerpt_terms": ["visibility-confidence state", "continues", "pauses", "stops"],
+      "draft_response_terms": ["clarified the method"]
+    },
+    {
+      "name": "figure caption is narrowed",
+      "new_excerpt_terms": ["illustrates the execution sequence", "rather than validating robustness"],
+      "draft_response_forbidden_terms": ["updated Figure 2 to validate robust execution"]
+    },
+    {
+      "name": "table result is bounded",
+      "new_excerpt_terms": ["one robot", "one fixture", "one object family"],
+      "draft_response_forbidden_terms": ["ready for submission"]
+    }
+  ],
   "unsupported_response_claims": [
     "added stress tests",
     "added Table 3",

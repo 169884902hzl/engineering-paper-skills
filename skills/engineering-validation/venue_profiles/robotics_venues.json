@@ -1,18 +1,27 @@
 {
-  "version": 1,
+  "version": 2,
+  "source_date": "2026-06-01",
   "profiles": {
-    "corl_icra_iros": {
+    "corl_2026": {
       "official_policy_checked_required": true,
+      "source_url": "https://2026.corl.org/contributions/instruction-for-authors",
+      "source_date": "2026-06-01",
       "required_fields": [
         "source_url",
         "source_date",
         "page_limit",
-        "anonymity",
         "limitations",
         "reproducibility_details",
         "ai_disclosure",
-        "supplement_policy",
+        "citation_integrity",
         "rebuttal_or_revision_constraints"
+      ],
+      "policy_checks": [
+        "limitations section status",
+        "reproducibility detail visibility",
+        "hallucinated or placeholder citation risk",
+        "AI use disclosure status",
+        "rebuttal versus revision stage boundary"
       ],
       "claim_risks": [
         "single robot written as general robotics",
@@ -21,8 +30,35 @@
         "demo written as deployment readiness"
       ]
     },
+    "icra_2026": {
+      "official_policy_checked_required": true,
+      "source_url": "https://2026.ieee-icra.org/contribute/final-paper-submission-instructions/",
+      "source_date": "2026-06-01",
+      "required_fields": [
+        "source_url",
+        "source_date",
+        "final_pdf_state",
+        "ai_disclosure",
+        "citation_integrity",
+        "figure_or_graphical_abstract_requirements",
+        "registration_or_final_submission_constraints"
+      ],
+      "policy_checks": [
+        "AI-generated text/reference policy",
+        "hallucinated citation screening risk",
+        "final PDF and upload consistency",
+        "final-paper figure requirements"
+      ],
+      "claim_risks": [
+        "AI-assisted text or citations not disclosed",
+        "unverified citations kept in final paper",
+        "figure caption written as robustness evidence"
+      ]
+    },
     "ral": {
       "official_policy_checked_required": true,
+      "source_url": "https://www.ieee-ras.org/publications/ra-l/ra-l-information-for-authors/",
+      "source_date": "2026-06-01",
       "required_fields": [
         "source_url",
         "source_date",
@@ -32,10 +68,43 @@
         "ai_disclosure",
         "final_pdf_checks"
       ],
+      "policy_checks": [
+        "main paper page limit",
+        "extra page allowance",
+        "supplemental text prohibition",
+        "multimedia material boundary",
+        "final paper deadline status"
+      ],
       "claim_risks": [
         "essential claims moved outside main paper",
         "page budget cuts remove evidence anchors",
         "supplement text used to carry required proof"
+      ]
+    },
+    "rss_2026": {
+      "official_policy_checked_required": true,
+      "source_url": "https://roboticsconference.org/2026/information/authorinfo/",
+      "source_date": "2026-06-01",
+      "required_fields": [
+        "source_url",
+        "source_date",
+        "page_limit",
+        "paper_type",
+        "limitations",
+        "anonymity",
+        "font_embedding",
+        "systems_or_demo_claim_scope"
+      ],
+      "policy_checks": [
+        "science/system versus demo category",
+        "limitations section status",
+        "8-page main paper limit where applicable",
+        "anonymity and PDF compliance"
+      ],
+      "claim_risks": [
+        "demo paper written as full systems contribution",
+        "system integration written without alternatives",
+        "limitations omitted or hidden"
       ]
     }
   }

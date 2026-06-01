@@ -30,6 +30,27 @@ Use this map to prevent these failures:
 - Discussion or Conclusion revives a claim that Results did not support.
 - Figures decorate the story instead of serving as evidence nodes.
 
+## Complete Claim Inventory
+
+For a full-paper audit, story spine is not complete until every major claim has
+been inventoried across sections.
+
+```text
+Section claim inventory
+| Claim ID | Claim text | First section | Reappears in | Method anchor | Experiment anchor | Figure/table anchor | Citation/source anchor | Boundary anchor | Verdict |
+```
+
+Rules:
+
+- If a claim appears in Abstract or Conclusion, it must have at least one method
+  or evidence anchor and one boundary anchor.
+- If a claim appears only in Discussion or Conclusion, treat it as claim
+  resurrection and downgrade, move, or delete it.
+- If one contribution depends on another, show the dependency rather than
+  listing contributions independently.
+- If a paper has multiple contributions, make one row per contribution and one
+  row per required evidence path.
+
 ## Section Dependency Checks
 
 | Section | Must depend on | Must support |
@@ -92,6 +113,21 @@ When the spine breaks, repair in this order:
    the experiment-question map before drafting interpretation.
 7. Recheck Abstract and Conclusion last; they may only state claims that survive
    the story-spine audit.
+
+## Multi-Contribution Check
+
+Use this when a paper has algorithm, system, benchmark, dataset, hardware, or
+analysis contributions in the same draft.
+
+```text
+Contribution dependency map
+| Contribution | Requires method object | Requires experiment | Depends on | Evidence sufficient? | Boundary |
+```
+
+Do not let a strong experiment for one contribution carry unsupported claims for
+another contribution. A system demo does not prove algorithmic superiority; an
+ablation does not prove deployment reliability; a benchmark result does not
+prove broad robotics generalization.
 
 ## Worked Failure Example
 
