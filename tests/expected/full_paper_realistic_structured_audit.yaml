@@ -42,21 +42,49 @@
         "name": "claim evidence rows",
         "path": "claim_evidence",
         "min_items": 4,
-        "required_fields": ["claim_id", "claim", "status", "evidence_anchor", "repair"],
+        "required_fields": [
+          "claim_id",
+          "claim",
+          "status",
+          "source_span",
+          "evidence_span",
+          "evidence_anchor",
+          "decision",
+          "forbidden_strengthening",
+          "repair"
+        ],
+        "non_empty_fields": [
+          "claim_id",
+          "claim",
+          "status",
+          "source_span",
+          "evidence_span",
+          "decision",
+          "forbidden_strengthening",
+          "repair"
+        ],
         "required_rows": [
           {
             "claim_id": "C1",
             "status": "FAIL",
+            "source_span": "industrial workcells",
+            "evidence_span": "one robot",
+            "decision": "reject",
             "repair": "delete"
           },
           {
             "claim_id": "C2",
             "status": "PASS_WITH_BOUNDARY",
+            "source_span": "84 percent",
+            "evidence_span": "180 trials",
             "evidence_anchor": "84 percent"
           },
           {
             "claim_id": "C3",
             "status": "PARTIAL",
+            "source_span": "causal driver",
+            "evidence_span": "no statistics",
+            "decision": "downgrade",
             "repair": "causal proof"
           }
         ]
@@ -65,16 +93,35 @@
         "name": "paragraph transition rows",
         "path": "paragraph_transitions",
         "min_items": 3,
-        "required_fields": ["from", "to", "relation", "issue", "repair"],
+        "required_fields": [
+          "from",
+          "to",
+          "relation",
+          "issue",
+          "terminology_drift",
+          "claim_strength_drift",
+          "repair"
+        ],
+        "non_empty_fields": [
+          "from",
+          "to",
+          "relation",
+          "issue",
+          "terminology_drift",
+          "claim_strength_drift",
+          "repair"
+        ],
         "required_rows": [
           {
             "from": "Related Work active perception",
             "to": "Related Work guarded execution",
-            "issue": "execution decisions"
+            "issue": "execution decisions",
+            "terminology_drift": "confidence gate"
           },
           {
             "from": "Discussion limitations",
             "to": "Conclusion",
+            "claim_strength_drift": "deployment readiness",
             "repair": "boundary"
           }
         ]
@@ -83,15 +130,42 @@
         "name": "response truthfulness rows",
         "path": "response_truthfulness",
         "min_items": 3,
-        "required_fields": ["response_claim", "status", "manuscript_anchor", "repair"],
+        "required_fields": [
+          "reviewer_comment_id",
+          "complaint_type",
+          "response_claim",
+          "status",
+          "old_problem_span",
+          "new_fix_span",
+          "semantic_match",
+          "manuscript_anchor",
+          "remaining_gap",
+          "repair"
+        ],
+        "non_empty_fields": [
+          "reviewer_comment_id",
+          "complaint_type",
+          "response_claim",
+          "status",
+          "old_problem_span",
+          "semantic_match",
+          "remaining_gap",
+          "repair"
+        ],
         "required_rows": [
           {
+            "reviewer_comment_id": "R5",
             "response_claim": "Table 3",
-            "status": "UNSUPPORTED"
+            "status": "UNSUPPORTED",
+            "semantic_match": "FAIL",
+            "remaining_gap": "no completed"
           },
           {
+            "reviewer_comment_id": "R2",
             "response_claim": "Lines 118-134",
-            "status": "UNVERIFIED"
+            "status": "UNVERIFIED",
+            "semantic_match": "PARTIAL",
+            "remaining_gap": "line numbers"
           }
         ]
       }

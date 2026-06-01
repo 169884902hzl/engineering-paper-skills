@@ -157,6 +157,9 @@ REQUIRED_DISCOVERY_ASSETS = {
         "Demo Gallery",
         "Structured JSON Audit",
         "Response Diff Verification",
+        "Inline Audit Snippets",
+        "source_span",
+        "remaining_gap",
     ],
     "docs/quality-gates.html": [
         "Quality Gates",
@@ -186,11 +189,26 @@ REQUIRED_DISCOVERY_ASSETS = {
     ],
     "CITATION.cff": [
         "Engineering Paper Skills",
-        "0.1.0-beta",
+        "commit-based-beta",
     ],
     "codemeta.json": [
         "Engineering Paper Skills",
         "research paper validation",
+    ],
+    "CHANGELOG.md": [
+        "No-release beta changelog",
+        "d03d683",
+        "8da3ceb",
+    ],
+    "KNOWN_GOOD.md": [
+        "Current public audit commit",
+        "Behavior evidence",
+        "Known limitations",
+    ],
+    "scripts/check_metadata_files.py": [
+        "Validate repository metadata",
+        "commit-based-beta",
+        "urlset",
     ],
 }
 
@@ -364,6 +382,8 @@ def main() -> int:
                 "fixture",
                 "gold_output",
                 "runtime_model_executed",
+                "evidence_level",
+                "score_interpretation",
                 "review_type",
                 "claim_evidence_alignment",
                 "story_spine",
@@ -377,6 +397,10 @@ def main() -> int:
                     errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} missing key: {key}")
             if rel_path.endswith("_model_eval.jsonl") and record.get("runtime_model_executed") is not True:
                 errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record runtime_model_executed=true")
+            if rel_path.endswith("_model_eval.jsonl") and record.get("evidence_level") != "local_single_run":
+                errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record evidence_level=local_single_run")
+            if not rel_path.endswith("_model_eval.jsonl") and record.get("evidence_level") != "repository_gold_review":
+                errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record evidence_level=repository_gold_review")
             if rel_path.endswith("_model_eval.jsonl") and "model_output" not in record:
                 errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} missing key: model_output")
             if rel_path.endswith("_model_eval.jsonl") and "model_output" in record:
@@ -473,6 +497,15 @@ def main() -> int:
             policy_checks = profile.get("policy_checks")
             if not isinstance(policy_checks, list) or len(policy_checks) < 3:
                 errors.append(f"Venue profile {rel_path}:{name} must include at least three policy_checks")
+            snapshot = profile.get("policy_snapshot")
+            if not isinstance(snapshot, dict):
+                errors.append(f"Venue profile {rel_path}:{name} must include policy_snapshot")
+                continue
+            for key in ("last_checked", "verification_method", "policy_excerpt_hash", "hash_basis"):
+                if not isinstance(snapshot.get(key), str) or not snapshot[key]:
+                    errors.append(f"Venue profile {rel_path}:{name} policy_snapshot missing {key}")
+            if "not live policy extraction" not in str(snapshot.get("verification_method", "")):
+                errors.append(f"Venue profile {rel_path}:{name} policy_snapshot must disclose non-live extraction")
 
     for rel_path, markers in REQUIRED_REFERENCE_MARKERS.items():
         path = ROOT / rel_path

@@ -13,6 +13,7 @@ python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-di
 python scripts/check_quality_assets.py
 python scripts/check_response_diff.py
 python scripts/check_venue_profiles.py
+python scripts/check_metadata_files.py
 ```
 
 ## Behavior Evidence
@@ -37,6 +38,8 @@ must not be described as behavior proof.
 - Keep human or local model-run score records under `evals/results/`.
 - Use `CITATION.cff` and `codemeta.json` for research-software metadata.
 - Use Pages and README demo links for discovery.
+- Use `KNOWN_GOOD.md` as the current commit-based beta anchor.
+- Use `CHANGELOG.md` for no-release quality-gate history.
 
 ## Evidence Boundary
 

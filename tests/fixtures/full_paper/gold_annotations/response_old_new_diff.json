@@ -26,8 +26,13 @@
     {
       "comment_id": "R2",
       "reviewer_concern": "method sounds like a module list",
+      "complaint_type": "mechanism clarity",
       "response_claim": "clarified the method in Lines 118-134",
       "expected_status": "PARTIAL_UNVERIFIED_LOCATION",
+      "old_problem_span": "complete pipeline for robust insertion",
+      "new_fix_span": "visibility-confidence state",
+      "semantic_match": "PARTIAL",
+      "remaining_gap": "line numbers and causal explanation remain unverified",
       "required_new_excerpt_terms": ["visibility-confidence state", "continues", "pauses", "stops"],
       "required_response_terms": ["clarified the method"],
       "unsupported_reason_terms": ["Lines 118-134"]
@@ -35,16 +40,26 @@
     {
       "comment_id": "R5",
       "reviewer_concern": "reflective-surface trials lack baselines",
+      "complaint_type": "missing experiment evidence",
       "response_claim": "added stress tests and Table 3",
       "expected_status": "UNSUPPORTED",
+      "old_problem_span": "validates robustness to occlusion",
+      "new_fix_span": "",
+      "semantic_match": "FAIL",
+      "remaining_gap": "no Table 3 or completed stress-test data exist in the new manuscript",
       "required_response_terms": ["added stress tests", "Table 3"],
       "forbidden_new_excerpt_terms": ["Table 3", "stress-test results"]
     },
     {
       "comment_id": "R6",
       "reviewer_concern": "Figure 2 is workflow, not robustness evidence",
+      "complaint_type": "figure evidence overclaim",
       "response_claim": "Figure 2 validates robust execution",
       "expected_status": "FALSE_CLAIM_STRENGTH",
+      "old_problem_span": "Figure 2 shows the workflow",
+      "new_fix_span": "rather than validating robustness",
+      "semantic_match": "FAIL",
+      "remaining_gap": "a workflow figure cannot serve as robustness evidence",
       "required_new_excerpt_terms": ["rather than validating robustness"],
       "required_response_terms": ["validate robust execution"]
     }

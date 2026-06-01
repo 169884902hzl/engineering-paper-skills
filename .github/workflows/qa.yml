@@ -18,6 +18,7 @@ jobs:
       - run: python scripts/check_quality_assets.py
       - run: python scripts/check_response_diff.py
       - run: python scripts/check_venue_profiles.py
+      - run: python scripts/check_metadata_files.py
       - name: Optional prompt behavior regression
         run: |
           if [ -z "${PROMPT_REGRESSION_COMMAND_TEMPLATE:-}" ]; then

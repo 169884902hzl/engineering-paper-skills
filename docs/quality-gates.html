@@ -49,7 +49,8 @@ python scripts/check_expected_behavior.py --spec-dir tests/expected
 python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-dir tests/outputs/golden
 python scripts/check_quality_assets.py
 python scripts/check_response_diff.py
-python scripts/check_venue_profiles.py</code></pre>
+python scripts/check_venue_profiles.py
+python scripts/check_metadata_files.py</code></pre>
 
       <h2>Behavior Evidence</h2>
       <p>Behavior evidence requires a real model command template. Without it, prompt regression is <code>NOT_RUN</code>.</p>
@@ -61,6 +62,9 @@ python scripts/check_venue_profiles.py</code></pre>
 
       <h2>Evidence Boundary</h2>
       <p>Golden outputs, static checks, and local model-run artifacts are review evidence. They are not proof of stable top-tier behavior on arbitrary unseen manuscripts.</p>
+
+      <h2>No-release Versioning</h2>
+      <p>Use <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/KNOWN_GOOD.md">KNOWN_GOOD.md</a> as the current commit-based beta anchor and <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/CHANGELOG.md">CHANGELOG.md</a> for quality-gate history.</p>
     </main>
   </body>
 </html>

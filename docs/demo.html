@@ -49,6 +49,13 @@
         border-radius: 4px;
         padding: 2px 5px;
       }
+      pre {
+        overflow-x: auto;
+        background: #101826;
+        color: #edf3fb;
+        padding: 16px;
+        border-radius: 8px;
+      }
     </style>
   </head>
   <body>
@@ -88,6 +95,32 @@
           <p>Maps panels and table cells to the claims they can and cannot support.</p>
           <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/figure_table_panel_claim.md">Open figure/table example</a>
         </article>
+      </section>
+
+      <section>
+        <h2>Inline Audit Snippets</h2>
+        <p>Short excerpts show the contract shape before readers open the full artifacts.</p>
+        <pre><code>{
+  "claim_id": "C1",
+  "status": "FAIL",
+  "source_span": "robust insertion in industrial workcells",
+  "evidence_span": "one robot, one tabletop fixture, one object family",
+  "decision": "reject",
+  "repair": "delete industrial reliability language"
+}</code></pre>
+        <pre><code>{
+  "reviewer_comment_id": "R5",
+  "response_claim": "new stress-test section and Table 3 were added",
+  "semantic_match": "FAIL",
+  "remaining_gap": "no completed stress-test table or manuscript data are supplied"
+}</code></pre>
+        <pre><code>{
+  "validation_status": {
+    "overall_readiness": "CANNOT_DETERMINE",
+    "official_venue_policy": "NOT_RUN",
+    "response_diff": "NOT_RUN"
+  }
+}</code></pre>
       </section>
 
       <section>

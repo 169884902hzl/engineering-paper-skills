@@ -15,28 +15,44 @@
       "claim_id": "C1",
       "claim": "industrial workcell reliability",
       "status": "FAIL",
+      "source_span": "robust insertion in industrial workcells",
+      "evidence_span": "one robot, one tabletop fixture, one object family",
       "evidence_anchor": "one robot, one tabletop fixture, one object family",
+      "decision": "reject",
+      "forbidden_strengthening": ["industrial", "general", "deployment-ready"],
       "repair": "delete industrial reliability language or move it to future work"
     },
     {
       "claim_id": "C2",
       "claim": "full system improves success in the evaluated setup",
       "status": "PASS_WITH_BOUNDARY",
+      "source_span": "the complete system achieved 84 percent success",
+      "evidence_span": "84 percent over 180 trials versus fixed-camera and open-loop variants",
       "evidence_anchor": "84 percent over 180 trials versus fixed-camera and open-loop variants",
+      "decision": "keep_with_boundary",
+      "forbidden_strengthening": ["statistically significant", "generalizes", "reliable"],
       "repair": "keep only with evaluated-tabletop boundary"
     },
     {
       "claim_id": "C3",
       "claim": "confidence gate causally proves the performance gain",
       "status": "PARTIAL",
+      "source_span": "proves that the confidence gate is the causal driver",
+      "evidence_span": "no-confidence-gate variant reaches 77 percent, but no statistics or failure taxonomy",
       "evidence_anchor": "no-confidence-gate variant reaches 77 percent, but no statistics or failure taxonomy",
+      "decision": "downgrade",
+      "forbidden_strengthening": ["proves", "causal", "guarantees"],
       "repair": "downgrade to component support rather than causal proof"
     },
     {
       "claim_id": "C4",
       "claim": "reflective trials validate robustness",
       "status": "FAIL_AS_COMPARATIVE_CLAIM",
+      "source_span": "reflective trials validate robustness",
+      "evidence_span": "18 of 30 full-system-only reflective trials with no baselines",
       "evidence_anchor": "18 of 30 full-system-only reflective trials with no baselines",
+      "decision": "narrow_to_observation",
+      "forbidden_strengthening": ["validate robustness", "stress-test proof", "comparative robustness"],
       "repair": "present as a stress observation and failure boundary"
     }
   ],
@@ -46,6 +62,8 @@
       "to": "Related Work guarded execution",
       "relation": "uncertainty to execution gate",
       "issue": "the draft does not explain why sensing uncertainty changes execution decisions",
+      "terminology_drift": "active perception, guarded execution, and confidence gate are introduced as separate ideas",
+      "claim_strength_drift": "prior work limitation becomes a method necessity without the bridge",
       "repair": "add a bridge from active sensing to confidence-gated execution"
     },
     {
@@ -53,6 +71,8 @@
       "to": "Methods state machine",
       "relation": "module names to mechanism",
       "issue": "the central method object appears after the module list",
+      "terminology_drift": "pipeline, framework, and state machine are not stabilized",
+      "claim_strength_drift": "module list implies a framework before the decision object is defined",
       "repair": "start Methods with the visibility-confidence state"
     },
     {
@@ -60,6 +80,8 @@
       "to": "Conclusion",
       "relation": "boundary to takeaway",
       "issue": "the conclusion can drop the one-robot one-fixture boundary",
+      "terminology_drift": "tabletop result can become industrial deployment language",
+      "claim_strength_drift": "bounded evidence can be strengthened into deployment readiness",
       "repair": "carry the boundary into the final takeaway"
     }
   ],
@@ -95,21 +117,39 @@
   ],
   "response_truthfulness": [
     {
+      "reviewer_comment_id": "R5",
+      "complaint_type": "missing stress-test evidence",
       "response_claim": "new stress-test section and Table 3 were added",
       "status": "UNSUPPORTED",
+      "old_problem_span": "Reflective parts remain a failure mode",
+      "new_fix_span": "",
+      "semantic_match": "FAIL",
       "manuscript_anchor": "Table 3 is planned but has no data",
+      "remaining_gap": "no completed stress-test table or manuscript data are supplied",
       "repair": "remove unless revised data and manuscript table are supplied"
     },
     {
+      "reviewer_comment_id": "R2",
+      "complaint_type": "method mechanism unclear",
       "response_claim": "Lines 118-134 explain the causal role",
       "status": "UNVERIFIED",
+      "old_problem_span": "Method reads as module list",
+      "new_fix_span": "visibility-confidence state continues, pauses, or stops execution",
+      "semantic_match": "PARTIAL",
       "manuscript_anchor": "no final line numbers are available",
+      "remaining_gap": "line numbers and causal wording are not verified",
       "repair": "use planned-change wording or provide a verified revised manuscript"
     },
     {
+      "reviewer_comment_id": "R6",
+      "complaint_type": "workflow figure overclaim",
       "response_claim": "Figure 2 validates robust execution",
       "status": "FALSE_CLAIM_STRENGTH",
+      "old_problem_span": "Figure 2 shows the execution sequence",
+      "new_fix_span": "Figure 2 illustrates the execution sequence rather than validating robustness",
+      "semantic_match": "FAIL",
       "manuscript_anchor": "Figure 2 is a workflow illustration",
+      "remaining_gap": "workflow illustration cannot validate robustness",
       "repair": "say Figure 2 illustrates the execution sequence"
     }
   ],

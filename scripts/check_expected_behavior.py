@@ -158,6 +158,7 @@ def _expect_json_expectations(path: Path, data: dict[str, Any]) -> dict[str, Any
         name = item.get("name")
         path_value = item.get("path")
         required_fields = item.get("required_fields", [])
+        non_empty_fields = item.get("non_empty_fields", [])
         required_rows = item.get("required_rows", [])
         min_items = item.get("min_items", 0)
         if not isinstance(name, str) or not name:
@@ -168,6 +169,8 @@ def _expect_json_expectations(path: Path, data: dict[str, Any]) -> dict[str, Any
             raise ValueError(f"{path}: json_expectations.{name}.min_items must be a non-negative integer")
         if not isinstance(required_fields, list) or not all(isinstance(field, str) for field in required_fields):
             raise ValueError(f"{path}: json_expectations.{name}.required_fields must be strings")
+        if not isinstance(non_empty_fields, list) or not all(isinstance(field, str) for field in non_empty_fields):
+            raise ValueError(f"{path}: json_expectations.{name}.non_empty_fields must be strings")
         if not isinstance(required_rows, list) or not all(isinstance(row, dict) for row in required_rows):
             raise ValueError(f"{path}: json_expectations.{name}.required_rows must be objects")
     return value
@@ -390,12 +393,27 @@ def check_outputs(spec_dir: Path, outputs_dir: Path, cases: set[str] | None = No
                 if len(rows) < min_items:
                     errors.append(f"{case}: JSON expectation {name} has {len(rows)} rows, expected {min_items}")
                 required_fields = expectation.get("required_fields", [])
+                non_empty_fields = expectation.get("non_empty_fields", [])
                 for index, row in enumerate(rows):
                     if not isinstance(row, dict):
                         errors.append(f"{case}: JSON expectation {name} row {index} is not an object")
                         continue
                     for field in required_fields:
                         if field not in row:
+                            errors.append(f"{case}: JSON expectation {name} row {index} missing field: {field}")
+                    for field in non_empty_fields:
+                        value = row.get(field)
+                        if isinstance(value, str):
+                            if not value.strip():
+                                errors.append(
+                                    f"{case}: JSON expectation {name} row {index} has empty field: {field}"
+                                )
+                        elif isinstance(value, list):
+                            if not value or not all(isinstance(item, str) and item.strip() for item in value):
+                                errors.append(
+                                    f"{case}: JSON expectation {name} row {index} has empty list field: {field}"
+                                )
+                        elif value is None:
                             errors.append(f"{case}: JSON expectation {name} row {index} missing field: {field}")
                 for required_row in expectation.get("required_rows", []):
                     matches = []

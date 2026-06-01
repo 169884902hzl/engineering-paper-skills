@@ -11,6 +11,7 @@ python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-di
 python scripts/check_quality_assets.py
 python scripts/check_response_diff.py
 python scripts/check_venue_profiles.py
+python scripts/check_metadata_files.py
 python scripts/run_prompt_regression.py
 ```
 
@@ -32,6 +33,8 @@ This checks:
 - response diff fixture and response-truthfulness sanity check
 - venue profile JSON files that require official source URL and source date
 - venue profile structure through `scripts/check_venue_profiles.py`
+- metadata, Pages, sitemap, robots, workflow, CFF, changelog, and known-good
+  commit structure through `scripts/check_metadata_files.py`
 - manual top-tier writing rubric under `evals/`
 - structured semantic expectations in selected `tests/expected/*.yaml` specs
 

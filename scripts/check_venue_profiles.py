@@ -112,6 +112,26 @@ def main() -> int:
                         errors.append(
                             f"{path.relative_to(ROOT)}:{name} formatting_source_url unreachable: {problem}"
                         )
+            snapshot = profile.get("policy_snapshot")
+            if not isinstance(snapshot, dict):
+                errors.append(f"{path.relative_to(ROOT)}:{name} missing policy_snapshot")
+                continue
+            last_checked = snapshot.get("last_checked")
+            try:
+                parse_source_date(path, f"{name}.policy_snapshot", last_checked)
+            except ValueError as exc:
+                errors.append(str(exc))
+            verification_method = snapshot.get("verification_method")
+            if not isinstance(verification_method, str) or "not live policy extraction" not in verification_method:
+                errors.append(
+                    f"{path.relative_to(ROOT)}:{name} policy_snapshot must state whether it is live extraction"
+                )
+            excerpt_hash = snapshot.get("policy_excerpt_hash")
+            if not isinstance(excerpt_hash, str) or len(excerpt_hash) < 12:
+                errors.append(f"{path.relative_to(ROOT)}:{name} policy_snapshot missing policy_excerpt_hash")
+            hash_basis = snapshot.get("hash_basis")
+            if not isinstance(hash_basis, str) or "policy_checks" not in hash_basis:
+                errors.append(f"{path.relative_to(ROOT)}:{name} policy_snapshot missing hash_basis")
 
     if errors:
         print("Venue profile check failed:")

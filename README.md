@@ -92,6 +92,7 @@ python scripts/check_expected_behavior.py --spec-dir tests/expected
 python scripts/check_quality_assets.py
 python scripts/check_response_diff.py
 python scripts/check_venue_profiles.py
+python scripts/check_metadata_files.py
 for s in skills/engineering-*; do
   python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
 done
@@ -112,7 +113,9 @@ model outputs as an artifact.
 This repository does not require GitHub releases; external reviews should cite
 the current `main` commit hash and the recorded eval artifacts.
 The no-release quality contract is documented in
-[Quality Gates](docs/quality-gates.md).
+[Quality Gates](docs/quality-gates.md). The current public audit anchor is
+tracked in [Known-Good Commit Matrix](KNOWN_GOOD.md), and quality-gate changes
+are tracked in [CHANGELOG.md](CHANGELOG.md).
 
 ## Project Overview
 
@@ -406,8 +409,10 @@ The skills are organized around five writing constraints:
 
 ## Roadmap
 
-- Add executable prompt regression runs once a stable non-interactive Codex CLI
-  command is selected for this repository.
+- Expand CI-controlled behavior-regression artifacts and human-scored eval
+  records beyond local single-run evidence.
+- Move structured JSON checks toward span-grounded claim/evidence and response
+  verification contracts.
 - Add more full before/after examples for each skill.
 - Add LaTeX project QA helpers for labels, citations, page count, and warnings.
 - Consider optional packaging once the manual installation path is stable.

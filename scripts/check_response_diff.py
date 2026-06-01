@@ -96,16 +96,34 @@ def main() -> int:
             continue
         comment_id = check.get("comment_id")
         reviewer_concern = check.get("reviewer_concern")
+        complaint_type = check.get("complaint_type")
         response_claim = check.get("response_claim")
         expected_status = check.get("expected_status")
+        old_problem_span = check.get("old_problem_span")
+        new_fix_span = check.get("new_fix_span")
+        semantic_match = check.get("semantic_match")
+        remaining_gap = check.get("remaining_gap")
         if not all(isinstance(value, str) and value for value in (
             comment_id,
             reviewer_concern,
+            complaint_type,
             response_claim,
             expected_status,
+            old_problem_span,
+            semantic_match,
+            remaining_gap,
         )):
-            errors.append("response_claim_checks entries require comment_id, reviewer_concern, response_claim, and expected_status")
+            errors.append(
+                "response_claim_checks entries require comment_id, reviewer_concern, complaint_type, "
+                "response_claim, expected_status, old_problem_span, semantic_match, and remaining_gap"
+            )
             continue
+        if semantic_match not in {"PASS", "PARTIAL", "FAIL"}:
+            errors.append(f"{comment_id}: semantic_match must be PASS, PARTIAL, or FAIL")
+        if not contains_phrase(old_excerpt, old_problem_span):
+            errors.append(f"{comment_id}: old manuscript excerpt missing old_problem_span: {old_problem_span}")
+        if isinstance(new_fix_span, str) and new_fix_span and not contains_phrase(new_excerpt, new_fix_span):
+            errors.append(f"{comment_id}: new manuscript excerpt missing new_fix_span: {new_fix_span}")
         for term in check.get("required_new_excerpt_terms", []):
             if not isinstance(term, str) or not term:
                 errors.append(f"{comment_id}: required_new_excerpt_terms must be non-empty strings")

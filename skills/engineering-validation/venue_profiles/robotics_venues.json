@@ -6,6 +6,12 @@
       "official_policy_checked_required": true,
       "source_url": "https://2026.corl.org/contributions/instruction-for-authors",
       "source_date": "2026-06-01",
+      "policy_snapshot": {
+        "last_checked": "2026-06-01",
+        "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",
+        "policy_excerpt_hash": "2766d4a7980dd4c4",
+        "hash_basis": "required_fields, policy_checks, and claim_risks stored in this profile"
+      },
       "required_fields": [
         "source_url",
         "source_date",
@@ -34,6 +40,12 @@
       "official_policy_checked_required": true,
       "source_url": "https://2026.ieee-icra.org/contribute/final-paper-submission-instructions/",
       "source_date": "2026-06-01",
+      "policy_snapshot": {
+        "last_checked": "2026-06-01",
+        "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",
+        "policy_excerpt_hash": "a249b3159f8801f8",
+        "hash_basis": "required_fields, policy_checks, and claim_risks stored in this profile"
+      },
       "required_fields": [
         "source_url",
         "source_date",
@@ -59,6 +71,12 @@
       "official_policy_checked_required": true,
       "source_url": "https://www.ieee-ras.org/publications/ra-l/ra-l-information-for-authors/",
       "source_date": "2026-06-01",
+      "policy_snapshot": {
+        "last_checked": "2026-06-01",
+        "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",
+        "policy_excerpt_hash": "5f701167b33db16f",
+        "hash_basis": "required_fields, policy_checks, and claim_risks stored in this profile"
+      },
       "required_fields": [
         "source_url",
         "source_date",
@@ -85,6 +103,12 @@
       "official_policy_checked_required": true,
       "source_url": "https://roboticsconference.org/2026/information/authorinfo/",
       "source_date": "2026-06-01",
+      "policy_snapshot": {
+        "last_checked": "2026-06-01",
+        "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",
+        "policy_excerpt_hash": "78f9cf6ac6252ccd",
+        "hash_basis": "required_fields, policy_checks, and claim_risks stored in this profile"
+      },
       "required_fields": [
         "source_url",
         "source_date",

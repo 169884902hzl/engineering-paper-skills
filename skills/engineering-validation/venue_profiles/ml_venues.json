@@ -6,6 +6,12 @@
       "official_policy_checked_required": true,
       "source_url": "https://nips.cc/public/guides/PaperChecklist",
       "source_date": "2026-06-01",
+      "policy_snapshot": {
+        "last_checked": "2026-06-01",
+        "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",
+        "policy_excerpt_hash": "d157e05aaaf45efc",
+        "hash_basis": "required_fields, policy_checks, and claim_risks stored in this profile"
+      },
       "required_fields": [
         "source_url",
         "source_date",
@@ -35,6 +41,12 @@
       "official_policy_checked_required": true,
       "source_url": "https://iclr.cc/Conferences/2026/AuthorGuide",
       "source_date": "2026-06-01",
+      "policy_snapshot": {
+        "last_checked": "2026-06-01",
+        "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",
+        "policy_excerpt_hash": "9ec026fe8785ff91",
+        "hash_basis": "required_fields, policy_checks, and claim_risks stored in this profile"
+      },
       "required_fields": [
         "source_url",
         "source_date",
@@ -61,6 +73,12 @@
       "official_policy_checked_required": true,
       "source_url": "https://icml.cc/Conferences/2026/AuthorInstructions",
       "source_date": "2026-06-01",
+      "policy_snapshot": {
+        "last_checked": "2026-06-01",
+        "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",
+        "policy_excerpt_hash": "c232809bdd5499b6",
+        "hash_basis": "required_fields, policy_checks, and claim_risks stored in this profile"
+      },
       "required_fields": [
         "source_url",
         "source_date",
@@ -88,6 +106,12 @@
       "source_url": "https://www.nature.com/nature-portfolio/editorial-policies/ai",
       "source_date": "2026-06-01",
       "formatting_source_url": "https://www.nature.com/nature/for-authors/formatting-guide",
+      "policy_snapshot": {
+        "last_checked": "2026-06-01",
+        "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",
+        "policy_excerpt_hash": "f03d297408e376c5",
+        "hash_basis": "required_fields, policy_checks, and claim_risks stored in this profile"
+      },
       "required_fields": [
         "source_url",
         "source_date",

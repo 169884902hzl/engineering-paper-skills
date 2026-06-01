@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use Engineering Paper Skills, please cite this repository."
 title: "Engineering Paper Skills"
-version: "0.1.0-beta"
+version: "commit-based-beta"
 type: software
 license: MIT
 authors:
