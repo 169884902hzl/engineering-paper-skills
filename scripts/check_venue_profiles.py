@@ -81,6 +81,10 @@ def main() -> int:
                 continue
             if profile.get("official_policy_checked_required") is not True:
                 errors.append(f"{path.relative_to(ROOT)}:{name} must require official policy checks")
+            if profile.get("profile_status") != "STATIC_SUMMARY_NOT_LIVE_CHECK":
+                errors.append(
+                    f"{path.relative_to(ROOT)}:{name} must mark profile_status=STATIC_SUMMARY_NOT_LIVE_CHECK"
+                )
             url = profile.get("source_url")
             if not isinstance(url, str) or not url.startswith("https://"):
                 errors.append(f"{path.relative_to(ROOT)}:{name} must include https source_url")

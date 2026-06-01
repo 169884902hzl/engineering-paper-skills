@@ -25,6 +25,17 @@ jobs:
             --command-template "$PROMPT_REGRESSION_COMMAND_TEMPLATE"
         env:
           PROMPT_REGRESSION_COMMAND_TEMPLATE: ${{ secrets.PROMPT_REGRESSION_COMMAND_TEMPLATE }}
+      - name: Write behavior eval stub
+        if: success()
+        run: |
+          python scripts/write_behavior_eval_stub.py \
+            --case "${{ inputs.case }}" \
+            --output-dir /tmp/engineering-paper-skill-regression \
+            --eval-output /tmp/engineering-paper-skill-regression/behavior_eval_stub.jsonl \
+            --commit "$GITHUB_SHA" \
+            --model "${PROMPT_REGRESSION_MODEL:-configured_by_command_template}"
+        env:
+          PROMPT_REGRESSION_MODEL: ${{ vars.PROMPT_REGRESSION_MODEL }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:

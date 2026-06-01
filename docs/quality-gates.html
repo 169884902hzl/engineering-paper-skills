@@ -50,7 +50,8 @@ python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-di
 python scripts/check_quality_assets.py
 python scripts/check_response_diff.py
 python scripts/check_venue_profiles.py
-python scripts/check_metadata_files.py</code></pre>
+python scripts/check_metadata_files.py
+python scripts/write_behavior_eval_stub.py --help</code></pre>
 
       <h2>Behavior Evidence</h2>
       <p>Behavior evidence requires a real model command template. Without it, prompt regression is <code>NOT_RUN</code>.</p>
@@ -59,6 +60,8 @@ python scripts/check_metadata_files.py</code></pre>
   --case full_paper_realistic_audit \
   --output-dir /tmp/engineering-paper-skill-regression \
   --command-template "$PROMPT_REGRESSION_COMMAND_TEMPLATE"</code></pre>
+      <p>A successful manual behavior run writes <code>behavior_eval_stub.jsonl</code> with the commit hash, output hash, artifact name, and <code>ci_single_run</code> evidence level. It remains unscored until human or semantic review is added.</p>
+      <p>Failed local behavior attempts are kept when they expose a real contract gap. The <code>6bec865</code> structured-audit attempt is recorded as <code>local_single_run_failed</code>, not as a passing model run.</p>
 
       <h2>Evidence Boundary</h2>
       <p>Golden outputs, static checks, and local model-run artifacts are review evidence. They are not proof of stable top-tier behavior on arbitrary unseen manuscripts.</p>

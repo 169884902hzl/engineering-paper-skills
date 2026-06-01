@@ -14,6 +14,7 @@ python scripts/check_quality_assets.py
 python scripts/check_response_diff.py
 python scripts/check_venue_profiles.py
 python scripts/check_metadata_files.py
+python scripts/write_behavior_eval_stub.py --help
 ```
 
 ## Behavior Evidence
@@ -30,6 +31,15 @@ python scripts/run_prompt_regression.py \
 
 If the command template is absent, prompt regression is `NOT_RUN`. That state
 must not be described as behavior proof.
+
+When the manual behavior workflow succeeds, it writes a
+`behavior_eval_stub.jsonl` artifact with the commit hash, output hash, case, and
+`ci_single_run` evidence level. That stub is provenance only until a human or
+semantic judge scores the output.
+
+The repository also keeps failed local behavior attempts when they reveal a real
+contract gap. For example, the `6bec865` structured-audit attempt is recorded as
+`local_single_run_failed`, not as a passing model run.
 
 ## Versioning Without Releases
 

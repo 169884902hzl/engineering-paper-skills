@@ -82,7 +82,8 @@ overall readiness must be `NOT_READY` or `CANNOT_DETERMINE`.
    and perform only the file-based or local-text audit that evidence allows.
 9. For venue readiness, report whether official policy was checked, including
    source URL and source date. If not checked, venue compliance is `NOT_RUN` or
-   `PARTIAL`.
+   `PARTIAL`. Static venue profiles count only as
+   `STATIC_SUMMARY_NOT_LIVE_CHECK`, not as official policy verification.
 10. Report evidence, failures, and unverified items.
 
 ## Default Output
@@ -108,6 +109,9 @@ Evidence
 - Not verified:
 - Official policy checked:
 - Official policy source/date:
+- Official page opened this run:
+- Policy excerpt checked:
+- Profile-only status:
 
 Blocking issues
 - ...

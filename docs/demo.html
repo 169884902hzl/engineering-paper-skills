@@ -124,6 +124,28 @@
       </section>
 
       <section>
+        <h2>Mini Walkthrough</h2>
+        <p>A compact input-to-output example shows how an unsafe manuscript claim is handled.</p>
+        <pre><code>Bad manuscript claim:
+"These results establish robust insertion in industrial workcells."</code></pre>
+        <pre><code>Audit row:
+{
+  "claim_id": "C1",
+  "source_span": "Robust Robot Insertion in Cluttered Industrial Workcells",
+  "evidence_span": "one robot arm, one tabletop fixture, and two part colors",
+  "status": "FAIL",
+  "decision": "reject",
+  "repair": "delete industrial reliability language or move it to future work"
+}</code></pre>
+        <pre><code>Safe rewrite:
+"In the evaluated tabletop setup, the full system improves success over fixed-view and open-loop variants, while broader industrial deployment remains untested."</code></pre>
+        <pre><code>Validation status:
+overall_readiness: CANNOT_DETERMINE
+official_venue_policy: NOT_RUN
+response_diff: NOT_RUN</code></pre>
+      </section>
+
+      <section>
         <h2>Quality Contract</h2>
         <p>The project tracks quality through commit hashes, local model-run artifacts, expected behavior specs, and human-readable eval records. See <a href="./quality-gates.html">quality gates</a>.</p>
       </section>

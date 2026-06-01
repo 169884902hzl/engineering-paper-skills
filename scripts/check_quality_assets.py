@@ -84,6 +84,7 @@ REQUIRED_FULL_PAPER_CASES = {
 }
 
 REQUIRED_EVAL_RESULTS = {
+    "evals/results/6bec865_full_paper_model_eval.jsonl",
     "evals/results/8da3ceb_full_paper_model_eval.jsonl",
     "evals/results/f3cbb28_full_paper_manual_eval.jsonl",
     "evals/results/f3cbb28_full_paper_model_eval.jsonl",
@@ -113,6 +114,13 @@ REQUIRED_MODEL_RUNS = {
         "Paragraph transition matrix",
         "Response diff verification",
         "CANNOT_VALIDATE_AS_READY",
+    ],
+    "tests/outputs/model_runs/full_paper_realistic_structured_audit_6bec865_failed.json": [
+        "BLOCKED_NOT_READY",
+        "claim_evidence",
+        "source_span",
+        "response_truthfulness",
+        "validation_status",
     ],
 }
 
@@ -146,6 +154,12 @@ REQUIRED_DISCOVERY_ASSETS = {
         "Validate venue profile JSON files",
         "--refresh",
         "official source URLs",
+        "STATIC_SUMMARY_NOT_LIVE_CHECK",
+    ],
+    "scripts/write_behavior_eval_stub.py": [
+        "behavior-regression eval stub",
+        "ci_single_run",
+        "output_sha256",
     ],
     "docs/index.html": [
         "Engineering Paper Skills",
@@ -158,6 +172,7 @@ REQUIRED_DISCOVERY_ASSETS = {
         "Structured JSON Audit",
         "Response Diff Verification",
         "Inline Audit Snippets",
+        "Mini Walkthrough",
         "source_span",
         "remaining_gap",
     ],
@@ -197,11 +212,12 @@ REQUIRED_DISCOVERY_ASSETS = {
     ],
     "CHANGELOG.md": [
         "No-release beta changelog",
+        "6bec865",
         "d03d683",
         "8da3ceb",
     ],
     "KNOWN_GOOD.md": [
-        "Current public audit commit",
+        "Commit anchors",
         "Behavior evidence",
         "Known limitations",
     ],
@@ -397,8 +413,13 @@ def main() -> int:
                     errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} missing key: {key}")
             if rel_path.endswith("_model_eval.jsonl") and record.get("runtime_model_executed") is not True:
                 errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record runtime_model_executed=true")
-            if rel_path.endswith("_model_eval.jsonl") and record.get("evidence_level") != "local_single_run":
-                errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record evidence_level=local_single_run")
+            if rel_path.endswith("_model_eval.jsonl") and record.get("evidence_level") not in {
+                "local_single_run",
+                "local_single_run_failed",
+            }:
+                errors.append(
+                    f"{eval_result.relative_to(ROOT)} line {line_no} must record local single-run evidence_level"
+                )
             if not rel_path.endswith("_model_eval.jsonl") and record.get("evidence_level") != "repository_gold_review":
                 errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record evidence_level=repository_gold_review")
             if rel_path.endswith("_model_eval.jsonl") and "model_output" not in record:
@@ -434,6 +455,21 @@ def main() -> int:
                 if not isinstance(record.get("residual_limitations"), list) or not record["residual_limitations"]:
                     errors.append(
                         f"{eval_result.relative_to(ROOT)} line {line_no} must record residual_limitations"
+                    )
+            if "6bec865" in rel_path:
+                if record.get("commit") != "6bec865":
+                    errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record commit=6bec865")
+                if record.get("ci_controlled") is not False:
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must explicitly record ci_controlled=false"
+                    )
+                if record.get("evidence_level") != "local_single_run_failed":
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must record failed local evidence"
+                    )
+                if not isinstance(record.get("blocking_failures"), list) or not record["blocking_failures"]:
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must record blocking_failures"
                     )
 
     for rel_path, markers in REQUIRED_MODEL_RUNS.items():
@@ -487,6 +523,10 @@ def main() -> int:
                 continue
             if profile.get("official_policy_checked_required") is not True:
                 errors.append(f"Venue profile {rel_path}:{name} must require official policy check")
+            if profile.get("profile_status") != "STATIC_SUMMARY_NOT_LIVE_CHECK":
+                errors.append(
+                    f"Venue profile {rel_path}:{name} must mark profile_status=STATIC_SUMMARY_NOT_LIVE_CHECK"
+                )
             if not isinstance(profile.get("source_url"), str) or not profile["source_url"].startswith("https://"):
                 errors.append(f"Venue profile {rel_path}:{name} must include https source_url")
             if not isinstance(profile.get("source_date"), str) or not profile["source_date"]:

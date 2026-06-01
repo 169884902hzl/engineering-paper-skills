@@ -67,23 +67,23 @@
           {
             "claim_id": "C1",
             "status": "FAIL",
-            "source_span": "industrial workcells",
-            "evidence_span": "one robot",
+            "source_span": "Robust Robot Insertion in Cluttered Industrial Workcells",
+            "evidence_span": "one robot arm",
             "decision": "reject",
             "repair": "delete"
           },
           {
             "claim_id": "C2",
             "status": "PASS_WITH_BOUNDARY",
-            "source_span": "84 percent",
-            "evidence_span": "180 trials",
+            "source_span": "full system reaches 84 percent",
+            "evidence_span": "fixed overhead camera baseline",
             "evidence_anchor": "84 percent"
           },
           {
             "claim_id": "C3",
             "status": "PARTIAL",
-            "source_span": "causal driver",
-            "evidence_span": "no statistics",
+            "source_span": "causal mechanisms",
+            "evidence_span": "no statistical test",
             "decision": "downgrade",
             "repair": "causal proof"
           }
@@ -168,6 +168,24 @@
             "remaining_gap": "line numbers"
           }
         ]
+      }
+    ],
+    "span_origin_checks": [
+      {
+        "name": "claim source and evidence spans come from fixture",
+        "path": "claim_evidence",
+        "fields": ["source_span", "evidence_span"],
+        "source_file": "tests/fixtures/full_paper/robot_active_observation_realistic_8page.md"
+      }
+    ],
+    "gold_row_expectations": [
+      {
+        "name": "claim rows match hidden gold contract",
+        "output_path": "claim_evidence",
+        "annotation_file": "tests/fixtures/full_paper/gold_annotations/robot_active_observation_realistic_8page.json",
+        "annotation_path": "structured_audit_contract.claim_evidence",
+        "key": "claim_id",
+        "fields": ["status", "decision", "source_span", "evidence_span"]
       }
     ]
   },

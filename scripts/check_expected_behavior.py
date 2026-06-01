@@ -15,6 +15,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[1]
+
 REQUIRED_KEYS = {
     "case",
     "prompt",
@@ -173,6 +175,30 @@ def _expect_json_expectations(path: Path, data: dict[str, Any]) -> dict[str, Any
             raise ValueError(f"{path}: json_expectations.{name}.non_empty_fields must be strings")
         if not isinstance(required_rows, list) or not all(isinstance(row, dict) for row in required_rows):
             raise ValueError(f"{path}: json_expectations.{name}.required_rows must be objects")
+    for item in value.get("span_origin_checks", []):
+        if not isinstance(item, dict):
+            raise ValueError(f"{path}: json_expectations.span_origin_checks entries must be objects")
+        name = item.get("name")
+        path_value = item.get("path")
+        fields = item.get("fields")
+        source_file = item.get("source_file")
+        if not isinstance(name, str) or not name:
+            raise ValueError(f"{path}: json_expectations.span_origin_checks entry missing name")
+        if not isinstance(path_value, str) or not path_value:
+            raise ValueError(f"{path}: json_expectations.span_origin_checks.{name} missing path")
+        if not isinstance(fields, list) or not all(isinstance(field, str) and field for field in fields):
+            raise ValueError(f"{path}: json_expectations.span_origin_checks.{name}.fields must be strings")
+        if not isinstance(source_file, str) or not source_file:
+            raise ValueError(f"{path}: json_expectations.span_origin_checks.{name} missing source_file")
+    for item in value.get("gold_row_expectations", []):
+        if not isinstance(item, dict):
+            raise ValueError(f"{path}: json_expectations.gold_row_expectations entries must be objects")
+        for key in ("name", "output_path", "annotation_file", "annotation_path", "key"):
+            if not isinstance(item.get(key), str) or not item[key]:
+                raise ValueError(f"{path}: json_expectations.gold_row_expectations entry missing {key}")
+        fields = item.get("fields")
+        if not isinstance(fields, list) or not all(isinstance(field, str) and field for field in fields):
+            raise ValueError(f"{path}: json_expectations.gold_row_expectations.{item['name']}.fields must be strings")
     return value
 
 
@@ -268,11 +294,22 @@ def _json_path(value: Any, path: str) -> Any:
     return current
 
 
+def _normalize_text(value: str) -> str:
+    return " ".join(value.lower().split())
+
+
+def _load_text_for_spec(path: str) -> str:
+    source = ROOT / path
+    if not source.exists():
+        raise FileNotFoundError(path)
+    return source.read_text(encoding="utf-8")
+
+
 def _field_matches(actual: Any, expected: Any) -> bool:
     if isinstance(expected, list):
         return actual in expected
     if isinstance(expected, str) and isinstance(actual, str):
-        return expected.lower() in actual.lower()
+        return _normalize_text(expected) in _normalize_text(actual)
     return actual == expected
 
 
@@ -430,6 +467,76 @@ def check_outputs(spec_dir: Path, outputs_dir: Path, cases: set[str] | None = No
                             f"{case}: JSON expectation {name} missing row matching: "
                             f"{json.dumps(required_row, sort_keys=True)}"
                         )
+
+            for expectation in json_spec.get("span_origin_checks", []):
+                name = expectation["name"]
+                try:
+                    rows = _json_path(parsed_output, expectation["path"])
+                    source_text = _load_text_for_spec(expectation["source_file"])
+                except (KeyError, FileNotFoundError) as exc:
+                    errors.append(f"{case}: JSON span-origin expectation {name} cannot load source: {exc}")
+                    continue
+                if not isinstance(rows, list):
+                    errors.append(f"{case}: JSON span-origin expectation {name} path is not an array")
+                    continue
+                normalized_source = _normalize_text(source_text)
+                for index, row in enumerate(rows):
+                    if not isinstance(row, dict):
+                        errors.append(f"{case}: JSON span-origin expectation {name} row {index} is not an object")
+                        continue
+                    for field in expectation["fields"]:
+                        value = row.get(field)
+                        if not isinstance(value, str) or not value.strip():
+                            errors.append(
+                                f"{case}: JSON span-origin expectation {name} row {index} missing {field}"
+                            )
+                            continue
+                        if _normalize_text(value) not in normalized_source:
+                            errors.append(
+                                f"{case}: JSON span-origin expectation {name} row {index} {field} "
+                                f"not found in {expectation['source_file']}: {value}"
+                            )
+
+            for expectation in json_spec.get("gold_row_expectations", []):
+                name = expectation["name"]
+                try:
+                    output_rows = _json_path(parsed_output, expectation["output_path"])
+                    annotation = json.loads(_load_text_for_spec(expectation["annotation_file"]))
+                    gold_rows = _json_path(annotation, expectation["annotation_path"])
+                except (KeyError, FileNotFoundError, json.JSONDecodeError) as exc:
+                    errors.append(f"{case}: JSON gold-row expectation {name} cannot load data: {exc}")
+                    continue
+                if not isinstance(output_rows, list) or not all(isinstance(row, dict) for row in output_rows):
+                    errors.append(f"{case}: JSON gold-row expectation {name} output path is not object rows")
+                    continue
+                if not isinstance(gold_rows, list) or not all(isinstance(row, dict) for row in gold_rows):
+                    errors.append(f"{case}: JSON gold-row expectation {name} annotation path is not object rows")
+                    continue
+                key = expectation["key"]
+                output_by_key = {row.get(key): row for row in output_rows if isinstance(row.get(key), str)}
+                for gold_row in gold_rows:
+                    row_id = gold_row.get(key)
+                    if not isinstance(row_id, str) or not row_id:
+                        errors.append(f"{case}: JSON gold-row expectation {name} annotation row missing key {key}")
+                        continue
+                    output_row = output_by_key.get(row_id)
+                    if output_row is None:
+                        errors.append(f"{case}: JSON gold-row expectation {name} missing output row {key}={row_id}")
+                        continue
+                    for field in expectation["fields"]:
+                        expected_value = gold_row.get(field)
+                        actual_value = output_row.get(field)
+                        if isinstance(expected_value, str) and isinstance(actual_value, str):
+                            if _normalize_text(expected_value) != _normalize_text(actual_value):
+                                errors.append(
+                                    f"{case}: JSON gold-row expectation {name} {key}={row_id} "
+                                    f"field {field} mismatch"
+                                )
+                        elif expected_value != actual_value:
+                            errors.append(
+                                f"{case}: JSON gold-row expectation {name} {key}={row_id} "
+                                f"field {field} mismatch"
+                            )
 
     return errors
 

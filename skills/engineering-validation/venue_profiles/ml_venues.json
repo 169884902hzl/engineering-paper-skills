@@ -6,6 +6,7 @@
       "official_policy_checked_required": true,
       "source_url": "https://nips.cc/public/guides/PaperChecklist",
       "source_date": "2026-06-01",
+      "profile_status": "STATIC_SUMMARY_NOT_LIVE_CHECK",
       "policy_snapshot": {
         "last_checked": "2026-06-01",
         "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",
@@ -41,6 +42,7 @@
       "official_policy_checked_required": true,
       "source_url": "https://iclr.cc/Conferences/2026/AuthorGuide",
       "source_date": "2026-06-01",
+      "profile_status": "STATIC_SUMMARY_NOT_LIVE_CHECK",
       "policy_snapshot": {
         "last_checked": "2026-06-01",
         "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",
@@ -73,6 +75,7 @@
       "official_policy_checked_required": true,
       "source_url": "https://icml.cc/Conferences/2026/AuthorInstructions",
       "source_date": "2026-06-01",
+      "profile_status": "STATIC_SUMMARY_NOT_LIVE_CHECK",
       "policy_snapshot": {
         "last_checked": "2026-06-01",
         "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",
@@ -106,6 +109,7 @@
       "source_url": "https://www.nature.com/nature-portfolio/editorial-policies/ai",
       "source_date": "2026-06-01",
       "formatting_source_url": "https://www.nature.com/nature/for-authors/formatting-guide",
+      "profile_status": "STATIC_SUMMARY_NOT_LIVE_CHECK",
       "policy_snapshot": {
         "last_checked": "2026-06-01",
         "verification_method": "manual official-page review summarized in this static profile; not live policy extraction",

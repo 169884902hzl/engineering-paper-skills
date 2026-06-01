@@ -12,6 +12,7 @@ python scripts/check_quality_assets.py
 python scripts/check_response_diff.py
 python scripts/check_venue_profiles.py
 python scripts/check_metadata_files.py
+python scripts/write_behavior_eval_stub.py --help
 python scripts/run_prompt_regression.py
 ```
 
@@ -37,6 +38,7 @@ This checks:
   commit structure through `scripts/check_metadata_files.py`
 - manual top-tier writing rubric under `evals/`
 - structured semantic expectations in selected `tests/expected/*.yaml` specs
+- behavior-regression eval-stub writer interface for CI/manual artifacts
 
 These checks are repository-quality checks. Golden outputs and recorded model
 runs are review artifacts; they do not prove stable behavior on arbitrary
@@ -50,7 +52,10 @@ Main CI includes an optional prompt-regression step. It runs only when the
 repository has a `PROMPT_REGRESSION_COMMAND_TEMPLATE` GitHub Actions secret.
 The separate `Behavior Regression` workflow can also be triggered manually; it
 fails if the command template secret is missing and uploads the generated
-regression outputs as a workflow artifact.
+regression outputs as a workflow artifact. On a successful behavior run, it
+also writes `behavior_eval_stub.jsonl` with the commit hash, output hash,
+artifact name, and `ci_single_run` evidence level. That stub is not a quality
+score until a human or semantic review is added.
 
 This repository does not require GitHub releases. For external reviews, use the
 current `main` commit hash plus the recorded model-run and eval artifacts. See

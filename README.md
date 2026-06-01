@@ -93,6 +93,7 @@ python scripts/check_quality_assets.py
 python scripts/check_response_diff.py
 python scripts/check_venue_profiles.py
 python scripts/check_metadata_files.py
+python scripts/write_behavior_eval_stub.py --help
 for s in skills/engineering-*; do
   python ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py "$s"
 done
@@ -109,7 +110,11 @@ and check the resulting output against structured semantic expectations. Without
 that secret, CI reports that behavior regression was not run.
 The repository also includes a manual `Behavior Regression` workflow that fails
 closed when the command-template secret is absent and uploads the generated
-model outputs as an artifact.
+model outputs as an artifact. When that workflow runs successfully, it also
+writes a behavior eval stub with the commit, case, output hash, artifact name,
+and `ci_single_run` evidence level. The stub is still unscored until human or
+semantic review is applied. Failed local behavior attempts are recorded as
+failure evidence, not upgraded into passing model-run claims.
 This repository does not require GitHub releases; external reviews should cite
 the current `main` commit hash and the recorded eval artifacts.
 The no-release quality contract is documented in

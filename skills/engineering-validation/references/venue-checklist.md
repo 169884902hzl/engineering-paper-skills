@@ -15,6 +15,10 @@ disclosure, citation integrity, and figure/table formatting.
 If the official venue instructions were not inspected in this session, mark the
 venue check `NOT_RUN` or `PARTIAL`.
 
+Static venue profiles are `STATIC_SUMMARY_NOT_LIVE_CHECK`. They can remind you
+which requirements to inspect, but they cannot be reported as official policy
+verification.
+
 ## Official-Policy Mode
 
 For a named venue, do not rely only on the static profile files. Inspect the
@@ -34,6 +38,17 @@ Required statuses:
 - `PARTIAL`: the official page was inspected but manuscript evidence is
   incomplete.
 - `NOT_RUN`: the official page was not inspected.
+
+For named venue checks, include these explicit fields:
+
+```text
+official_page_opened_this_run: YES / NO
+policy_excerpt_checked: YES / NO
+profile_only_status: STATIC_SUMMARY_NOT_LIVE_CHECK / NOT_USED
+```
+
+If `official_page_opened_this_run` is `NO`, the venue-readiness result cannot be
+`PASS`; use `PARTIAL` or `NOT_RUN`.
 
 ## Venue Profiles To Instantiate
 
@@ -61,6 +76,6 @@ not available, keep the venue readiness result `NOT_RUN` or `PARTIAL`.
 
 The repository includes static profile prompts under
 `skills/engineering-validation/venue_profiles/`. They are reminders of fields
-to verify, not official policy snapshots. If the user needs readiness for a
-specific venue, inspect the current official venue instructions in the current
+to verify, not live official policy extraction. If the user needs readiness for
+a specific venue, inspect the current official venue instructions in the current
 session or mark official policy verification `NOT_RUN`.

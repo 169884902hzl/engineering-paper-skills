@@ -30,6 +30,38 @@
     "final line numbers not supplied",
     "caption change not verified by manuscript diff"
   ],
+  "structured_audit_contract": {
+    "claim_evidence": [
+      {
+        "claim_id": "C1",
+        "status": "FAIL",
+        "decision": "reject",
+        "source_span": "General Active Observation and Guarded Execution for Robust Robot Insertion in Cluttered Industrial Workcells",
+        "evidence_span": "one robot arm, one tabletop fixture, and two part colors from the same object family"
+      },
+      {
+        "claim_id": "C2",
+        "status": "PASS_WITH_BOUNDARY",
+        "decision": "keep_with_boundary",
+        "source_span": "The full system reaches 84 percent success",
+        "evidence_span": "A fixed overhead camera baseline reaches 69 percent success. A fixed side camera baseline reaches 72 percent success"
+      },
+      {
+        "claim_id": "C3",
+        "status": "PARTIAL",
+        "decision": "downgrade",
+        "source_span": "the ablations prove that both active observation and guarded execution are causal mechanisms behind the improvement",
+        "evidence_span": "They also do not prove that one component is the sole causal mechanism because the variants differ in several execution details and no statistical test is reported"
+      },
+      {
+        "claim_id": "C4",
+        "status": "FAIL_AS_COMPARATIVE_CLAIM",
+        "decision": "narrow_to_observation",
+        "source_span": "Additional reflective-surface trials further demonstrate robustness to challenging industrial conditions",
+        "evidence_span": "The full system succeeds in 18 of these 30 trials, but the authors did not run all baselines on this condition"
+      }
+    ]
+  },
   "failure_modes": [
     "only language polishing",
     "only high-level story spine without paragraph matrix",

@@ -111,8 +111,8 @@ def check_html_pages(errors: list[str]) -> None:
 
 def check_no_release_docs(errors: list[str]) -> None:
     for rel_path, markers in {
-        "KNOWN_GOOD.md": ["Current public audit commit", "Behavior evidence", "Known limitations"],
-        "CHANGELOG.md": ["No-release beta changelog", "d03d683", "8da3ceb"],
+        "KNOWN_GOOD.md": ["Commit anchors", "Behavior evidence", "Known limitations"],
+        "CHANGELOG.md": ["No-release beta changelog", "6bec865", "d03d683", "8da3ceb"],
     }.items():
         path = ROOT / rel_path
         if not require_file(path, errors):
