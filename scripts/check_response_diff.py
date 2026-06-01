@@ -90,6 +90,47 @@ def main() -> int:
             if contains_phrase(new_excerpt, term):
                 errors.append(f"{name}: unsafe response term appears in new manuscript excerpt: {term}")
 
+    for check in annotation.get("response_claim_checks", []):
+        if not isinstance(check, dict):
+            errors.append("response_claim_checks entries must be objects")
+            continue
+        comment_id = check.get("comment_id")
+        reviewer_concern = check.get("reviewer_concern")
+        response_claim = check.get("response_claim")
+        expected_status = check.get("expected_status")
+        if not all(isinstance(value, str) and value for value in (
+            comment_id,
+            reviewer_concern,
+            response_claim,
+            expected_status,
+        )):
+            errors.append("response_claim_checks entries require comment_id, reviewer_concern, response_claim, and expected_status")
+            continue
+        for term in check.get("required_new_excerpt_terms", []):
+            if not isinstance(term, str) or not term:
+                errors.append(f"{comment_id}: required_new_excerpt_terms must be non-empty strings")
+                continue
+            if not contains_phrase(new_excerpt, term):
+                errors.append(f"{comment_id}: new manuscript excerpt missing term required for semantic match: {term}")
+        for term in check.get("required_response_terms", []):
+            if not isinstance(term, str) or not term:
+                errors.append(f"{comment_id}: required_response_terms must be non-empty strings")
+                continue
+            if not contains_phrase(draft_response, term):
+                errors.append(f"{comment_id}: draft response missing claimed-change term: {term}")
+        for term in check.get("forbidden_new_excerpt_terms", []):
+            if not isinstance(term, str) or not term:
+                errors.append(f"{comment_id}: forbidden_new_excerpt_terms must be non-empty strings")
+                continue
+            if contains_phrase(new_excerpt, term):
+                errors.append(f"{comment_id}: unsupported response claim appears in new manuscript excerpt: {term}")
+        for term in check.get("unsupported_reason_terms", []):
+            if not isinstance(term, str) or not term:
+                errors.append(f"{comment_id}: unsupported_reason_terms must be non-empty strings")
+                continue
+            if not contains_phrase(draft_response, term):
+                errors.append(f"{comment_id}: fixture no longer exposes unsupported reason term: {term}")
+
     if "complete pipeline for robust insertion" not in old_excerpt:
         errors.append("Old manuscript excerpt no longer contains the original overclaim pressure")
 

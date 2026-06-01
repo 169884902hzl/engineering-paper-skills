@@ -49,10 +49,9 @@ The separate `Behavior Regression` workflow can also be triggered manually; it
 fails if the command template secret is missing and uploads the generated
 regression outputs as a workflow artifact.
 
-The separate `Release Gate` workflow runs on `v*` tags and requires both
-official venue URL refresh and prompt behavior regression. A release tag should
-not be treated as fully checked until this workflow passes. It also uploads the
-release-gate behavior-regression outputs for later human scoring.
+This repository does not require GitHub releases. For external reviews, use the
+current `main` commit hash plus the recorded model-run and eval artifacts. See
+`docs/quality-gates.md` for the no-release quality contract.
 
 The command template must accept `{prompt}`, `{output}`, and `{name}`
 placeholders. Example shape:

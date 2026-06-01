@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Engineering Paper Skills Demo Gallery</title>
+    <meta name="description" content="Demo outputs for Engineering Paper Skills: full-paper audit, sentence-level audit, response diff verification, AI-smell polishing, and figure/table claim checks.">
+    <link rel="canonical" href="https://169884902hzl.github.io/engineering-paper-skills/demo.html">
+    <style>
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #172033;
+        background: #f7f9fc;
+        line-height: 1.6;
+      }
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 44px 20px 72px;
+      }
+      h1 {
+        font-size: 2.5rem;
+        line-height: 1.1;
+        margin: 0 0 12px;
+        letter-spacing: 0;
+      }
+      h2 {
+        font-size: 1.25rem;
+        margin-top: 30px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 14px;
+      }
+      .card {
+        background: #ffffff;
+        border: 1px solid #d9e1ea;
+        border-radius: 8px;
+        padding: 18px;
+      }
+      a {
+        color: #0f766e;
+        text-underline-offset: 3px;
+      }
+      code {
+        background: #eef3f7;
+        border-radius: 4px;
+        padding: 2px 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="./">Engineering Paper Skills</a></p>
+      <h1>Demo Gallery</h1>
+      <p>These examples show the expected shape of evidence-bound paper audits. They are review artifacts, not proof that every unseen manuscript will receive the same quality of review.</p>
+
+      <section class="grid" aria-label="Demo output links">
+        <article class="card">
+          <h2>Full-Paper Audit</h2>
+          <p>Story spine, claim-evidence audit, paragraph transitions, validation status, and repair plan.</p>
+          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_audit.md">Open full-paper audit</a>
+        </article>
+        <article class="card">
+          <h2>Structured JSON Audit</h2>
+          <p>Machine-readable claim, paragraph, response, and validation rows used by regression checks.</p>
+          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_structured_audit.json">Open JSON audit</a>
+        </article>
+        <article class="card">
+          <h2>Sentence-Level Audit</h2>
+          <p>Sentence role, evidence anchor, claim-strength risk, and safe repair examples.</p>
+          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_sentence_audit.md">Open sentence audit</a>
+        </article>
+        <article class="card">
+          <h2>Response Diff Verification</h2>
+          <p>Checks whether response claims match actual old/new manuscript changes.</p>
+          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/fixtures/full_paper/response_old_new_diff.md">Open response diff fixture</a>
+        </article>
+        <article class="card">
+          <h2>AI-Smell Polishing</h2>
+          <p>Rejects stronger wording when it inflates unsupported robustness or deployment claims.</p>
+          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/polishing_ai_smell.md">Open polishing example</a>
+        </article>
+        <article class="card">
+          <h2>Figure/Table Claim Check</h2>
+          <p>Maps panels and table cells to the claims they can and cannot support.</p>
+          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/figure_table_panel_claim.md">Open figure/table example</a>
+        </article>
+      </section>
+
+      <section>
+        <h2>Quality Contract</h2>
+        <p>The project tracks quality through commit hashes, local model-run artifacts, expected behavior specs, and human-readable eval records. See <a href="./quality-gates.html">quality gates</a>.</p>
+      </section>
+    </main>
+  </body>
+</html>

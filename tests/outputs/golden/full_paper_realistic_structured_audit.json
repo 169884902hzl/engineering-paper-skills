@@ -1,0 +1,123 @@
+{
+  "verdict": {
+    "overall_status": "NOT_READY",
+    "highest_risk_issue": "unsupported broad claims and false response-completion claims",
+    "not_run": [
+      "latex_build",
+      "citation_verification",
+      "official_venue_policy_check",
+      "response_diff_verification",
+      "final_line_number_verification"
+    ]
+  },
+  "claim_evidence": [
+    {
+      "claim_id": "C1",
+      "claim": "industrial workcell reliability",
+      "status": "FAIL",
+      "evidence_anchor": "one robot, one tabletop fixture, one object family",
+      "repair": "delete industrial reliability language or move it to future work"
+    },
+    {
+      "claim_id": "C2",
+      "claim": "full system improves success in the evaluated setup",
+      "status": "PASS_WITH_BOUNDARY",
+      "evidence_anchor": "84 percent over 180 trials versus fixed-camera and open-loop variants",
+      "repair": "keep only with evaluated-tabletop boundary"
+    },
+    {
+      "claim_id": "C3",
+      "claim": "confidence gate causally proves the performance gain",
+      "status": "PARTIAL",
+      "evidence_anchor": "no-confidence-gate variant reaches 77 percent, but no statistics or failure taxonomy",
+      "repair": "downgrade to component support rather than causal proof"
+    },
+    {
+      "claim_id": "C4",
+      "claim": "reflective trials validate robustness",
+      "status": "FAIL_AS_COMPARATIVE_CLAIM",
+      "evidence_anchor": "18 of 30 full-system-only reflective trials with no baselines",
+      "repair": "present as a stress observation and failure boundary"
+    }
+  ],
+  "paragraph_transitions": [
+    {
+      "from": "Related Work active perception",
+      "to": "Related Work guarded execution",
+      "relation": "uncertainty to execution gate",
+      "issue": "the draft does not explain why sensing uncertainty changes execution decisions",
+      "repair": "add a bridge from active sensing to confidence-gated execution"
+    },
+    {
+      "from": "Methods module list",
+      "to": "Methods state machine",
+      "relation": "module names to mechanism",
+      "issue": "the central method object appears after the module list",
+      "repair": "start Methods with the visibility-confidence state"
+    },
+    {
+      "from": "Discussion limitations",
+      "to": "Conclusion",
+      "relation": "boundary to takeaway",
+      "issue": "the conclusion can drop the one-robot one-fixture boundary",
+      "repair": "carry the boundary into the final takeaway"
+    }
+  ],
+  "section_dependencies": [
+    {
+      "section": "Abstract",
+      "promise": "general robust industrial insertion",
+      "proof": "local tabletop success-rate comparison only",
+      "boundary": "one robot, one fixture, one object family",
+      "status": "FAIL"
+    },
+    {
+      "section": "Methods",
+      "promise": "active observation framework",
+      "proof": "predefined observer-view updates plus confidence gate",
+      "boundary": "not a general next-best-view planner",
+      "status": "PARTIAL"
+    },
+    {
+      "section": "Experiments",
+      "promise": "component contribution",
+      "proof": "variant success rates",
+      "boundary": "no statistics, no repeated randomized blocks, no failure taxonomy",
+      "status": "PARTIAL"
+    },
+    {
+      "section": "Conclusion",
+      "promise": "final bounded takeaway",
+      "proof": "84 percent over 180 trials",
+      "boundary": "must not revive industrial or general deployment claims",
+      "status": "PASS_IF_NARROWED"
+    }
+  ],
+  "response_truthfulness": [
+    {
+      "response_claim": "new stress-test section and Table 3 were added",
+      "status": "UNSUPPORTED",
+      "manuscript_anchor": "Table 3 is planned but has no data",
+      "repair": "remove unless revised data and manuscript table are supplied"
+    },
+    {
+      "response_claim": "Lines 118-134 explain the causal role",
+      "status": "UNVERIFIED",
+      "manuscript_anchor": "no final line numbers are available",
+      "repair": "use planned-change wording or provide a verified revised manuscript"
+    },
+    {
+      "response_claim": "Figure 2 validates robust execution",
+      "status": "FALSE_CLAIM_STRENGTH",
+      "manuscript_anchor": "Figure 2 is a workflow illustration",
+      "repair": "say Figure 2 illustrates the execution sequence"
+    }
+  ],
+  "validation_status": {
+    "overall_readiness": "CANNOT_DETERMINE",
+    "build": "NOT_RUN",
+    "references": "NOT_RUN",
+    "official_venue_policy": "NOT_RUN",
+    "response_diff": "NOT_RUN"
+  }
+}

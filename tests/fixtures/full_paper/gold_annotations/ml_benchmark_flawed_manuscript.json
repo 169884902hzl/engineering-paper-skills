@@ -1,0 +1,18 @@
+{
+  "fixture": "tests/fixtures/full_paper/ml_benchmark_flawed_manuscript.md",
+  "paper_type": "machine_learning_benchmark",
+  "failure_modes": [
+    "simulation benchmark written as real deployment readiness",
+    "small internal dataset written as transfer evidence",
+    "missing strongest retrieval baseline hidden behind broad baseline language",
+    "planned cross-domain table claimed as completed",
+    "unreleased internal dataset conflicts with benchmark and reproducibility claims"
+  ],
+  "required_audit_findings": [
+    "narrow deployable robot learning claims",
+    "separate benchmark contribution from method contribution",
+    "require verified nearest-neighbor retrieval baselines",
+    "mark cross-domain transfer and user study as NOT_RUN",
+    "downgrade real-world transfer from claim to limitation"
+  ]
+}

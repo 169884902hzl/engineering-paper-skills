@@ -22,6 +22,33 @@
       "draft_response_forbidden_terms": ["ready for submission"]
     }
   ],
+  "response_claim_checks": [
+    {
+      "comment_id": "R2",
+      "reviewer_concern": "method sounds like a module list",
+      "response_claim": "clarified the method in Lines 118-134",
+      "expected_status": "PARTIAL_UNVERIFIED_LOCATION",
+      "required_new_excerpt_terms": ["visibility-confidence state", "continues", "pauses", "stops"],
+      "required_response_terms": ["clarified the method"],
+      "unsupported_reason_terms": ["Lines 118-134"]
+    },
+    {
+      "comment_id": "R5",
+      "reviewer_concern": "reflective-surface trials lack baselines",
+      "response_claim": "added stress tests and Table 3",
+      "expected_status": "UNSUPPORTED",
+      "required_response_terms": ["added stress tests", "Table 3"],
+      "forbidden_new_excerpt_terms": ["Table 3", "stress-test results"]
+    },
+    {
+      "comment_id": "R6",
+      "reviewer_concern": "Figure 2 is workflow, not robustness evidence",
+      "response_claim": "Figure 2 validates robust execution",
+      "expected_status": "FALSE_CLAIM_STRENGTH",
+      "required_new_excerpt_terms": ["rather than validating robustness"],
+      "required_response_terms": ["validate robust execution"]
+    }
+  ],
   "unsupported_response_claims": [
     "added stress tests",
     "added Table 3",

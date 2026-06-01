@@ -1,0 +1,18 @@
+{
+  "fixture": "tests/fixtures/full_paper/systems_artifact_flawed_manuscript.md",
+  "paper_type": "systems_artifact",
+  "failure_modes": [
+    "local workstation latency written as production fleet readiness",
+    "module list without central system object",
+    "empty artifact-evaluation table claimed as completed",
+    "reproducibility claim conflicts with incomplete build instructions",
+    "distributed scalability claimed without distributed experiment"
+  ],
+  "required_audit_findings": [
+    "narrow production-ready and fleet claims",
+    "define chunked time-indexed log representation as the method object",
+    "separate local latency evidence from deployment claims",
+    "mark artifact packaging and Table 3 as NOT_RUN",
+    "require build and artifact checks before reproducibility claims"
+  ]
+}

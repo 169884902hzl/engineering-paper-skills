@@ -56,11 +56,15 @@ output as unsupported.
 
 ## What Output Looks Like
 
+- [Demo gallery](https://169884902hzl.github.io/engineering-paper-skills/demo.html)
+- [Quality gates](https://169884902hzl.github.io/engineering-paper-skills/quality-gates.html)
+- [Discovery checklist](https://169884902hzl.github.io/engineering-paper-skills/discovery.html)
 - [Full-paper realistic audit](tests/outputs/golden/full_paper_realistic_audit.md)
+- [Structured JSON audit](tests/outputs/golden/full_paper_realistic_structured_audit.json)
 - [Sentence-level claim and evidence audit](tests/outputs/golden/full_paper_realistic_sentence_audit.md)
 - [AI-smell polishing example](tests/outputs/golden/polishing_ai_smell.md)
 - [Figure/table panel-claim audit](tests/outputs/golden/figure_table_panel_claim.md)
-- [Recorded local model-run artifact](tests/outputs/model_runs/full_paper_realistic_audit_f383bb9.md)
+- [Recorded local model-run artifact](tests/outputs/model_runs/full_paper_realistic_audit_8da3ceb.md)
 
 ## Quick Start
 
@@ -105,9 +109,10 @@ that secret, CI reports that behavior regression was not run.
 The repository also includes a manual `Behavior Regression` workflow that fails
 closed when the command-template secret is absent and uploads the generated
 model outputs as an artifact.
-Release tags also run a stricter `Release Gate` workflow that requires venue URL
-refresh, configured behavior regression, and uploaded regression outputs for
-human scoring.
+This repository does not require GitHub releases; external reviews should cite
+the current `main` commit hash and the recorded eval artifacts.
+The no-release quality contract is documented in
+[Quality Gates](docs/quality-gates.md).
 
 ## Project Overview
 
@@ -249,7 +254,7 @@ Repeat the command for the other installed skill directories when needed.
 ## Validation
 
 Before publishing changes to this repository, run the repository QA checks. A
-skill is not considered release-ready only because `quick_validate.py` passes.
+skill is not considered publish-ready only because `quick_validate.py` passes.
 At minimum, validate every skill directory, check relative links, scan for
 private paths and stale wording, and review adversarial prompts that try to
 induce unsupported claims.
@@ -397,7 +402,7 @@ The skills are organized around five writing constraints:
 - `evals/`: manual top-tier paper quality rubric and recorded gold-fixture
   review results
 - `NOTICE.md`: third-party license notices
-- `OPEN_SOURCE_QA.md`: validation commands and release checks
+- `OPEN_SOURCE_QA.md`: validation commands and quality checks
 
 ## Roadmap
 

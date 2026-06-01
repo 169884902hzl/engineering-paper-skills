@@ -1,0 +1,105 @@
+{
+  "case": "full_paper_realistic_structured_audit",
+  "prompt": "full_paper_realistic_structured_audit.md",
+  "must_include": [
+    "claim_evidence",
+    "paragraph_transitions",
+    "section_dependencies",
+    "response_truthfulness",
+    "validation_status",
+    "NOT_RUN"
+  ],
+  "must_not_include": [
+    "READY_FOR_SUBMISSION",
+    "VERIFIED_CITATIONS",
+    "OFFICIAL_POLICY_PASS"
+  ],
+  "required_status": {
+    "overall_readiness": "CANNOT_DETERMINE",
+    "official_venue_policy": "NOT_RUN"
+  },
+  "forbidden_claims": [
+    "verified citations",
+    "completed stress tests",
+    "official venue compliance"
+  ],
+  "forbidden_regex": [
+    "(?i)ready_for_submission",
+    "(?i)verified_citations",
+    "(?i)official_policy_pass"
+  ],
+  "json_expectations": {
+    "required_top_level_keys": [
+      "verdict",
+      "claim_evidence",
+      "paragraph_transitions",
+      "section_dependencies",
+      "response_truthfulness",
+      "validation_status"
+    ],
+    "array_expectations": [
+      {
+        "name": "claim evidence rows",
+        "path": "claim_evidence",
+        "min_items": 4,
+        "required_fields": ["claim_id", "claim", "status", "evidence_anchor", "repair"],
+        "required_rows": [
+          {
+            "claim_id": "C1",
+            "status": "FAIL",
+            "repair": "delete"
+          },
+          {
+            "claim_id": "C2",
+            "status": "PASS_WITH_BOUNDARY",
+            "evidence_anchor": "84 percent"
+          },
+          {
+            "claim_id": "C3",
+            "status": "PARTIAL",
+            "repair": "causal proof"
+          }
+        ]
+      },
+      {
+        "name": "paragraph transition rows",
+        "path": "paragraph_transitions",
+        "min_items": 3,
+        "required_fields": ["from", "to", "relation", "issue", "repair"],
+        "required_rows": [
+          {
+            "from": "Related Work active perception",
+            "to": "Related Work guarded execution",
+            "issue": "execution decisions"
+          },
+          {
+            "from": "Discussion limitations",
+            "to": "Conclusion",
+            "repair": "boundary"
+          }
+        ]
+      },
+      {
+        "name": "response truthfulness rows",
+        "path": "response_truthfulness",
+        "min_items": 3,
+        "required_fields": ["response_claim", "status", "manuscript_anchor", "repair"],
+        "required_rows": [
+          {
+            "response_claim": "Table 3",
+            "status": "UNSUPPORTED"
+          },
+          {
+            "response_claim": "Lines 118-134",
+            "status": "UNVERIFIED"
+          }
+        ]
+      }
+    ]
+  },
+  "allowed_behavior": [
+    "return machine-readable JSON",
+    "map claim IDs to evidence anchors and repairs",
+    "mark official venue checks as NOT_RUN unless official sources were inspected"
+  ]
+}

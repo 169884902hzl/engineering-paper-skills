@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Engineering Paper Skills Quality Gates</title>
+    <meta name="description" content="Quality gates for Engineering Paper Skills, including repository checks, behavior evidence, no-release versioning, and evidence boundaries.">
+    <link rel="canonical" href="https://169884902hzl.github.io/engineering-paper-skills/quality-gates.html">
+    <style>
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #172033;
+        background: #f7f9fc;
+        line-height: 1.6;
+      }
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 44px 20px 72px;
+      }
+      h1 {
+        font-size: 2.4rem;
+        line-height: 1.1;
+        letter-spacing: 0;
+      }
+      pre {
+        overflow-x: auto;
+        background: #101826;
+        color: #edf3fb;
+        padding: 16px;
+        border-radius: 8px;
+      }
+      a {
+        color: #0f766e;
+        text-underline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="./">Engineering Paper Skills</a></p>
+      <h1>Quality Gates</h1>
+      <p>This repository does not require GitHub releases. External reviews should cite the current commit hash plus recorded model-run and eval artifacts.</p>
+
+      <h2>Required Repository Checks</h2>
+      <pre><code>python scripts/validate_repo.py
+python scripts/check_expected_behavior.py --spec-dir tests/expected
+python scripts/check_expected_behavior.py --spec-dir tests/expected --outputs-dir tests/outputs/golden
+python scripts/check_quality_assets.py
+python scripts/check_response_diff.py
+python scripts/check_venue_profiles.py</code></pre>
+
+      <h2>Behavior Evidence</h2>
+      <p>Behavior evidence requires a real model command template. Without it, prompt regression is <code>NOT_RUN</code>.</p>
+      <pre><code>python scripts/run_prompt_regression.py \
+  --require-command \
+  --case full_paper_realistic_audit \
+  --output-dir /tmp/engineering-paper-skill-regression \
+  --command-template "$PROMPT_REGRESSION_COMMAND_TEMPLATE"</code></pre>
+
+      <h2>Evidence Boundary</h2>
+      <p>Golden outputs, static checks, and local model-run artifacts are review evidence. They are not proof of stable top-tier behavior on arbitrary unseen manuscripts.</p>
+    </main>
+  </body>
+</html>

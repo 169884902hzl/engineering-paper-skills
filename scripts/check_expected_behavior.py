@@ -40,6 +40,7 @@ OPTIONAL_DICT_KEYS = {
 OPTIONAL_COMPLEX_DICT_KEYS = {
     "semantic_expectations",
     "structured_expectations",
+    "json_expectations",
 }
 
 
@@ -141,6 +142,37 @@ def _expect_structured_expectations(path: Path, data: dict[str, Any]) -> dict[st
     return parsed
 
 
+def _expect_json_expectations(path: Path, data: dict[str, Any]) -> dict[str, Any]:
+    value = data.get("json_expectations")
+    if not isinstance(value, dict):
+        raise ValueError(f"{path}: json_expectations must be an object")
+    for key in ("required_top_level_keys", "array_expectations"):
+        if key in value and not isinstance(value[key], list):
+            raise ValueError(f"{path}: json_expectations.{key} must be a list")
+    for item in value.get("required_top_level_keys", []):
+        if not isinstance(item, str) or not item:
+            raise ValueError(f"{path}: json_expectations.required_top_level_keys entries must be strings")
+    for item in value.get("array_expectations", []):
+        if not isinstance(item, dict):
+            raise ValueError(f"{path}: json_expectations.array_expectations entries must be objects")
+        name = item.get("name")
+        path_value = item.get("path")
+        required_fields = item.get("required_fields", [])
+        required_rows = item.get("required_rows", [])
+        min_items = item.get("min_items", 0)
+        if not isinstance(name, str) or not name:
+            raise ValueError(f"{path}: json_expectations.array_expectations entry missing name")
+        if not isinstance(path_value, str) or not path_value:
+            raise ValueError(f"{path}: json_expectations.{name} missing path")
+        if not isinstance(min_items, int) or min_items < 0:
+            raise ValueError(f"{path}: json_expectations.{name}.min_items must be a non-negative integer")
+        if not isinstance(required_fields, list) or not all(isinstance(field, str) for field in required_fields):
+            raise ValueError(f"{path}: json_expectations.{name}.required_fields must be strings")
+        if not isinstance(required_rows, list) or not all(isinstance(row, dict) for row in required_rows):
+            raise ValueError(f"{path}: json_expectations.{name}.required_rows must be objects")
+    return value
+
+
 def validate_specs(spec_dir: Path) -> list[str]:
     errors: list[str] = []
 
@@ -195,6 +227,8 @@ def validate_specs(spec_dir: Path) -> list[str]:
                         _expect_semantic_expectations(path, data)
                     elif key == "structured_expectations":
                         _expect_structured_expectations(path, data)
+                    elif key == "json_expectations":
+                        _expect_json_expectations(path, data)
 
             if data["forbidden_claims"] and not (
                 data["must_not_include"]
@@ -215,11 +249,28 @@ def validate_specs(spec_dir: Path) -> list[str]:
 
 
 def _find_output(outputs_dir: Path, case: str) -> Path | None:
-    for suffix in (".out", ".txt", ".md"):
+    for suffix in (".out", ".txt", ".md", ".json"):
         candidate = outputs_dir / f"{case}{suffix}"
         if candidate.exists():
             return candidate
     return None
+
+
+def _json_path(value: Any, path: str) -> Any:
+    current = value
+    for part in path.split("."):
+        if not isinstance(current, dict) or part not in current:
+            raise KeyError(path)
+        current = current[part]
+    return current
+
+
+def _field_matches(actual: Any, expected: Any) -> bool:
+    if isinstance(expected, list):
+        return actual in expected
+    if isinstance(expected, str) and isinstance(actual, str):
+        return expected.lower() in actual.lower()
+    return actual == expected
 
 
 def check_outputs(spec_dir: Path, outputs_dir: Path, cases: set[str] | None = None) -> list[str]:
@@ -312,6 +363,55 @@ def check_outputs(spec_dir: Path, outputs_dir: Path, cases: set[str] | None = No
                             errors.append(
                                 f"{case}: structured expectation {group}.{name} forbidden term in matched row: {term}"
                             )
+
+        if "json_expectations" in data:
+            try:
+                parsed_output = json.loads(output)
+            except json.JSONDecodeError as exc:
+                errors.append(f"{case}: output is not valid JSON for json_expectations: {exc}")
+                continue
+
+            json_spec = data["json_expectations"]
+            for key in json_spec.get("required_top_level_keys", []):
+                if not isinstance(parsed_output, dict) or key not in parsed_output:
+                    errors.append(f"{case}: JSON output missing top-level key: {key}")
+
+            for expectation in json_spec.get("array_expectations", []):
+                name = expectation["name"]
+                try:
+                    rows = _json_path(parsed_output, expectation["path"])
+                except KeyError:
+                    errors.append(f"{case}: JSON expectation {name} missing path: {expectation['path']}")
+                    continue
+                if not isinstance(rows, list):
+                    errors.append(f"{case}: JSON expectation {name} path is not an array")
+                    continue
+                min_items = expectation.get("min_items", 0)
+                if len(rows) < min_items:
+                    errors.append(f"{case}: JSON expectation {name} has {len(rows)} rows, expected {min_items}")
+                required_fields = expectation.get("required_fields", [])
+                for index, row in enumerate(rows):
+                    if not isinstance(row, dict):
+                        errors.append(f"{case}: JSON expectation {name} row {index} is not an object")
+                        continue
+                    for field in required_fields:
+                        if field not in row:
+                            errors.append(f"{case}: JSON expectation {name} row {index} missing field: {field}")
+                for required_row in expectation.get("required_rows", []):
+                    matches = []
+                    for row in rows:
+                        if not isinstance(row, dict):
+                            continue
+                        if all(
+                            field in row and _field_matches(row[field], expected)
+                            for field, expected in required_row.items()
+                        ):
+                            matches.append(row)
+                    if not matches:
+                        errors.append(
+                            f"{case}: JSON expectation {name} missing row matching: "
+                            f"{json.dumps(required_row, sort_keys=True)}"
+                        )
 
     return errors
 

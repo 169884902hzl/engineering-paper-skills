@@ -101,6 +101,7 @@ REQUIRED_PROMPTS = {
     "validation_realistic.md",
     "full_paper_audit.md",
     "full_paper_realistic_audit.md",
+    "full_paper_realistic_structured_audit.md",
 }
 
 

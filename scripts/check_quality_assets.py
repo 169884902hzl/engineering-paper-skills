@@ -57,15 +57,48 @@ REQUIRED_FULL_PAPER_CASES = {
         "golden": "tests/outputs/golden/full_paper_realistic_audit.md",
         "min_words": 5000,
     },
+    "full_paper_realistic_structured_audit": {
+        "fixture": "tests/fixtures/full_paper/robot_active_observation_realistic_8page.md",
+        "annotation": "tests/fixtures/full_paper/gold_annotations/robot_active_observation_realistic_8page.json",
+        "prompt": "tests/prompts/full_paper_realistic_structured_audit.md",
+        "expected": "tests/expected/full_paper_realistic_structured_audit.yaml",
+        "golden": "tests/outputs/golden/full_paper_realistic_structured_audit.json",
+        "min_words": 5000,
+    },
+    "ml_benchmark_flawed_manuscript": {
+        "fixture": "tests/fixtures/full_paper/ml_benchmark_flawed_manuscript.md",
+        "annotation": "tests/fixtures/full_paper/gold_annotations/ml_benchmark_flawed_manuscript.json",
+        "prompt": "tests/prompts/full_paper_realistic_audit.md",
+        "expected": "tests/expected/full_paper_realistic_audit.yaml",
+        "golden": "tests/outputs/golden/full_paper_realistic_audit.md",
+        "min_words": 500,
+    },
+    "systems_artifact_flawed_manuscript": {
+        "fixture": "tests/fixtures/full_paper/systems_artifact_flawed_manuscript.md",
+        "annotation": "tests/fixtures/full_paper/gold_annotations/systems_artifact_flawed_manuscript.json",
+        "prompt": "tests/prompts/full_paper_realistic_audit.md",
+        "expected": "tests/expected/full_paper_realistic_audit.yaml",
+        "golden": "tests/outputs/golden/full_paper_realistic_audit.md",
+        "min_words": 500,
+    },
 }
 
 REQUIRED_EVAL_RESULTS = {
+    "evals/results/8da3ceb_full_paper_model_eval.jsonl",
     "evals/results/f3cbb28_full_paper_manual_eval.jsonl",
     "evals/results/f3cbb28_full_paper_model_eval.jsonl",
     "evals/results/f383bb9_full_paper_model_eval.jsonl",
 }
 
 REQUIRED_MODEL_RUNS = {
+    "tests/outputs/model_runs/full_paper_realistic_audit_8da3ceb.md": [
+        "Target commit under review: 8da3ceb",
+        "Runtime model executed: true",
+        "CI-controlled behavior regression: no",
+        "Full-paper audit verdict",
+        "Response diff verification",
+        "CANNOT_VALIDATE_AS_READY",
+    ],
     "tests/outputs/model_runs/full_paper_realistic_audit_f3cbb28.md": [
         "local model-run artifact, not a CI regression result",
         "Full-paper audit verdict",
@@ -99,13 +132,6 @@ REQUIRED_VENUE_PROFILES = {
 }
 
 REQUIRED_DISCOVERY_ASSETS = {
-    ".github/workflows/release-gate.yml": [
-        "on:",
-        "v*",
-        "--require-command",
-        "check_venue_profiles.py --refresh",
-        "actions/upload-artifact@v4",
-    ],
     ".github/workflows/behavior-regression.yml": [
         "--require-command",
         "actions/upload-artifact@v4",
@@ -125,6 +151,17 @@ REQUIRED_DISCOVERY_ASSETS = {
         "Engineering Paper Skills",
         "manuscript audit",
         "Example Outputs",
+        "SoftwareSourceCode",
+    ],
+    "docs/demo.html": [
+        "Demo Gallery",
+        "Structured JSON Audit",
+        "Response Diff Verification",
+    ],
+    "docs/quality-gates.html": [
+        "Quality Gates",
+        "Behavior Evidence",
+        "Evidence Boundary",
     ],
     "docs/robots.txt": [
         "Sitemap: https://169884902hzl.github.io/engineering-paper-skills/sitemap.xml",
@@ -132,10 +169,20 @@ REQUIRED_DISCOVERY_ASSETS = {
     "docs/sitemap.xml": [
         "https://169884902hzl.github.io/engineering-paper-skills/",
     ],
-    "docs/release-notes-v0.1.0-beta.md": [
-        "v0.1.0-beta",
+    "docs/quality-gates.md": [
+        "does not require GitHub releases",
+        "Behavior Evidence",
         "Evidence Boundary",
-        "Known Limitations",
+    ],
+    "docs/discovery.md": [
+        "Discovery Checklist",
+        "Google Search Console",
+        "Do not claim",
+    ],
+    "docs/discovery.html": [
+        "Discovery Checklist",
+        "Search Console",
+        "Safe Launch Wording",
     ],
     "CITATION.cff": [
         "Engineering Paper Skills",
@@ -273,16 +320,32 @@ def main() -> int:
         full_golden = ROOT / str(assets["golden"])
         if full_golden.exists():
             golden_text = full_golden.read_text(encoding="utf-8")
-            for marker in (
-                "Story spine",
-                "Paragraph transition",
-                "Section",
-                "Sentence role",
-                "Response",
-                "Validation result",
-            ):
-                if marker not in golden_text:
-                    errors.append(f"{full_golden.relative_to(ROOT)} missing marker: {marker}")
+            if full_golden.suffix == ".json":
+                try:
+                    golden_data = json.loads(golden_text)
+                except json.JSONDecodeError as exc:
+                    errors.append(f"{full_golden.relative_to(ROOT)} invalid JSON: {exc}")
+                else:
+                    for marker in (
+                        "claim_evidence",
+                        "paragraph_transitions",
+                        "section_dependencies",
+                        "response_truthfulness",
+                        "validation_status",
+                    ):
+                        if marker not in golden_data:
+                            errors.append(f"{full_golden.relative_to(ROOT)} missing key: {marker}")
+            else:
+                for marker in (
+                    "Story spine",
+                    "Paragraph transition",
+                    "Section",
+                    "Sentence role",
+                    "Response",
+                    "Validation result",
+                ):
+                    if marker not in golden_text:
+                        errors.append(f"{full_golden.relative_to(ROOT)} missing marker: {marker}")
 
     for rel_path in REQUIRED_EVAL_RESULTS:
         eval_result = ROOT / rel_path
@@ -329,6 +392,17 @@ def main() -> int:
             if "f383bb9" in rel_path:
                 if record.get("commit") != "f383bb9":
                     errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record commit=f383bb9")
+                if record.get("ci_controlled") is not False:
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must explicitly record ci_controlled=false"
+                    )
+                if not isinstance(record.get("residual_limitations"), list) or not record["residual_limitations"]:
+                    errors.append(
+                        f"{eval_result.relative_to(ROOT)} line {line_no} must record residual_limitations"
+                    )
+            if "8da3ceb" in rel_path:
+                if record.get("commit") != "8da3ceb":
+                    errors.append(f"{eval_result.relative_to(ROOT)} line {line_no} must record commit=8da3ceb")
                 if record.get("ci_controlled") is not False:
                     errors.append(
                         f"{eval_result.relative_to(ROOT)} line {line_no} must explicitly record ci_controlled=false"
@@ -413,7 +487,7 @@ def main() -> int:
     for rel_path, markers in REQUIRED_DISCOVERY_ASSETS.items():
         path = ROOT / rel_path
         if not path.exists():
-            errors.append(f"Missing discovery/release asset: {rel_path}")
+            errors.append(f"Missing discovery or quality asset: {rel_path}")
             continue
         text = path.read_text(encoding="utf-8")
         for marker in markers:
