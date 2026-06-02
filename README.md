@@ -20,63 +20,49 @@ numbers, deployment tests, or submission readiness.
 
 ## What It Can Write
 
-The example below is excerpted from a recorded local Codex run at base commit
-`ce1478f`. It shows the normal user path: paste the task, problem, method,
-evidence, and boundary; get bounded manuscript prose first, followed by short
-evidence notes. Full provenance is recorded in
-[tests/outputs/model_runs/writing/manifest.json](tests/outputs/model_runs/writing/manifest.json).
+The examples below are excerpted from recorded local Codex outputs generated at
+base commit `078d53e7b5925cf7c56b3b4696c8a35b9ac8d475` from richer writing
+prompt fixtures. They are local single-run artifacts, not CI-controlled
+behavior proof and not top-tier-ready proof. Full provenance is recorded in
+[tests/outputs/model_runs/writing/manifest_rich.json](tests/outputs/model_runs/writing/manifest_rich.json),
+with a strict local eval record in
+[evals/results/078d53e_rich_writing_model_eval.jsonl](evals/results/078d53e_rich_writing_model_eval.jsonl).
 
-**Input**
-
-```text
-Use $engineering-paper-coach to turn these notes into one bounded English
-manuscript paragraph. This is a writing request, not an audit request.
-
-Task:
-Robotic inspection under partial occlusion.
-
-Problem:
-Fixed cameras miss defects when the part rotates away from the main view.
-
-Method:
-The system requests a secondary view when confidence is low.
-
-Evidence:
-92% defect localization accuracy on one inspection fixture.
-Fixed-camera baseline: 81%.
-
-Boundary:
-One fixture.
-One object family.
-No deployment test.
-No statistical significance test.
-```
-
-**Recorded local Codex output excerpt**
+**Ablation rows -> contribution-level ablation paragraph**
 
 ```text
-Robotic inspection under partial occlusion remains difficult when a fixed
-camera view cannot observe defects after the part rotates away from the main
-viewpoint. To address this limitation, the proposed system requests a secondary
-view when its inspection confidence is low, allowing defect localization to use
-additional visual evidence only when the primary view is insufficient. On one
-inspection fixture and one object family, this view-requesting strategy
-achieved 92% defect localization accuracy, compared with 81% for a
-fixed-camera baseline. These results indicate that confidence-triggered
-secondary viewing can improve localization in the evaluated setup, while
-broader deployment performance remains unverified.
+The ablation trend shows that the main gain comes from reducing perception and
+grounding failures before the action is executed, rather than from execution
+constraints alone. Starting from a naive direct action hint at 17% success,
+adding geometry-aware execution raises performance to 23%...
 ```
 
 Full artifact:
-[coach_write_draft_first_ce1478f.md](tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md).
+[writing_ablation_with_failure_modes_078d53e.md](tests/outputs/model_runs/writing/writing_ablation_with_failure_modes_078d53e.md).
 
-**Why this is evidence-bound**
+**Result table + diagnostic axes -> Results paragraph**
 
-- It uses the supplied task, problem, method, result, baseline, and boundary.
-- It does not add citations, extra baselines, extra fixtures, statistical
-  claims, or deployment evidence.
-- It shows the coach skill answering a writing request with manuscript prose
-  first, not with an audit verdict.
+```text
+In the tested tabletop occlusion setup, the confidence-triggered multi-view
+system ranks first among the evaluated variants, followed by the fixed side
+view, the fixed overhead view, and the open-loop controller. The strongest
+result is the full system's 84% success over 180 trials...
+```
+
+Full artifact:
+[writing_results_with_diagnostic_axes_078d53e.md](tests/outputs/model_runs/writing/writing_results_with_diagnostic_axes_078d53e.md).
+
+**Method notes -> Methods overview**
+
+```text
+Given synchronized overhead and side RGB-D observations, the system first
+estimates an insertion pose together with a confidence score, rather than
+sending the observations directly to control. This intermediate state is the
+main handoff object...
+```
+
+Full artifact:
+[writing_methods_overview_rich_078d53e.md](tests/outputs/model_runs/writing/writing_methods_overview_rich_078d53e.md).
 
 Better input evidence produces better manuscript prose. If evidence is missing,
 the skill should downgrade the claim, write a scaffold, or mark the gap instead
@@ -174,7 +160,52 @@ They are maintainer-written expected outputs, not recorded model-run artifacts.
 | Coach writing request with draft-first output | [coach_write_draft_first.md](tests/prompts/coach_write_draft_first.md) | [coach_write_draft_first.md](tests/outputs/golden/coach_write_draft_first.md) |
 | Minimal abstract smoke check | [writing_min.md](tests/prompts/writing_min.md) | [writing_min.md](tests/outputs/golden/writing_min.md) |
 
-### Recorded Draft-First Writing Outputs
+### Recorded Rich Writing Outputs
+
+The outputs below are raw local Codex final answers generated from rich writing
+prompt fixtures at base commit `078d53e7b5925cf7c56b3b4696c8a35b9ac8d475`.
+They are recorded local single-run artifacts, not CI-controlled behavior proof,
+not multi-run stability proof, and not top-tier-ready proof.
+
+| Writing task | Prompt fixture | Recorded local output |
+|---|---|---|
+| Introduction opening for contact-rich insertion | [writing_intro_opening_rich.md](tests/prompts/writing_intro_opening_rich.md) | [writing_intro_opening_rich_078d53e.md](tests/outputs/model_runs/writing/writing_intro_opening_rich_078d53e.md) |
+| Methods overview from method notes | [writing_methods_overview_rich.md](tests/prompts/writing_methods_overview_rich.md) | [writing_methods_overview_rich_078d53e.md](tests/outputs/model_runs/writing/writing_methods_overview_rich_078d53e.md) |
+| Results paragraph from diagnostic axes | [writing_results_with_diagnostic_axes.md](tests/prompts/writing_results_with_diagnostic_axes.md) | [writing_results_with_diagnostic_axes_078d53e.md](tests/outputs/model_runs/writing/writing_results_with_diagnostic_axes_078d53e.md) |
+| Ablation paragraph from failure modes | [writing_ablation_with_failure_modes.md](tests/prompts/writing_ablation_with_failure_modes.md) | [writing_ablation_with_failure_modes_078d53e.md](tests/outputs/model_runs/writing/writing_ablation_with_failure_modes_078d53e.md) |
+| Related Work positioning with placeholders | [writing_related_work_positioning_rich.md](tests/prompts/writing_related_work_positioning_rich.md) | [writing_related_work_positioning_rich_078d53e.md](tests/outputs/model_runs/writing/writing_related_work_positioning_rich_078d53e.md) |
+| Chinese notes to English manuscript prose | [writing_zh_notes_to_en_manuscript_rich.md](tests/prompts/writing_zh_notes_to_en_manuscript_rich.md) | [writing_zh_notes_to_en_manuscript_rich_078d53e.md](tests/outputs/model_runs/writing/writing_zh_notes_to_en_manuscript_rich_078d53e.md) |
+| Six-sentence Abstract from rich evidence | [writing_abstract_from_rich_evidence.md](tests/prompts/writing_abstract_from_rich_evidence.md) | [writing_abstract_from_rich_evidence_078d53e.md](tests/outputs/model_runs/writing/writing_abstract_from_rich_evidence_078d53e.md) |
+| Bounded two-paragraph Conclusion | [writing_conclusion_bounded_takeaway_rich.md](tests/prompts/writing_conclusion_bounded_takeaway_rich.md) | [writing_conclusion_bounded_takeaway_rich_078d53e.md](tests/outputs/model_runs/writing/writing_conclusion_bounded_takeaway_rich_078d53e.md) |
+
+Full provenance is recorded in
+[tests/outputs/model_runs/writing/manifest_rich.json](tests/outputs/model_runs/writing/manifest_rich.json).
+The local eval record is
+[evals/results/078d53e_rich_writing_model_eval.jsonl](evals/results/078d53e_rich_writing_model_eval.jsonl).
+
+**Hero candidates from recorded local Codex outputs**
+
+```text
+The largest improvement enters at the overlay self-verification stage: success
+increases from 44% to 76%, a 32 percentage point gain, consistent with its role
+in rejecting visually plausible but poorly grounded action hints before they
+reach execution.
+```
+
+```text
+The diagnostic pattern explains why the ranking is not simply a
+camera-placement effect: overhead viewing tends to fail when the peg hides the
+hole during final approach, side viewing improves lateral visibility but can
+still leave depth uncertainty unresolved...
+```
+
+```text
+This ordering is used because visual uncertainty that is left unresolved before
+contact can propagate into the peg-hole interaction and become difficult to
+correct once the peg begins entering the hole.
+```
+
+### Previous Behavior Evidence: Draft-First Writing Outputs
 
 The outputs below are raw local Codex final answers generated from the same
 draft-first writing prompt fixtures at base commit `ce1478f`. They are recorded
@@ -188,7 +219,7 @@ snapshots.
 | Results paragraph from table-like evidence | [writing_results_interpretation.md](tests/prompts/writing_results_interpretation.md) | [writing_results_interpretation_ce1478f.md](tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md) |
 | Methods reader path from module notes | [writing_methods_reader_path.md](tests/prompts/writing_methods_reader_path.md) | [writing_methods_reader_path_ce1478f.md](tests/outputs/model_runs/writing/writing_methods_reader_path_ce1478f.md) |
 | Two-paragraph Conclusion from results and limits | [writing_conclusion_two_paragraph.md](tests/prompts/writing_conclusion_two_paragraph.md) | [writing_conclusion_two_paragraph_ce1478f.md](tests/outputs/model_runs/writing/writing_conclusion_two_paragraph_ce1478f.md) |
-| Minimal abstract smoke check | [writing_min.md](tests/prompts/writing_min.md) | [writing_min_ce1478f.md](tests/outputs/model_runs/writing/writing_min_ce1478f.md) |
+| Minimal abstract smoke/provenance check | [writing_min.md](tests/prompts/writing_min.md) | [writing_min_ce1478f.md](tests/outputs/model_runs/writing/writing_min_ce1478f.md) |
 
 Full provenance is recorded in
 [tests/outputs/model_runs/writing/manifest.json](tests/outputs/model_runs/writing/manifest.json).

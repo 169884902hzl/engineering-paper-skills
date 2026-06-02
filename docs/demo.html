@@ -92,16 +92,71 @@
         <h2>Manuscript Writing Examples</h2>
         <p>Start here if you want to see what the skills can write from rough notes. Safety and audit examples are listed after the writing examples.</p>
 
+        <article class="card" id="recorded-rich-writing-outputs">
+          <h3>Recorded Rich Writing Outputs</h3>
+          <p><strong>Recorded local Codex outputs:</strong> these are raw final answers generated from rich writing prompt fixtures at base commit <code>078d53e7b5925cf7c56b3b4696c8a35b9ac8d475</code>. They are local single-run evidence, not CI-controlled behavior proof, not multi-run stability proof, and not top-tier-ready proof.</p>
+          <ul>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_with_failure_modes_078d53e.md">Ablation rows to contribution-level ablation paragraph</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_with_diagnostic_axes_078d53e.md">Result table plus diagnostic axes to Results paragraph</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_methods_overview_rich_078d53e.md">Method notes to Methods overview</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_intro_opening_rich_078d53e.md">Introduction opening from task, bottleneck, and method motivation</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_related_work_positioning_rich_078d53e.md">Related Work positioning with citation placeholders</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_notes_to_en_manuscript_rich_078d53e.md">Chinese notes to English manuscript prose</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_abstract_from_rich_evidence_078d53e.md">Six-sentence Abstract from rich evidence</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_bounded_takeaway_rich_078d53e.md">Bounded two-paragraph Conclusion</a></li>
+          </ul>
+          <p>Full provenance is recorded in <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_rich.json">tests/outputs/model_runs/writing/manifest_rich.json</a>. The local eval record is <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/078d53e_rich_writing_model_eval.jsonl">evals/results/078d53e_rich_writing_model_eval.jsonl</a>.</p>
+          <div class="grid">
+            <div>
+              <h3>Ablation rows -> contribution role</h3>
+              <pre><code>Excerpted from recorded local Codex output:
+The largest improvement enters at the overlay
+self-verification stage: success increases from
+44% to 76%, a 32 percentage point gain, consistent
+with its role in rejecting visually plausible but
+poorly grounded action hints before they reach
+execution.
+
+Full artifact:
+writing_ablation_with_failure_modes_078d53e.md</code></pre>
+            </div>
+            <div>
+              <h3>Diagnostic results -> mechanism reading</h3>
+              <pre><code>Excerpted from recorded local Codex output:
+The diagnostic pattern explains why the ranking is
+not simply a camera-placement effect: overhead
+viewing tends to fail when the peg hides the hole
+during final approach, side viewing improves
+lateral visibility but can still leave depth
+uncertainty unresolved.
+
+Full artifact:
+writing_results_with_diagnostic_axes_078d53e.md</code></pre>
+            </div>
+            <div>
+              <h3>Method notes -> reader path</h3>
+              <pre><code>Excerpted from recorded local Codex output:
+This ordering is used because visual uncertainty
+that is left unresolved before contact can propagate
+into the peg-hole interaction and become difficult
+to correct once the peg begins entering the hole.
+
+Full artifact:
+writing_methods_overview_rich_078d53e.md</code></pre>
+            </div>
+          </div>
+        </article>
+
         <article class="card" id="recorded-draft-first-writing-outputs">
-          <h3>Recorded Draft-First Writing Outputs</h3>
-          <p><strong>Recorded local Codex outputs:</strong> these are raw final answers generated from draft-first writing prompt fixtures at base commit <code>ce1478f</code>. They are local single-run evidence, not CI-controlled behavior proof or top-tier-ready proof.</p>
+          <h3>Previous Behavior Evidence: Draft-First Writing Outputs</h3>
+          <p><strong>Recorded local Codex outputs:</strong> these are older raw final answers generated from draft-first writing prompt fixtures at base commit <code>ce1478f</code>. They are retained as previous behavior evidence, not current showcase samples, not CI-controlled behavior proof, and not top-tier-ready proof.</p>
           <ul>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md">Coach writing request with draft-first output</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md">Ablation interpretation from component rows</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md">Results paragraph from table-like evidence</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_methods_reader_path_ce1478f.md">Methods reader path from module notes</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_two_paragraph_ce1478f.md">Two-paragraph Conclusion from results and limits</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_min_ce1478f.md">Minimal abstract smoke check</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_min_ce1478f.md">Minimal abstract smoke/provenance check</a></li>
           </ul>
           <p>Full provenance is recorded in <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest.json">tests/outputs/model_runs/writing/manifest.json</a>.</p>
           <div class="example">

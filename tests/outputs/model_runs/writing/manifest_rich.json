@@ -1,0 +1,78 @@
+{
+  "manifest_type": "recorded_local_rich_writing_outputs",
+  "base_commit": "078d53e7b5925cf7c56b3b4696c8a35b9ac8d475",
+  "generated_on": "2026-06-02T12:05:20.439644+00:00",
+  "codex_cli_version": "codex-cli 0.136.0",
+  "runtime_model_executed": true,
+  "generation_mode": "interactive_codex_cli_conversation",
+  "ci_controlled": false,
+  "evidence_level": "local_single_run",
+  "edited_for_readme": false,
+  "note": "These are raw final-answer outputs generated in an interactive Codex CLI session from rich writing prompt fixtures after installing this repository's skills.",
+  "outputs": [
+    {
+      "case": "writing_intro_opening_rich",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_intro_opening_rich.md",
+      "output": "tests/outputs/model_runs/writing/writing_intro_opening_rich_078d53e.md",
+      "sha256": "c1be8b6aab733fe646d694b26228c8200870418fc6873a11a3fff48e9f13e998",
+      "command_or_interaction": "interactive Codex CLI conversation; prompt file read and final answer saved"
+    },
+    {
+      "case": "writing_methods_overview_rich",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_methods_overview_rich.md",
+      "output": "tests/outputs/model_runs/writing/writing_methods_overview_rich_078d53e.md",
+      "sha256": "2b7a411f55aa4454a39ef14f77e2b839cad18c72e2e1b5781cea7e3da1cb0f8f",
+      "command_or_interaction": "interactive Codex CLI conversation; prompt file read and final answer saved"
+    },
+    {
+      "case": "writing_results_with_diagnostic_axes",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_results_with_diagnostic_axes.md",
+      "output": "tests/outputs/model_runs/writing/writing_results_with_diagnostic_axes_078d53e.md",
+      "sha256": "20a8d464fc0606dfd97a60c0192e6f58d59a4412281a9ea40fb3f89c9e9adefd",
+      "command_or_interaction": "interactive Codex CLI conversation; prompt file read and final answer saved"
+    },
+    {
+      "case": "writing_ablation_with_failure_modes",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_ablation_with_failure_modes.md",
+      "output": "tests/outputs/model_runs/writing/writing_ablation_with_failure_modes_078d53e.md",
+      "sha256": "abd5e71969bcc2a5e66c4ccc92ee416c881838a5f6896c19c5956e8faf9d61ed",
+      "command_or_interaction": "interactive Codex CLI conversation; prompt file read and final answer saved"
+    },
+    {
+      "case": "writing_related_work_positioning_rich",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_related_work_positioning_rich.md",
+      "output": "tests/outputs/model_runs/writing/writing_related_work_positioning_rich_078d53e.md",
+      "sha256": "97a0f132c4cccb141767a082d117a4fb9d5d290bd0b2ac0295d32631e667e1fa",
+      "command_or_interaction": "interactive Codex CLI conversation; prompt file read and final answer saved"
+    },
+    {
+      "case": "writing_zh_notes_to_en_manuscript_rich",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_zh_notes_to_en_manuscript_rich.md",
+      "output": "tests/outputs/model_runs/writing/writing_zh_notes_to_en_manuscript_rich_078d53e.md",
+      "sha256": "dc1c76aef3d03a38612690e7b6411adfb149c702d43ff46b11e1035a42974740",
+      "command_or_interaction": "interactive Codex CLI conversation; prompt file read and final answer saved"
+    },
+    {
+      "case": "writing_abstract_from_rich_evidence",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_abstract_from_rich_evidence.md",
+      "output": "tests/outputs/model_runs/writing/writing_abstract_from_rich_evidence_078d53e.md",
+      "sha256": "bcd14340b1c18bad56585dc392ad8d023df89c1f647d8604a6cd1f2075c3cb2a",
+      "command_or_interaction": "interactive Codex CLI conversation; prompt file read and final answer saved"
+    },
+    {
+      "case": "writing_conclusion_bounded_takeaway_rich",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_conclusion_bounded_takeaway_rich.md",
+      "output": "tests/outputs/model_runs/writing/writing_conclusion_bounded_takeaway_rich_078d53e.md",
+      "sha256": "9a939df21453b2d03f9e669dbd24c1991657c6b571ddeee26e1322a4d75b6e87",
+      "command_or_interaction": "interactive Codex CLI conversation; prompt file read and final answer saved"
+    }
+  ]
+}

@@ -174,44 +174,36 @@
 
       <section>
         <h2>Start With Rough Notes</h2>
-        <p>Most users should begin by giving the skill the task, problem, method, evidence, and boundary. The example below is excerpted from a recorded local Codex run, so the first screen shows writing behavior rather than a hand-written sample.</p>
-        <p><strong>Recorded local output excerpt:</strong> full provenance is in the demo gallery. Normal users only need the installed skills, not the repository QA scripts.</p>
-        <div class="card example">
-          <pre><code>Input:
-Use $engineering-paper-coach to turn these notes
-into one bounded English manuscript paragraph.
-
-Task: robotic inspection under partial occlusion.
-
-Problem: fixed cameras miss defects when the part
-rotates away from the main view.
-
-Method: request a secondary view when confidence is
-low.
-
-Evidence: 92% defect localization accuracy on one
-inspection fixture; fixed-camera baseline 81%.
-
-Boundary: one fixture, one object family, no
-deployment test, no statistical significance test.</code></pre>
-          <pre><code>Recorded local output excerpt:
-Robotic inspection under partial occlusion remains
-difficult when a fixed camera view cannot observe
-defects after the part rotates away from the main
-viewpoint. To address this limitation, the proposed
-system requests a secondary view when its inspection
-confidence is low, allowing defect localization to
-use additional visual evidence only when the primary
-view is insufficient. On one inspection fixture and
-one object family, this view-requesting strategy
-achieved 92% defect localization accuracy, compared
-with 81% for a fixed-camera baseline. These results
-indicate that confidence-triggered secondary viewing
-can improve localization in the evaluated setup,
-while broader deployment performance remains
-unverified.</code></pre>
+        <p>Most users should begin by giving the skill the task, problem, method, evidence, and boundary. The examples below are excerpted from recorded local Codex outputs generated from rich writing prompt fixtures at base commit <code>078d53e7b5925cf7c56b3b4696c8a35b9ac8d475</code>.</p>
+        <p><strong>Recorded local output excerpt:</strong> these recorded local Codex outputs are local single-run evidence, not CI-controlled behavior proof and not top-tier-ready proof. Full provenance is in the demo gallery.</p>
+        <div class="grid">
+          <div class="card">
+            <h3>Ablation rows to contribution prose</h3>
+            <pre><code>The largest improvement enters at the overlay
+self-verification stage: success increases from
+44% to 76%, a 32 percentage point gain, consistent
+with its role in rejecting visually plausible but
+poorly grounded action hints before they reach
+execution.</code></pre>
+          </div>
+          <div class="card">
+            <h3>Results table with diagnostic axes</h3>
+            <pre><code>The diagnostic pattern explains why the ranking is
+not simply a camera-placement effect: overhead
+viewing tends to fail when the peg hides the hole
+during final approach, side viewing improves
+lateral visibility but can still leave depth
+uncertainty unresolved...</code></pre>
+          </div>
+          <div class="card">
+            <h3>Method notes to reader path</h3>
+            <pre><code>This ordering is used because visual uncertainty
+that is left unresolved before contact can propagate
+into the peg-hole interaction and become difficult
+to correct once the peg begins entering the hole.</code></pre>
+          </div>
         </div>
-        <p><a href="./demo.html#recorded-draft-first-writing-outputs">Open recorded writing outputs</a></p>
+        <p><a href="./demo.html#recorded-rich-writing-outputs">Open recorded rich writing outputs</a></p>
       </section>
 
       <section>
@@ -233,9 +225,10 @@ unverified.</code></pre>
         <p>Start with the draft-first writing examples if you want to see manuscript prose. Practical examples and recorded local Codex outputs are in the demo gallery. Structured artifacts and model-run records are kept for reviewers and maintainers.</p>
         <ul>
           <li><a href="./demo.html">Demo gallery</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md">Recorded coach draft-first output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md">Recorded ablation interpretation output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md">Recorded results interpretation output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_with_failure_modes_078d53e.md">Recorded rich ablation output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_with_diagnostic_axes_078d53e.md">Recorded rich results output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_methods_overview_rich_078d53e.md">Recorded rich methods overview output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_rich.json">Recorded rich writing manifest</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_methods_reader_path.md">Methods reader-path draft</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_results_interpretation.md">Results interpretation draft</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_ablation_interpretation.md">Ablation interpretation draft</a></li>

@@ -15,7 +15,8 @@ tag implies readiness.
 | Current structured-contract baseline | `38b3d4d72660fbfe5705103e6bc27addac14668e` |
 | Latest local structured-contract attempt | `38b3d4d72660fbfe5705103e6bc27addac14668e` |
 | Latest local structured-contract failure kept for diagnosis | `80d9c23b8b9e6fd42470df845547724d63a8cc48` |
-| Current user-facing demo baseline | `681d305` recorded local demo outputs plus `2dc9571` hero notes-to-manuscript paragraph demo |
+| Current user-facing demo baseline | `078d53e` recorded rich writing outputs plus prior `681d305` and `2dc9571` demo outputs |
+| Current rich writing model-output baseline | `078d53e7b5925cf7c56b3b4696c8a35b9ac8d475` |
 | Current draft-first writing model-output baseline | `ce1478f66f50a27abe7dfe3d45ee31565ca6cb71` |
 | Status | top-tier candidate, not top-tier ready |
 | Release state | no GitHub release; commit-based beta |
@@ -40,6 +41,8 @@ anchors; it does not try to embed the hash of its own future edits.
 | `evals/results/681d305_demo_outputs_model_eval.jsonl` | eval record for demo-output provenance | `local_single_run` |
 | `tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md` | recorded local hero notes-to-manuscript paragraph demo | `local_single_run` |
 | `evals/results/2dc9571_hero_demo_model_eval.jsonl` | eval record for the hero writing demo output | `local_single_run` |
+| `tests/outputs/model_runs/writing/manifest_rich.json` | manifest for recorded local rich writing outputs at `078d53e` | `local_single_run` |
+| `evals/results/078d53e_rich_writing_model_eval.jsonl` | strict local eval record for rich writing model outputs | `local_single_run` |
 | `tests/outputs/model_runs/writing/manifest.json` | manifest for recorded local draft-first writing outputs at `ce1478f` | `local_single_run` |
 | `evals/results/ce1478f_writing_model_eval.jsonl` | eval record for draft-first writing model outputs | `local_single_run` |
 | `.github/workflows/behavior-regression.yml` | manual behavior-regression workflow | requires configured model command |
@@ -65,6 +68,23 @@ upgrade the project to top-tier ready.
 Recorded demo command strings use `<repo-root>` placeholders in public
 JSON/JSONL provenance files. Local absolute workspace paths are not part of the
 published evidence contract.
+
+## Rich writing output provenance
+
+The rich writing outputs under `tests/outputs/model_runs/writing/` are raw local
+Codex final answers generated from eight rich writing prompt fixtures at base
+commit `078d53e7b5925cf7c56b3b4696c8a35b9ac8d475`. They were generated after
+installing this repository's current `engineering-writing` and
+`engineering-paper-coach` skill files into Codex home.
+
+The current user-facing showcase uses three of those outputs: Ablation rows to
+contribution-level ablation prose, Results with diagnostic axes, and Methods
+overview reader path. The Introduction, Related Work, Chinese notes, Abstract,
+and Conclusion outputs are kept in the demo gallery. These artifacts remain
+`local_single_run` evidence; they are not CI-controlled proof, not multi-run
+stability proof, and not top-tier-ready proof. Their full output paths and
+SHA-256 hashes are recorded in
+`tests/outputs/model_runs/writing/manifest_rich.json`.
 
 ## Draft-first writing output provenance
 

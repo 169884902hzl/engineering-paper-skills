@@ -4,6 +4,25 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Record rich writing model runs
+
+- Generated eight fresh rich writing outputs in an interactive Codex CLI
+  session from rich writing prompt fixtures at base commit `078d53e`.
+- Added raw final-answer artifacts under `tests/outputs/model_runs/writing/`
+  for Introduction, Methods, Results, Ablation, Related Work, Chinese notes to
+  English prose, Abstract, and Conclusion writing cases.
+- Added `tests/outputs/model_runs/writing/manifest_rich.json` with prompt
+  paths, output paths, SHA-256 hashes, evidence level, CI-control status, and
+  interactive-generation provenance.
+- Added `evals/results/078d53e_rich_writing_model_eval.jsonl` with strict local
+  scoring for draft-first behavior, manuscript-prose-first behavior, evidence
+  use, boundary preservation, and showcase placement.
+- Updated README and Pages so the homepage now showcases the richer Ablation,
+  Results, and Methods outputs, while the older `ce1478f` outputs are retained
+  as previous behavior evidence.
+- This entry is local single-run writing evidence only. It is not CI proof,
+  multi-run stability proof, or top-tier-ready proof.
+
 ## Record draft-first writing model outputs
 
 - Ran local Codex in read-only mode against the six draft-first writing prompt
