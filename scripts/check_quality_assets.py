@@ -186,7 +186,7 @@ REQUIRED_DISCOVERY_ASSETS = {
         "Engineering Paper Skills",
         "manuscript audit",
         "Start With Rough Notes",
-        "Example manuscript paragraph",
+        "Recorded local output excerpt",
         "Normal users only need",
         "Example Outputs",
         "SoftwareSourceCode",

@@ -20,76 +20,63 @@ numbers, deployment tests, or submission readiness.
 
 ## What It Can Write
 
-The example below shows the normal user path: paste the paper problem, prior
-limitation, method, evidence, and boundary; get bounded manuscript prose. The
-full provenance for this example is linked later in this README.
+The example below is excerpted from a recorded local Codex run at base commit
+`ce1478f`. It shows the normal user path: paste the task, problem, method,
+evidence, and boundary; get bounded manuscript prose first, followed by short
+evidence notes. Full provenance is recorded in
+[tests/outputs/model_runs/writing/manifest.json](tests/outputs/model_runs/writing/manifest.json).
 
 **Input**
 
 ```text
-Use $engineering-writing to turn these notes into one English manuscript
-paragraph.
+Use $engineering-paper-coach to turn these notes into one bounded English
+manuscript paragraph. This is a writing request, not an audit request.
 
-Target paper type:
-Robotics conference paper.
+Task:
+Robotic inspection under partial occlusion.
 
 Problem:
-Contact-rich insertion fails when visual occlusion hides the peg-hole alignment
-and the controller continues with a poor pose estimate.
-
-Prior limitation:
-Fixed overhead or side cameras can lose task-relevant visibility during
-insertion. Open-loop insertion does not react to pose uncertainty or contact
-deviations.
+Fixed cameras miss defects when the part rotates away from the main view.
 
 Method:
-The system uses overhead and side RGB-D observations. It estimates insertion
-pose and confidence. When confidence is low, it requests an additional view. A
-guarded insertion controller stops if force or pose deviation exceeds a limit.
+The system requests a secondary view when confidence is low.
 
 Evidence:
-Full system: 84% success over 180 trials.
-Fixed overhead camera: 69%.
-Fixed side camera: 72%.
-Open-loop controller: 61%.
+92% defect localization accuracy on one inspection fixture.
+Fixed-camera baseline: 81%.
 
 Boundary:
-One 7-DoF robot arm.
-One tabletop fixture.
-One cylindrical peg family.
-No confidence intervals.
+One fixture.
+One object family.
+No deployment test.
 No statistical significance test.
-No cross-robot test.
-No industrial deployment test.
-No ablation isolating view selection from guarded execution.
 ```
 
-**Example manuscript paragraph**
+**Recorded local Codex output excerpt**
 
 ```text
-Contact-rich insertion can fail when visual occlusion hides peg-hole alignment
-and the controller continues from a poor pose estimate. Fixed overhead or side
-RGB-D cameras may lose task-relevant visibility during insertion, while
-open-loop insertion does not react to pose uncertainty or contact deviations.
-We study a system that uses overhead and side RGB-D observations to estimate
-insertion pose and confidence, requests an additional view when confidence is
-low, and applies a guarded insertion controller that stops when force or pose
-deviation exceeds a limit. In 180 trials, the full system achieved 84% success,
-compared with 69% for a fixed overhead camera, 72% for a fixed side camera, and
-61% for an open-loop controller. This evidence supports a bounded system-level
-improvement in the tested setup, but it is limited to one 7-DoF robot arm, one
-tabletop fixture, and one cylindrical peg family, with no confidence intervals,
-no statistical significance test, no cross-robot test, no industrial deployment
-test, and no ablation isolating view selection from guarded execution.
+Robotic inspection under partial occlusion remains difficult when a fixed
+camera view cannot observe defects after the part rotates away from the main
+viewpoint. To address this limitation, the proposed system requests a secondary
+view when its inspection confidence is low, allowing defect localization to use
+additional visual evidence only when the primary view is insufficient. On one
+inspection fixture and one object family, this view-requesting strategy
+achieved 92% defect localization accuracy, compared with 81% for a
+fixed-camera baseline. These results indicate that confidence-triggered
+secondary viewing can improve localization in the evaluated setup, while
+broader deployment performance remains unverified.
 ```
+
+Full artifact:
+[coach_write_draft_first_ce1478f.md](tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md).
 
 **Why this is evidence-bound**
 
-- It uses the supplied problem, prior limitation, method, numbers, and boundary.
-- It does not add citations, baselines, objects, robots, statistics, or
-  deployment evidence.
-- It turns rough notes into manuscript prose instead of only refusing unsafe
-  claims.
+- It uses the supplied task, problem, method, result, baseline, and boundary.
+- It does not add citations, extra baselines, extra fixtures, statistical
+  claims, or deployment evidence.
+- It shows the coach skill answering a writing request with manuscript prose
+  first, not with an audit verdict.
 
 Better input evidence produces better manuscript prose. If evidence is missing,
 the skill should downgrade the claim, write a scaffold, or mark the gap instead
@@ -180,12 +167,12 @@ They are maintainer-written expected outputs, not recorded model-run artifacts.
 
 | Writing task | Prompt fixture | Expected draft-first output |
 |---|---|---|
-| Abstract from minimal evidence | [writing_min.md](tests/prompts/writing_min.md) | [writing_min.md](tests/outputs/golden/writing_min.md) |
 | Methods reader path from module notes | [writing_methods_reader_path.md](tests/prompts/writing_methods_reader_path.md) | [writing_methods_reader_path.md](tests/outputs/golden/writing_methods_reader_path.md) |
 | Results paragraph from table-like evidence | [writing_results_interpretation.md](tests/prompts/writing_results_interpretation.md) | [writing_results_interpretation.md](tests/outputs/golden/writing_results_interpretation.md) |
 | Ablation interpretation from component rows | [writing_ablation_interpretation.md](tests/prompts/writing_ablation_interpretation.md) | [writing_ablation_interpretation.md](tests/outputs/golden/writing_ablation_interpretation.md) |
 | Two-paragraph Conclusion from results and limits | [writing_conclusion_two_paragraph.md](tests/prompts/writing_conclusion_two_paragraph.md) | [writing_conclusion_two_paragraph.md](tests/outputs/golden/writing_conclusion_two_paragraph.md) |
 | Coach writing request with draft-first output | [coach_write_draft_first.md](tests/prompts/coach_write_draft_first.md) | [coach_write_draft_first.md](tests/outputs/golden/coach_write_draft_first.md) |
+| Minimal abstract smoke check | [writing_min.md](tests/prompts/writing_min.md) | [writing_min.md](tests/outputs/golden/writing_min.md) |
 
 ### Recorded Draft-First Writing Outputs
 
@@ -196,12 +183,12 @@ snapshots.
 
 | Writing task | Prompt fixture | Recorded local output |
 |---|---|---|
-| Abstract from minimal evidence | [writing_min.md](tests/prompts/writing_min.md) | [writing_min_ce1478f.md](tests/outputs/model_runs/writing/writing_min_ce1478f.md) |
-| Methods reader path from module notes | [writing_methods_reader_path.md](tests/prompts/writing_methods_reader_path.md) | [writing_methods_reader_path_ce1478f.md](tests/outputs/model_runs/writing/writing_methods_reader_path_ce1478f.md) |
-| Results paragraph from table-like evidence | [writing_results_interpretation.md](tests/prompts/writing_results_interpretation.md) | [writing_results_interpretation_ce1478f.md](tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md) |
-| Ablation interpretation from component rows | [writing_ablation_interpretation.md](tests/prompts/writing_ablation_interpretation.md) | [writing_ablation_interpretation_ce1478f.md](tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md) |
-| Two-paragraph Conclusion from results and limits | [writing_conclusion_two_paragraph.md](tests/prompts/writing_conclusion_two_paragraph.md) | [writing_conclusion_two_paragraph_ce1478f.md](tests/outputs/model_runs/writing/writing_conclusion_two_paragraph_ce1478f.md) |
 | Coach writing request with draft-first output | [coach_write_draft_first.md](tests/prompts/coach_write_draft_first.md) | [coach_write_draft_first_ce1478f.md](tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md) |
+| Ablation interpretation from component rows | [writing_ablation_interpretation.md](tests/prompts/writing_ablation_interpretation.md) | [writing_ablation_interpretation_ce1478f.md](tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md) |
+| Results paragraph from table-like evidence | [writing_results_interpretation.md](tests/prompts/writing_results_interpretation.md) | [writing_results_interpretation_ce1478f.md](tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md) |
+| Methods reader path from module notes | [writing_methods_reader_path.md](tests/prompts/writing_methods_reader_path.md) | [writing_methods_reader_path_ce1478f.md](tests/outputs/model_runs/writing/writing_methods_reader_path_ce1478f.md) |
+| Two-paragraph Conclusion from results and limits | [writing_conclusion_two_paragraph.md](tests/prompts/writing_conclusion_two_paragraph.md) | [writing_conclusion_two_paragraph_ce1478f.md](tests/outputs/model_runs/writing/writing_conclusion_two_paragraph_ce1478f.md) |
+| Minimal abstract smoke check | [writing_min.md](tests/prompts/writing_min.md) | [writing_min_ce1478f.md](tests/outputs/model_runs/writing/writing_min_ce1478f.md) |
 
 Full provenance is recorded in
 [tests/outputs/model_runs/writing/manifest.json](tests/outputs/model_runs/writing/manifest.json).
@@ -209,17 +196,6 @@ The local eval record is
 [evals/results/ce1478f_writing_model_eval.jsonl](evals/results/ce1478f_writing_model_eval.jsonl).
 These outputs are local single-run evidence, not CI-controlled behavior proof
 or top-tier-ready proof.
-
-**Excerpted from recorded local Codex output: Results interpretation**
-
-Full artifact:
-[writing_results_interpretation_ce1478f.md](tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md).
-
-```text
-In the tested tabletop occlusion setup, the full system achieved 84% insertion
-success across 180 trials, compared with 69% for the fixed overhead camera,
-72% for the fixed side camera, and 61% for the open-loop controller.
-```
 
 **Excerpted from recorded local Codex output: Coach draft-first output**
 
@@ -233,7 +209,18 @@ viewpoint. To address this limitation, the proposed system requests a secondary
 view when its inspection confidence is low...
 ```
 
-**Example excerpt: Methods reader path**
+**Excerpted from recorded local Codex output: Ablation interpretation**
+
+Full artifact:
+[writing_ablation_interpretation_ce1478f.md](tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md).
+
+```text
+Geometry-aware execution alone raises success only modestly, from 17% to 23%.
+Adding target-focused perception produces a larger gain to 44%. The largest
+increase, from 44% to 76%, occurs when overlay self-verification is added...
+```
+
+**Golden expected excerpt: Methods reader path**
 
 ```text
 The execution path begins with overhead and side RGB-D observations, which are
@@ -243,7 +230,7 @@ continuing the insertion attempt. The guarded insertion controller then
 executes the motion while monitoring force and pose deviation...
 ```
 
-**Example excerpt: Ablation interpretation**
+**Golden expected excerpt: Ablation interpretation**
 
 ```text
 Directly querying action hints reaches only 17% success, indicating that raw

@@ -174,45 +174,44 @@
 
       <section>
         <h2>Start With Rough Notes</h2>
-        <p>Most users should begin by giving the skill the paper problem, method, evidence, and boundary. The example below shows how rough robotics notes become bounded manuscript prose instead of an overconfident claim.</p>
-        <p><strong>Example manuscript paragraph:</strong> full provenance is in the demo gallery. Normal users only need the installed skills, not the repository QA scripts.</p>
+        <p>Most users should begin by giving the skill the task, problem, method, evidence, and boundary. The example below is excerpted from a recorded local Codex run, so the first screen shows writing behavior rather than a hand-written sample.</p>
+        <p><strong>Recorded local output excerpt:</strong> full provenance is in the demo gallery. Normal users only need the installed skills, not the repository QA scripts.</p>
         <div class="card example">
           <pre><code>Input:
-Use $engineering-writing to turn these notes into
-one English manuscript paragraph.
+Use $engineering-paper-coach to turn these notes
+into one bounded English manuscript paragraph.
 
-Problem: contact-rich insertion fails when visual
-occlusion hides peg-hole alignment.
+Task: robotic inspection under partial occlusion.
 
-Method: overhead and side RGB-D observations,
-pose-confidence estimation, additional view request,
-and guarded insertion.
+Problem: fixed cameras miss defects when the part
+rotates away from the main view.
 
-Evidence: 84% success over 180 trials; baselines
-are 69%, 72%, and 61%.
+Method: request a secondary view when confidence is
+low.
 
-Boundary: one 7-DoF robot arm, one tabletop fixture,
-one cylindrical peg family, no significance test,
-no cross-robot test, and no deployment test.</code></pre>
-          <pre><code>Example manuscript paragraph:
-Contact-rich insertion can fail when visual
-occlusion hides peg-hole alignment and the controller
-continues from a poor pose estimate. Fixed overhead
-or side RGB-D cameras may lose task-relevant
-visibility during insertion, while open-loop
-insertion does not react to pose uncertainty or
-contact deviations. We study a system that uses
-overhead and side RGB-D observations to estimate
-insertion pose and confidence, requests an additional
-view when confidence is low, and applies a guarded
-insertion controller. In 180 trials, the full system
-achieved 84% success, compared with 69%, 72%, and
-61% for the supplied baselines. This evidence
-supports a bounded system-level improvement in the
-tested setup, but not statistical significance,
-cross-robot robustness, or industrial deployment.</code></pre>
+Evidence: 92% defect localization accuracy on one
+inspection fixture; fixed-camera baseline 81%.
+
+Boundary: one fixture, one object family, no
+deployment test, no statistical significance test.</code></pre>
+          <pre><code>Recorded local output excerpt:
+Robotic inspection under partial occlusion remains
+difficult when a fixed camera view cannot observe
+defects after the part rotates away from the main
+viewpoint. To address this limitation, the proposed
+system requests a secondary view when its inspection
+confidence is low, allowing defect localization to
+use additional visual evidence only when the primary
+view is insufficient. On one inspection fixture and
+one object family, this view-requesting strategy
+achieved 92% defect localization accuracy, compared
+with 81% for a fixed-camera baseline. These results
+indicate that confidence-triggered secondary viewing
+can improve localization in the evaluated setup,
+while broader deployment performance remains
+unverified.</code></pre>
         </div>
-        <p><a href="./demo.html#recorded-demo-outputs">Open recorded demo outputs</a></p>
+        <p><a href="./demo.html#recorded-draft-first-writing-outputs">Open recorded writing outputs</a></p>
       </section>
 
       <section>
@@ -234,6 +233,9 @@ cross-robot robustness, or industrial deployment.</code></pre>
         <p>Start with the draft-first writing examples if you want to see manuscript prose. Practical examples and recorded local Codex outputs are in the demo gallery. Structured artifacts and model-run records are kept for reviewers and maintainers.</p>
         <ul>
           <li><a href="./demo.html">Demo gallery</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md">Recorded coach draft-first output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md">Recorded ablation interpretation output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md">Recorded results interpretation output</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_methods_reader_path.md">Methods reader-path draft</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_results_interpretation.md">Results interpretation draft</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_ablation_interpretation.md">Ablation interpretation draft</a></li>

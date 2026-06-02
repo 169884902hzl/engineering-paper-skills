@@ -92,28 +92,19 @@
         <h2>Manuscript Writing Examples</h2>
         <p>Start here if you want to see what the skills can write from rough notes. Safety and audit examples are listed after the writing examples.</p>
 
-        <article class="card">
+        <article class="card" id="recorded-draft-first-writing-outputs">
           <h3>Recorded Draft-First Writing Outputs</h3>
           <p><strong>Recorded local Codex outputs:</strong> these are raw final answers generated from draft-first writing prompt fixtures at base commit <code>ce1478f</code>. They are local single-run evidence, not CI-controlled behavior proof or top-tier-ready proof.</p>
           <ul>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_min_ce1478f.md">Abstract from minimal evidence</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_methods_reader_path_ce1478f.md">Methods reader path from module notes</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md">Results paragraph from table-like evidence</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md">Ablation interpretation from component rows</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_two_paragraph_ce1478f.md">Two-paragraph Conclusion from results and limits</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md">Coach writing request with draft-first output</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md">Ablation interpretation from component rows</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md">Results paragraph from table-like evidence</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_methods_reader_path_ce1478f.md">Methods reader path from module notes</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_two_paragraph_ce1478f.md">Two-paragraph Conclusion from results and limits</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_min_ce1478f.md">Minimal abstract smoke check</a></li>
           </ul>
           <p>Full provenance is recorded in <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest.json">tests/outputs/model_runs/writing/manifest.json</a>.</p>
           <div class="example">
-            <pre><code>Excerpted from recorded local Codex output:
-In the tested tabletop occlusion setup, the full
-system achieved 84% insertion success across 180
-trials, compared with 69% for the fixed overhead
-camera, 72% for the fixed side camera, and 61% for
-the open-loop controller.
-
-Full artifact:
-writing_results_interpretation_ce1478f.md</code></pre>
             <pre><code>Excerpted from recorded local Codex output:
 Robotic inspection under partial occlusion remains
 difficult when a fixed camera view cannot observe
@@ -124,6 +115,15 @@ confidence is low.
 
 Full artifact:
 coach_write_draft_first_ce1478f.md</code></pre>
+            <pre><code>Excerpted from recorded local Codex output:
+Geometry-aware execution alone raises success only
+modestly, from 17% to 23%. Adding target-focused
+perception produces a larger gain to 44%. The largest
+increase, from 44% to 76%, occurs when overlay
+self-verification is added.
+
+Full artifact:
+writing_ablation_interpretation_ce1478f.md</code></pre>
           </div>
         </article>
 
@@ -131,11 +131,11 @@ coach_write_draft_first_ce1478f.md</code></pre>
           <h3>Draft-First Writing Examples</h3>
           <p><strong>Golden expected outputs:</strong> these examples define the intended WRITE-mode behavior. They are maintainer-written expected outputs, not recorded model-run artifacts.</p>
           <ul>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_min.md">Abstract from minimal evidence</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_methods_reader_path.md">Methods reader path from module notes</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_results_interpretation.md">Results paragraph from table-like evidence</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_ablation_interpretation.md">Ablation interpretation from component rows</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_conclusion_two_paragraph.md">Two-paragraph Conclusion from results and limits</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_min.md">Minimal abstract smoke check</a></li>
           </ul>
           <div class="example">
             <pre><code>Methods reader-path excerpt:
