@@ -34,6 +34,17 @@ Ablation, Discussion, or Conclusion prose, prefer the writing contract from
 `engineering-writing`. Do not let `engineering-paper-coach` reduce the request
 into a safety rewrite unless the evidence is too thin for manuscript prose.
 
+If evidence is thin but sufficient for a bounded paragraph, produce:
+
+1. a modest manuscript paragraph first
+2. then a short `What would strengthen this` note
+
+Do not replace writing with a warning unless the requested claim cannot be
+written without invention. If the user requests Abstract, Introduction, Related
+Work, Methods, Results, Ablation, Discussion, or Conclusion prose, prefer
+`engineering-writing` behavior. Coach must not reduce a section-writing request
+into only a safety rewrite.
+
 When coach handles a writing request itself:
 
 - Produce the draft first.

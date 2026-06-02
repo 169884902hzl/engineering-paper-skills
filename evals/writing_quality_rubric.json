@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "score_scale": {
     "1": "fail",
     "2": "weak",
@@ -28,6 +28,11 @@
   "blocking_failure_types": [
     "write request starts with verdict or audit table",
     "invented number, baseline, citation, experiment, figure, or mechanism",
+    "unsupported_mechanism_blocker",
+    "prompt_meta_language_blocker",
+    "audit_disclaimer_in_manuscript_blocker",
+    "conclusion_boundary_inventory_blocker",
+    "related_work_meta_language_blocker",
     "result paragraph claims statistical significance without supplied support",
     "ablation paragraph claims causal proof without controlled evidence",
     "methods paragraph reads as a module directory without reader path",
@@ -48,7 +53,17 @@
     "related_work_paper_list_not_positioning",
     "sentence_translation_not_native_manuscript_prose",
     "unsupported_claim_expansion",
-    "no_internal_revision_signal"
+    "no_internal_revision_signal",
+    "unsupported_mechanism_blocker",
+    "prompt_meta_language_blocker",
+    "audit_disclaimer_in_manuscript_blocker",
+    "conclusion_boundary_inventory_blocker",
+    "related_work_meta_language_blocker",
+    "weak_argument_compression",
+    "wrong_manuscript_register",
+    "weak_section_boundary_control",
+    "rough_notes_hallucination",
+    "unstable_multi_run_behavior"
   ],
   "human_review_fields": [
     "case",
@@ -62,6 +77,11 @@
     "native_english_argument_reconstruction",
     "section_specific_opening",
     "self_revision_quality",
+    "argument_compression",
+    "manuscript_register",
+    "section_boundary_control",
+    "rough_notes_robustness",
+    "multi_run_stability",
     "showcase_decision",
     "notes"
   ],
@@ -137,6 +157,46 @@
     "showcase_decision": {
       "pass": "A human reviewer could reasonably use this output as a public demo of writing ability.",
       "fail": "The output should be kept only as a smoke check, provenance record, or internal behavior artifact."
+    },
+    "unsupported_mechanism_blocker": {
+      "pass": "The manuscript prose names only mechanisms supplied by the prompt or source notes.",
+      "fail": "The draft introduces a physical mechanism such as jamming, slip, compliance, deformation, fatigue, binding, impact, resonance, or failure statistics that was not supplied."
+    },
+    "prompt_meta_language_blocker": {
+      "pass": "The manuscript prose does not mention the prompt, notes, evidence availability, verification status, or review process.",
+      "fail": "The draft contains prompt or process wording such as supplied notes, supplied positioning, available evidence, pending verification, unsupported, not verified, or without claiming."
+    },
+    "audit_disclaimer_in_manuscript_blocker": {
+      "pass": "Scope is stated as part of the scientific claim or evaluation envelope.",
+      "fail": "A manuscript sentence reads like an audit disclaimer or refusal rather than paper prose."
+    },
+    "conclusion_boundary_inventory_blocker": {
+      "pass": "A Conclusion boundary paragraph begins from a concrete operating boundary and derives future work from failure regimes.",
+      "fail": "The second Conclusion paragraph opens as an inventory of one robot, one fixture, no significance, no deployment, or similar limitation list."
+    },
+    "related_work_meta_language_blocker": {
+      "pass": "Related Work uses citation placeholders and technical-axis positioning without discussing verification inside the manuscript paragraph.",
+      "fail": "Related Work manuscript prose talks about supplied evidence, pending citation verification, or unverified novelty instead of writing a bounded technical gap bridge."
+    },
+    "argument_compression": {
+      "pass": "The draft compresses rough notes into a clear paper argument without losing task, method, evidence, or boundary.",
+      "fail": "The draft either copies notes mechanically or drops the main argument while staying safe."
+    },
+    "manuscript_register": {
+      "pass": "The draft sounds like native engineering manuscript prose.",
+      "fail": "The draft sounds like a prompt response, checklist, maintainer note, or reviewer warning."
+    },
+    "section_boundary_control": {
+      "pass": "The draft performs the requested section job without drifting into another section's role.",
+      "fail": "The draft turns Methods into Results, Related Work into citation audit, Conclusion into limitations inventory, or Results into a table note."
+    },
+    "rough_notes_robustness": {
+      "pass": "Rough, incomplete, mixed-language, or contradictory notes lead to useful bounded prose or an appropriate scaffold without invention.",
+      "fail": "The model hallucinates, overcommits, or refuses useful writing when rough notes still support bounded prose."
+    },
+    "multi_run_stability": {
+      "pass": "Repeated runs preserve the same claim boundary, section job, and absence of public-demo blockers.",
+      "fail": "Repeated runs vary into unsupported claims, prompt-meta wording, or section-role instability."
     }
   }
 }

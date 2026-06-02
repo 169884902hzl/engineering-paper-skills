@@ -14,6 +14,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from check_public_writing_demos import validate_public_writing_demos  # noqa: E402
 
 REQUIRED_FIXTURES = {
     "abstract_overclaim.md",
@@ -406,6 +409,7 @@ def word_count(path: Path) -> int:
 
 def main() -> int:
     errors: list[str] = []
+    validate_public_writing_demos(errors)
 
     for rel_path in ("README.md", "docs/index.html", "docs/demo.html"):
         path = ROOT / rel_path

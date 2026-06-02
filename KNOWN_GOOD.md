@@ -15,8 +15,8 @@ tag implies readiness.
 | Current structured-contract baseline | `38b3d4d72660fbfe5705103e6bc27addac14668e` |
 | Latest local structured-contract attempt | `38b3d4d72660fbfe5705103e6bc27addac14668e` |
 | Latest local structured-contract failure kept for diagnosis | `80d9c23b8b9e6fd42470df845547724d63a8cc48` |
-| Current user-facing demo baseline | `ad6d5b4` showcase v2 writing outputs plus prior `078d53e`, `681d305`, and `2dc9571` demo outputs |
-| Current showcase v2 writing baseline | `ad6d5b448be9c76b9c034d4fc599fe4d33296270` working-tree-generated showcase v2 outputs |
+| Current user-facing demo baseline | `e99ca8120a6174a9cdba7083bd71f739908c822c` rerun showcase evidence plus retained Results/Ablation from `ad6d5b4` |
+| Current showcase v2 writing baseline | `e99ca8120a6174a9cdba7083bd71f739908c822c` rerun outputs, Methods v2, messy-note evidence, stability evidence, and benchmarks |
 | Current rich writing model-output baseline | `078d53e7b5925cf7c56b3b4696c8a35b9ac8d475` |
 | Current draft-first writing model-output baseline | `ce1478f66f50a27abe7dfe3d45ee31565ca6cb71` |
 | Status | top-tier candidate, not top-tier ready |
@@ -47,6 +47,18 @@ anchors; it does not try to embed the hash of its own future edits.
 | `tests/outputs/model_runs/writing/manifest_showcase_v2.json` | manifest for recorded local showcase v2 writing outputs at `ad6d5b4` | `local_single_run` |
 | `evals/results/ad6d5b4_showcase_v2_writing_eval.jsonl` | strict local eval record for showcase v2 writing model outputs | `local_single_run` |
 | `evals/results/ad6d5b4_showcase_v2_human_review.md` | human review table for showcase v2 writing outputs | `local_single_run_review` |
+| `tests/outputs/model_runs/writing/manifest_showcase_v2_rerun.json` | manifest for Abstract, Related Work, Chinese-to-English, Conclusion reruns and Methods v2 at `e99ca81` | `local_single_run` |
+| `evals/results/e99ca81_showcase_v2_rerun_eval.jsonl` | eval JSONL for showcase reruns and Methods v2 | `local_single_run` |
+| `evals/results/e99ca81_showcase_v2_rerun_human_review.md` | human review for showcase reruns and Methods v2 | `local_single_run_review` |
+| `tests/outputs/model_runs/writing/manifest_messy_notes.json` | manifest for rough, incomplete, mixed, and contradictory notes prompts | `local_single_run` |
+| `evals/results/e99ca81_messy_notes_eval.jsonl` | eval JSONL for messy-note robustness | `local_single_run` |
+| `evals/results/e99ca81_messy_notes_human_review.md` | human review for messy-note robustness | `local_single_run_review` |
+| `tests/outputs/model_runs/writing/manifest_stability.json` | three-run local stability sample for Results, Ablation, and Chinese-to-English prompts | `local_multi_run_sample` |
+| `evals/results/e99ca81_stability_eval.jsonl` | eval JSONL for local stability samples | `local_multi_run_sample` |
+| `evals/results/e99ca81_stability_human_review.md` | human review for local stability samples | `local_multi_run_review` |
+| `tests/outputs/model_runs/writing/manifest_benchmark.json` | de-identified benchmark and full-section Results demo manifest | `local_single_run` |
+| `evals/results/e99ca81_benchmark_human_review.md` | human review for de-identified benchmark prompts | `local_single_run_review` |
+| `evals/results/e99ca81_full_section_human_review.md` | human review for full-section Results demo | `local_single_run_review` |
 | `tests/outputs/model_runs/writing/manifest.json` | manifest for recorded local draft-first writing outputs at `ce1478f` | `local_single_run` |
 | `evals/results/ce1478f_writing_model_eval.jsonl` | eval record for draft-first writing model outputs | `local_single_run` |
 | `.github/workflows/behavior-regression.yml` | manual behavior-regression workflow | requires configured model command |
@@ -73,7 +85,7 @@ Recorded demo command strings use `<repo-root>` placeholders in public
 JSON/JSONL provenance files. Local absolute workspace paths are not part of the
 published evidence contract.
 
-## Showcase v2 writing output provenance
+## Showcase v2 and rerun writing output provenance
 
 The showcase v2 writing outputs under `tests/outputs/model_runs/writing/` are
 raw local Codex final answers generated from seven stricter showcase v2 prompt
@@ -81,18 +93,28 @@ fixtures at base commit `ad6d5b448be9c76b9c034d4fc599fe4d33296270`. They were
 generated after installing this repository's edited `skills/_shared` and
 `skills/engineering-*` directories into Codex home.
 
-The current first-screen showcase uses four of those outputs: Results with
-diagnostic axes, Ablation rows to contribution-level prose, Chinese notes to
-English manuscript prose, and Introduction opening. The Conclusion output is a
-gallery item. The Related Work output is kept as provenance-only because its
-final sentence still has audit-style wording. The Abstract output is rejected
-as a showcase artifact because it introduced unsupported `lateral jamming`
-wording.
+GPTPro review kept Results with diagnostic axes and Ablation rows as strong
+hero candidates, but required reruns for Abstract, Related Work,
+Chinese-to-English, and Conclusion. The rerun pass at
+`e99ca8120a6174a9cdba7083bd71f739908c822c` adds those reruns, a Methods v2
+showcase, messy-note prompts, a local three-run stability sample, de-identified
+benchmark prompts, and a full-section Results demo.
 
-These artifacts remain `local_single_run` evidence. They are not CI-controlled
-proof, not multi-run stability proof, and not top-tier-ready proof. Their full
-output paths and SHA-256 hashes are recorded in
-`tests/outputs/model_runs/writing/manifest_showcase_v2.json`.
+The current first-screen showcase uses four outputs: Results, Ablation,
+Chinese-to-English rerun, and Methods v2. Abstract, Related Work, Conclusion,
+and the full-section Results demo are gallery items when their human review
+allows it. The old Abstract, Related Work, Chinese-to-English, and Conclusion
+showcase v2 outputs are evidence-only or rejected artifacts.
+
+These artifacts remain candidate-level local evidence. The stability sample
+improves confidence over one-off demos, but it is still not CI-controlled proof
+and does not upgrade the project to top-tier ready. Full output paths and
+SHA-256 hashes are recorded in
+`tests/outputs/model_runs/writing/manifest_showcase_v2.json`,
+`tests/outputs/model_runs/writing/manifest_showcase_v2_rerun.json`,
+`tests/outputs/model_runs/writing/manifest_messy_notes.json`,
+`tests/outputs/model_runs/writing/manifest_stability.json`, and
+`tests/outputs/model_runs/writing/manifest_benchmark.json`.
 
 ## Rich writing output provenance
 
@@ -134,11 +156,12 @@ evidence assets for repository QA, provenance checks, and behavior review.
 ## Known limitations
 
 - Showcase v2 prompts are richer than many messy user notes, so the outputs may
-  be stronger than default behavior on thin source material.
-- The showcase v2 evidence is local single-run evidence only; no multi-run
-  stability study was performed.
-- No external human panel score is available for showcase v2 unless a reviewer
-  later adds one manually.
+  still be stronger than default behavior on thin source material.
+- The messy-note prompts and de-identified benchmarks improve coverage, but
+  they remain local artifacts and do not replace broad user-study evidence.
+- The stability evidence is a local three-run sample for three prompt families,
+  not a public CI-controlled stability benchmark.
+- Human reviews are local reviewer records, not an external panel score.
 - No public CI-controlled model-run artifact is available for `6bec865`,
   `80d9c23`, or `38b3d4d`.
 - Structured JSON expectations check required fields, rows, and grounded spans;

@@ -155,8 +155,8 @@
   <body>
     <main>
       <header>
-        <h1>Engineering Paper Skills</h1>
-        <p class="subtitle">Evidence-bound Codex skills for engineering paper writing, manuscript audit, reviewer response, figure/table claim checks, and validation.</p>
+        <h1>Turn engineering notes, result tables, ablation rows, and Chinese notes into bounded manuscript prose.</h1>
+        <p class="subtitle">Engineering Paper Skills is a Codex skill suite for engineering paper writing, manuscript audit, reviewer response, figure/table claim checks, and validation.</p>
         <div class="actions">
           <a class="button" href="https://github.com/169884902hzl/engineering-paper-skills">GitHub repository</a>
           <a class="button" href="./demo.html">Demo gallery</a>
@@ -170,12 +170,13 @@
         <h2>What This Is</h2>
         <p>This beta skill suite is designed for robotics, machine learning, control, systems, and other experiment-heavy engineering papers where claims must stay tied to concrete methods, results, figures, tables, citations, and limitations.</p>
         <p>It is conservative by default. It should expose missing evidence, downgrade unsupported claims, and avoid inventing experiments, citations, metrics, tables, line numbers, or venue readiness.</p>
+        <p>Normal users only need <code>skills/_shared</code> and <code>skills/engineering-*</code>. Repository scripts, tests, and evals are maintainer evidence.</p>
       </section>
 
       <section>
         <h2>Start With Rough Notes</h2>
-        <p>Most users should begin by giving the skill the task, bottleneck, method, evidence, and boundary. The examples below pair short input skeletons with recorded local Codex output excerpts from showcase v2 prompt fixtures.</p>
-        <p><strong>Recorded local output excerpt:</strong> these recorded local Codex outputs are local single-run evidence, not CI-controlled behavior proof, not multi-run stability proof, and not top-tier-ready proof. Full provenance is in the demo gallery.</p>
+        <p>Most users should begin by giving the skill the section target, task bottleneck, method object, result evidence, diagnostic axes, and boundary. Ask for manuscript prose first and state forbidden claims.</p>
+        <p><strong>Recorded local output excerpt:</strong> these are recorded local Codex outputs; the evidence archive contains manifests, hashes, eval JSONL, and human reviews.</p>
         <div class="grid">
           <div class="card">
             <h3>Results table with diagnostic axes</h3>
@@ -211,26 +212,37 @@ open-loop carries pose error; full system 84% vs
 69%/72%/61%; bounded evaluation.
 
 Recorded local output excerpt:
-Occlusion becomes the dominant failure source during
-the final approach to peg-hole insertion, where the
-peg itself reduces the information available...</code></pre>
-            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md">Full artifact</a></p>
+Occlusion during the final approach, rather than
+initial visual recognition, is the central failure
+mode in peg-hole insertion under fixed camera views.</code></pre>
+            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_rerun_e99ca81.md">Full artifact</a></p>
           </div>
           <div class="card">
-            <h3>Introduction opening</h3>
+            <h3>Methods reader path</h3>
             <pre><code>Input skeleton:
-Fixed overhead loses the hole near contact; side
-view leaves depth uncertainty; open-loop carries
-uncertain pose into contact.
+overhead RGB-D -> pose/confidence -> optional
+additional view -> refined pose -> guarded
+insertion with force and pose-deviation stops.
 
 Recorded local output excerpt:
-As a peg approaches a hole, the visual evidence
-needed for insertion can disappear at the moment
-when corrective motion becomes most constrained.</code></pre>
-            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_intro_showcase_v2_ad6d5b4.md">Full artifact</a></p>
+Because pose uncertainty that survives into contact
+is difficult to correct safely, the method first
+resolves the insertion pose in perception...</code></pre>
+            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_methods_showcase_v2_e99ca81.md">Full artifact</a></p>
           </div>
         </div>
-        <p><a href="./demo.html#recorded-showcase-v2-writing-outputs">Open recorded showcase v2 writing outputs</a></p>
+        <p>Recorded local outputs are candidate-level evidence, not top-tier-ready proof. See the <a href="./demo.html#evidence-archive">Evidence Archive</a> for provenance.</p>
+      </section>
+
+      <section>
+        <h2>How To Get Strong Prose</h2>
+        <ul>
+          <li>Give the section target and ask for manuscript prose first.</li>
+          <li>Name the task bottleneck and the method object, not only module names.</li>
+          <li>Provide the result table, diagnostic axes, or failure modes.</li>
+          <li>State the boundary and forbidden claims before the draft request.</li>
+        </ul>
+        <p><a href="./demo.html#writing-gallery">Open the Writing Gallery</a></p>
       </section>
 
       <section>
@@ -254,8 +266,9 @@ when corrective motion becomes most constrained.</code></pre>
           <li><a href="./demo.html">Demo gallery</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_showcase_v2_ad6d5b4.md">Recorded showcase v2 results output</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md">Recorded showcase v2 ablation output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md">Recorded showcase v2 Chinese-notes output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_showcase_v2.json">Recorded showcase v2 writing manifest</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_rerun_e99ca81.md">Recorded Chinese-notes rerun output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_methods_showcase_v2_e99ca81.md">Recorded Methods showcase v2 output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_showcase_v2_rerun.json">Recorded showcase v2 rerun manifest</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_methods_reader_path.md">Methods reader-path draft</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_results_interpretation.md">Results interpretation draft</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_ablation_interpretation.md">Ablation interpretation draft</a></li>

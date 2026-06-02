@@ -213,3 +213,55 @@ quality_checks:
   - Chinese notes must be reconstructed into native English manuscript logic.
   - Conclusion prose must avoid new terms, new results, broad deployment claims,
     and disclaimer-like final sentences.
+
+public_demo_reject_patterns:
+  - lateral jamming
+  - jamming
+  - supplied notes
+  - supplied positioning
+  - available evidence
+  - without claiming
+  - Unsupported / not verified
+  - pending verified citations
+
+flows:
+  abstract_showcase_rerun:
+    prompt: tests/prompts/writing_abstract_showcase_v2_rerun.md
+    reference:
+      - references/abstract.md
+      - references/ral-style-writing-guide.md
+  related_work_showcase_rerun:
+    prompt: tests/prompts/writing_related_work_showcase_v2_rerun.md
+    reference:
+      - references/related-work.md
+      - references/ral-style-writing-guide.md
+      - ../_shared/citation-boundary.md
+  zh_to_en_showcase_rerun:
+    prompt: tests/prompts/writing_zh_to_en_showcase_v2_rerun.md
+    reference:
+      - references/ral-style-writing-guide.md
+      - ../_shared/non-english-source-notes.md
+  conclusion_showcase_rerun:
+    prompt: tests/prompts/writing_conclusion_showcase_v2_rerun.md
+    reference:
+      - references/conclusion.md
+      - references/ral-style-writing-guide.md
+  methods_showcase_v2:
+    prompt: tests/prompts/writing_methods_showcase_v2.md
+    reference:
+      - references/methods.md
+      - references/methods-worksheet.md
+      - references/ral-style-writing-guide.md
+      - ../_shared/list-to-argument.md
+  messy_notes_eval:
+    prompts:
+      - tests/prompts/messy_notes_intro.md
+      - tests/prompts/messy_table_to_results.md
+      - tests/prompts/incomplete_related_work_notes.md
+      - tests/prompts/mixed_zh_en_notes_to_methods.md
+      - tests/prompts/contradictory_boundary_notes.md
+  multi_run_stability:
+    prompts:
+      - tests/prompts/writing_results_showcase_v2.md
+      - tests/prompts/writing_ablation_showcase_v2.md
+      - tests/prompts/writing_zh_to_en_showcase_v2_rerun.md

@@ -4,6 +4,32 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Fix writing showcase blockers and add robustness evidence
+
+- Added public recorded-demo reject rules to `engineering-writing` and the
+  RAL-style writing guide for unsupported physical mechanisms, process-meta
+  wording in manuscript prose, audit-disclaimer endings, Related Work
+  verification prose inside the paragraph, and Conclusion limitation-inventory
+  starts.
+- Strengthened `engineering-paper-coach` so thin but sufficient evidence still
+  produces a modest manuscript paragraph first, with strengthening notes after
+  the draft.
+- Added hard public-demo reject patterns and new writing flows to the
+  `engineering-writing` manifest and expanded the writing rubric with blocker,
+  manuscript-register, rough-note, and stability criteria.
+- Added rerun prompts and real local Codex CLI outputs for Abstract, Related
+  Work, Chinese-to-English, and Conclusion showcase v2 cases.
+- Added Methods showcase v2, messy-note prompt fixtures, de-identified
+  benchmark prompts, a full-section Results demo, and a local three-run
+  stability sample for Results, Ablation, and Chinese-to-English prompts.
+- Added `scripts/check_public_writing_demos.py` and wired it into
+  `scripts/check_quality_assets.py` so public README and Pages surfaces cannot
+  promote rejected or blocker-containing writing outputs.
+- Reworked README and Pages into a value-first writing gallery, safety/audit
+  examples, and an evidence archive with manifests, eval JSONL, human reviews,
+  rejected outputs, and previous behavior evidence.
+- Evidence boundary: this is still a top-tier candidate, not top-tier-ready.
+
 ## Improve showcase writing prompts and outputs
 
 - Upgraded the `engineering-writing` WRITE contract from safe bounded drafting

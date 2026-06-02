@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Engineering Paper Skills Demo Gallery</title>
-    <meta name="description" content="Demo outputs for Engineering Paper Skills: notes-to-manuscript writing, full-paper audit, response diff verification, polishing, and figure/table claim checks.">
+    <meta name="description" content="Demo outputs for Engineering Paper Skills: writing gallery, safety audit examples, and evidence archive.">
     <link rel="canonical" href="https://169884902hzl.github.io/engineering-paper-skills/demo.html">
     <style>
       body {
@@ -80,514 +80,131 @@
     <main>
       <p><a href="./">Engineering Paper Skills</a></p>
       <h1>Demo Gallery</h1>
-      <p>These examples show how to use Engineering Paper Skills on common engineering-paper tasks. They are practical usage examples, not proof that every unseen manuscript will receive the same review quality.</p>
+      <p>These examples show how Engineering Paper Skills turns rough engineering evidence into bounded manuscript prose, then keeps safety checks and provenance separate.</p>
 
       <section>
         <h2>Example Provenance</h2>
-        <p><strong>Illustrative examples</strong> are hand-written for readability and are marked as illustrative. They are not recorded model-run outputs.</p>
-        <p><strong>Recorded local Codex outputs</strong> are raw final messages generated from prompt fixtures and stored in the repository. They are local single-run evidence, not CI-controlled behavior proof.</p>
+        <p><strong>Illustrative examples</strong> are hand-written for readability and are marked as illustrative.</p>
+        <p><strong>Recorded local Codex outputs</strong> are raw final messages generated from prompt fixtures and stored in the repository. They are candidate-level local evidence, not top-tier-ready proof.</p>
       </section>
 
-      <section>
-        <h2>Manuscript Writing Examples</h2>
-        <p>Start here if you want to see what the skills can write from rough notes. Safety and audit examples are listed after the writing examples.</p>
+      <section id="writing-gallery">
+        <h2>Writing Gallery</h2>
+        <p>Manuscript Writing Examples should read like manuscript prose first. The strongest public cards are Results, Ablation, Chinese-to-English, and Methods.</p>
 
-        <article class="card" id="recorded-showcase-v2-writing-outputs">
-          <h3>Recorded Showcase V2 Writing Outputs</h3>
-          <p><strong>Recorded local Codex outputs:</strong> these are raw final answers generated from showcase v2 prompt fixtures at base commit <code>ad6d5b4</code> after installing the edited skills into Codex home. They are local single-run evidence, not CI-controlled behavior proof, not multi-run stability proof, and not top-tier-ready proof.</p>
-          <div class="grid">
-            <div>
-              <h3>Results table + diagnostic axes</h3>
-              <pre><code>Input skeleton:
-84% over 180 trials; baselines 69%, 72%, 61%.
-Diagnostics: overhead occlusion, side-view depth
-uncertainty, open-loop contact error.
+        <div class="grid">
+          <article class="card">
+            <h3>Results table + diagnostic axes</h3>
+            <pre><code>Input skeleton:
+84% over 180 trials; fixed-view and open-loop
+baselines; overhead final occlusion, side-view depth
+uncertainty, and open-loop contact error.
 
-Recorded local output excerpt:
+Recorded excerpt:
 In contact-rich peg insertion, the best-performing
 policy is the one that prevents visual ambiguity
-from becoming unrecovered contact error.
+from becoming unrecovered contact error.</code></pre>
+            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_showcase_v2_ad6d5b4.md">Open recorded output</a></p>
+          </article>
 
-Full artifact:
-writing_results_showcase_v2_ad6d5b4.md</code></pre>
-            </div>
-            <div>
-              <h3>Ablation rows -> contribution roles</h3>
-              <pre><code>Input skeleton:
+          <article class="card">
+            <h3>Ablation rows -> contribution roles</h3>
+            <pre><code>Input skeleton:
 17%, 23%, 44%, 76%, 88% additive rows.
 Identify the main bottleneck and contribution roles.
 
-Recorded local output excerpt:
+Recorded excerpt:
 The largest gain appears when overlay self-
 verification is added, lifting success from 44% to
 76%; this delta attributes a central contribution
-role to rejecting poorly grounded action hints.
+role to rejecting poorly grounded action hints.</code></pre>
+            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md">Open recorded output</a></p>
+          </article>
 
-Full artifact:
-writing_ablation_showcase_v2_ad6d5b4.md</code></pre>
-            </div>
-            <div>
-              <h3>Chinese notes -> English argument</h3>
-              <pre><code>Input skeleton:
+          <article class="card">
+            <h3>Chinese-to-English manuscript prose</h3>
+            <pre><code>Input skeleton:
 遮挡下 peg-hole 插入; fixed cameras lose cues;
 open-loop carries pose error; full system 84% vs
 69%/72%/61%; bounded evaluation.
 
-Recorded local output excerpt:
-This ranking is consistent with the supplied
-failure modes: overhead sensing provides global
-context early but is vulnerable near contact...
+Recorded excerpt:
+Occlusion during the final approach, rather than
+initial visual recognition, is the central failure
+mode in peg-hole insertion under fixed camera views.</code></pre>
+            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_rerun_e99ca81.md">Open recorded output</a></p>
+          </article>
 
-Full artifact:
-writing_zh_to_en_showcase_v2_ad6d5b4.md</code></pre>
-            </div>
-            <div>
-              <h3>Introduction opening</h3>
-              <pre><code>Input skeleton:
-Fixed overhead loses the hole near contact; side
-view leaves depth uncertainty; open-loop carries
-uncertain pose into contact.
+          <article class="card">
+            <h3>Methods Execution Path</h3>
+            <pre><code>Input skeleton:
+overhead RGB-D -> pose/confidence -> optional
+additional view -> refined pose -> guarded
+insertion with force and pose-deviation stops.
 
-Recorded local output excerpt:
-As a peg approaches a hole, the visual evidence
-needed for insertion can disappear at the moment
-when corrective motion becomes most constrained.
+Recorded excerpt:
+Because pose uncertainty that survives into contact
+is difficult to correct safely, the method first
+resolves the insertion pose in perception.</code></pre>
+            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_methods_showcase_v2_e99ca81.md">Open recorded output</a></p>
+          </article>
+        </div>
 
-Full artifact:
-writing_intro_showcase_v2_ad6d5b4.md</code></pre>
-            </div>
-          </div>
-          <ul>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/writing_results_showcase_v2.md">Results showcase v2 prompt</a> -> <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_showcase_v2_ad6d5b4.md">recorded output</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/writing_ablation_showcase_v2.md">Ablation showcase v2 prompt</a> -> <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md">recorded output</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/writing_intro_showcase_v2.md">Introduction showcase v2 prompt</a> -> <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_intro_showcase_v2_ad6d5b4.md">recorded output</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/writing_zh_to_en_showcase_v2.md">Chinese-notes showcase v2 prompt</a> -> <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md">recorded output</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_showcase_v2.json">Showcase v2 manifest</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/ad6d5b4_showcase_v2_human_review.md">Showcase v2 human review</a></li>
-          </ul>
-        </article>
+        <h2>Demo Gallery Additions</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Abstract rerun</h3>
+            <p>Six-sentence Abstract with supplied evidence only and a scope-aware final sentence.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_abstract_showcase_v2_rerun_e99ca81.md">Open abstract rerun</a>
+          </article>
+          <article class="card">
+            <h3>Related Work Positioning</h3>
+            <p>Technical-axis positioning with citation placeholders and the verification note kept after the draft.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_related_work_showcase_v2_rerun_e99ca81.md">Open Related Work rerun</a>
+          </article>
+          <article class="card">
+            <h3>Conclusion rerun</h3>
+            <p>Two paragraphs: method and evidence first, then an operating envelope and future work from failure regimes.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun_e99ca81.md">Open Conclusion rerun</a>
+          </article>
+          <article class="card">
+            <h3>Full-section Results demo</h3>
+            <p>Main result, ablation, and failure-boundary paragraphs as one mini Results section.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/full_section_results_demo_e99ca81.md">Open full-section output</a>
+          </article>
+        </div>
 
-        <article class="card" id="recorded-rich-writing-outputs">
-          <h3>Recorded Rich Writing Outputs</h3>
-          <p><strong>Recorded local Codex outputs:</strong> these are raw final answers generated from rich writing prompt fixtures at base commit <code>078d53e7b5925cf7c56b3b4696c8a35b9ac8d475</code>. They are local single-run evidence, not CI-controlled behavior proof, not multi-run stability proof, and not top-tier-ready proof.</p>
-          <ul>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_with_failure_modes_078d53e.md">Ablation rows to contribution-level ablation paragraph</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_with_diagnostic_axes_078d53e.md">Result table plus diagnostic axes to Results paragraph</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_methods_overview_rich_078d53e.md">Method notes to Methods overview</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_intro_opening_rich_078d53e.md">Introduction opening from task, bottleneck, and method motivation</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_related_work_positioning_rich_078d53e.md">Related Work positioning with citation placeholders</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_notes_to_en_manuscript_rich_078d53e.md">Chinese notes to English manuscript prose</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_abstract_from_rich_evidence_078d53e.md">Six-sentence Abstract from rich evidence</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_bounded_takeaway_rich_078d53e.md">Bounded two-paragraph Conclusion</a></li>
-          </ul>
-          <p>Full provenance is recorded in <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_rich.json">tests/outputs/model_runs/writing/manifest_rich.json</a>. The local eval record is <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/078d53e_rich_writing_model_eval.jsonl">evals/results/078d53e_rich_writing_model_eval.jsonl</a>.</p>
-          <div class="grid">
-            <div>
-              <h3>Ablation rows -> contribution role</h3>
-              <pre><code>Excerpted from recorded local Codex output:
-The largest improvement enters at the overlay
-self-verification stage: success increases from
-44% to 76%, a 32 percentage point gain, consistent
-with its role in rejecting visually plausible but
-poorly grounded action hints before they reach
-execution.
-
-Full artifact:
-writing_ablation_with_failure_modes_078d53e.md</code></pre>
-            </div>
-            <div>
-              <h3>Diagnostic results -> mechanism reading</h3>
-              <pre><code>Excerpted from recorded local Codex output:
-The diagnostic pattern explains why the ranking is
-not simply a camera-placement effect: overhead
-viewing tends to fail when the peg hides the hole
-during final approach, side viewing improves
-lateral visibility but can still leave depth
-uncertainty unresolved.
-
-Full artifact:
-writing_results_with_diagnostic_axes_078d53e.md</code></pre>
-            </div>
-            <div>
-              <h3>Method notes -> reader path</h3>
-              <pre><code>Excerpted from recorded local Codex output:
-This ordering is used because visual uncertainty
-that is left unresolved before contact can propagate
-into the peg-hole interaction and become difficult
-to correct once the peg begins entering the hole.
-
-Full artifact:
-writing_methods_overview_rich_078d53e.md</code></pre>
-            </div>
-          </div>
-        </article>
-
-        <article class="card" id="recorded-draft-first-writing-outputs">
-          <h3>Previous Behavior Evidence: Draft-First Writing Outputs</h3>
-          <p><strong>Recorded local Codex outputs:</strong> these are older raw final answers generated from draft-first writing prompt fixtures at base commit <code>ce1478f</code>. They are retained as previous behavior evidence, not current showcase samples, not CI-controlled behavior proof, and not top-tier-ready proof.</p>
-          <ul>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md">Coach writing request with draft-first output</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md">Ablation interpretation from component rows</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md">Results paragraph from table-like evidence</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_methods_reader_path_ce1478f.md">Methods reader path from module notes</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_two_paragraph_ce1478f.md">Two-paragraph Conclusion from results and limits</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_min_ce1478f.md">Minimal abstract smoke/provenance check</a></li>
-          </ul>
-          <p>Full provenance is recorded in <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest.json">tests/outputs/model_runs/writing/manifest.json</a>.</p>
-        </article>
-
-        <article class="card">
-          <h3>Draft-First Writing Examples</h3>
-          <p><strong>Golden expected outputs:</strong> these examples define the intended WRITE-mode behavior. They are maintainer-written expected outputs, not recorded model-run artifacts.</p>
-          <ul>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_methods_reader_path.md">Methods reader path from module notes</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_results_interpretation.md">Results paragraph from table-like evidence</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_ablation_interpretation.md">Ablation interpretation from component rows</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_conclusion_two_paragraph.md">Two-paragraph Conclusion from results and limits</a></li>
-            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_min.md">Minimal abstract smoke check</a></li>
-          </ul>
-          <div class="example">
-            <pre><code>Methods reader-path excerpt:
-The execution path begins with overhead and side
-RGB-D observations, which are used to estimate the
-insertion pose and an associated confidence score.
-When the confidence score is low, the system requests
-an additional view before continuing the insertion
-attempt. The guarded insertion controller then
-executes the motion while monitoring force and pose
-deviation.</code></pre>
-            <pre><code>Ablation interpretation excerpt:
-Directly querying action hints reaches only 17%
-success, indicating that raw image-space reasoning is
-not sufficient for reliable manipulation in the
-evaluated task family. Adding geometry-aware
-execution increases success to 23%, suggesting that
-better action realization helps, but does not by
-itself resolve perception and hint-validity errors.</code></pre>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Notes To Manuscript Paragraph</h3>
-          <p><strong>Recorded local output excerpt:</strong> generated from <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/demo_notes_to_manuscript_paragraph.md">demo_notes_to_manuscript_paragraph.md</a> and stored as <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md">demo_notes_to_manuscript_paragraph_2dc9571.md</a>.</p>
-          <div class="example">
-            <pre><code>Input:
-Use $engineering-writing to turn these notes into
-one English manuscript paragraph.
-
-Problem:
-Contact-rich insertion fails when occlusion hides
-peg-hole alignment and the controller continues
-from a poor pose estimate.
-
-Method:
-Overhead and side RGB-D observations estimate pose
-and confidence; low confidence triggers another
-view; guarded execution stops under force or
-pose-deviation limits.
-
-Evidence:
-84% success over 180 trials. Baselines: 69%, 72%,
-and 61%.
-
-Boundary:
-One 7-DoF robot arm, one tabletop fixture, one
-cylindrical peg family, no significance test, no
-cross-robot test, no deployment test.</code></pre>
-            <pre><code>Recorded local output excerpt:
-Contact-rich insertion can fail when visual
-occlusion hides peg-hole alignment and the controller
-continues from a poor pose estimate. Fixed overhead
-or side RGB-D cameras may lose task-relevant
-visibility during insertion, while open-loop
-insertion does not react to pose uncertainty or
-contact deviations. We study a system that uses
-overhead and side RGB-D observations to estimate
-insertion pose and confidence, requests an additional
-view when confidence is low, and applies a guarded
-insertion controller that stops when force or pose
-deviation exceeds a limit. In 180 trials, the full
-system achieved 84% success, compared with 69% for
-a fixed overhead camera, 72% for a fixed side camera,
-and 61% for an open-loop controller. This evidence
-supports a bounded system-level improvement in the
-tested setup, but it is limited to one 7-DoF robot
-arm, one tabletop fixture, and one cylindrical peg
-family.</code></pre>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Related Work Positioning</h3>
-          <p><strong>Recorded local output excerpt:</strong> generated from <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/demo_related_work_nearest_neighbor.md">demo_related_work_nearest_neighbor.md</a> and stored as <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_related_work_nearest_neighbor_681d305.md">demo_related_work_nearest_neighbor_681d305.md</a>.</p>
-          <div class="example">
-            <pre><code>Input:
-Use $engineering-writing to draft a Related Work
-positioning paragraph.
-
-Prior-work notes:
-- fixed-camera insertion systems
-- active perception for grasping or inspection
-- force-guarded insertion controllers
-- industrial insertion systems, exact citation missing
-
-Current paper:
-Contact-rich insertion under partial occlusion.
-Requests another RGB-D view when confidence is low.
-Uses guarded execution with force and pose-deviation
-stop conditions.
-Evaluated in one tabletop setup.</code></pre>
-            <pre><code>Recorded local output excerpt:
-Prior work on robotic insertion has studied
-fixed-camera perception pipelines, active perception
-for manipulation, and force-guarded execution.
-Fixed-camera insertion systems address the same task
-family but typically assume a fixed overhead or side
-view during execution [citation needed: fixed-camera
-insertion systems]. Active-perception methods select
-viewpoints for manipulation tasks such as grasping or
-inspection, but the supplied sources do not yet
-establish that these methods handle contact-rich
-insertion under partial occlusion [citation needed:
-active perception for manipulation scope]. Against
-these axes, the present system should be positioned as
-a tabletop contact-rich insertion pipeline that couples
-confidence-triggered RGB-D view requests with force
-and pose-deviation guards.</code></pre>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Methods Execution Path</h3>
-          <p><strong>Recorded local output excerpt:</strong> generated from <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/demo_methods_execution_path.md">demo_methods_execution_path.md</a> and stored as <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_methods_execution_path_681d305.md">demo_methods_execution_path_681d305.md</a>.</p>
-          <div class="example">
-            <pre><code>Input:
-Use $engineering-writing to convert this module list
-into a Methods paragraph.
-
-Inputs:
-RGB-D observations from overhead and side cameras.
-
-State:
-Insertion pose estimate and confidence score.
-
-View request:
-If confidence is low, request another view.
-
-Controller:
-Guarded insertion controller.
-
-Stop conditions:
-force threshold exceeded or pose deviation exceeds
-limit.</code></pre>
-            <pre><code>Recorded local output excerpt:
-The execution path begins with RGB-D observations
-from an overhead camera and a side camera. These
-observations are used to estimate the insertion pose
-and a confidence score for the estimate. If the
-confidence score is low, the system requests an
-additional view before proceeding. The guarded
-insertion controller then attempts insertion using
-the current pose estimate while monitoring force and
-pose deviation. The execution is stopped when either
-the force threshold is exceeded or the pose deviation
-exceeds its limit, and the run is assigned an
-insertion success or failure outcome. The supplied
-notes do not specify the confidence formula,
-threshold values, timing behavior, calibration
-procedure, or controller pseudocode.</code></pre>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Research Notes To Paper Skeleton</h3>
-          <div class="example">
-            <pre><code>Input:
-Use $engineering-paper-coach to turn these notes
-into a conservative paper skeleton.
-
-Task:
-Contact-rich insertion with visual occlusion.
-
-Method:
-Multi-view RGB-D observation requests a new view
-when confidence is low; guarded execution stops
-under force or pose-deviation limits.
-
-Evidence:
-84% success over 180 trials.
-Baselines: fixed overhead 69%, fixed side 72%,
-open-loop 61%.
-
-Boundary:
-One robot, one tabletop fixture, one object family.
-No industrial deployment or significance test.</code></pre>
-            <pre><code>Illustrative output:
-Story skeleton:
-1. Problem: fixed views can lose visibility during
-   contact-rich insertion.
-2. Gap: fixed-view and open-loop variants
-   underperform in the tested tabletop setup.
-3. Method: a confidence-triggered multi-view policy
-   with guarded execution.
-4. Evidence: 84% success over 180 trials, compared
-   with 69%, 72%, and 61% baselines.
-5. Boundary: one robot, one fixture, one object
-   family, and no statistical test.
-
-Safe contribution wording:
-"We evaluate a perception-guided guarded insertion
-system in a tabletop occlusion setting."</code></pre>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Skeleton To Bounded Paragraph</h3>
-          <div class="example">
-            <pre><code>Input:
-Use $engineering-writing to draft a Results paragraph.
-Do not add experiments, baselines, statistics,
-objects, venues, or citations.
-
-Experiment question:
-Does the proposed multi-view guarded insertion
-system improve success over fixed-view and
-open-loop variants?
-
-Results:
-Full system: 84% over 180 trials.
-Fixed overhead: 69%.
-Fixed side: 72%.
-Open-loop: 61%.
-
-Boundary:
-One robot, one fixture, one object family.
-No statistical significance test.</code></pre>
-            <pre><code>Illustrative output:
-The full system achieved 84% success over 180
-trials in the evaluated tabletop occlusion setup,
-compared with 69% for the fixed overhead camera,
-72% for the fixed side camera, and 61% for the
-open-loop controller. These results support a
-bounded comparison under the tested protocol:
-combining view selection with guarded execution
-improves success relative to the supplied
-fixed-view and open-loop variants in this setup.
-The experiment does not establish cross-robot
-robustness, industrial deployment readiness, or
-generalization beyond the tested object family and
-fixture geometry.</code></pre>
-          </div>
-        </article>
+        <h2>How To Get Strong Prose</h2>
+        <ul>
+          <li>Give the section target and ask for manuscript prose first.</li>
+          <li>Name the task bottleneck and method object.</li>
+          <li>Provide a result table plus diagnostic axes or failure modes.</li>
+          <li>State the boundary and forbidden claims before the draft request.</li>
+        </ul>
       </section>
 
-      <section>
-        <h2>Safety And Audit Examples</h2>
-        <p>Use these examples when the task is to check claim strength, figure/table support, response truthfulness, or readiness. They are useful, but they are not the first thing a writing-focused user needs to see.</p>
+      <section id="safety-audit-examples">
+        <h2>Safety / audit examples</h2>
+        <p>Safety And Audit Examples are for checking claim strength, figure/table support, response truthfulness, and readiness. They are separate from the writing gallery.</p>
 
         <article class="card">
           <h3>Conservative Claim Audit</h3>
           <div class="example">
             <pre><code>Input:
-Use $engineering-paper-coach to audit this claim.
-
-Evidence:
-- 84% success over 180 trials.
-- One robot arm.
-- One tabletop fixture.
-- One object family.
-- No cross-robot or deployment test.
+Evidence: 84% success over 180 trials, one robot,
+one tabletop fixture, one object family.
 
 Draft:
-"The system is deployment-ready and proven robust
-for industrial insertion."</code></pre>
-            <pre><code>Illustrative output:
-Diagnosis: NOT_READY as written.
-
-Blocking issues:
-- "deployment-ready" is unsupported.
-- "proven robust" exceeds one-setup evidence.
-- "industrial insertion" is not tested.
+The system is deployment-ready and proven robust
+for industrial insertion.</code></pre>
+            <pre><code>Illustrative audit:
+Diagnosis: not ready as written.
 
 Safe rewrite:
-"In the evaluated tabletop insertion setup, the
-system achieved 84% success over 180 trials on
-one robot arm and one object family. Broader
-industrial deployment remains untested."</code></pre>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Conservative Polishing</h3>
-          <div class="example">
-            <pre><code>Input:
-Use $engineering-polishing to polish this paragraph.
-Preserve all facts and do not strengthen the claim.
-
-Draft:
-"Our method is a robust and general solution for
-insertion. It works well in realistic settings and
-shows strong performance against baselines. This
-demonstrates that active observation is an effective
-mechanism for industrial manipulation."
-
-Evidence:
-84% over 180 trials; one robot; one fixture;
-one object family; fixed-view and open-loop
-baselines; no industrial or causal ablation test.</code></pre>
-            <pre><code>Illustrative output:
-Polished version:
-"In the evaluated tabletop insertion setup, the
-proposed system achieved 84% success over 180
-trials, compared with the supplied fixed-view and
-open-loop baselines. This result supports a bounded
-performance improvement under the tested protocol.
-The current evidence does not establish industrial
-readiness, broad generalization, or a causal
-mechanism for active observation."
-
-Rejected wording:
-- robust and general solution
-- realistic settings
-- effective mechanism
-- industrial manipulation</code></pre>
-          </div>
-        </article>
-
-        <article class="card">
-          <h3>Figure/Table Claim Check</h3>
-          <div class="example">
-            <pre><code>Input:
-Use $engineering-figure-table to audit this caption.
-
-Figure 2:
-Workflow diagram only.
-
-Table 1:
-Full system: 84%.
-Fixed overhead camera: 69%.
-Fixed side camera: 72%.
-Open-loop controller: 61%.
-
-Draft caption:
-"Figure 2 validates robust active observation and
-proves industrial suitability."</code></pre>
-            <pre><code>Illustrative output:
-Verdict: FAIL for caption claim strength.
-
-Supported:
-- Figure 2 can illustrate workflow states.
-- Table 1 can support a bounded comparison in
-  the tested tabletop protocol.
-
-Unsupported:
-- Figure 2 does not validate robustness.
-- The supplied data do not prove industrial use.
-
-Safe caption:
-"Figure 2 illustrates the perception, view-request,
-guarded-execution, and stop states. Quantitative
-success rates are reported in Table 1."</code></pre>
+In the evaluated tabletop insertion setup, the
+system achieved 84% success over 180 trials on one
+robot arm and one object family. Broader industrial
+deployment remains untested.</code></pre>
           </div>
         </article>
 
@@ -595,196 +212,90 @@ success rates are reported in Table 1."</code></pre>
           <h3>Reviewer Response Truthfulness</h3>
           <div class="example">
             <pre><code>Input:
-Use $engineering-response to audit this response.
+Reviewer asks for stress-test evidence.
 
-Reviewer:
-"The paper overclaims robustness and has no
-stress-test evidence."
-
-Supplied material:
-No revised manuscript diff.
-No source data for a new stress-test table.
-Final line numbers are unavailable.
-
-Draft response:
-"We added Table 3, new stress tests, and final
-line numbers."</code></pre>
-            <pre><code>Illustrative output:
-Verdict: FAIL.
-
-Unsupported response claims:
-- Table 3 was not supplied.
-- New stress-test data were not supplied.
-- Final line numbers are not available.
-
-Safe response plan:
-"We will narrow the robustness claim to the
-evaluated tabletop protocol and mark the planned
-stress-test table as not yet completed. Final line
-numbers will be added after the compiled revision
-is available."</code></pre>
+Draft response says:
+We added Table 3, new stress tests, and final line
+numbers.</code></pre>
+            <pre><code>Illustrative audit:
+Package status: revision plan only.
+The draft response cannot claim added experiments,
+tables, or final line numbers unless those changes
+are present in the revised manuscript package.</code></pre>
           </div>
         </article>
 
         <article class="card">
-          <h3>Validation Should Not Say Ready</h3>
-          <div class="example">
-            <pre><code>Input:
-Use $engineering-validation to triage readiness.
+          <h3>Notes To Manuscript Paragraph</h3>
+          <p>Recorded demo output for a practical notes-to-prose request remains available as a general usage example.</p>
+          <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md">Open notes-to-manuscript demo</a>
+        </article>
 
-Available:
-- Draft PDF was read once.
-- No LaTeX build was run.
-- No citation metadata check was run.
-- No figure source-data check was run.
-- No official venue policy was checked.
-- No final line numbers.
-- No response diff.
+        <article class="card">
+          <h3>Mini Walkthrough</h3>
+          <pre><code>Rough evidence:
+Method: multi-view RGB-D insertion with guarded
+execution.
+Results: 84% over 180 trials.
+Boundary: one robot, one fixture, one object family.
 
-User request:
-"Can I say the paper is ready?"</code></pre>
-            <pre><code>Illustrative output:
-Readiness verdict: NOT_READY / CANNOT_DETERMINE.
-
-Check states:
-- LaTeX build: NOT_RUN
-- Citation metadata: NOT_RUN
-- Figure/table source data: NOT_RUN
-- Official venue policy: NOT_RUN
-- Response diff: NOT_RUN
-- Final line numbers: NOT_RUN
-
-Allowed statement:
-"The draft has received a dry-read triage, but
-required submission checks have not been run."
-
-Forbidden statement:
-"The paper is submission-ready."</code></pre>
-          </div>
+Safe manuscript sentence:
+In the evaluated tabletop setup, the system achieved
+84% success over 180 trials and improved over the
+fixed-view and open-loop baselines.</code></pre>
         </article>
       </section>
 
-      <section id="recorded-demo-outputs">
-        <h2>Recorded Demo Outputs</h2>
-        <p>These are raw local Codex final messages generated from prompt fixtures. Most user-facing demo outputs were generated at base commit <code>681d305</code>; the notes-to-manuscript paragraph hero demo was generated at base commit <code>2dc9571</code>. They are excerpted here for readability; the full artifacts and hashes are recorded in the manifest.</p>
-        <ul>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/manifest.json">Recorded demo manifest</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md">Notes-to-manuscript paragraph output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_claim_audit_681d305.md">Claim audit output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_results_paragraph_681d305.md">Results paragraph output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_polishing_claim_inflation_681d305.md">Conservative polishing output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_figure_source_data_consistency_681d305.md">Figure/table consistency output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_response_truthfulness_681d305.md">Reviewer response truthfulness output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_validation_readiness_681d305.md">Validation readiness output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_related_work_nearest_neighbor_681d305.md">Related Work nearest-neighbor output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/demo/demo_methods_execution_path_681d305.md">Methods execution-path output</a></li>
-        </ul>
-        <pre><code>Recorded excerpt: Notes to manuscript paragraph
-Contact-rich insertion can fail when visual occlusion hides peg-hole alignment
-and the controller continues from a poor pose estimate. Fixed overhead or side
-RGB-D cameras may lose task-relevant visibility during insertion, while
-open-loop insertion does not react to pose uncertainty or contact deviations.</code></pre>
-        <pre><code>Recorded excerpt: Figure/table consistency
-Figure 3 and Table 1 support only a limited claim: the full system reports a
-higher success rate than the listed baselines under the tested protocol.
-They do not support claims of statistical significance, causal validation,
-robust generalization, industrial deployment readiness, or solving insertion
-under occlusion.</code></pre>
-        <pre><code>Recorded excerpt: Reviewer response truthfulness
-Package status: Revision plan only, not a final reviewer response.
-Main risk: The draft falsely claims added stress tests, Table 3, final line
-numbers, and broad generalization.</code></pre>
-      </section>
+      <section id="evidence-archive">
+        <h2>Evidence Archive</h2>
+        <p>This section contains manifests, eval JSONL, human reviews, rejected outputs, and previous behavior evidence. It is for reviewers and maintainers.</p>
 
-      <section>
-        <h2>Mini Walkthrough</h2>
-        <p>A compact workflow shows how rough evidence becomes safer manuscript language.</p>
-        <pre><code>Rough evidence:
-Method: multi-view RGB-D insertion with guarded execution.
-Results: 84% over 180 trials.
-Baselines: fixed overhead 69%, fixed side 72%, open-loop 61%.
-Boundary: one robot, one fixture, one object family.</code></pre>
-        <pre><code>Unsafe draft:
-"Our method provides a robust and deployment-ready solution for industrial insertion."</code></pre>
-        <pre><code>Coach audit:
-Verdict: FAIL.
+        <article class="card">
+          <h3>Recorded Demo Outputs</h3>
+          <ul>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_showcase_v2.json">Original showcase v2 manifest</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_showcase_v2_rerun.json">Showcase v2 rerun manifest</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_messy_notes.json">Messy notes manifest</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_stability.json">Multi-run stability manifest</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_benchmark.json">Benchmark and full-section manifest</a></li>
+          </ul>
+        </article>
 
-Why:
-- "robust" is not supported by one setup.
-- "deployment-ready" is not supported by tabletop-only evidence.
-- "industrial insertion" is not tested.</code></pre>
-        <pre><code>Safe manuscript sentence:
-"In the evaluated tabletop setup, the system achieved 84% success over 180
-trials and improved over the supplied fixed-view and open-loop baselines.
-Broader industrial deployment and cross-platform robustness remain untested."</code></pre>
-      </section>
+        <article class="card">
+          <h3>Eval JSONL And Human Reviews</h3>
+          <ul>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/e99ca81_showcase_v2_rerun_eval.jsonl">Showcase v2 rerun eval JSONL</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/e99ca81_showcase_v2_rerun_human_review.md">Showcase v2 rerun human review</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/e99ca81_messy_notes_eval.jsonl">Messy notes eval JSONL</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/e99ca81_messy_notes_human_review.md">Messy notes human review</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/e99ca81_stability_eval.jsonl">Stability eval JSONL</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/e99ca81_stability_human_review.md">Stability human review</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/e99ca81_benchmark_human_review.md">Benchmark human review</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/e99ca81_full_section_human_review.md">Full-section human review</a></li>
+          </ul>
+        </article>
 
-      <section>
-        <h2>Deep Audit Artifacts</h2>
-        <p>Use these links when you want to inspect the stricter review artifacts and repository quality evidence.</p>
-        <div class="grid" aria-label="Demo output links">
-          <article class="card">
-            <h2>Full-Paper Audit</h2>
-            <p>Story spine, claim-evidence audit, paragraph transitions, validation status, and repair plan.</p>
-            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_audit.md">Open full-paper audit</a>
-          </article>
-          <article class="card">
-            <h2>Structured JSON Audit</h2>
-            <p>Machine-readable claim, paragraph, response, and validation rows used by regression checks.</p>
-            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_structured_audit.json">Open JSON audit</a>
-          </article>
-          <article class="card">
-            <h2>Sentence-Level Audit</h2>
-            <p>Sentence role, evidence anchor, claim-strength risk, and safe repair examples.</p>
-            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_sentence_audit.md">Open sentence audit</a>
-          </article>
-          <article class="card">
-            <h2>Response Diff Verification</h2>
-            <p>Checks whether response claims match actual old/new manuscript changes.</p>
-            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/fixtures/full_paper/response_old_new_diff.md">Open response diff fixture</a>
-          </article>
-          <article class="card">
-            <h2>AI-Smell Polishing</h2>
-            <p>Rejects stronger wording when it inflates unsupported robustness or deployment claims.</p>
-            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/polishing_ai_smell.md">Open polishing example</a>
-          </article>
-          <article class="card">
-            <h2>Figure/Table Claim Check</h2>
-            <p>Maps panels and table cells to the claims they can and cannot support.</p>
-            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/figure_table_panel_claim.md">Open figure/table example</a>
-          </article>
-        </div>
-      </section>
+        <article class="card">
+          <h3>Rejected Outputs And Previous Behavior Evidence</h3>
+          <ul>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_abstract_showcase_v2_ad6d5b4.md">Rejected original Abstract showcase v2 output</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_related_work_showcase_v2_ad6d5b4.md">Evidence-only original Related Work showcase v2 output</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md">Evidence-only original Chinese-to-English showcase v2 output</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_ad6d5b4.md">Evidence-only original Conclusion showcase v2 output</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/ad6d5b4_showcase_v2_human_review.md">Original showcase v2 human review</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest.json">Previous ce1478f behavior manifest</a></li>
+          </ul>
+        </article>
 
-      <section>
-        <h2>Inline Audit Snippets</h2>
-        <p>Short excerpts show the structured contract shape for maintainers and reviewers.</p>
-        <pre><code>{
-  "claim_id": "C1",
-  "status": "FAIL",
-  "source_span": "robust insertion in industrial workcells",
-  "evidence_span": "one robot, one tabletop fixture, one object family",
-  "decision": "reject",
-  "repair": "delete industrial reliability language"
-}</code></pre>
-        <pre><code>{
-  "reviewer_comment_id": "R5",
-  "response_claim": "new stress-test section and Table 3 were added",
-  "semantic_match": "FAIL",
-  "remaining_gap": "no completed stress-test table or manuscript data are supplied"
-}</code></pre>
-        <pre><code>{
-  "validation_status": {
-    "overall_readiness": "CANNOT_DETERMINE",
-    "official_venue_policy": "NOT_RUN",
-    "response_diff": "NOT_RUN"
-  }
-}</code></pre>
-      </section>
-
-      <section>
-        <h2>Quality Contract</h2>
-        <p>The project tracks quality through commit hashes, local model-run artifacts, expected behavior specs, and human-readable eval records. See <a href="./quality-gates.html">quality gates</a>.</p>
+        <article class="card">
+          <h3>Deep Audit Artifacts</h3>
+          <p>Structured JSON Audit, Response Diff Verification, Inline Audit Snippets, <code>source_span</code>, and <code>remaining_gap</code> records remain available for maintainers.</p>
+          <ul>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_structured_audit.json">Structured JSON Audit</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/fixtures/full_paper/response_old_new_diff.md">Response Diff Verification fixture</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/full_paper_realistic_sentence_audit.md">Inline Audit Snippets</a></li>
+          </ul>
+        </article>
       </section>
     </main>
   </body>

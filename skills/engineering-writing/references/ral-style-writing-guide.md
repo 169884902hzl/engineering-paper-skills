@@ -44,6 +44,30 @@ by updating the pose estimate before guarded contact execution; broader robot
 and deployment conditions remain outside this evaluation.
 ```
 
+## Public Recorded Demo Reject Rules
+
+Public recorded writing demos must be rejected or rerun if manuscript prose
+contains any of these blockers:
+
+- unsupported physical mechanisms not present in source notes, including
+  jamming, slip, compliance, deformation, fatigue, binding, impact, resonance,
+  or physical failure statistics
+- prompt or process meta-language inside manuscript prose, including `supplied
+  notes`, `supplied positioning`, `available evidence`, `pending
+  verification`, `unsupported`, `not verified`, or `without claiming`
+- a final sentence that reads like an audit disclaimer instead of scientific
+  scope
+- Related Work prose that discusses citation verification inside the manuscript
+  paragraph
+- Conclusion prose whose second paragraph starts as a limitation inventory
+  instead of a concrete operating boundary
+
+Manuscript prose may use scope-aware wording, but not audit wording. Evidence
+boundary material belongs after the draft unless it is phrased as scientific
+scope. If a mechanism is plausible but not supplied, do not name it. Do not
+write `without claiming...`, `supplied notes`, `available evidence`, or
+`unsupported / not verified` inside the Draft.
+
 ## Strong Sentence Patterns By Section
 
 Use these patterns as section-specific logic, not as text to copy blindly.
