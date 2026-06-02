@@ -17,6 +17,136 @@ Recommended order:
 Draft -> Why this works -> Evidence used -> Boundary / do-not-claim
 ```
 
+## Excellent Engineering Manuscript Prose Standard
+
+Excellent engineering prose is not only safe. It should make the paper's
+technical argument legible while staying inside supplied evidence.
+
+A strong paragraph should:
+
+- have a clear paragraph job
+- name a concrete bottleneck
+- turn method modules into an argument
+- interpret numbers through failure modes or mechanisms
+- make boundaries sound like scientific scope
+- avoid meta language such as `the supplied notes show`, `available evidence
+  indicates`, and `pending verified citations`
+- avoid audit-style phrases in manuscript prose
+
+In manuscript prose, do not explain the drafting process to the reader. Replace
+reviewer-facing phrases with section-specific claims:
+
+```text
+Weak: The supplied notes indicate that the method improves the tested setup
+without claiming deployment readiness.
+Better: In the evaluated tabletop setup, the method improves insertion success
+by updating the pose estimate before guarded contact execution; broader robot
+and deployment conditions remain outside this evaluation.
+```
+
+## Strong Sentence Patterns By Section
+
+Use these patterns as section-specific logic, not as text to copy blindly.
+
+### Abstract
+
+The final sentence should be scope-aware, not disclaimer-like.
+
+Bad:
+
+```text
+without claiming statistical significance or deployment readiness
+```
+
+Better:
+
+```text
+These results provide bounded evidence for the evaluated tabletop setting;
+broader robot, fixture, and deployment conditions remain outside the present
+evaluation.
+```
+
+### Introduction
+
+The opening should name operational difficulty, not generic importance.
+
+```text
+The difficulty is not simply that [task] requires accurate perception; it is
+that [failure mode] changes the information available to the controller exactly
+when [execution stage] becomes least recoverable.
+```
+
+### Methods
+
+Open with the organizing principle, not `Given inputs`.
+
+```text
+The method is organized around resolving [uncertainty] before [irreversible /
+contact-rich / downstream stage], rather than treating [module A] and [module B]
+as separate steps.
+```
+
+### Results
+
+Use ranking, key number, diagnostic interpretation, and boundary.
+
+```text
+The ranking reflects [diagnostic reason], not merely [surface explanation].
+```
+
+### Ablation
+
+Recover contribution roles from major deltas.
+
+```text
+The largest jump occurs when [component] is introduced, indicating that the main
+bottleneck lies in [failure mode], not only in [weaker explanation].
+```
+
+### Related Work
+
+Remove meta-language from manuscript prose.
+
+Bad:
+
+```text
+pending verified citations and protocols rather than a proven novelty claim
+```
+
+Better:
+
+```text
+This positions the present pipeline as a bounded contribution at the
+intersection of [axis A], [axis B], and [axis C], with exact novelty depending
+on verified nearest-neighbor citations.
+```
+
+### Chinese Notes
+
+Chinese notes are evidence and intent, not the English sentence order. Extract
+the argument, rebuild the paragraph around the target section, then write native
+English prose. Preserve numbers and boundaries exactly, but replace Chinese
+logic markers with English manuscript progression.
+
+### Conclusion
+
+Use two paragraphs when requested or when the conclusion needs both a takeaway
+and an operating boundary. The bounded takeaway should be specific.
+
+Bad:
+
+```text
+The remaining failures identify the current operating boundary.
+```
+
+Better:
+
+```text
+The operating boundary is reached when perception cannot disambiguate the
+insertion pose before contact, or when contact disturbance exceeds the guarded
+controller's recovery range.
+```
+
 ## Showcase-Grade Paragraph Standard
 
 Use this stricter standard for README, demo, recorded-output, or user-facing
@@ -32,6 +162,9 @@ examples. A paragraph that is merely safe is not enough.
 - It must integrate boundaries as scientific scope, not as an apology.
 - It must avoid generic sentence frames when a concrete task, failure mode,
   metric, or component role is available.
+- It must not use audit-style phrases such as `without claiming`, `not proven`,
+  or `pending verified citations` as the manuscript sentence frame unless the
+  user explicitly requests review wording.
 
 Weak but safe:
 
@@ -77,6 +210,8 @@ Do not:
 - list every module
 - write `significantly improves` without numbers or a supplied statistical basis
 - claim deployment, robustness, or generalization beyond the supplied evidence
+- end with a disclaimer sentence when the same boundary can be written as
+  scientific scope
 
 ## Introduction: Layered Problem-To-Formulation Path
 
@@ -165,10 +300,21 @@ The paragraph must identify:
 - exact distinction
 - gap bridge
 
+Do not end a Related Work paragraph with an audit note about missing citation
+verification. If citations are placeholders, write a manuscript-ready bounded
+positioning sentence and put verification needs after the draft.
+
 ## Methods: Reader Path Instead Of Module Directory
 
 The first Methods paragraph should give the reader a data and execution path,
 not a list of module names.
+
+For showcase prose, prefer an organizing principle before the path:
+
+```text
+The method is organized around resolving [uncertainty] before [downstream
+stage], because [failure mode] would otherwise propagate into [error].
+```
 
 ```text
 Given [input], the system first produces [intermediate representation 1] through [stage 1].
@@ -291,6 +437,14 @@ Taken together, these results support [specific claim], not [stronger untested
 claim].
 ```
 
+For a stronger two-paragraph conclusion:
+
+- Paragraph 1 should recover the method object, strongest supplied evidence,
+  and bounded takeaway.
+- Paragraph 2 should state the operating boundary through concrete failure
+  regimes, then derive future work from that failure regime.
+- Avoid turning the last sentence into a disclaimer list.
+
 ## Chinese Notes To English Manuscript Prose
 
 Use this when source notes are Chinese but the final manuscript should be
@@ -309,6 +463,16 @@ Then write native English manuscript prose using the target section skeleton.
 Chinese phrasing is source material, not the final sentence order. Preserve
 numbers, method facts, and limitations exactly; do not add citations, baselines,
 statistics, novelty, or deployment claims.
+
+Native-English reconstruction protocol:
+
+1. Convert Chinese notes into argument slots: task, bottleneck, method object,
+   evidence, and boundary.
+2. Choose the target section job before writing any English sentence.
+3. Reorder the material into English paper logic rather than preserving the
+   Chinese note order.
+4. Use mechanism and failure-mode verbs when the notes provide them.
+5. Check that every number, comparison, and limitation remains unchanged.
 
 ## Rich Prompt Inputs
 
@@ -349,6 +513,10 @@ more concrete section-specific sentence:
 - `These results indicate/suggest/support...`
 - `The current results remain bounded...`
 - `The proposed system achieved...`
+- `without claiming...`
+- `the supplied notes show...`
+- `available evidence indicates...`
+- `pending verified citations...`
 
 Prefer:
 
@@ -358,6 +526,18 @@ Prefer:
 - Ablation: `The ablation isolates where the improvement enters the pipeline: [component/role].`
 - Related Work: `The nearest prior line shares [feature], but assumes [condition] that this setting violates.`
 - Conclusion: `Taken together, the results support [bounded takeaway], not [stronger untested claim].`
+
+## Internal Self-Edit Checklist
+
+Before final WRITE output, silently check:
+
+- Is the first sentence concrete?
+- Does the paragraph have a section job?
+- Is there at least one mechanism or failure-mode interpretation?
+- Does every number come from supplied evidence?
+- Is boundary written as scope, not apology?
+- Are generic frames removed?
+- Is there any meta-commentary that should be rewritten as manuscript prose?
 
 ## Anti-Patterns
 

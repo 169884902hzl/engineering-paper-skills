@@ -58,6 +58,48 @@ paragraph, not a compressed safety note or a list converted into sentences.
 Evidence boundaries still matter, but the boundary sentence must not become the
 whole paragraph.
 
+## Showcase-Grade Writing Procedure
+
+Use this procedure for showcase-grade, public-demo, or non-minimal WRITE
+requests. The final answer should show the revised manuscript prose first, not
+the internal notes.
+
+1. Extract argument: identify the task, bottleneck, method object, evidence,
+   and boundary.
+2. Draft manuscript prose using section-specific logic.
+3. Self-revise once before final output to remove generic frames, improve
+   mechanism interpretation, and integrate the boundary naturally.
+
+For showcase-grade or non-minimal WRITE requests:
+
+- Do not output the first safe draft directly. Internally revise it once before
+  final output.
+- Prefer concrete failure modes over generic openings.
+- Prefer mechanism-specific verbs over generic `improve`, `address`, or
+  `support` when the supplied evidence allows a more precise verb.
+- Use boundary as scientific scope, not apology.
+- Do not write `without claiming...` in manuscript prose unless the user asks
+  for audit wording.
+- Do not let the final sentence become a disclaimer.
+- For Results, if diagnostic notes are supplied, use them to explain why the
+  ranking occurs.
+- For Ablation, recover contribution roles from major deltas.
+- For Methods, explain why the reader path is ordered that way.
+- For Related Work, write technical-axis positioning, not meta-commentary.
+- For Chinese notes, do not translate sentence by sentence; reconstruct the
+  English paper argument.
+
+Silent self-edit checklist before final WRITE output:
+
+- Is the first sentence concrete?
+- Does the paragraph have a section job?
+- Is there at least one mechanism or failure-mode interpretation when supplied
+  evidence permits it?
+- Does every number come from supplied evidence?
+- Is the boundary written as scope, not apology?
+- Are generic frames removed?
+- Is there any meta-commentary that should be rewritten as manuscript prose?
+
 For showcase or public-demo WRITE requests, one paragraph should normally be
 120-220 words unless the user asks for a shorter answer. Drafts below 80 words
 are acceptable only for smoke checks, captions, or explicitly minimal prompts.
@@ -169,7 +211,9 @@ Before drafting, identify:
 - current manuscript paths and page/word constraints
 
 If `core claim`, `evidence`, or `boundary` is absent, state the gap before
-drafting. You may still provide a scaffold.
+drafting. You may still provide a scaffold. For WRITE requests with enough
+evidence to draft, keep that gap note after the draft unless placing it first is
+necessary to avoid an unsupported claim.
 
 ## Workflow
 
@@ -191,9 +235,12 @@ drafting. You may still provide a scaffold.
 9. When the user supplies diagnostic notes, category breakdowns, ablation notes,
    failure modes, or nearest-neighbor details, use them in the draft rather than
    collapsing them into generic improvement wording.
-10. Check sentence roles: every sentence must have a function, necessity,
+10. For showcase-grade or non-minimal WRITE requests, revise the draft once
+    before final output. Remove generic frames, replace vague verbs with
+    mechanism-specific wording, and turn boundaries into scope statements.
+11. Check sentence roles: every sentence must have a function, necessity,
    placement, connection, and evidence boundary.
-11. For WRITE mode, return prose first, then a short explanation of paragraph
+12. For WRITE mode, return prose first, then a short explanation of paragraph
    job, evidence used, and boundary. For PLAN or AUDIT mode, return planning or
    diagnostic tables before draft prose when they are needed.
 
@@ -206,29 +253,30 @@ Use this by default for drafting requests.
 ```markdown
 ## Draft
 
-[English manuscript prose first. For non-minimal writing requests, write a
-complete paragraph with section-specific interpretation, not only a safe
-summary.]
+[Final revised English manuscript prose first. For non-minimal writing
+requests, write a complete paragraph with section-specific interpretation, not
+only a safe summary.]
 
 ## Why this works
 
 - Paragraph job:
-- Claim flow:
-- Why this order:
+- Argument flow:
+- Evidence-to-claim link:
 
-## Evidence used
+## Evidence boundary
 
-- [Only user-provided evidence.]
+- Used:
+- Not supplied:
 
-## Boundary / do-not-claim
+## Do-not-claim
 
-- Do not claim:
-- Needs evidence before claiming:
+- ...
 ```
 
-Keep the notes after the draft concise. If the user explicitly asks for
-`output only`, provide just the draft unless doing so would hide an unsupported
-claim or missing evidence.
+Keep the notes after the draft concise. If the user explicitly asks for `only
+give the paragraph`, `final prose only`, or `output only`, provide just the
+final revised prose unless doing so would hide an unsupported claim or missing
+evidence.
 
 ### PLAN Mode
 

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "score_scale": {
     "1": "fail",
     "2": "weak",
@@ -7,7 +7,7 @@
     "4": "strong demo candidate",
     "5": "showcase-grade"
   },
-  "purpose": "Score draft-first engineering-writing outputs, separate from full-paper audit readiness.",
+  "purpose": "Score draft-first engineering-writing outputs for manuscript prose quality, not only evidence safety.",
   "thresholds": {
     "usable_demo": {
       "minimum_each": 3,
@@ -20,7 +20,9 @@
       "blocking_failures_allowed": 0,
       "requires_recorded_model_output": true,
       "requires_mechanism_interpretation": true,
-      "requires_non_template_language": true
+      "requires_non_template_language": true,
+      "requires_scientific_scope_boundary": true,
+      "requires_meta_language_absence": true
     }
   },
   "blocking_failure_types": [
@@ -29,19 +31,24 @@
     "result paragraph claims statistical significance without supplied support",
     "ablation paragraph claims causal proof without controlled evidence",
     "methods paragraph reads as a module directory without reader path",
+    "related work paragraph makes unverified novelty claims",
+    "abstract or conclusion ends with a disclaimer-like final sentence",
     "conclusion introduces new result or deployment claim"
   ],
   "failure_reason_taxonomy": [
     "too_short",
     "template_openers",
     "boundary_dominant",
+    "disclaimer_final_sentence",
+    "audit_style_meta_language",
     "table_reading",
     "no_diagnostic_axis",
     "component_list_not_contribution_recovery",
     "method_inventory_not_reader_path",
     "related_work_paper_list_not_positioning",
     "sentence_translation_not_native_manuscript_prose",
-    "unsupported_claim_expansion"
+    "unsupported_claim_expansion",
+    "no_internal_revision_signal"
   ],
   "human_review_fields": [
     "case",
@@ -49,7 +56,12 @@
     "prose_density",
     "mechanism_interpretation",
     "non_template_language",
-    "boundary_integration",
+    "final_sentence_quality",
+    "meta_language_absence",
+    "scientific_scope_boundary",
+    "native_english_argument_reconstruction",
+    "section_specific_opening",
+    "self_revision_quality",
     "showcase_decision",
     "notes"
   ],
@@ -59,7 +71,7 @@
       "fail": "The output begins with Verdict, Story spine, Source-note triage, or a full matrix for a writing request."
     },
     "paragraph_job": {
-      "pass": "The draft clearly performs the requested section job: abstract, introduction, methods overview, result, ablation, robustness, or conclusion.",
+      "pass": "The draft clearly performs the requested section job: abstract, introduction, methods overview, result, ablation, related work, discussion, or conclusion.",
       "fail": "The prose mixes section jobs or does not answer the requested writing task."
     },
     "evidence_use": {
@@ -67,11 +79,11 @@
       "fail": "The draft invents or distorts evidence."
     },
     "section_skeleton": {
-      "pass": "The draft follows the relevant engineering section skeleton, such as problem-to-method abstract, reader-path Methods, or ranking-to-boundary Results.",
+      "pass": "The draft follows the relevant engineering section skeleton, such as problem-to-method Abstract, reader-path Methods, ranking-to-boundary Results, or contribution-role Ablation.",
       "fail": "The draft is generic prose or a list of modules, papers, or numbers."
     },
     "claim_boundary": {
-      "pass": "The draft states or preserves where the claim stops.",
+      "pass": "The draft preserves where the claim stops.",
       "fail": "The draft expands local evidence into broad robustness, deployment, or generalization claims."
     },
     "sentence_quality": {
@@ -97,6 +109,30 @@
     "boundary_integrated": {
       "pass": "The boundary is integrated as scientific scope and does not dominate or replace the manuscript paragraph.",
       "fail": "The output is mostly a limitation list or refusal-style safety note."
+    },
+    "final_sentence_quality": {
+      "pass": "The final manuscript sentence completes the section job with a scope-aware takeaway, operating boundary, or technical bridge.",
+      "fail": "The final sentence is a disclaimer, an audit note, or a detached list of unsupported claims."
+    },
+    "meta_language_absence": {
+      "pass": "The manuscript prose does not mention the prompt, supplied notes, missing verification process, or the model's safety reasoning.",
+      "fail": "The prose contains phrases such as supplied notes, available evidence, pending verification, or not proven as the manuscript frame."
+    },
+    "scientific_scope_boundary": {
+      "pass": "Boundaries are written as evaluated scope, operating envelope, or future evidence need.",
+      "fail": "Boundaries sound like apology, refusal, or reviewer commentary."
+    },
+    "native_english_argument_reconstruction": {
+      "pass": "For non-English notes, the output reconstructs a native English manuscript argument rather than translating sentence order.",
+      "fail": "The output follows source-note order mechanically or preserves non-English phrasing."
+    },
+    "section_specific_opening": {
+      "pass": "The opening names a concrete task, bottleneck, experiment question, method organizing principle, or technical axis.",
+      "fail": "The opening uses generic importance or difficulty without section-specific content."
+    },
+    "self_revision_quality": {
+      "pass": "The final output reads like a revised draft: generic frames are removed, mechanism verbs are sharpened, and boundary is natural.",
+      "fail": "The draft looks like the first safe pass, with stock frames, table narration, or a disclaimer tail."
     },
     "showcase_decision": {
       "pass": "A human reviewer could reasonably use this output as a public demo of writing ability.",

@@ -1,5 +1,7 @@
-version: 1
-purpose: "Route engineering-writing requests to draft-first prose, planning maps, or audit outputs without loading every reference."
+version: 2
+purpose: >
+  Route engineering-writing requests to draft-first manuscript prose, planning
+  maps, or audit outputs without loading every reference.
 
 always_load:
   - SKILL.md
@@ -10,51 +12,138 @@ always_load:
 
 request_modes:
   write:
+    description: >
+      Draft, compose, expand, or turn notes, figures, methods, tables, or
+      results into manuscript prose.
     output_order:
       - Draft
       - Why this works
-      - Evidence used
-      - Boundary / do-not-claim
+      - Evidence boundary
+      - Do-not-claim
     open_when:
-      - "draft"
-      - "write"
-      - "compose"
-      - "turn notes into prose"
-      - "abstract"
-      - "introduction"
-      - "methods"
-      - "results"
-      - "ablation"
-      - "conclusion"
+      - draft
+      - write
+      - compose
+      - turn notes into prose
+      - abstract
+      - introduction
+      - methods
+      - results
+      - ablation
+      - related work
+      - discussion
+      - conclusion
     do_not_start_with:
       - Verdict
       - Story spine
       - Source-note triage
-    normal_quality:
-      paragraph_length: "Use the length requested by the user; avoid compressed safety notes."
-      notes_after_draft: "Concise."
-    showcase_quality:
-      paragraph_length: "Normally 120-220 words for one paragraph unless the user asks otherwise."
-      requires:
-        - section-specific interpretation
-        - non-template language when concrete details are available
-        - concise integrated boundary
+    normal_write:
+      reference:
+        - references/ral-style-writing-guide.md
+      requirements:
+        - manuscript prose first
+        - complete paragraph for non-minimal requests
+        - concise evidence notes after draft
+        - boundary written as scope, not apology
+    showcase_write:
+      reference:
+        - references/ral-style-writing-guide.md
+      paragraph_length: >
+        Normally 120-220 words for one paragraph unless the user asks for a
+        different length.
+      internal_steps:
+        - extract argument: task, bottleneck, method object, evidence, boundary
+        - draft section-specific manuscript prose
+        - self-revise once before final output
+      requirements:
+        - concrete failure mode or bottleneck opening
+        - mechanism or failure-mode interpretation when evidence allows
+        - mechanism-specific verbs instead of generic improve or address
+        - no manuscript sentence framed as "without claiming"
+        - no disclaimer-like final sentence
         - diagnostic axis for results when supplied
-        - contribution recovery for ablation when supplied
-        - nearest-neighbor distinction for related work when supplied
+        - contribution-role recovery for ablation when supplied
+        - technical-axis positioning for related work
+        - native English argument reconstruction for Chinese notes
+    final_prose_only:
+      trigger_phrases:
+        - only give the paragraph
+        - final prose only
+        - output only
+      output_order:
+        - final revised manuscript prose
+      requirements:
+        - no outline before the draft
+        - no explanation after the draft unless needed to avoid an unsupported claim
+    zh_to_en:
+      reference:
+        - references/ral-style-writing-guide.md
+        - ../_shared/non-english-source-notes.md
+      requirements:
+        - reconstruct the English paper argument
+        - do not translate sentence by sentence
+        - preserve numbers, methods, and boundaries exactly
+    results_with_diagnostic_axes:
+      reference:
+        - references/experiments.md
+        - references/experiments-worksheet.md
+        - references/ral-style-writing-guide.md
+      required_flow:
+        - ranking
+        - key number
+        - diagnostic interpretation
+        - scientific scope boundary
+    ablation_with_failure_modes:
+      reference:
+        - references/experiments.md
+        - references/experiments-worksheet.md
+        - references/ral-style-writing-guide.md
+      required_flow:
+        - component delta
+        - failure mode or capability
+        - contribution role
+        - do-not-claim
+    related_work_nearest_neighbor:
+      reference:
+        - references/related-work.md
+        - references/ral-style-writing-guide.md
+        - ../_shared/citation-boundary.md
+      requirements:
+        - technical-axis positioning
+        - nearest-neighbor distinction
+        - citation placeholders only when citations are not verified
+        - verification needs after draft, not as manuscript meta-language
+    conclusion_two_paragraph:
+      reference:
+        - references/conclusion.md
+        - references/ral-style-writing-guide.md
+      required_flow:
+        - paragraph 1: method, evidence, bounded takeaway
+        - paragraph 2: operating boundary, failure regime, specific future work
+      requirements:
+        - no new results
+        - no deployment or broad robustness claims without evidence
+
   plan:
+    description: >
+      Build paper plans, section plans, story maps, contribution designs, or
+      writing order.
     output_order:
       - One-sentence thesis
       - Story spine
       - Section job map
       - Contribution-evidence map
     open_when:
-      - "outline"
-      - "plan"
-      - "story"
-      - "paper structure"
-      - "writing order"
+      - outline
+      - plan
+      - story
+      - paper structure
+      - writing order
+
   audit:
+    description: >
+      Review, diagnose, critique, find weaknesses, identify unsupported claims,
+      or explain why a draft is not working.
     output_order:
       - Verdict
       - Evidence boundary
@@ -62,14 +151,15 @@ request_modes:
       - Required repairs
       - Safe rewrite
     open_when:
-      - "review"
-      - "audit"
-      - "diagnose"
-      - "unsafe claims"
-      - "weaknesses"
+      - review
+      - audit
+      - diagnose
+      - unsafe claims
+      - weaknesses
 
 section_references:
-  title: references/title.md
+  title:
+    - references/title.md
   abstract:
     - references/abstract.md
     - references/ral-style-writing-guide.md
@@ -101,16 +191,25 @@ section_references:
     - ../_shared/story-spine.md
 
 quality_checks:
-  - "For WRITE prompts, the first substantive section should be Draft."
-  - "Every draft must use only supplied methods, results, baselines, figures, citations, and boundaries."
-  - "Non-minimal WRITE drafts should be complete manuscript paragraphs, not compressed safety notes."
-  - "Showcase WRITE drafts should normally be 120-220 words for one paragraph unless the user requests a shorter output."
-  - "Showcase WRITE drafts should include at least four sentence roles: setup/question, method/comparison object, evidence/result, interpretation, and boundary/scope."
-  - "Non-minimal WRITE drafts should include a section-specific interpretation sentence when supplied evidence allows it."
-  - "Avoid repeated generic openers when a concrete task, failure mode, metric, or component role is available."
-  - "Boundary and do-not-claim content should be integrated as scope and should not dominate the draft."
-  - "Results prose must interpret ranking, key numbers, mechanism relevance, and boundary instead of reading table cells."
-  - "Ablation prose must tie component changes to contribution roles without claiming causal proof unless directly tested."
-  - "Methods prose must explain input, intermediate object, transformation, handoff, and execution or safety boundary."
-  - "Related Work prose must use technical axes and nearest-neighbor distinction when prior-work notes are supplied."
-  - "Conclusion prose must not introduce new terms, new results, or broader deployment claims."
+  - For WRITE prompts, the first substantive section should be Draft.
+  - Every draft must use only supplied methods, results, baselines, figures,
+    citations, and boundaries.
+  - Non-minimal WRITE drafts should be complete manuscript paragraphs, not
+    compressed safety notes.
+  - Showcase WRITE drafts should internally self-revise once before final output.
+  - Showcase WRITE drafts should include section-specific interpretation when
+    supplied evidence allows it.
+  - Avoid repeated generic openers when a concrete task, failure mode, metric, or
+    component role is available.
+  - Boundary and do-not-claim content should be integrated as scope and should
+    not dominate the draft.
+  - Results prose must interpret ranking, key numbers, diagnostic relevance, and
+    boundary instead of reading table cells.
+  - Ablation prose must tie component changes to contribution roles without
+    claiming causal proof unless directly tested.
+  - Methods prose must explain the reader path and why that order matters.
+  - Related Work prose must use technical axes and nearest-neighbor distinction
+    when prior-work notes are supplied.
+  - Chinese notes must be reconstructed into native English manuscript logic.
+  - Conclusion prose must avoid new terms, new results, broad deployment claims,
+    and disclaimer-like final sentences.

@@ -174,36 +174,63 @@
 
       <section>
         <h2>Start With Rough Notes</h2>
-        <p>Most users should begin by giving the skill the task, problem, method, evidence, and boundary. The examples below are excerpted from recorded local Codex outputs generated from rich writing prompt fixtures at base commit <code>078d53e7b5925cf7c56b3b4696c8a35b9ac8d475</code>.</p>
-        <p><strong>Recorded local output excerpt:</strong> these recorded local Codex outputs are local single-run evidence, not CI-controlled behavior proof and not top-tier-ready proof. Full provenance is in the demo gallery.</p>
+        <p>Most users should begin by giving the skill the task, bottleneck, method, evidence, and boundary. The examples below pair short input skeletons with recorded local Codex output excerpts from showcase v2 prompt fixtures.</p>
+        <p><strong>Recorded local output excerpt:</strong> these recorded local Codex outputs are local single-run evidence, not CI-controlled behavior proof, not multi-run stability proof, and not top-tier-ready proof. Full provenance is in the demo gallery.</p>
         <div class="grid">
           <div class="card">
-            <h3>Ablation rows to contribution prose</h3>
-            <pre><code>The largest improvement enters at the overlay
-self-verification stage: success increases from
-44% to 76%, a 32 percentage point gain, consistent
-with its role in rejecting visually plausible but
-poorly grounded action hints before they reach
-execution.</code></pre>
-          </div>
-          <div class="card">
             <h3>Results table with diagnostic axes</h3>
-            <pre><code>The diagnostic pattern explains why the ranking is
-not simply a camera-placement effect: overhead
-viewing tends to fail when the peg hides the hole
-during final approach, side viewing improves
-lateral visibility but can still leave depth
-uncertainty unresolved...</code></pre>
+            <pre><code>Input skeleton:
+84% over 180 trials; baselines 69%, 72%, 61%.
+Diagnostics: overhead occlusion, side-view depth
+uncertainty, open-loop contact error.
+
+Recorded local output excerpt:
+In contact-rich peg insertion, the best-performing
+policy is the one that prevents visual ambiguity
+from becoming unrecovered contact error.</code></pre>
+            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_showcase_v2_ad6d5b4.md">Full artifact</a></p>
           </div>
           <div class="card">
-            <h3>Method notes to reader path</h3>
-            <pre><code>This ordering is used because visual uncertainty
-that is left unresolved before contact can propagate
-into the peg-hole interaction and become difficult
-to correct once the peg begins entering the hole.</code></pre>
+            <h3>Ablation rows to contribution prose</h3>
+            <pre><code>Input skeleton:
+17%, 23%, 44%, 76%, 88% additive rows.
+Recover component roles from deltas.
+
+Recorded local output excerpt:
+The ablation indicates that the main bottleneck in
+contact-rich action grounding is not merely executing
+a hinted motion, but verifying that a visually
+plausible hint is grounded to the intended target.</code></pre>
+            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md">Full artifact</a></p>
+          </div>
+          <div class="card">
+            <h3>Chinese notes to manuscript prose</h3>
+            <pre><code>Input skeleton:
+遮挡下 peg-hole 插入; fixed cameras lose cues;
+open-loop carries pose error; full system 84% vs
+69%/72%/61%; bounded evaluation.
+
+Recorded local output excerpt:
+Occlusion becomes the dominant failure source during
+the final approach to peg-hole insertion, where the
+peg itself reduces the information available...</code></pre>
+            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md">Full artifact</a></p>
+          </div>
+          <div class="card">
+            <h3>Introduction opening</h3>
+            <pre><code>Input skeleton:
+Fixed overhead loses the hole near contact; side
+view leaves depth uncertainty; open-loop carries
+uncertain pose into contact.
+
+Recorded local output excerpt:
+As a peg approaches a hole, the visual evidence
+needed for insertion can disappear at the moment
+when corrective motion becomes most constrained.</code></pre>
+            <p><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_intro_showcase_v2_ad6d5b4.md">Full artifact</a></p>
           </div>
         </div>
-        <p><a href="./demo.html#recorded-rich-writing-outputs">Open recorded rich writing outputs</a></p>
+        <p><a href="./demo.html#recorded-showcase-v2-writing-outputs">Open recorded showcase v2 writing outputs</a></p>
       </section>
 
       <section>
@@ -225,10 +252,10 @@ to correct once the peg begins entering the hole.</code></pre>
         <p>Start with the draft-first writing examples if you want to see manuscript prose. Practical examples and recorded local Codex outputs are in the demo gallery. Structured artifacts and model-run records are kept for reviewers and maintainers.</p>
         <ul>
           <li><a href="./demo.html">Demo gallery</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_with_failure_modes_078d53e.md">Recorded rich ablation output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_with_diagnostic_axes_078d53e.md">Recorded rich results output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_methods_overview_rich_078d53e.md">Recorded rich methods overview output</a></li>
-          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_rich.json">Recorded rich writing manifest</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_showcase_v2_ad6d5b4.md">Recorded showcase v2 results output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md">Recorded showcase v2 ablation output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md">Recorded showcase v2 Chinese-notes output</a></li>
+          <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_showcase_v2.json">Recorded showcase v2 writing manifest</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_methods_reader_path.md">Methods reader-path draft</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_results_interpretation.md">Results interpretation draft</a></li>
           <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/golden/writing_ablation_interpretation.md">Ablation interpretation draft</a></li>

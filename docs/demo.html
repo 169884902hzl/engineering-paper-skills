@@ -92,6 +92,81 @@
         <h2>Manuscript Writing Examples</h2>
         <p>Start here if you want to see what the skills can write from rough notes. Safety and audit examples are listed after the writing examples.</p>
 
+        <article class="card" id="recorded-showcase-v2-writing-outputs">
+          <h3>Recorded Showcase V2 Writing Outputs</h3>
+          <p><strong>Recorded local Codex outputs:</strong> these are raw final answers generated from showcase v2 prompt fixtures at base commit <code>ad6d5b4</code> after installing the edited skills into Codex home. They are local single-run evidence, not CI-controlled behavior proof, not multi-run stability proof, and not top-tier-ready proof.</p>
+          <div class="grid">
+            <div>
+              <h3>Results table + diagnostic axes</h3>
+              <pre><code>Input skeleton:
+84% over 180 trials; baselines 69%, 72%, 61%.
+Diagnostics: overhead occlusion, side-view depth
+uncertainty, open-loop contact error.
+
+Recorded local output excerpt:
+In contact-rich peg insertion, the best-performing
+policy is the one that prevents visual ambiguity
+from becoming unrecovered contact error.
+
+Full artifact:
+writing_results_showcase_v2_ad6d5b4.md</code></pre>
+            </div>
+            <div>
+              <h3>Ablation rows -> contribution roles</h3>
+              <pre><code>Input skeleton:
+17%, 23%, 44%, 76%, 88% additive rows.
+Identify the main bottleneck and contribution roles.
+
+Recorded local output excerpt:
+The largest gain appears when overlay self-
+verification is added, lifting success from 44% to
+76%; this delta attributes a central contribution
+role to rejecting poorly grounded action hints.
+
+Full artifact:
+writing_ablation_showcase_v2_ad6d5b4.md</code></pre>
+            </div>
+            <div>
+              <h3>Chinese notes -> English argument</h3>
+              <pre><code>Input skeleton:
+遮挡下 peg-hole 插入; fixed cameras lose cues;
+open-loop carries pose error; full system 84% vs
+69%/72%/61%; bounded evaluation.
+
+Recorded local output excerpt:
+This ranking is consistent with the supplied
+failure modes: overhead sensing provides global
+context early but is vulnerable near contact...
+
+Full artifact:
+writing_zh_to_en_showcase_v2_ad6d5b4.md</code></pre>
+            </div>
+            <div>
+              <h3>Introduction opening</h3>
+              <pre><code>Input skeleton:
+Fixed overhead loses the hole near contact; side
+view leaves depth uncertainty; open-loop carries
+uncertain pose into contact.
+
+Recorded local output excerpt:
+As a peg approaches a hole, the visual evidence
+needed for insertion can disappear at the moment
+when corrective motion becomes most constrained.
+
+Full artifact:
+writing_intro_showcase_v2_ad6d5b4.md</code></pre>
+            </div>
+          </div>
+          <ul>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/writing_results_showcase_v2.md">Results showcase v2 prompt</a> -> <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_results_showcase_v2_ad6d5b4.md">recorded output</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/writing_ablation_showcase_v2.md">Ablation showcase v2 prompt</a> -> <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md">recorded output</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/writing_intro_showcase_v2.md">Introduction showcase v2 prompt</a> -> <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_intro_showcase_v2_ad6d5b4.md">recorded output</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/prompts/writing_zh_to_en_showcase_v2.md">Chinese-notes showcase v2 prompt</a> -> <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md">recorded output</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_showcase_v2.json">Showcase v2 manifest</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/ad6d5b4_showcase_v2_human_review.md">Showcase v2 human review</a></li>
+          </ul>
+        </article>
+
         <article class="card" id="recorded-rich-writing-outputs">
           <h3>Recorded Rich Writing Outputs</h3>
           <p><strong>Recorded local Codex outputs:</strong> these are raw final answers generated from rich writing prompt fixtures at base commit <code>078d53e7b5925cf7c56b3b4696c8a35b9ac8d475</code>. They are local single-run evidence, not CI-controlled behavior proof, not multi-run stability proof, and not top-tier-ready proof.</p>
@@ -159,27 +234,6 @@ writing_methods_overview_rich_078d53e.md</code></pre>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_min_ce1478f.md">Minimal abstract smoke/provenance check</a></li>
           </ul>
           <p>Full provenance is recorded in <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest.json">tests/outputs/model_runs/writing/manifest.json</a>.</p>
-          <div class="example">
-            <pre><code>Excerpted from recorded local Codex output:
-Robotic inspection under partial occlusion remains
-difficult when a fixed camera view cannot observe
-defects after the part rotates away from the main
-viewpoint. To address this limitation, the proposed
-system requests a secondary view when its inspection
-confidence is low.
-
-Full artifact:
-coach_write_draft_first_ce1478f.md</code></pre>
-            <pre><code>Excerpted from recorded local Codex output:
-Geometry-aware execution alone raises success only
-modestly, from 17% to 23%. Adding target-focused
-perception produces a larger gain to 44%. The largest
-increase, from 44% to 76%, occurs when overlay
-self-verification is added.
-
-Full artifact:
-writing_ablation_interpretation_ce1478f.md</code></pre>
-          </div>
         </article>
 
         <article class="card">
@@ -630,12 +684,6 @@ Contact-rich insertion can fail when visual occlusion hides peg-hole alignment
 and the controller continues from a poor pose estimate. Fixed overhead or side
 RGB-D cameras may lose task-relevant visibility during insertion, while
 open-loop insertion does not react to pose uncertainty or contact deviations.</code></pre>
-        <pre><code>Recorded excerpt: Related Work nearest-neighbor
-The strongest novelty claim is not yet safe. The supplied notes support a
-positioning hypothesis, not a fully verified literature gap: the paper appears
-to combine confidence-triggered additional RGB-D views with guarded
-contact-rich insertion, but the author has not yet shown that prior work lacks
-this exact combination.</code></pre>
         <pre><code>Recorded excerpt: Figure/table consistency
 Figure 3 and Table 1 support only a limited claim: the full system reports a
 higher success rate than the listed baselines under the tested protocol.

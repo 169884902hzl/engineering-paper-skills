@@ -4,6 +4,30 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Improve showcase writing prompts and outputs
+
+- Upgraded the `engineering-writing` WRITE contract from safe bounded drafting
+  to showcase-grade manuscript generation with one internal self-revision pass.
+- Added the `Showcase-Grade Writing Procedure` to require argument extraction,
+  section-specific drafting, generic-frame removal, mechanism interpretation,
+  and natural scientific-scope boundaries.
+- Updated `engineering-paper-coach` so clear section-writing requests route to
+  or inherit the stronger `engineering-writing` contract instead of shrinking
+  into a safety rewrite.
+- Strengthened `ral-style-writing-guide.md` with excellent-prose standards,
+  section-specific sentence patterns, native-English reconstruction for Chinese
+  notes, and an internal self-edit checklist.
+- Added seven showcase v2 prompt fixtures and seven real local Codex CLI
+  outputs under `tests/outputs/model_runs/writing/`.
+- Added `tests/outputs/model_runs/writing/manifest_showcase_v2.json`,
+  `evals/results/ad6d5b4_showcase_v2_writing_eval.jsonl`, and
+  `evals/results/ad6d5b4_showcase_v2_human_review.md`.
+- Updated README and Pages display so the first writing examples show input
+  skeletons paired with recorded output excerpts. Older `ce1478f` outputs are
+  retained as previous behavior links rather than main showcase excerpts.
+- Evidence boundary: this is local single-run writing evidence only. It is not
+  CI proof, multi-run stability proof, or top-tier-ready proof.
+
 ## Record rich writing model runs
 
 - Generated eight fresh rich writing outputs in an interactive Codex CLI

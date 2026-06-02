@@ -20,49 +20,97 @@ numbers, deployment tests, or submission readiness.
 
 ## What It Can Write
 
-The examples below are excerpted from recorded local Codex outputs generated at
-base commit `078d53e7b5925cf7c56b3b4696c8a35b9ac8d475` from richer writing
-prompt fixtures. They are local single-run artifacts, not CI-controlled
-behavior proof and not top-tier-ready proof. Full provenance is recorded in
-[tests/outputs/model_runs/writing/manifest_rich.json](tests/outputs/model_runs/writing/manifest_rich.json),
-with a strict local eval record in
-[evals/results/078d53e_rich_writing_model_eval.jsonl](evals/results/078d53e_rich_writing_model_eval.jsonl).
+The examples below are raw recorded Codex outputs from showcase v2 prompt
+fixtures. They show the intended user experience: rough notes, tables, or
+Chinese source notes become manuscript prose first. These are local single-run
+artifacts, not CI-controlled behavior proof, not multi-run stability proof, and
+not top-tier-ready proof.
 
-**Ablation rows -> contribution-level ablation paragraph**
+### Results table + diagnostic axes -> Results paragraph
 
 ```text
-The ablation trend shows that the main gain comes from reducing perception and
-grounding failures before the action is executed, rather than from execution
-constraints alone. Starting from a naive direct action hint at 17% success,
-adding geometry-aware execution raises performance to 23%...
+Input skeleton:
+Full system 84% over 180 trials; fixed overhead 69%; fixed side 72%;
+open-loop 61%. Diagnostic axes: overhead loses the hole near final approach,
+side view preserves lateral visibility but leaves depth uncertainty, and
+open-loop carries pose error into contact.
+```
+
+```text
+Recorded excerpt:
+In contact-rich peg insertion, the best-performing policy is the one that
+prevents visual ambiguity from becoming unrecovered contact error. The
+confidence-triggered multi-view system achieved 84% success over 180 trials,
+outperforming fixed side viewing by 12 percentage points...
 ```
 
 Full artifact:
-[writing_ablation_with_failure_modes_078d53e.md](tests/outputs/model_runs/writing/writing_ablation_with_failure_modes_078d53e.md).
+[writing_results_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_results_showcase_v2_ad6d5b4.md).
+Provenance: local single-run Codex CLI output, `gpt-5.5`, recorded in
+[manifest_showcase_v2.json](tests/outputs/model_runs/writing/manifest_showcase_v2.json).
 
-**Result table + diagnostic axes -> Results paragraph**
+### Ablation rows -> contribution-level ablation paragraph
 
 ```text
-In the tested tabletop occlusion setup, the confidence-triggered multi-view
-system ranks first among the evaluated variants, followed by the fixed side
-view, the fixed overhead view, and the open-loop controller. The strongest
-result is the full system's 84% success over 180 trials...
+Input skeleton:
+Naive direct hint 17%; + geometry-aware execution 23%; + target-focused
+perception 44%; + overlay self-verification 76%; full mask-constrained
+grounding 88%. Interpret each delta as a contribution role, not causal proof.
+```
+
+```text
+Recorded excerpt:
+The ablation indicates that the main bottleneck in contact-rich action
+grounding is not merely executing a hinted motion, but verifying that a
+visually plausible hint is grounded to the intended insertion target.
 ```
 
 Full artifact:
-[writing_results_with_diagnostic_axes_078d53e.md](tests/outputs/model_runs/writing/writing_results_with_diagnostic_axes_078d53e.md).
+[writing_ablation_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md).
+Provenance: local single-run Codex CLI output, `gpt-5.5`, recorded in
+[manifest_showcase_v2.json](tests/outputs/model_runs/writing/manifest_showcase_v2.json).
 
-**Method notes -> Methods overview**
+### Chinese notes -> English manuscript paragraph
 
 ```text
-Given synchronized overhead and side RGB-D observations, the system first
-estimates an insertion pose together with a confidence score, rather than
-sending the observations directly to control. This intermediate state is the
-main handoff object...
+Input skeleton:
+遮挡下 peg-hole 插入；overhead early context but final occlusion; side lateral
+view but unstable depth; open-loop carries pose error; full system 84% vs
+69%/72%/61%; no significance, cross-robot, or deployment test.
+```
+
+```text
+Recorded excerpt:
+Occlusion becomes the dominant failure source during the final approach to
+peg-hole insertion, where the peg itself reduces the information available to
+a fixed overhead camera and converts early pose error into contact failure
+under open-loop execution.
 ```
 
 Full artifact:
-[writing_methods_overview_rich_078d53e.md](tests/outputs/model_runs/writing/writing_methods_overview_rich_078d53e.md).
+[writing_zh_to_en_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md).
+Provenance: local single-run Codex CLI output, `gpt-5.5`, recorded in
+[manifest_showcase_v2.json](tests/outputs/model_runs/writing/manifest_showcase_v2.json).
+
+### Introduction notes -> strong opening
+
+```text
+Input skeleton:
+Fixed overhead loses the hole near contact; fixed side leaves depth
+uncertainty; open-loop carries uncertain pose into contact; force guards stop
+unsafe motion but do not resolve upstream visual ambiguity.
+```
+
+```text
+Recorded excerpt:
+As a peg approaches a hole, the visual evidence needed for insertion can
+disappear at the moment when corrective motion becomes most constrained.
+```
+
+Full artifact:
+[writing_intro_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_intro_showcase_v2_ad6d5b4.md).
+Provenance: local single-run Codex CLI output, `gpt-5.5`, recorded in
+[manifest_showcase_v2.json](tests/outputs/model_runs/writing/manifest_showcase_v2.json).
 
 Better input evidence produces better manuscript prose. If evidence is missing,
 the skill should downgrade the claim, write a scaffold, or mark the gap instead
@@ -96,6 +144,58 @@ Evidence:
 
 Boundary:
 [what is not tested or not supplied]
+```
+
+For stronger section drafting, call `engineering-writing` directly:
+
+```text
+Use $engineering-writing to draft a showcase-grade [section name] paragraph.
+
+Target:
+[Abstract / Introduction opening / Methods overview / Results / Ablation /
+Related Work / Conclusion]
+
+Paper type:
+[robotics / ML systems / control / engineering conference or journal]
+
+Task:
+[specific task, not a broad field]
+
+Core bottleneck:
+[the technical bottleneck that carries the paper contribution]
+
+Existing routes and limitations:
+- [route A]: [what it solves] but [what it misses]
+- [route B]: [what it solves] but [what it misses]
+- [route C]: [what it solves] but [what it misses]
+
+Method:
+[method object, not only module names]
+[information flow / decision rule / intermediate representation / execution path]
+
+Evidence:
+- [main result, with numbers]
+- [baseline]
+- [ablation]
+- [failure modes or diagnostic axes]
+
+Boundary:
+- [dataset / robot / platform / scenario scope]
+- [statistical tests not performed]
+- [deployment or generalization tests not performed]
+- [causal mechanisms not proven]
+
+Writing requirements:
+- Produce manuscript prose first.
+- Do not output an outline before the draft.
+- Write like a strong engineering conference paper, but stay evidence-bound.
+- Use mechanism or failure-mode interpretation, not table reading.
+- Integrate boundary as scientific scope, not as apology.
+- Avoid generic frames such as "X remains challenging", "To address this
+  limitation", and "These results indicate" unless the sentence names a
+  concrete mechanism.
+- Do not invent citations, experiments, baselines, statistics, line numbers,
+  deployment, novelty proof, or broad robustness.
 ```
 
 ## Which Skill Should I Use First?
@@ -144,6 +244,32 @@ This project is useful for:
 | Check manuscript readiness, LaTeX build state, claim-evidence alignment, and submission risks | `engineering-validation` |
 
 ## Use Case Examples
+
+### Recorded Showcase V2 Writing Outputs
+
+The outputs below are raw local Codex final answers generated from the stricter
+showcase v2 prompt fixtures at base commit `ad6d5b4`. They were generated after
+installing this repository's edited `engineering-writing` and
+`engineering-paper-coach` skills into Codex home. They are local single-run
+artifacts, not CI-controlled behavior proof, not multi-run stability proof, and
+not top-tier-ready proof.
+
+| Writing task | Prompt fixture | Recorded local output | Review placement |
+|---|---|---|---|
+| Results paragraph from diagnostic axes | [writing_results_showcase_v2.md](tests/prompts/writing_results_showcase_v2.md) | [writing_results_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_results_showcase_v2_ad6d5b4.md) | hero |
+| Ablation paragraph with contribution roles | [writing_ablation_showcase_v2.md](tests/prompts/writing_ablation_showcase_v2.md) | [writing_ablation_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md) | hero |
+| Introduction opening from operational bottleneck | [writing_intro_showcase_v2.md](tests/prompts/writing_intro_showcase_v2.md) | [writing_intro_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_intro_showcase_v2_ad6d5b4.md) | hero |
+| Chinese notes to English manuscript argument | [writing_zh_to_en_showcase_v2.md](tests/prompts/writing_zh_to_en_showcase_v2.md) | [writing_zh_to_en_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md) | hero |
+| Two-paragraph Conclusion | [writing_conclusion_showcase_v2.md](tests/prompts/writing_conclusion_showcase_v2.md) | [writing_conclusion_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_ad6d5b4.md) | gallery |
+| Related Work positioning | [writing_related_work_showcase_v2.md](tests/prompts/writing_related_work_showcase_v2.md) | [writing_related_work_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_related_work_showcase_v2_ad6d5b4.md) | provenance-only |
+| Six-sentence Abstract | [writing_abstract_showcase_v2.md](tests/prompts/writing_abstract_showcase_v2.md) | [writing_abstract_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_abstract_showcase_v2_ad6d5b4.md) | reject |
+
+Full provenance is recorded in
+[tests/outputs/model_runs/writing/manifest_showcase_v2.json](tests/outputs/model_runs/writing/manifest_showcase_v2.json).
+The local eval record is
+[evals/results/ad6d5b4_showcase_v2_writing_eval.jsonl](evals/results/ad6d5b4_showcase_v2_writing_eval.jsonl),
+with human review in
+[evals/results/ad6d5b4_showcase_v2_human_review.md](evals/results/ad6d5b4_showcase_v2_human_review.md).
 
 ### Draft-First Writing Examples
 
@@ -228,29 +354,6 @@ The local eval record is
 These outputs are local single-run evidence, not CI-controlled behavior proof
 or top-tier-ready proof.
 
-**Excerpted from recorded local Codex output: Coach draft-first output**
-
-Full artifact:
-[coach_write_draft_first_ce1478f.md](tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md).
-
-```text
-Robotic inspection under partial occlusion remains difficult when a fixed
-camera view cannot observe defects after the part rotates away from the main
-viewpoint. To address this limitation, the proposed system requests a secondary
-view when its inspection confidence is low...
-```
-
-**Excerpted from recorded local Codex output: Ablation interpretation**
-
-Full artifact:
-[writing_ablation_interpretation_ce1478f.md](tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md).
-
-```text
-Geometry-aware execution alone raises success only modestly, from 17% to 23%.
-Adding target-focused perception produces a larger gain to 44%. The largest
-increase, from 44% to 76%, occurs when overlay self-verification is added...
-```
-
 **Golden expected excerpt: Methods reader path**
 
 ```text
@@ -294,56 +397,6 @@ Full provenance is recorded in
 The notes-to-manuscript paragraph hero example is stored at
 [tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md](tests/outputs/model_runs/demo/demo_notes_to_manuscript_paragraph_2dc9571.md).
 It is local single-run evidence, not CI-controlled behavior proof.
-
-### Recorded Output Excerpts
-
-Excerpted for readability; see the linked artifacts for the full raw outputs.
-
-**Notes to manuscript paragraph**
-
-```text
-Contact-rich insertion can fail when visual occlusion hides peg-hole alignment
-and the controller continues from a poor pose estimate. Fixed overhead or side
-RGB-D cameras may lose task-relevant visibility during insertion, while
-open-loop insertion does not react to pose uncertainty or contact deviations.
-```
-
-**Related Work nearest-neighbor distinction**
-
-```text
-The strongest novelty claim is not yet safe. The supplied notes support a
-positioning hypothesis, not a fully verified literature gap: the paper appears
-to combine confidence-triggered additional RGB-D views with guarded
-contact-rich insertion, but the author has not yet shown that prior work lacks
-this exact combination.
-```
-
-**Results paragraph**
-
-```text
-These results support a bounded system-level claim that combining multi-view
-perception with guarded execution improves insertion success in the tested
-single-arm, single-fixture, cylindrical-peg setting. However, the experiment
-does not isolate the individual effects of view selection and guarded execution.
-```
-
-**Figure/table audit**
-
-```text
-Figure 3 and Table 1 support only a limited claim: the full system reports a
-higher success rate than the listed baselines under the tested protocol.
-They do not support claims of statistical significance, causal validation,
-robust generalization, industrial deployment readiness, or solving insertion
-under occlusion.
-```
-
-**Reviewer response truthfulness**
-
-```text
-Package status: Revision plan only, not a final reviewer response.
-Main risk: The draft falsely claims added stress tests, Table 3, final line
-numbers, and broad generalization.
-```
 
 ## Installation
 

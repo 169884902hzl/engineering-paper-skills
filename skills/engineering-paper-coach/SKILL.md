@@ -29,12 +29,26 @@ If the user asks to draft, write, compose, generate, expand, or turn notes,
 tables, modules, figures, or results into manuscript prose, do not begin with
 `Verdict`.
 
+If the user asks for Abstract, Introduction, Related Work, Methods, Results,
+Ablation, Discussion, or Conclusion prose, prefer the writing contract from
+`engineering-writing`. Do not let `engineering-paper-coach` reduce the request
+into a safety rewrite unless the evidence is too thin for manuscript prose.
+
+When coach handles a writing request itself:
+
+- Produce the draft first.
+- Internally revise the draft once before final output.
+- Keep the evidence boundary after the draft.
+- Make the manuscript paragraph primary; boundary should not dominate.
+- Avoid generic safety paragraphs and audit-style wording.
+- Use boundary as scientific scope, not apology.
+
 For writing requests, use this output:
 
 ```markdown
 ## Draft
 
-[Bounded manuscript prose.]
+[Final revised manuscript prose.]
 
 ## Evidence boundary
 
@@ -57,6 +71,10 @@ paragraph, include a section-specific interpretation when the supplied evidence
 allows it, avoid generic openers when a concrete task or failure mode is
 available, and keep the boundary concise rather than letting it dominate the
 paragraph.
+
+Do not write a short bounded draft merely because the coach skill is a
+lightweight entry point. If the supplied evidence can support a real paragraph,
+write real manuscript prose first and leave caveats for the post-draft notes.
 
 ## Evidence Boundary
 
