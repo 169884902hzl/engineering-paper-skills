@@ -136,11 +136,14 @@ Public recorded writing demos must be rejected or rerun if manuscript prose
 contains any of the following:
 
 - an unsupported physical mechanism that is not present in the source notes,
-  such as jamming, slip, compliance, deformation, fatigue, binding, impact,
-  resonance, or physical failure statistics
+  such as lateral jamming, jamming, slip, compliance, deformation, fatigue,
+  binding, impact, resonance, collision, vibration, backlash, wear, fracture,
+  buckling, instability, drift, or physical failure statistics
 - prompt or process meta-language inside manuscript prose, such as `supplied
-  notes`, `supplied positioning`, `available evidence`, `pending
-  verification`, `unsupported`, `not verified`, or `without claiming`
+  notes`, `supplied positioning`, `supplied failure modes`, `available
+  evidence`, `dominant failure source`, `pending verification`, `pending
+  verified citations`, `unsupported`, `not verified`, `Unsupported / not
+  verified`, `Evidence Needed`, or `without claiming`
 - a final sentence that reads like an audit disclaimer rather than scientific
   scope
 - Related Work prose that discusses citation verification inside the manuscript
@@ -152,7 +155,10 @@ Manuscript prose may use scope-aware wording, but not audit wording. Evidence
 boundary notes belong after the draft unless they can be phrased as scientific
 scope. If a mechanism is plausible but not supplied, do not name it. Do not
 write `without claiming...` in manuscript prose. Do not write `supplied notes`,
-`available evidence`, or `unsupported / not verified` inside the Draft.
+`supplied positioning`, `supplied failure modes`, `available evidence`,
+`dominant failure source`, `pending verification`, `pending verified
+citations`, `unsupported`, `not verified`, `Unsupported / not verified`, or
+`Evidence Needed` inside the Draft.
 
 Avoid repeated generic openers such as `X remains difficult`, `To address this
 limitation`, and `These results indicate` when a section-specific opening can

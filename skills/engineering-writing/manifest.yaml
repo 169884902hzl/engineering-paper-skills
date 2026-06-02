@@ -217,11 +217,33 @@ quality_checks:
 public_demo_reject_patterns:
   - lateral jamming
   - jamming
+  - slip
+  - compliance
+  - deformation
+  - fatigue
+  - binding
+  - impact
+  - resonance
+  - collision
+  - vibration
+  - backlash
+  - wear
+  - fracture
+  - buckling
+  - instability
+  - drift
+  - physical failure statistics
   - supplied notes
   - supplied positioning
+  - supplied failure modes
   - available evidence
+  - dominant failure source
   - without claiming
+  - unsupported
+  - not verified
+  - pending verification
   - Unsupported / not verified
+  - Evidence Needed
   - pending verified citations
 
 flows:

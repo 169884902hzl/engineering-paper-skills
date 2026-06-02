@@ -1,0 +1,48 @@
+{
+  "manifest": "showcase_v2_rerun2",
+  "base_commit": "8865acf6469b0dae32d16807c341c04bf249e2a3",
+  "status": "strong public beta; top-tier candidate; not top-tier-ready",
+  "runtime_model_executed": true,
+  "ci_controlled": false,
+  "entries": [
+    {
+      "case": "conclusion_showcase_rerun2",
+      "prompt": "tests/prompts/writing_conclusion_showcase_v2_rerun2.md",
+      "output": "tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun2_8865acf.md",
+      "output_sha256": "4d667fe8db2e8c1dfca7035d3bd44082252c5912f37e9c0c4441c2a4a2e6c50d",
+      "word_count": 182,
+      "model": "gpt-5.5",
+      "runtime": "codex-cli 0.136.0",
+      "base_commit": "8865acf6469b0dae32d16807c341c04bf249e2a3",
+      "generation_mode": "codex_exec_read_only",
+      "runtime_model_executed": true,
+      "ci_controlled": false,
+      "evidence_level": "local_single_run",
+      "placement": "gallery",
+      "score": 8.4,
+      "manuscript_ready": true,
+      "notes": "Two paragraphs; paragraph 2 starts from the concrete failure boundary before scope.",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C <repo-root> -o tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun2_8865acf.md \"Read skills/engineering-writing/SKILL.md, skills/engineering-writing/references/ral-style-writing-guide.md, and tests/prompts/writing_conclusion_showcase_v2_rerun2.md. Produce the output requested by tests/prompts/writing_conclusion_showcase_v2_rerun2.md. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "full_section_results_demo_v2",
+      "prompt": "tests/prompts/full_section_results_demo_v2.md",
+      "output": "tests/outputs/model_runs/writing/full_section_results_demo_v2_8865acf.md",
+      "output_sha256": "1eb117475ff4787364c7ce79590f0fb4f54796d8c46b00e7e41add659effc5f6",
+      "word_count": 264,
+      "model": "gpt-5.5",
+      "runtime": "codex-cli 0.136.0",
+      "base_commit": "8865acf6469b0dae32d16807c341c04bf249e2a3",
+      "generation_mode": "codex_exec_read_only",
+      "runtime_model_executed": true,
+      "ci_controlled": false,
+      "evidence_level": "local_single_run",
+      "placement": "gallery",
+      "score": 8.5,
+      "manuscript_ready": true,
+      "notes": "Exactly three manuscript paragraphs with main result, ablation interpretation, and operating-envelope boundary.",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C <repo-root> -o tests/outputs/model_runs/writing/full_section_results_demo_v2_8865acf.md \"Read skills/engineering-writing/SKILL.md, skills/engineering-writing/references/ral-style-writing-guide.md, and tests/prompts/full_section_results_demo_v2.md. Produce the output requested by tests/prompts/full_section_results_demo_v2.md. Do not edit files. Final answer only.\""
+    }
+  ],
+  "public_demo_reject_patterns_enforced": true
+}

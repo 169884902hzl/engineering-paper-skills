@@ -85,7 +85,7 @@
       <section>
         <h2>Example Provenance</h2>
         <p><strong>Illustrative examples</strong> are hand-written for readability and are marked as illustrative.</p>
-        <p><strong>Recorded local Codex outputs</strong> are raw final messages generated from prompt fixtures and stored in the repository. They are candidate-level local evidence, not top-tier-ready proof.</p>
+        <p><strong>Recorded local Codex outputs</strong> are raw final messages generated from prompt fixtures and stored in the repository. They are strong public-beta evidence and top-tier candidate evidence, not top-tier-ready proof.</p>
       </section>
 
       <section id="writing-gallery">
@@ -100,7 +100,7 @@
 baselines; overhead final occlusion, side-view depth
 uncertainty, and open-loop contact error.
 
-Recorded excerpt:
+Short excerpt from recorded output:
 In contact-rich peg insertion, the best-performing
 policy is the one that prevents visual ambiguity
 from becoming unrecovered contact error.</code></pre>
@@ -113,7 +113,7 @@ from becoming unrecovered contact error.</code></pre>
 17%, 23%, 44%, 76%, 88% additive rows.
 Identify the main bottleneck and contribution roles.
 
-Recorded excerpt:
+Short excerpt from recorded output:
 The largest gain appears when overlay self-
 verification is added, lifting success from 44% to
 76%; this delta attributes a central contribution
@@ -128,7 +128,7 @@ role to rejecting poorly grounded action hints.</code></pre>
 open-loop carries pose error; full system 84% vs
 69%/72%/61%; bounded evaluation.
 
-Recorded excerpt:
+Short excerpt from recorded output:
 Occlusion during the final approach, rather than
 initial visual recognition, is the central failure
 mode in peg-hole insertion under fixed camera views.</code></pre>
@@ -142,7 +142,7 @@ overhead RGB-D -> pose/confidence -> optional
 additional view -> refined pose -> guarded
 insertion with force and pose-deviation stops.
 
-Recorded excerpt:
+Short excerpt from recorded output:
 Because pose uncertainty that survives into contact
 is difficult to correct safely, the method first
 resolves the insertion pose in perception.</code></pre>
@@ -163,14 +163,36 @@ resolves the insertion pose in perception.</code></pre>
             <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_related_work_showcase_v2_rerun_e99ca81.md">Open Related Work rerun</a>
           </article>
           <article class="card">
-            <h3>Conclusion rerun</h3>
-            <p>Two paragraphs: method and evidence first, then an operating envelope and future work from failure regimes.</p>
-            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun_e99ca81.md">Open Conclusion rerun</a>
+            <h3>Conclusion rerun2</h3>
+            <p>Two paragraphs: method and evidence first, then a concrete failure boundary before platform scope.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun2_8865acf.md">Open Conclusion rerun2</a>
           </article>
           <article class="card">
-            <h3>Full-section Results demo</h3>
+            <h3>Full-section Results demo v2</h3>
             <p>Main result, ablation, and failure-boundary paragraphs as one mini Results section.</p>
-            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/full_section_results_demo_e99ca81.md">Open full-section output</a>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/full_section_results_demo_v2_8865acf.md">Open full-section output</a>
+          </article>
+          <article class="card">
+            <h3>Full-section Methods demo</h3>
+            <p>Three Methods paragraphs: overview, intermediate representation, and guarded execution path.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/full_section_methods_demo_8865acf.md">Open Methods section output</a>
+          </article>
+          <article class="card">
+            <h3>Rough-user Results</h3>
+            <p>Minimal rough notes transformed into bounded Results prose with scope retained.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/rough_user_results_minimal_8865acf.md">Open rough-user Results output</a>
+          </article>
+          <article class="card">
+            <h3>Realistic manuscript-note Results</h3>
+            <p>De-identified author-style notes converted into bounded Results prose and missing-evidence notes.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/realistic_robotics_manuscript_notes_results_8865acf.md">Open realistic-note output</a>
+          </article>
+          <article class="card">
+            <h3>Chinese notes to Methods and Discussion</h3>
+            <p>Chinese notes reconstructed as section-specific English prose without sentence-by-sentence translation.</p>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/zh_notes_to_methods_showcase_8865acf.md">Open Methods output</a>
+            <br>
+            <a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/zh_notes_to_discussion_showcase_8865acf.md">Open Discussion output</a>
           </article>
         </div>
 
@@ -234,15 +256,19 @@ are present in the revised manuscript package.</code></pre>
         <article class="card">
           <h3>Mini Walkthrough</h3>
           <pre><code>Rough evidence:
-Method: multi-view RGB-D insertion with guarded
-execution.
-Results: 84% over 180 trials.
-Boundary: one robot, one fixture, one object family.
+bad notes:
+multi-view RGB-D peg insert, numbers 84 over 180,
+fixed views 69/72, open loop 61. maybe view update
+helps. one robot/fixture/peg family only.
 
 Safe manuscript sentence:
 In the evaluated tabletop setup, the system achieved
 84% success over 180 trials and improved over the
-fixed-view and open-loop baselines.</code></pre>
+fixed-view and open-loop baselines.
+
+Missing evidence:
+confidence intervals, statistical tests, trial split,
+fixture diversity, and cross-robot evaluation.</code></pre>
         </article>
       </section>
 
@@ -258,6 +284,10 @@ fixed-view and open-loop baselines.</code></pre>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_messy_notes.json">Messy notes manifest</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_stability.json">Multi-run stability manifest</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_benchmark.json">Benchmark and full-section manifest</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_showcase_v2_rerun2.json">Showcase v2 rerun2 manifest</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_rough_user.json">Rough-user minimal manifest</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_stability_rough_benchmark.json">Rough and benchmark stability manifest</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest_realistic_sections.json">Realistic sections manifest</a></li>
           </ul>
         </article>
 
@@ -272,6 +302,11 @@ fixed-view and open-loop baselines.</code></pre>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/e99ca81_stability_human_review.md">Stability human review</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/e99ca81_benchmark_human_review.md">Benchmark human review</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/e99ca81_full_section_human_review.md">Full-section human review</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/8865acf_showcase_v2_rerun2_human_review.md">Showcase v2 rerun2 human review</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/8865acf_full_section_v2_human_review.md">Full-section v2 human review</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/8865acf_rough_user_human_review.md">Rough-user human review</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/8865acf_stability_rough_benchmark_human_review.md">Rough and benchmark stability human review</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/8865acf_realistic_sections_human_review.md">Realistic sections human review</a></li>
           </ul>
         </article>
 
@@ -282,6 +317,8 @@ fixed-view and open-loop baselines.</code></pre>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_related_work_showcase_v2_ad6d5b4.md">Evidence-only original Related Work showcase v2 output</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md">Evidence-only original Chinese-to-English showcase v2 output</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_ad6d5b4.md">Evidence-only original Conclusion showcase v2 output</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun_e99ca81.md">Superseded Conclusion rerun evidence-only output</a></li>
+            <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/full_section_results_demo_e99ca81.md">Superseded full-section Results evidence-only output</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/evals/results/ad6d5b4_showcase_v2_human_review.md">Original showcase v2 human review</a></li>
             <li><a href="https://github.com/169884902hzl/engineering-paper-skills/blob/main/tests/outputs/model_runs/writing/manifest.json">Previous ce1478f behavior manifest</a></li>
           </ul>

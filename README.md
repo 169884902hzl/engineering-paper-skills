@@ -26,6 +26,9 @@ ablation rows, Chinese source notes, or Methods notes become manuscript prose
 first. These are local artifacts, not CI-controlled behavior proof and not
 top-tier-ready proof.
 
+Examples are recorded local Codex outputs; detailed provenance is in Evidence
+Archive.
+
 ### Results table + diagnostic axes -> Results paragraph
 
 ```text
@@ -37,7 +40,7 @@ open-loop carries pose error into contact.
 ```
 
 ```text
-Recorded excerpt:
+Short excerpt from recorded output:
 In contact-rich peg insertion, the best-performing policy is the one that
 prevents visual ambiguity from becoming unrecovered contact error. The
 confidence-triggered multi-view system achieved 84% success over 180 trials,
@@ -46,9 +49,6 @@ outperforming fixed side viewing by 12 percentage points...
 
 Full artifact:
 [writing_results_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_results_showcase_v2_ad6d5b4.md).
-Provenance: recorded local Codex CLI output, `gpt-5.5`; see
-[manifest_showcase_v2.json](tests/outputs/model_runs/writing/manifest_showcase_v2.json)
-and [manifest_stability.json](tests/outputs/model_runs/writing/manifest_stability.json).
 
 ### Ablation rows -> contribution-level ablation paragraph
 
@@ -60,7 +60,7 @@ grounding 88%. Interpret each delta as a contribution role, not causal proof.
 ```
 
 ```text
-Recorded excerpt:
+Short excerpt from recorded output:
 The ablation indicates that the main bottleneck in contact-rich action
 grounding is not merely executing a hinted motion, but verifying that a
 visually plausible hint is grounded to the intended insertion target.
@@ -68,9 +68,6 @@ visually plausible hint is grounded to the intended insertion target.
 
 Full artifact:
 [writing_ablation_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md).
-Provenance: recorded local Codex CLI output, `gpt-5.5`; see
-[manifest_showcase_v2.json](tests/outputs/model_runs/writing/manifest_showcase_v2.json)
-and [manifest_stability.json](tests/outputs/model_runs/writing/manifest_stability.json).
 
 ### Chinese notes -> English manuscript paragraph
 
@@ -82,7 +79,7 @@ view but unstable depth; open-loop carries pose error; full system 84% vs
 ```
 
 ```text
-Recorded excerpt:
+Short excerpt from recorded output:
 Occlusion during the final approach, rather than initial visual recognition,
 is the central failure mode in peg-hole insertion under fixed camera views.
 Overhead sensing captures the global scene early but loses usable hole
@@ -91,9 +88,6 @@ visibility as the peg approaches contact...
 
 Full artifact:
 [writing_zh_to_en_showcase_v2_rerun_e99ca81.md](tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_rerun_e99ca81.md).
-Provenance: recorded local Codex CLI output, `gpt-5.5`; see
-[manifest_showcase_v2_rerun.json](tests/outputs/model_runs/writing/manifest_showcase_v2_rerun.json)
-and [manifest_stability.json](tests/outputs/model_runs/writing/manifest_stability.json).
 
 ### Methods notes -> reader-path Methods paragraph
 
@@ -105,7 +99,7 @@ and pose-deviation stops. Explain the reader path, not a module list.
 ```
 
 ```text
-Recorded excerpt:
+Short excerpt from recorded output:
 Because pose uncertainty that survives into contact is difficult to correct
 safely, the method first resolves the insertion pose in perception and only
 then commits to guarded execution.
@@ -113,8 +107,6 @@ then commits to guarded execution.
 
 Full artifact:
 [writing_methods_showcase_v2_e99ca81.md](tests/outputs/model_runs/writing/writing_methods_showcase_v2_e99ca81.md).
-Provenance: recorded local Codex CLI output, `gpt-5.5`; see
-[manifest_showcase_v2_rerun.json](tests/outputs/model_runs/writing/manifest_showcase_v2_rerun.json).
 
 Better input evidence produces better manuscript prose. If evidence is missing,
 the skill should downgrade the claim, write a scaffold, or mark the gap instead
@@ -263,8 +255,10 @@ The outputs below are raw local Codex final answers. Results and Ablation from
 showcase v2 remain strong hero candidates. The Abstract, Related Work,
 Chinese-to-English, and Conclusion public-demo blockers were rerun at base
 commit `e99ca8120a6174a9cdba7083bd71f739908c822c`, and Methods showcase v2 was
-added in the same pass. These are local artifacts, not CI-controlled behavior
-proof and not top-tier-ready proof.
+added in the same pass. Commit `8865acf6469b0dae32d16807c341c04bf249e2a3`
+adds stricter public-demo checks, a boundary-first Conclusion rerun, and
+three-paragraph full-section demos. These are local artifacts, not
+CI-controlled behavior proof and not top-tier-ready proof.
 
 | Writing task | Prompt fixture | Recorded local output | Review placement |
 |---|---|---|---|
@@ -274,18 +268,25 @@ proof and not top-tier-ready proof.
 | Methods overview with reader path | [writing_methods_showcase_v2.md](tests/prompts/writing_methods_showcase_v2.md) | [writing_methods_showcase_v2_e99ca81.md](tests/outputs/model_runs/writing/writing_methods_showcase_v2_e99ca81.md) | hero |
 | Six-sentence Abstract rerun | [writing_abstract_showcase_v2_rerun.md](tests/prompts/writing_abstract_showcase_v2_rerun.md) | [writing_abstract_showcase_v2_rerun_e99ca81.md](tests/outputs/model_runs/writing/writing_abstract_showcase_v2_rerun_e99ca81.md) | gallery |
 | Related Work positioning rerun | [writing_related_work_showcase_v2_rerun.md](tests/prompts/writing_related_work_showcase_v2_rerun.md) | [writing_related_work_showcase_v2_rerun_e99ca81.md](tests/outputs/model_runs/writing/writing_related_work_showcase_v2_rerun_e99ca81.md) | gallery |
-| Two-paragraph Conclusion rerun | [writing_conclusion_showcase_v2_rerun.md](tests/prompts/writing_conclusion_showcase_v2_rerun.md) | [writing_conclusion_showcase_v2_rerun_e99ca81.md](tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun_e99ca81.md) | gallery |
-| Full-section Results demo | [full_section_results_demo.md](tests/prompts/full_section_results_demo.md) | [full_section_results_demo_e99ca81.md](tests/outputs/model_runs/writing/full_section_results_demo_e99ca81.md) | gallery |
+| Two-paragraph Conclusion rerun2 | [writing_conclusion_showcase_v2_rerun2.md](tests/prompts/writing_conclusion_showcase_v2_rerun2.md) | [writing_conclusion_showcase_v2_rerun2_8865acf.md](tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun2_8865acf.md) | gallery |
+| Full-section Results demo v2 | [full_section_results_demo_v2.md](tests/prompts/full_section_results_demo_v2.md) | [full_section_results_demo_v2_8865acf.md](tests/outputs/model_runs/writing/full_section_results_demo_v2_8865acf.md) | gallery |
+| Full-section Methods demo | [full_section_methods_demo.md](tests/prompts/full_section_methods_demo.md) | [full_section_methods_demo_8865acf.md](tests/outputs/model_runs/writing/full_section_methods_demo_8865acf.md) | gallery |
+| Realistic manuscript-note Results | [realistic_robotics_manuscript_notes_results.md](tests/prompts/realistic_robotics_manuscript_notes_results.md) | [realistic_robotics_manuscript_notes_results_8865acf.md](tests/outputs/model_runs/writing/realistic_robotics_manuscript_notes_results_8865acf.md) | gallery |
+| Chinese notes to Methods | [zh_notes_to_methods_showcase.md](tests/prompts/zh_notes_to_methods_showcase.md) | [zh_notes_to_methods_showcase_8865acf.md](tests/outputs/model_runs/writing/zh_notes_to_methods_showcase_8865acf.md) | gallery |
+| Chinese notes to Discussion | [zh_notes_to_discussion_showcase.md](tests/prompts/zh_notes_to_discussion_showcase.md) | [zh_notes_to_discussion_showcase_8865acf.md](tests/outputs/model_runs/writing/zh_notes_to_discussion_showcase_8865acf.md) | gallery |
+| Related Work verified-citation mode | [related_work_verified_citation_mode.md](tests/prompts/related_work_verified_citation_mode.md) | [related_work_verified_citation_mode_8865acf.md](tests/outputs/model_runs/writing/related_work_verified_citation_mode_8865acf.md) | evidence-only |
 
 Full provenance is recorded in
 [tests/outputs/model_runs/writing/manifest_showcase_v2.json](tests/outputs/model_runs/writing/manifest_showcase_v2.json),
 [tests/outputs/model_runs/writing/manifest_showcase_v2_rerun.json](tests/outputs/model_runs/writing/manifest_showcase_v2_rerun.json),
+[tests/outputs/model_runs/writing/manifest_showcase_v2_rerun2.json](tests/outputs/model_runs/writing/manifest_showcase_v2_rerun2.json),
+[tests/outputs/model_runs/writing/manifest_realistic_sections.json](tests/outputs/model_runs/writing/manifest_realistic_sections.json),
 and
 [tests/outputs/model_runs/writing/manifest_stability.json](tests/outputs/model_runs/writing/manifest_stability.json).
 The local review records are
 [evals/results/e99ca81_showcase_v2_rerun_human_review.md](evals/results/e99ca81_showcase_v2_rerun_human_review.md)
 and
-[evals/results/e99ca81_stability_human_review.md](evals/results/e99ca81_stability_human_review.md).
+[evals/results/8865acf_showcase_v2_rerun2_human_review.md](evals/results/8865acf_showcase_v2_rerun2_human_review.md).
 
 ### Rough Notes And Benchmark Evidence
 
@@ -297,6 +298,9 @@ not only rich showcase prompts.
 | Messy notes: intro, results table, incomplete Related Work, mixed zh/en Methods, contradictory boundary notes | [manifest_messy_notes.json](tests/outputs/model_runs/writing/manifest_messy_notes.json) | [e99ca81_messy_notes_human_review.md](evals/results/e99ca81_messy_notes_human_review.md) |
 | Three-run stability: Results, Ablation, Chinese-to-English rerun | [manifest_stability.json](tests/outputs/model_runs/writing/manifest_stability.json) | [e99ca81_stability_human_review.md](evals/results/e99ca81_stability_human_review.md) |
 | De-identified benchmark and full-section Results demo | [manifest_benchmark.json](tests/outputs/model_runs/writing/manifest_benchmark.json) | [e99ca81_benchmark_human_review.md](evals/results/e99ca81_benchmark_human_review.md) |
+| Minimal rough-user prompts: intro, results, Methods, Chinese notes, Related Work scaffold | [manifest_rough_user.json](tests/outputs/model_runs/writing/manifest_rough_user.json) | [8865acf_rough_user_human_review.md](evals/results/8865acf_rough_user_human_review.md) |
+| Stability on rough-user and benchmark prompts | [manifest_stability_rough_benchmark.json](tests/outputs/model_runs/writing/manifest_stability_rough_benchmark.json) | [8865acf_stability_rough_benchmark_human_review.md](evals/results/8865acf_stability_rough_benchmark_human_review.md) |
+| Realistic manuscript-note, citation-mode, full-section, and Chinese-note cases | [manifest_realistic_sections.json](tests/outputs/model_runs/writing/manifest_realistic_sections.json) | [8865acf_realistic_sections_human_review.md](evals/results/8865acf_realistic_sections_human_review.md) |
 
 ### Draft-First Writing Examples
 
@@ -318,6 +322,17 @@ They are maintainer-written expected outputs, not recorded model-run artifacts.
 The remaining recorded writing outputs are retained for provenance, regression
 review, and previous behavior comparison. Some are useful evidence, but they
 are not public hero cards.
+
+### Superseded Or Evidence-only Showcase Outputs
+
+| Output | Reason |
+|---|---|
+| [writing_conclusion_showcase_v2_rerun_e99ca81.md](tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun_e99ca81.md) | Superseded by boundary-first rerun2 at `8865acf`; retained for provenance only. |
+| [full_section_results_demo_e99ca81.md](tests/outputs/model_runs/writing/full_section_results_demo_e99ca81.md) | Superseded by the exactly-three-paragraph v2 output at `8865acf`; retained for provenance only. |
+| [writing_abstract_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_abstract_showcase_v2_ad6d5b4.md) | Rejected original Abstract showcase output; retained for comparison only. |
+| [writing_related_work_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_related_work_showcase_v2_ad6d5b4.md) | Evidence-only original Related Work showcase output. |
+| [writing_zh_to_en_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md) | Evidence-only original Chinese-to-English showcase output. |
+| [writing_conclusion_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_ad6d5b4.md) | Evidence-only original Conclusion showcase output. |
 
 ### Recorded Rich Writing Outputs
 

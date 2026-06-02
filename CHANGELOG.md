@@ -4,6 +4,24 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Strengthen public writing checks and rough-note evidence
+
+- Upgraded `scripts/check_public_writing_demos.py` from fixed blocker strings
+  to prompt-output comparison for physical mechanism terms in public writing
+  artifacts.
+- Synchronized public-demo reject patterns across `engineering-writing`
+  manifest, skill instructions, and the RAL-style writing guide.
+- Added real Codex CLI outputs for Conclusion rerun2, full-section Results v2,
+  rough-user minimal prompts, rough/benchmark stability, verified-citation
+  Related Work mode, realistic manuscript-note prompts, full-section Methods,
+  and Chinese notes to Methods/Discussion.
+- Added manifests, eval JSONL, and human reviews for the new evidence sets.
+- Reworked README and Pages so shortened snippets are labeled as shortened
+  excerpts, old rejected or superseded outputs stay in Evidence Archive, and
+  per-card provenance is replaced by one compact evidence note.
+- Evidence boundary: this remains a strong public beta and top-tier candidate,
+  not top-tier-ready.
+
 ## Fix writing showcase blockers and add robustness evidence
 
 - Added public recorded-demo reject rules to `engineering-writing` and the

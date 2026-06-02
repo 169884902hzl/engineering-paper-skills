@@ -8,18 +8,18 @@ tag implies readiness.
 
 | Field | Value |
 |---|---|
-| Latest GPTPro-reviewed main commit | `6bec865f5c9c83a89a5b5448caff1f96a0c9c19a` |
-| Latest GPTPro-reviewed commit message | `Strengthen metadata and audit evidence gates` |
+| Latest GPTPro-reviewed main commit | `8865acf6469b0dae32d16807c341c04bf249e2a3` |
+| Latest GPTPro-reviewed commit message | `Fix writing showcase blockers and add robustness evidence` |
 | Current repository metadata/audit-gate baseline | current `main`; resolve with `git rev-parse HEAD` |
 | Current behavior-audited model-output commit | `38b3d4d72660fbfe5705103e6bc27addac14668e` |
 | Current structured-contract baseline | `38b3d4d72660fbfe5705103e6bc27addac14668e` |
 | Latest local structured-contract attempt | `38b3d4d72660fbfe5705103e6bc27addac14668e` |
 | Latest local structured-contract failure kept for diagnosis | `80d9c23b8b9e6fd42470df845547724d63a8cc48` |
-| Current user-facing demo baseline | `e99ca8120a6174a9cdba7083bd71f739908c822c` rerun showcase evidence plus retained Results/Ablation from `ad6d5b4` |
-| Current showcase v2 writing baseline | `e99ca8120a6174a9cdba7083bd71f739908c822c` rerun outputs, Methods v2, messy-note evidence, stability evidence, and benchmarks |
+| Current user-facing demo baseline | `8865acf6469b0dae32d16807c341c04bf249e2a3` public-check and rough-note evidence plus retained Results/Ablation from `ad6d5b4` |
+| Current showcase v2 writing baseline | `8865acf6469b0dae32d16807c341c04bf249e2a3` rerun2 outputs, full-section v2, rough-user evidence, rough/benchmark stability, realistic-note evidence, and retained `e99ca81` reruns |
 | Current rich writing model-output baseline | `078d53e7b5925cf7c56b3b4696c8a35b9ac8d475` |
 | Current draft-first writing model-output baseline | `ce1478f66f50a27abe7dfe3d45ee31565ca6cb71` |
-| Status | top-tier candidate, not top-tier ready |
+| Status | top-tier candidate, not top-tier-ready |
 | Release state | no GitHub release; commit-based beta |
 
 The current `main` hash should always be resolved with `git rev-parse HEAD` or
@@ -59,6 +59,19 @@ anchors; it does not try to embed the hash of its own future edits.
 | `tests/outputs/model_runs/writing/manifest_benchmark.json` | de-identified benchmark and full-section Results demo manifest | `local_single_run` |
 | `evals/results/e99ca81_benchmark_human_review.md` | human review for de-identified benchmark prompts | `local_single_run_review` |
 | `evals/results/e99ca81_full_section_human_review.md` | human review for full-section Results demo | `local_single_run_review` |
+| `tests/outputs/model_runs/writing/manifest_showcase_v2_rerun2.json` | manifest for Conclusion rerun2 and full-section Results v2 | `local_single_run` |
+| `evals/results/8865acf_showcase_v2_rerun2_eval.jsonl` | eval JSONL for rerun2 and full-section Results v2 | `local_single_run` |
+| `evals/results/8865acf_showcase_v2_rerun2_human_review.md` | human review for rerun2 and full-section Results v2 | `local_single_run_review` |
+| `evals/results/8865acf_full_section_v2_human_review.md` | required-field human review for full-section Results v2 | `local_single_run_review` |
+| `tests/outputs/model_runs/writing/manifest_rough_user.json` | manifest for minimal rough-user prompts | `local_single_run` |
+| `evals/results/8865acf_rough_user_eval.jsonl` | eval JSONL for rough-user prompts | `local_single_run` |
+| `evals/results/8865acf_rough_user_human_review.md` | human review for rough-user prompts | `local_single_run_review` |
+| `tests/outputs/model_runs/writing/manifest_stability_rough_benchmark.json` | three-run local stability sample for rough-user and benchmark prompts | `local_multi_run_sample` |
+| `evals/results/8865acf_stability_rough_benchmark_eval.jsonl` | eval JSONL for rough-user and benchmark stability | `local_multi_run_sample` |
+| `evals/results/8865acf_stability_rough_benchmark_human_review.md` | human review for rough-user and benchmark stability | `local_multi_run_review` |
+| `tests/outputs/model_runs/writing/manifest_realistic_sections.json` | manifest for realistic manuscript notes, citation mode, full-section Methods, and Chinese-note cases | `local_single_run` |
+| `evals/results/8865acf_realistic_sections_eval.jsonl` | eval JSONL for realistic-section evidence | `local_single_run` |
+| `evals/results/8865acf_realistic_sections_human_review.md` | human review for realistic-section evidence | `local_single_run_review` |
 | `tests/outputs/model_runs/writing/manifest.json` | manifest for recorded local draft-first writing outputs at `ce1478f` | `local_single_run` |
 | `evals/results/ce1478f_writing_model_eval.jsonl` | eval record for draft-first writing model outputs | `local_single_run` |
 | `.github/workflows/behavior-regression.yml` | manual behavior-regression workflow | requires configured model command |
@@ -79,7 +92,7 @@ The README and Pages use two distinct example classes:
 
 Recorded demo outputs remain `local_single_run` evidence. They are useful for
 showing real skill behavior, but they are not CI-controlled proof and do not
-upgrade the project to top-tier ready.
+upgrade the project to top-tier-ready.
 
 Recorded demo command strings use `<repo-root>` placeholders in public
 JSON/JSONL provenance files. Local absolute workspace paths are not part of the
@@ -98,23 +111,37 @@ hero candidates, but required reruns for Abstract, Related Work,
 Chinese-to-English, and Conclusion. The rerun pass at
 `e99ca8120a6174a9cdba7083bd71f739908c822c` adds those reruns, a Methods v2
 showcase, messy-note prompts, a local three-run stability sample, de-identified
-benchmark prompts, and a full-section Results demo.
+benchmark prompts, and an initial full-section Results demo. The follow-up
+evidence pass at `8865acf6469b0dae32d16807c341c04bf249e2a3` keeps the public
+status as strong public beta and top-tier candidate, not top-tier-ready, while
+adding a boundary-first Conclusion rerun2, exactly three-paragraph
+full-section Results v2 and Methods outputs, rough-user prompts, rough and
+benchmark stability samples, realistic manuscript-note prompts, citation-mode
+Related Work evidence, and Chinese-note Methods/Discussion cases.
 
 The current first-screen showcase uses four outputs: Results, Ablation,
-Chinese-to-English rerun, and Methods v2. Abstract, Related Work, Conclusion,
-and the full-section Results demo are gallery items when their human review
-allows it. The old Abstract, Related Work, Chinese-to-English, and Conclusion
-showcase v2 outputs are evidence-only or rejected artifacts.
+Chinese-to-English rerun, and Methods v2. Abstract, Related Work, Conclusion
+rerun2, full-section Results v2, full-section Methods, realistic-note Results,
+and Chinese-note Methods/Discussion are gallery items when their human review
+allows it. Citation-sensitive Related Work variants stay gallery or
+evidence-only, never hero. The old Abstract, old `ad6d5b4` Related Work,
+Chinese-to-English, Conclusion outputs, the old `e99ca81` Conclusion rerun, and
+the old `e99ca81` full-section Results output are evidence-only or rejected
+artifacts.
 
 These artifacts remain candidate-level local evidence. The stability sample
 improves confidence over one-off demos, but it is still not CI-controlled proof
-and does not upgrade the project to top-tier ready. Full output paths and
+and does not upgrade the project to top-tier-ready. Full output paths and
 SHA-256 hashes are recorded in
 `tests/outputs/model_runs/writing/manifest_showcase_v2.json`,
 `tests/outputs/model_runs/writing/manifest_showcase_v2_rerun.json`,
 `tests/outputs/model_runs/writing/manifest_messy_notes.json`,
-`tests/outputs/model_runs/writing/manifest_stability.json`, and
-`tests/outputs/model_runs/writing/manifest_benchmark.json`.
+`tests/outputs/model_runs/writing/manifest_stability.json`,
+`tests/outputs/model_runs/writing/manifest_benchmark.json`,
+`tests/outputs/model_runs/writing/manifest_showcase_v2_rerun2.json`,
+`tests/outputs/model_runs/writing/manifest_rough_user.json`,
+`tests/outputs/model_runs/writing/manifest_stability_rough_benchmark.json`,
+and `tests/outputs/model_runs/writing/manifest_realistic_sections.json`.
 
 ## Rich writing output provenance
 
@@ -157,18 +184,20 @@ evidence assets for repository QA, provenance checks, and behavior review.
 
 - Showcase v2 prompts are richer than many messy user notes, so the outputs may
   still be stronger than default behavior on thin source material.
-- The messy-note prompts and de-identified benchmarks improve coverage, but
-  they remain local artifacts and do not replace broad user-study evidence.
-- The stability evidence is a local three-run sample for three prompt families,
-  not a public CI-controlled stability benchmark.
+- Minimal rough-user prompts and realistic manuscript-note prompts improve
+  coverage, but they remain local artifacts and do not replace broad user-study
+  evidence.
+- The stability evidence is local three-run sampling for selected prompt
+  families, not a public CI-controlled stability benchmark.
 - Human reviews are local reviewer records, not an external panel score.
 - No public CI-controlled model-run artifact is available for `6bec865`,
   `80d9c23`, or `38b3d4d`.
 - Structured JSON expectations check required fields, rows, and grounded spans;
   they now separate strict schema checks from flexible issue-class behavior
   checks, but are still not full semantic entailment.
-- Full-paper fixtures include synthetic robotics, ML, and systems cases; they do
-  not replace de-identified real manuscript benchmarks.
+- Full-paper fixtures include synthetic robotics, ML, and systems cases; the
+  de-identified manuscript-note prompts are closer to author notes but still do
+  not replace broad real-manuscript benchmarks.
 - Venue profiles contain static policy summaries and reachable official URLs;
   they do not replace live official policy extraction.
 - Sentence-level audits remain sampled rather than exhaustive across a complete
