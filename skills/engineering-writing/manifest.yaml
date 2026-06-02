@@ -91,6 +91,10 @@ section_references:
 quality_checks:
   - "For WRITE prompts, the first substantive section should be Draft."
   - "Every draft must use only supplied methods, results, baselines, figures, citations, and boundaries."
+  - "Non-minimal WRITE drafts should be complete manuscript paragraphs, not compressed safety notes."
+  - "Non-minimal WRITE drafts should include a section-specific interpretation sentence when supplied evidence allows it."
+  - "Avoid repeated generic openers when a concrete task, failure mode, metric, or component role is available."
   - "Results prose must interpret ranking, key numbers, mechanism relevance, and boundary instead of reading table cells."
   - "Ablation prose must tie component changes to contribution roles without claiming causal proof unless directly tested."
+  - "Methods prose must explain input, intermediate object, transformation, handoff, and execution or safety boundary."
   - "Conclusion prose must not introduce new terms, new results, or broader deployment claims."

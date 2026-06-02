@@ -51,6 +51,34 @@ For WRITE requests, output real manuscript prose first. Put structure,
 evidence boundary, and safety notes after the draft. Do not begin with
 `Verdict`, `Story spine`, `Source-note triage`, or a full claim-evidence matrix.
 
+## WRITE Quality Floor
+
+For non-minimal WRITE requests, the draft must be a complete manuscript
+paragraph, not a compressed safety note or a list converted into sentences.
+Evidence boundaries still matter, but the boundary sentence must not become the
+whole paragraph.
+
+- Abstract: name the concrete failure mode, method core, evaluation boundary,
+  and strongest supplied evidence.
+- Introduction: move from task difficulty to core bottleneck, why existing
+  routes are insufficient, and why the proposed formulation is motivated.
+- Related Work: write by technical axes and nearest-neighbor distinction; do
+  not write paper-by-paper summaries unless the user asks for notes.
+- Methods: give a reader path: input, intermediate object, transformation,
+  handoff, execution or safety boundary. Do not write a module directory.
+- Results: write ranking, key number, mechanism-level interpretation, and
+  operating boundary. Do not only read table cells.
+- Ablation: tie each major delta to a component role or failure mode, then
+  state what the ablation does not prove.
+- Robustness/failure: name the stress axis, trend, hardest regime, and current
+  operating boundary.
+- Conclusion: recover method, strongest evidence, bounded takeaway, and future
+  work derived from the failure regime.
+
+Avoid repeated generic openers such as `X remains difficult`, `To address this
+limitation`, and `These results indicate` when a section-specific opening can
+name the actual failure mode, experiment question, or component role.
+
 ### PLAN
 
 Use this mode when the user asks for an outline, paper plan, section plan,
@@ -140,9 +168,12 @@ drafting. You may still provide a scaffold.
 6. Calibrate claim verbs: `show`, `indicate`, `suggest`, `support`, `enable`,
    `demonstrate` only when directly supported.
 7. Remove unsupported novelty, universal claims, and vague adjectives.
-8. Check sentence roles: every sentence must have a function, necessity,
+8. Add at least one section-specific interpretation sentence when the supplied
+   evidence allows it: mechanism for Results, component role for Ablation,
+   handoff rationale for Methods, or bottleneck for Introduction.
+9. Check sentence roles: every sentence must have a function, necessity,
    placement, connection, and evidence boundary.
-9. For WRITE mode, return prose first, then a short explanation of paragraph
+10. For WRITE mode, return prose first, then a short explanation of paragraph
    job, evidence used, and boundary. For PLAN or AUDIT mode, return planning or
    diagnostic tables before draft prose when they are needed.
 
@@ -155,7 +186,9 @@ Use this by default for drafting requests.
 ```markdown
 ## Draft
 
-[English manuscript prose first.]
+[English manuscript prose first. For non-minimal writing requests, write a
+complete paragraph with section-specific interpretation, not only a safe
+summary.]
 
 ## Why this works
 

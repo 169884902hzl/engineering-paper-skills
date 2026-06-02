@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "score_scale": {
     "1": "fail",
     "3": "partial",
@@ -16,7 +16,9 @@
       "minimum_each": 4,
       "minimum_average": 4.5,
       "blocking_failures_allowed": 0,
-      "requires_recorded_model_output": true
+      "requires_recorded_model_output": true,
+      "requires_mechanism_interpretation": true,
+      "requires_non_template_language": true
     }
   },
   "blocking_failure_types": [
@@ -55,6 +57,26 @@
     "after_draft_notes": {
       "pass": "Any structure and evidence notes are concise and placed after the draft.",
       "fail": "The notes overwhelm the manuscript prose or appear before it in writing mode."
+    },
+    "prose_density": {
+      "pass": "The draft is a complete manuscript paragraph with enough internal progression to show a section job.",
+      "fail": "The draft is a compressed safety note, a list-like conversion, or too short to show section writing ability."
+    },
+    "mechanism_interpretation": {
+      "pass": "The draft includes a section-specific interpretation sentence when the supplied evidence permits it: bottleneck, handoff rationale, mechanism reading, component role, or operating boundary.",
+      "fail": "The draft reports facts or numbers but does not explain what they mean for the paper's argument."
+    },
+    "non_template_language": {
+      "pass": "The prose avoids repeated generic frames when concrete failure modes, metrics, components, or baselines are available.",
+      "fail": "The prose relies on stock patterns such as remains difficult, to address this limitation, or these results indicate without section-specific detail."
+    },
+    "boundary_integrated": {
+      "pass": "The boundary is integrated as scientific scope and does not dominate or replace the manuscript paragraph.",
+      "fail": "The output is mostly a limitation list or refusal-style safety note."
+    },
+    "showcase_decision": {
+      "pass": "A human reviewer could reasonably use this output as a public demo of writing ability.",
+      "fail": "The output should be kept only as a smoke check, provenance record, or internal behavior artifact."
     }
   }
 }

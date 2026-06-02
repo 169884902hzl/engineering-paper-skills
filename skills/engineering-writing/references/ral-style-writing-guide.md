@@ -17,6 +17,39 @@ Recommended order:
 Draft -> Why this works -> Evidence used -> Boundary / do-not-claim
 ```
 
+## Showcase-Grade Paragraph Standard
+
+Use this stricter standard for README, demo, recorded-output, or user-facing
+examples. A paragraph that is merely safe is not enough.
+
+- It must have a section job that a reader can name after one pass.
+- It must contain at least one interpretation sentence that is specific to the
+  section: bottleneck for Introduction, handoff rationale for Methods,
+  mechanism-level reading for Results, component role for Ablation, or operating
+  boundary for robustness.
+- It must not be a list of facts joined by connectors.
+- It must not spend more space on disclaimers than on the paper claim.
+- It must integrate boundaries as scientific scope, not as an apology.
+- It must avoid generic sentence frames when a concrete task, failure mode,
+  metric, or component role is available.
+
+Weak but safe:
+
+```text
+X remains difficult. To address this limitation, we propose Y. The method
+achieves Z. These results indicate improvement in the tested setup.
+```
+
+Stronger engineering prose:
+
+```text
+The experiment isolates where the system gains reliability: execution
+constraints alone produce only a small improvement, while target-focused
+perception and verification account for the main jumps in success. This pattern
+suggests that the bottleneck is not only executing the action, but selecting and
+grounding the action before contact.
+```
+
 ## Abstract: Six-Sentence System Template
 
 Use this when the paper is a robotics, control, perception, learning, or systems
@@ -114,6 +147,21 @@ Boundary: This component assumes [condition] and does not by itself guarantee [o
 Do not start a Methods section with formulas before the object and reader path
 are clear.
 
+For a stronger Methods overview, include the reason for the order:
+
+```text
+The system estimates [state] before [execution] because [failure mode] would
+otherwise propagate into [downstream error]. This handoff makes [component B]
+responsible for [role], while [component C] enforces [safety or execution
+boundary].
+```
+
+Avoid:
+
+```text
+The method has three modules: perception, planning, and control.
+```
+
 ## Results: Ranking, Numbers, Interpretation, Boundary
 
 Experiments must prove bounded contributions. They are not table narration.
@@ -131,6 +179,23 @@ that is what the table shows. For example, write `from 19% to 88%` or `69
 percentage points higher`, not just `69% higher`, unless a relative-ratio claim
 is intended and supported.
 
+A stronger Results paragraph explains the numbers:
+
+```text
+Overall, [method] ranks first on [metric], reaching [number] compared with
+[baseline number] for [closest baseline]. The gap is largest under [condition],
+where [failure mode] makes [baseline assumption] unreliable. This pattern is
+consistent with [mechanism], but the evidence remains limited to [scope].
+```
+
+If no diagnostic notes are supplied, do not invent them. Instead write:
+
+```text
+The supplied results support the ranking but do not explain which failure mode
+accounts for the difference; a mechanism-level interpretation would require
+[failure breakdown / category results / ablation].
+```
+
 ### Ablation
 
 ```text
@@ -141,6 +206,16 @@ The remaining gap indicates [boundary or residual failure].
 
 Do not let ablation become a component inventory. Each row must recover a
 contribution or expose a failure mode.
+
+Use contribution-level recovery when interpretation notes are supplied:
+
+```text
+The ablation separates three responsibilities. [Component A] mainly affects
+[failure mode/capability], as shown by [delta]. [Component B] accounts for the
+larger jump from [a] to [b], suggesting that [role] is the main bottleneck. The
+remaining improvement from [component C] supports [spatial/temporal/semantic]
+grounding, but the additive design does not prove an isolated causal mechanism.
+```
 
 ### Robustness And Failure Boundary
 
@@ -177,6 +252,26 @@ Given [input], the system first [operation], yielding [intermediate output].
 Table [X] summarizes [scope]. Overall, [method] achieves [number] compared with [baseline].
 This pattern is consistent with [interpretation], but does not establish [untested stronger claim].
 ```
+
+## Avoid Generic Drafting Patterns
+
+Do not repeat these as default openers when the supplied evidence permits a
+more concrete section-specific sentence:
+
+- `X remains challenging/difficult...`
+- `To address this limitation...`
+- `These results indicate/suggest/support...`
+- `The current results remain bounded...`
+- `The proposed system achieved...`
+
+Prefer:
+
+- Introduction: `The difficulty is not only [task], but [specific bottleneck that breaks existing route].`
+- Methods: `The reader path starts from [input] because [downstream stage] depends on [intermediate state].`
+- Results: `The full system ranks first under [evaluation scope], with the clearest gap against [closest baseline].`
+- Ablation: `The ablation isolates where the improvement enters the pipeline: [component/role].`
+- Related Work: `The nearest prior line shares [feature], but assumes [condition] that this setting violates.`
+- Conclusion: `Taken together, the results support [bounded takeaway], not [stronger untested claim].`
 
 ## Anti-Patterns
 
