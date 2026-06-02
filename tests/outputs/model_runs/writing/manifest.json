@@ -1,0 +1,61 @@
+{
+  "manifest_type": "recorded_local_writing_outputs",
+  "base_commit": "ce1478f66f50a27abe7dfe3d45ee31565ca6cb71",
+  "generated_on": "2026-06-02T12:09:15+08:00",
+  "codex_cli_version": "codex-cli 0.135.0",
+  "runtime_model_executed": true,
+  "ci_controlled": false,
+  "evidence_level": "local_single_run",
+  "edited_for_readme": false,
+  "note": "These are raw local Codex final-answer outputs generated from draft-first writing prompt fixtures after installing this repository's skills into Codex home. They are not CI-controlled behavior proof and not top-tier-ready proof.",
+  "outputs": [
+    {
+      "case": "writing_min",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_min.md",
+      "output": "tests/outputs/model_runs/writing/writing_min_ce1478f.md",
+      "sha256": "fe198abdbdcc74d009ced4545a420b0aca451b1aa442298d7db961a12991d55b",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C <repo-root> -o tests/outputs/model_runs/writing/writing_min_ce1478f.md \"Read tests/prompts/writing_min.md and produce the requested output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "writing_methods_reader_path",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_methods_reader_path.md",
+      "output": "tests/outputs/model_runs/writing/writing_methods_reader_path_ce1478f.md",
+      "sha256": "e4b452c63bf7a249d4fa2a41b78a82b0e4617da8114275efe249c8020dc20df8",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C <repo-root> -o tests/outputs/model_runs/writing/writing_methods_reader_path_ce1478f.md \"Read tests/prompts/writing_methods_reader_path.md and produce the requested output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "writing_results_interpretation",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_results_interpretation.md",
+      "output": "tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md",
+      "sha256": "7986f1ea382f0b49e357dd6470dea884cd120b37b54147b271158881c0e57c63",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C <repo-root> -o tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md \"Read tests/prompts/writing_results_interpretation.md and produce the requested output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "writing_ablation_interpretation",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_ablation_interpretation.md",
+      "output": "tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md",
+      "sha256": "1eb1096116df81351741a6375d85cc9804438bd596f22a939aba65c0eade8969",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C <repo-root> -o tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md \"Read tests/prompts/writing_ablation_interpretation.md and produce the requested output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "writing_conclusion_two_paragraph",
+      "skill": "engineering-writing",
+      "prompt": "tests/prompts/writing_conclusion_two_paragraph.md",
+      "output": "tests/outputs/model_runs/writing/writing_conclusion_two_paragraph_ce1478f.md",
+      "sha256": "688e37028fa23660782bdbea1d3c5703ae525c1cffd68ddef67d78ea4c341024",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C <repo-root> -o tests/outputs/model_runs/writing/writing_conclusion_two_paragraph_ce1478f.md \"Read tests/prompts/writing_conclusion_two_paragraph.md and produce the requested output. Do not edit files. Final answer only.\""
+    },
+    {
+      "case": "coach_write_draft_first",
+      "skill": "engineering-paper-coach",
+      "prompt": "tests/prompts/coach_write_draft_first.md",
+      "output": "tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md",
+      "sha256": "59e7ada550eb92bbda92a66d9b72eef997433d5b8708d4a0dce78a20ffdef6e3",
+      "command": "codex exec --ephemeral --skip-git-repo-check --sandbox read-only -C <repo-root> -o tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md \"Read tests/prompts/coach_write_draft_first.md and produce the requested output. Do not edit files. Final answer only.\""
+    }
+  ]
+}

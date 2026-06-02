@@ -4,6 +4,22 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Record draft-first writing model outputs
+
+- Ran local Codex in read-only mode against the six draft-first writing prompt
+  fixtures at base commit `ce1478f`.
+- Added raw final-answer artifacts under `tests/outputs/model_runs/writing/`.
+- Added `tests/outputs/model_runs/writing/manifest.json` with prompt paths,
+  output paths, command strings, SHA-256 hashes, evidence level, and CI-control
+  status.
+- Added `evals/results/ce1478f_writing_model_eval.jsonl` to record local
+  single-run behavior checks for draft-first order, evidence use, boundary
+  preservation, and audit/checklist regression risk.
+- Updated README and Pages so recorded draft-first writing outputs are linked
+  separately from maintainer-written golden examples.
+- This entry is local single-run writing evidence only. It is not CI proof,
+  multi-run stability proof, or top-tier-ready proof.
+
 ## Separate normal user path from maintainer evidence
 
 - Added explicit README guidance that normal users only need `skills/_shared`

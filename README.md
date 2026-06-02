@@ -187,6 +187,52 @@ They are maintainer-written expected outputs, not recorded model-run artifacts.
 | Two-paragraph Conclusion from results and limits | [writing_conclusion_two_paragraph.md](tests/prompts/writing_conclusion_two_paragraph.md) | [writing_conclusion_two_paragraph.md](tests/outputs/golden/writing_conclusion_two_paragraph.md) |
 | Coach writing request with draft-first output | [coach_write_draft_first.md](tests/prompts/coach_write_draft_first.md) | [coach_write_draft_first.md](tests/outputs/golden/coach_write_draft_first.md) |
 
+### Recorded Draft-First Writing Outputs
+
+The outputs below are raw local Codex final answers generated from the same
+draft-first writing prompt fixtures at base commit `ce1478f`. They are recorded
+model-run artifacts, not illustrative examples and not polished golden
+snapshots.
+
+| Writing task | Prompt fixture | Recorded local output |
+|---|---|---|
+| Abstract from minimal evidence | [writing_min.md](tests/prompts/writing_min.md) | [writing_min_ce1478f.md](tests/outputs/model_runs/writing/writing_min_ce1478f.md) |
+| Methods reader path from module notes | [writing_methods_reader_path.md](tests/prompts/writing_methods_reader_path.md) | [writing_methods_reader_path_ce1478f.md](tests/outputs/model_runs/writing/writing_methods_reader_path_ce1478f.md) |
+| Results paragraph from table-like evidence | [writing_results_interpretation.md](tests/prompts/writing_results_interpretation.md) | [writing_results_interpretation_ce1478f.md](tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md) |
+| Ablation interpretation from component rows | [writing_ablation_interpretation.md](tests/prompts/writing_ablation_interpretation.md) | [writing_ablation_interpretation_ce1478f.md](tests/outputs/model_runs/writing/writing_ablation_interpretation_ce1478f.md) |
+| Two-paragraph Conclusion from results and limits | [writing_conclusion_two_paragraph.md](tests/prompts/writing_conclusion_two_paragraph.md) | [writing_conclusion_two_paragraph_ce1478f.md](tests/outputs/model_runs/writing/writing_conclusion_two_paragraph_ce1478f.md) |
+| Coach writing request with draft-first output | [coach_write_draft_first.md](tests/prompts/coach_write_draft_first.md) | [coach_write_draft_first_ce1478f.md](tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md) |
+
+Full provenance is recorded in
+[tests/outputs/model_runs/writing/manifest.json](tests/outputs/model_runs/writing/manifest.json).
+The local eval record is
+[evals/results/ce1478f_writing_model_eval.jsonl](evals/results/ce1478f_writing_model_eval.jsonl).
+These outputs are local single-run evidence, not CI-controlled behavior proof
+or top-tier-ready proof.
+
+**Excerpted from recorded local Codex output: Results interpretation**
+
+Full artifact:
+[writing_results_interpretation_ce1478f.md](tests/outputs/model_runs/writing/writing_results_interpretation_ce1478f.md).
+
+```text
+In the tested tabletop occlusion setup, the full system achieved 84% insertion
+success across 180 trials, compared with 69% for the fixed overhead camera,
+72% for the fixed side camera, and 61% for the open-loop controller.
+```
+
+**Excerpted from recorded local Codex output: Coach draft-first output**
+
+Full artifact:
+[coach_write_draft_first_ce1478f.md](tests/outputs/model_runs/writing/coach_write_draft_first_ce1478f.md).
+
+```text
+Robotic inspection under partial occlusion remains difficult when a fixed
+camera view cannot observe defects after the part rotates away from the main
+viewpoint. To address this limitation, the proposed system requests a secondary
+view when its inspection confidence is low...
+```
+
 **Example excerpt: Methods reader path**
 
 ```text

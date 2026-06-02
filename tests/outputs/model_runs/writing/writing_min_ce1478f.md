@@ -1,0 +1,1 @@
+Complete target invisibility is a failure mode for the evaluated gripper-target task. We draft an active observer camera method that keeps the target and gripper visible. In 120 real trials, the method is compared with a baseline. The method achieves 86% success, compared with 71% for the baseline. It still fails under complete target invisibility.
