@@ -2,8 +2,10 @@
   "version": 2,
   "score_scale": {
     "1": "fail",
-    "3": "partial",
-    "5": "strong"
+    "2": "weak",
+    "3": "usable but plain",
+    "4": "strong demo candidate",
+    "5": "showcase-grade"
   },
   "purpose": "Score draft-first engineering-writing outputs, separate from full-paper audit readiness.",
   "thresholds": {
@@ -28,6 +30,28 @@
     "ablation paragraph claims causal proof without controlled evidence",
     "methods paragraph reads as a module directory without reader path",
     "conclusion introduces new result or deployment claim"
+  ],
+  "failure_reason_taxonomy": [
+    "too_short",
+    "template_openers",
+    "boundary_dominant",
+    "table_reading",
+    "no_diagnostic_axis",
+    "component_list_not_contribution_recovery",
+    "method_inventory_not_reader_path",
+    "related_work_paper_list_not_positioning",
+    "sentence_translation_not_native_manuscript_prose",
+    "unsupported_claim_expansion"
+  ],
+  "human_review_fields": [
+    "case",
+    "draft_first",
+    "prose_density",
+    "mechanism_interpretation",
+    "non_template_language",
+    "boundary_integration",
+    "showcase_decision",
+    "notes"
   ],
   "criteria": {
     "draft_first": {

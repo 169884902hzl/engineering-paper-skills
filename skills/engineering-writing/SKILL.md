@@ -58,6 +58,19 @@ paragraph, not a compressed safety note or a list converted into sentences.
 Evidence boundaries still matter, but the boundary sentence must not become the
 whole paragraph.
 
+For showcase or public-demo WRITE requests, one paragraph should normally be
+120-220 words unless the user asks for a shorter answer. Drafts below 80 words
+are acceptable only for smoke checks, captions, or explicitly minimal prompts.
+
+A showcase-grade paragraph should normally contain at least four sentence
+roles:
+
+1. setup, question, or bottleneck
+2. method, comparison object, or technical axis
+3. evidence, transformation, or result
+4. interpretation or component role
+5. boundary, operating scope, or do-not-claim
+
 - Abstract: name the concrete failure mode, method core, evaluation boundary,
   and strongest supplied evidence.
 - Introduction: move from task difficulty to core bottleneck, why existing
@@ -78,6 +91,10 @@ whole paragraph.
 Avoid repeated generic openers such as `X remains difficult`, `To address this
 limitation`, and `These results indicate` when a section-specific opening can
 name the actual failure mode, experiment question, or component role.
+
+The boundary should usually be one concise final sentence or clause. If the
+boundary or do-not-claim content is longer than the manuscript claim in WRITE
+mode, rewrite so evidence-based prose is primary and the boundary is concise.
 
 ### PLAN
 
@@ -171,9 +188,12 @@ drafting. You may still provide a scaffold.
 8. Add at least one section-specific interpretation sentence when the supplied
    evidence allows it: mechanism for Results, component role for Ablation,
    handoff rationale for Methods, or bottleneck for Introduction.
-9. Check sentence roles: every sentence must have a function, necessity,
+9. When the user supplies diagnostic notes, category breakdowns, ablation notes,
+   failure modes, or nearest-neighbor details, use them in the draft rather than
+   collapsing them into generic improvement wording.
+10. Check sentence roles: every sentence must have a function, necessity,
    placement, connection, and evidence boundary.
-10. For WRITE mode, return prose first, then a short explanation of paragraph
+11. For WRITE mode, return prose first, then a short explanation of paragraph
    job, evidence used, and boundary. For PLAN or AUDIT mode, return planning or
    diagnostic tables before draft prose when they are needed.
 

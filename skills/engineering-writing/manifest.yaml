@@ -30,6 +30,18 @@ request_modes:
       - Verdict
       - Story spine
       - Source-note triage
+    normal_quality:
+      paragraph_length: "Use the length requested by the user; avoid compressed safety notes."
+      notes_after_draft: "Concise."
+    showcase_quality:
+      paragraph_length: "Normally 120-220 words for one paragraph unless the user asks otherwise."
+      requires:
+        - section-specific interpretation
+        - non-template language when concrete details are available
+        - concise integrated boundary
+        - diagnostic axis for results when supplied
+        - contribution recovery for ablation when supplied
+        - nearest-neighbor distinction for related work when supplied
   plan:
     output_order:
       - One-sentence thesis
@@ -92,9 +104,13 @@ quality_checks:
   - "For WRITE prompts, the first substantive section should be Draft."
   - "Every draft must use only supplied methods, results, baselines, figures, citations, and boundaries."
   - "Non-minimal WRITE drafts should be complete manuscript paragraphs, not compressed safety notes."
+  - "Showcase WRITE drafts should normally be 120-220 words for one paragraph unless the user requests a shorter output."
+  - "Showcase WRITE drafts should include at least four sentence roles: setup/question, method/comparison object, evidence/result, interpretation, and boundary/scope."
   - "Non-minimal WRITE drafts should include a section-specific interpretation sentence when supplied evidence allows it."
   - "Avoid repeated generic openers when a concrete task, failure mode, metric, or component role is available."
+  - "Boundary and do-not-claim content should be integrated as scope and should not dominate the draft."
   - "Results prose must interpret ranking, key numbers, mechanism relevance, and boundary instead of reading table cells."
   - "Ablation prose must tie component changes to contribution roles without claiming causal proof unless directly tested."
   - "Methods prose must explain input, intermediate object, transformation, handoff, and execution or safety boundary."
+  - "Related Work prose must use technical axes and nearest-neighbor distinction when prior-work notes are supplied."
   - "Conclusion prose must not introduce new terms, new results, or broader deployment claims."

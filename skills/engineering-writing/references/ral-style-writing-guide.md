@@ -107,6 +107,26 @@ Contribution verbs should be testable. Prefer `formulate`, `introduce`,
 `present`, `evaluate`, and `validate under [condition]`. Avoid adjective-only
 contributions such as `novel`, `robust`, or `general` without evidence.
 
+### Introduction Opening: Showcase Pattern
+
+Use this when the user asks for a strong opening, a README demo, or a recorded
+writing example.
+
+Paragraph 1 should name the task and the operational bottleneck. It should
+explain why the difficulty breaks a perception, planning, control, or execution
+loop.
+
+Paragraph 2 should contrast the main existing routes, isolate the missing
+condition, and motivate the proposed formulation without listing modules.
+
+Reusable high-density opening:
+
+```text
+The difficulty is not simply that [task] requires [capability]; it is that
+[failure mode] changes the information available to [downstream stage] exactly
+when [execution/recovery] becomes least forgiving.
+```
+
 ## Related Work: Technical Axes, Not Paper Summaries
 
 Group prior work by mechanism or assumption.
@@ -122,6 +142,28 @@ Taken together, existing work leaves uncovered the combination of [requirement 1
 Do not write a chronological list of one-sentence paper summaries. If citations
 are missing or unverified, use placeholders and do not claim that prior work
 failed without a source.
+
+### Nearest-Neighbor Distinction
+
+Use this paragraph pattern when the user supplies rough related-work notes but
+not verified citations.
+
+```text
+The closest prior line shares [surface similarity], but differs in
+[assumption/signal/execution loop/evidence condition]. This distinction matters
+because [our setting] requires [combination] rather than [prior capability
+alone]. With the supplied notes, this should be framed as a bounded positioning
+claim until the exact citations and protocols are verified.
+```
+
+The paragraph must identify:
+
+- technical axis
+- what that axis solves
+- what it assumes or omits
+- nearest-neighbor similarity
+- exact distinction
+- gap bridge
 
 ## Methods: Reader Path Instead Of Module Directory
 
@@ -241,6 +283,50 @@ The method currently assumes [condition]. Performance degrades when [failure reg
 ```
 
 Do not introduce new terms, new results, or broad promises in Conclusion.
+
+The first paragraph should end with a bounded takeaway sentence when possible:
+
+```text
+Taken together, these results support [specific claim], not [stronger untested
+claim].
+```
+
+## Chinese Notes To English Manuscript Prose
+
+Use this when source notes are Chinese but the final manuscript should be
+English.
+
+Do not translate sentence by sentence. First extract:
+
+- task
+- bottleneck
+- method object
+- evidence
+- boundary
+- target section
+
+Then write native English manuscript prose using the target section skeleton.
+Chinese phrasing is source material, not the final sentence order. Preserve
+numbers, method facts, and limitations exactly; do not add citations, baselines,
+statistics, novelty, or deployment claims.
+
+## Rich Prompt Inputs
+
+Showcase-grade outputs need richer source notes than smoke checks. For public
+demos or recorded writing examples, prefer prompts that include:
+
+- section target and desired paragraph count
+- task, bottleneck, and why it matters
+- method object and information flow
+- table numbers or ablation rows
+- diagnostic axes or failure modes for Results
+- component roles for Ablation
+- nearest-neighbor notes for Related Work
+- explicit boundaries and forbidden claims
+
+If these inputs are absent, write a bounded draft, but mark that stronger
+section-specific interpretation would require diagnostic notes, failure
+breakdowns, ablation details, or verified citations.
 
 ## Reusable Sentence Skeletons
 

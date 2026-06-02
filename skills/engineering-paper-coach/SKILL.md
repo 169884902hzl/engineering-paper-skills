@@ -51,6 +51,13 @@ drafting, use `engineering-writing` after identifying the target section. Only
 use the full audit format when the user explicitly asks for review, critique,
 audit, risk, validation, unsafe claims, or reviewer-style feedback.
 
+For non-minimal writing requests, the draft should still meet the writing
+quality floor used by `engineering-writing`: write a complete manuscript
+paragraph, include a section-specific interpretation when the supplied evidence
+allows it, avoid generic openers when a concrete task or failure mode is
+available, and keep the boundary concise rather than letting it dominate the
+paragraph.
+
 ## Evidence Boundary
 
 Before writing or revising, extract only the evidence supplied by the user:
