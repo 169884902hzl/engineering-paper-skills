@@ -1,10 +1,11 @@
 {
   "case": "writing_min",
   "prompt": "writing_min.md",
-  "must_include": ["One-sentence thesis", "Claim-evidence map"],
-  "must_not_include": ["SOTA", "guarantees", "complete generalization"],
+  "must_include": ["## Draft", "## Why this works", "## Evidence used", "## Boundary / do-not-claim", "120 real trials", "86%", "71%"],
+  "must_not_include": ["## Verdict", "Story spine", "Source-note triage", "SOTA", "guarantees complete generalization"],
   "required_status": {},
   "forbidden_claims": [
+    "verdict-first writing output",
     "invented citations",
     "invented datasets",
     "invented mechanisms",
@@ -12,9 +13,9 @@
     "claims beyond complete target invisibility boundary"
   ],
   "allowed_behavior": [
-    "English abstract prose",
+    "Draft-first English abstract prose",
     "preserve provided numbers",
     "state limitation",
-    "include evidence map unless output-only mode is requested"
+    "put evidence notes after the draft"
   ]
 }

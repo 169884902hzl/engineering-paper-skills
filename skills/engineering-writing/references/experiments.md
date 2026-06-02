@@ -59,6 +59,12 @@ Use:
 data -> interpretation -> bounded conclusion
 ```
 
+For a table-driven engineering result, prefer this paragraph path:
+
+```text
+ranking -> key number -> mechanism-level interpretation -> qualitative or category support -> boundary
+```
+
 Recommended paragraph sequence:
 
 1. Overall result: ranking, strongest number, cost/time if relevant.
@@ -129,6 +135,11 @@ This result supports [contribution] under [tested condition], while [boundary]
 remains outside the evaluation.
 ```
 
+If the comparison is between percentages, say `percentage points` when the
+table supports an absolute difference. For example, use `from 19% to 88%` or
+`69 percentage points higher` rather than `69% higher` unless a relative ratio
+is intended and supported.
+
 ### Category Or Condition Axis
 
 ```text
@@ -143,6 +154,13 @@ interpretation], but it does not establish [untested stronger claim].
 Removing [component] primarily changes [metric], which supports its role in
 [contribution]. The remaining performance indicates [boundary or residual
 capability].
+```
+
+For additive ablations, use:
+
+```text
+Adding [component] improves [metric] from [a] to [b], mainly reducing [failure mode].
+This supports the role of [component] in [contribution], rather than proving [stronger causal claim].
 ```
 
 ### Stress Or Failure

@@ -1,68 +1,96 @@
 version: 1
+purpose: "Route engineering-writing requests to draft-first prose, planning maps, or audit outputs without loading every reference."
+
 always_load:
-  - references/contribution-evidence.md
+  - SKILL.md
   - ../_shared/evidence-boundary.md
   - ../_shared/claim-strength.md
-  - ../_shared/sentence-role-and-story-flow.md
-  - ../_shared/story-spine.md
+  - ../_shared/non-english-source-notes.md
   - ../_shared/output-mode.md
-axes:
-  section:
-    abstract:
-      load:
-        - references/abstract.md
-    introduction:
-      load:
-        - references/introduction.md
-    related_work:
-      load:
-        - references/related-work.md
-        - ../_shared/citation-boundary.md
-    methods:
-      load:
-        - references/methods.md
-        - references/methods-worksheet.md
-    experiments:
-      load:
-        - references/experiments.md
-        - references/experiments-worksheet.md
-    discussion:
-      load:
-        - references/discussion.md
-    conclusion:
-      load:
-        - references/conclusion.md
-  input_state:
-    thin_notes:
-      load:
-        - ../_shared/non-english-source-notes.md
-    list_like:
-      load:
-        - ../_shared/list-to-argument.md
-    over_length:
-      load:
-        - references/page-budget-war-plan.md
-    failure_repair:
-      load:
-        - references/bad-sentence-repairs.md
-        - ../_shared/sentence-role-and-story-flow.md
-  venue_family:
-    nature_science_cell:
-      load:
-        - references/venue-aware-writing.md
-        - ../_shared/ai-assisted-writing-policy.md
-    ml_conference:
-      load:
-        - references/venue-aware-writing.md
-        - references/paper-level-narrative-map.md
-    robotics_conference:
-      load:
-        - references/venue-aware-writing.md
-        - references/experiments-worksheet.md
-    systems_conference:
-      load:
-        - references/venue-aware-writing.md
-        - references/methods-worksheet.md
-notes:
-  - This manifest is an explicit routing map for humans and agents. Codex still
-    follows SKILL.md as the entrypoint.
+
+request_modes:
+  write:
+    output_order:
+      - Draft
+      - Why this works
+      - Evidence used
+      - Boundary / do-not-claim
+    open_when:
+      - "draft"
+      - "write"
+      - "compose"
+      - "turn notes into prose"
+      - "abstract"
+      - "introduction"
+      - "methods"
+      - "results"
+      - "ablation"
+      - "conclusion"
+    do_not_start_with:
+      - Verdict
+      - Story spine
+      - Source-note triage
+  plan:
+    output_order:
+      - One-sentence thesis
+      - Story spine
+      - Section job map
+      - Contribution-evidence map
+    open_when:
+      - "outline"
+      - "plan"
+      - "story"
+      - "paper structure"
+      - "writing order"
+  audit:
+    output_order:
+      - Verdict
+      - Evidence boundary
+      - Unsupported or overstrong claims
+      - Required repairs
+      - Safe rewrite
+    open_when:
+      - "review"
+      - "audit"
+      - "diagnose"
+      - "unsafe claims"
+      - "weaknesses"
+
+section_references:
+  title: references/title.md
+  abstract:
+    - references/abstract.md
+    - references/ral-style-writing-guide.md
+  introduction:
+    - references/introduction.md
+    - references/ral-style-writing-guide.md
+  related_work:
+    - references/related-work.md
+    - references/ral-style-writing-guide.md
+    - ../_shared/citation-boundary.md
+  methods:
+    - references/methods.md
+    - references/methods-worksheet.md
+    - references/ral-style-writing-guide.md
+    - ../_shared/list-to-argument.md
+  experiments:
+    - references/experiments.md
+    - references/experiments-worksheet.md
+    - references/ral-style-writing-guide.md
+  discussion:
+    - references/discussion.md
+  conclusion:
+    - references/conclusion.md
+    - references/ral-style-writing-guide.md
+  full_paper:
+    - references/paper-workflow.md
+    - references/paper-level-narrative-map.md
+    - references/contribution-evidence.md
+    - ../_shared/story-spine.md
+
+quality_checks:
+  - "For WRITE prompts, the first substantive section should be Draft."
+  - "Every draft must use only supplied methods, results, baselines, figures, citations, and boundaries."
+  - "Results prose must interpret ranking, key numbers, mechanism relevance, and boundary instead of reading table cells."
+  - "Ablation prose must tie component changes to contribution roles without claiming causal proof unless directly tested."
+  - "Conclusion prose must not introduce new terms, new results, or broader deployment claims."

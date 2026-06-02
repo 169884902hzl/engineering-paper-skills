@@ -172,6 +172,42 @@ This project is useful for:
 
 ## Use Case Examples
 
+### Draft-First Writing Examples
+
+These golden examples define the intended WRITE-mode behavior: manuscript prose
+comes first, followed by short notes on structure, evidence, and boundaries.
+They are maintainer-written expected outputs, not recorded model-run artifacts.
+
+| Writing task | Prompt fixture | Expected draft-first output |
+|---|---|---|
+| Abstract from minimal evidence | [writing_min.md](tests/prompts/writing_min.md) | [writing_min.md](tests/outputs/golden/writing_min.md) |
+| Methods reader path from module notes | [writing_methods_reader_path.md](tests/prompts/writing_methods_reader_path.md) | [writing_methods_reader_path.md](tests/outputs/golden/writing_methods_reader_path.md) |
+| Results paragraph from table-like evidence | [writing_results_interpretation.md](tests/prompts/writing_results_interpretation.md) | [writing_results_interpretation.md](tests/outputs/golden/writing_results_interpretation.md) |
+| Ablation interpretation from component rows | [writing_ablation_interpretation.md](tests/prompts/writing_ablation_interpretation.md) | [writing_ablation_interpretation.md](tests/outputs/golden/writing_ablation_interpretation.md) |
+| Two-paragraph Conclusion from results and limits | [writing_conclusion_two_paragraph.md](tests/prompts/writing_conclusion_two_paragraph.md) | [writing_conclusion_two_paragraph.md](tests/outputs/golden/writing_conclusion_two_paragraph.md) |
+| Coach writing request with draft-first output | [coach_write_draft_first.md](tests/prompts/coach_write_draft_first.md) | [coach_write_draft_first.md](tests/outputs/golden/coach_write_draft_first.md) |
+
+**Example excerpt: Methods reader path**
+
+```text
+The execution path begins with overhead and side RGB-D observations, which are
+used to estimate the insertion pose and an associated confidence score. When
+the confidence score is low, the system requests an additional view before
+continuing the insertion attempt. The guarded insertion controller then
+executes the motion while monitoring force and pose deviation...
+```
+
+**Example excerpt: Ablation interpretation**
+
+```text
+Directly querying action hints reaches only 17% success, indicating that raw
+image-space reasoning is not sufficient for reliable manipulation in the
+evaluated task family. Adding geometry-aware execution increases success to
+23%, suggesting that better action realization helps...
+```
+
+### Recorded Local Demos
+
 These use cases are backed by recorded local Codex outputs. The prompt fixtures
 are useful copyable starting points; the outputs are raw local final messages
 from Codex, not polished golden examples.
@@ -533,7 +569,7 @@ to use the skills.
   including forbidden regexes, forbidden claim patterns, and required output
   sections
 - `evals/`: manual top-tier paper quality rubric and recorded gold-fixture
-  review results
+  review results, plus a draft-first writing quality rubric
 - `NOTICE.md`: third-party license notices
 - `OPEN_SOURCE_QA.md`: validation commands and quality checks
 
@@ -541,6 +577,8 @@ to use the skills.
 
 - Expand CI-controlled behavior-regression artifacts and human-scored eval
   records beyond local single-run evidence.
+- Promote draft-first writing demos from golden expected outputs to recorded
+  local model-run artifacts once the writing prompts are stable.
 - Move structured JSON checks toward span-grounded claim/evidence and response
   verification contracts.
 - Add more full before/after examples for each skill.

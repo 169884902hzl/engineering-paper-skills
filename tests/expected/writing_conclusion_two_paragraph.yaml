@@ -1,0 +1,18 @@
+{
+  "case": "writing_conclusion_two_paragraph",
+  "prompt": "writing_conclusion_two_paragraph.md",
+  "must_include": ["## Draft", "## Why this works", "## Evidence used", "## Boundary / do-not-claim", "88%", "19%", "very thin objects", "severe occlusion"],
+  "must_not_include": ["## Verdict", "Story spine", "Source-note triage", "validated industrial deployment", "new benchmark"],
+  "required_status": {},
+  "forbidden_claims": [
+    "verdict-first writing output",
+    "new result in conclusion",
+    "new module in conclusion",
+    "deployment claim"
+  ],
+  "allowed_behavior": [
+    "Draft-first two-paragraph Conclusion",
+    "method plus strongest evidence",
+    "boundary plus future direction"
+  ]
+}

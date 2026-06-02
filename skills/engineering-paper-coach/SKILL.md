@@ -23,6 +23,34 @@ response, figure/table, and validation skills.
   checks, route to `engineering-validation`.
 - For old/new manuscript response verification, route to `engineering-response`.
 
+## Writing-Request Override
+
+If the user asks to draft, write, compose, generate, expand, or turn notes,
+tables, modules, figures, or results into manuscript prose, do not begin with
+`Verdict`.
+
+For writing requests, use this output:
+
+```markdown
+## Draft
+
+[Bounded manuscript prose.]
+
+## Evidence boundary
+
+- Used:
+- Not supplied:
+
+## Do-not-claim
+
+- ...
+```
+
+Keep the evidence notes short. If the task clearly needs deeper section
+drafting, use `engineering-writing` after identifying the target section. Only
+use the full audit format when the user explicitly asks for review, critique,
+audit, risk, validation, unsafe claims, or reviewer-style feedback.
+
 ## Evidence Boundary
 
 Before writing or revising, extract only the evidence supplied by the user:
@@ -118,7 +146,9 @@ Before final output, remove:
 
 ## Output Requirements
 
-Default output format:
+For writing requests, default to `## Draft` first as defined above.
+
+For audit, review, risk, validation, or unsafe-claim requests, use:
 
 ```markdown
 ## Verdict

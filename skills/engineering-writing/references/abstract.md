@@ -9,6 +9,10 @@ and stable boundaries.
 
 ## Five-Sentence Contract
 
+Use the five-sentence contract for compact engineering conference abstracts.
+For system papers that need a clearer execution bridge, use the six-sentence
+system template in `ral-style-writing-guide.md`.
+
 ### Sentence 1: Task and Failure Mode
 
 Job: state the control, perception, learning, or engineering problem and the
@@ -95,6 +99,24 @@ Avoid:
 - only `significantly improves`
 - results without baseline context
 - subset-only metrics presented as global headline
+
+## Six-Sentence System Variant
+
+Use this when the method has a named system, a multi-stage pipeline, and real
+execution or deployment logic that would otherwise be compressed too hard.
+
+```text
+1. [Task] remains challenging because [specific coupled difficulty].
+2. Small errors in [operation/perception/planning] can cause [concrete failure].
+3. We propose [Method], a [framework/system/representation] for [setting].
+4. [Method] first [stage 1], then [stage 2], and finally [stage 3].
+5. The resulting [representation/signal/plan] is converted into [executable action/control/policy] through [grounding mechanism].
+6. Experiments on [platform/benchmark/dataset] show [headline result], with [comparison, boundary, or remaining limitation].
+```
+
+The fifth sentence is an execution bridge, not another module list. Use it only
+when the source material explains how the representation becomes an action,
+control signal, policy, or evaluated output.
 
 ## Abstract Gate
 

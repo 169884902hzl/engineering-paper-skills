@@ -1,0 +1,19 @@
+{
+  "case": "writing_methods_reader_path",
+  "prompt": "writing_methods_reader_path.md",
+  "must_include": ["## Draft", "## Why this works", "## Evidence used", "## Boundary / do-not-claim", "RGB-D observations", "confidence", "guarded insertion controller"],
+  "must_not_include": ["## Verdict", "Story spine", "Source-note triage", "industrial deployment", "achieves", "proves"],
+  "required_status": {},
+  "forbidden_claims": [
+    "verdict-first writing output",
+    "invented threshold values",
+    "invented calibration procedure",
+    "invented performance result",
+    "module directory Methods"
+  ],
+  "allowed_behavior": [
+    "Draft-first Methods overview",
+    "reader path from input to output",
+    "state missing implementation details after the draft"
+  ]
+}

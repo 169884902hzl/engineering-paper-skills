@@ -35,6 +35,41 @@ for writing the paper's argument, not merely polishing sentences.
 - Use `engineering-validation` for build checks, readiness claims, citation
   checks, and final submission QA.
 
+## Request Modes
+
+Classify the user request before choosing an output shape.
+
+### WRITE
+
+Use this mode when the user asks to draft, write, compose, generate, or turn
+notes, modules, figures, tables, results, or outlines into manuscript prose.
+Examples include abstract drafting, Introduction opening, Related Work
+positioning, Methods overview, Results paragraph, ablation interpretation,
+robustness paragraph, Discussion, or Conclusion.
+
+For WRITE requests, output real manuscript prose first. Put structure,
+evidence boundary, and safety notes after the draft. Do not begin with
+`Verdict`, `Story spine`, `Source-note triage`, or a full claim-evidence matrix.
+
+### PLAN
+
+Use this mode when the user asks for an outline, paper plan, section plan,
+story map, contribution design, or writing order. In PLAN mode, it is
+appropriate to show the thesis, section job map, and contribution-evidence map
+before prose.
+
+### AUDIT
+
+Use this mode when the user asks to review, diagnose, check, critique, find
+weaknesses, identify unsupported claims, or explain why a draft is not working.
+For full manuscript audits, prefer `engineering-paper-auditor`.
+
+### POLISH
+
+Use this mode when the user asks for local wording, concision, sentence flow, or
+translation of already stable section logic. For pure polish, prefer
+`engineering-polishing`.
+
 ## When to Open Extra Files
 
 | File | Open when |
@@ -55,6 +90,7 @@ for writing the paper's argument, not merely polishing sentences.
 | [references/section-budget.md](references/section-budget.md) | Checking whether a section is too thin, too dense, or taking space from evidence |
 | [references/page-budget-war-plan.md](references/page-budget-war-plan.md) | Cutting manuscript length without damaging evidence anchors |
 | [references/source-learning.md](references/source-learning.md) | Learning structure from 3-5 neighboring papers without copying wording or surface format |
+| [references/ral-style-writing-guide.md](references/ral-style-writing-guide.md) | Drafting engineering prose from notes using RAL-style section skeletons: Abstract, Introduction, Related Work, Methods reader path, Results interpretation, ablation, robustness, or Conclusion |
 | [references/bad-sentence-repairs.md](references/bad-sentence-repairs.md) | Repairing common bad manuscript sentences and section-level failure symptoms |
 | [manifest.yaml](manifest.yaml) | Planning which references to load for section, input-state, or failure-repair tasks |
 | [references/examples.md](references/examples.md) | Needing concrete prompt and output behavior examples |
@@ -106,11 +142,42 @@ drafting. You may still provide a scaffold.
 7. Remove unsupported novelty, universal claims, and vague adjectives.
 8. Check sentence roles: every sentence must have a function, necessity,
    placement, connection, and evidence boundary.
-9. Return prose plus assumptions, missing evidence, and a short claim-evidence
-   map unless prose-only output was requested and no unsupported-risk note would
-   be hidden.
+9. For WRITE mode, return prose first, then a short explanation of paragraph
+   job, evidence used, and boundary. For PLAN or AUDIT mode, return planning or
+   diagnostic tables before draft prose when they are needed.
 
-## Default Output
+## Default Output By Mode
+
+### WRITE Mode
+
+Use this by default for drafting requests.
+
+```markdown
+## Draft
+
+[English manuscript prose first.]
+
+## Why this works
+
+- Paragraph job:
+- Claim flow:
+- Why this order:
+
+## Evidence used
+
+- [Only user-provided evidence.]
+
+## Boundary / do-not-claim
+
+- Do not claim:
+- Needs evidence before claiming:
+```
+
+Keep the notes after the draft concise. If the user explicitly asks for
+`output only`, provide just the draft unless doing so would hide an unsupported
+claim or missing evidence.
+
+### PLAN Mode
 
 ```text
 One-sentence thesis
@@ -139,4 +206,18 @@ Sentence role audit
 
 Missing evidence or assumptions
 - ...
+```
+
+### AUDIT Mode
+
+```markdown
+## Verdict
+
+## Evidence boundary
+
+## Unsupported or overstrong claims
+
+## Required repairs
+
+## Safe rewrite
 ```

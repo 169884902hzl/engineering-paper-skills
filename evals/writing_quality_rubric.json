@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "score_scale": {
+    "1": "fail",
+    "3": "partial",
+    "5": "strong"
+  },
+  "purpose": "Score draft-first engineering-writing outputs, separate from full-paper audit readiness.",
+  "thresholds": {
+    "usable_demo": {
+      "minimum_each": 3,
+      "minimum_average": 4,
+      "blocking_failures_allowed": 0
+    },
+    "strong_public_demo": {
+      "minimum_each": 4,
+      "minimum_average": 4.5,
+      "blocking_failures_allowed": 0,
+      "requires_recorded_model_output": true
+    }
+  },
+  "blocking_failure_types": [
+    "write request starts with verdict or audit table",
+    "invented number, baseline, citation, experiment, figure, or mechanism",
+    "result paragraph claims statistical significance without supplied support",
+    "ablation paragraph claims causal proof without controlled evidence",
+    "methods paragraph reads as a module directory without reader path",
+    "conclusion introduces new result or deployment claim"
+  ],
+  "criteria": {
+    "draft_first": {
+      "pass": "The first substantive section is manuscript prose, not a diagnosis or planning table.",
+      "fail": "The output begins with Verdict, Story spine, Source-note triage, or a full matrix for a writing request."
+    },
+    "paragraph_job": {
+      "pass": "The draft clearly performs the requested section job: abstract, introduction, methods overview, result, ablation, robustness, or conclusion.",
+      "fail": "The prose mixes section jobs or does not answer the requested writing task."
+    },
+    "evidence_use": {
+      "pass": "The draft uses supplied facts, numbers, modules, figures, tables, and boundaries accurately.",
+      "fail": "The draft invents or distorts evidence."
+    },
+    "section_skeleton": {
+      "pass": "The draft follows the relevant engineering section skeleton, such as problem-to-method abstract, reader-path Methods, or ranking-to-boundary Results.",
+      "fail": "The draft is generic prose or a list of modules, papers, or numbers."
+    },
+    "claim_boundary": {
+      "pass": "The draft states or preserves where the claim stops.",
+      "fail": "The draft expands local evidence into broad robustness, deployment, or generalization claims."
+    },
+    "sentence_quality": {
+      "pass": "Sentences are concrete, necessary, connected, and free of generic adjective stacks.",
+      "fail": "The prose is fluent but vague, promotional, or mechanically connected."
+    },
+    "after_draft_notes": {
+      "pass": "Any structure and evidence notes are concise and placed after the draft.",
+      "fail": "The notes overwhelm the manuscript prose or appear before it in writing mode."
+    }
+  }
+}
