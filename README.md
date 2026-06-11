@@ -234,6 +234,25 @@ This project is useful for:
 - preparing point-by-point responses to advisor, editor, or reviewer comments
 - checking manuscript readiness before submission
 
+## Scope and Complementary Tools
+
+This suite covers the writing loop: drafting, auditing, polishing,
+figure/table claims, reviewer response, and readiness validation.
+
+Out of scope by design:
+
+- Literature discovery. External deep-research tools (for example ChatGPT
+  Deep Research) and scholarly APIs or MCP servers (Semantic Scholar, arXiv,
+  Crossref) find papers better than an inline writing skill. This suite owns
+  the verification gate instead:
+  [citation-verification-workflow](skills/_shared/citation-verification-workflow.md)
+  defines how externally discovered citations become safe to cite.
+- Paper reading, slide building, and reference-manager workflows.
+- Acceptance prediction. The auditor reports findings, and its opt-in
+  [scored audit mode](skills/engineering-paper-auditor/references/scored-audit-mode.md)
+  gives finding-anchored triage bands, not venue scores or accept/reject
+  predictions.
+
 ## Skill Set
 
 | Use case | Skill |
@@ -452,6 +471,8 @@ It is local single-run evidence, not CI-controlled behavior proof.
 
 - Codex with local skills support enabled.
 - A writable Codex skills directory, usually `~/.codex/skills/`.
+- Claude Code also works: the same skill folders load from
+  `~/.claude/skills/`. See the Claude Code install step below.
 - Python 3 is only needed for repository QA scripts, not for normal skill use.
 - Optional: LaTeX tools if you want `engineering-validation` to compile paper
   projects.
@@ -473,6 +494,18 @@ cp -a skills/_shared skills/engineering-* ~/.codex/skills/
 
 Restart Codex so the new skills are loaded.
 
+### Claude Code Install
+
+The skill contracts are plain Markdown, so they load in Claude Code as well.
+The `agents/openai.yaml` files are Codex-specific and are ignored there.
+
+```bash
+cp -a skills/_shared skills/engineering-* ~/.claude/skills/
+```
+
+Restart Claude Code, then invoke a skill by name, for example
+`engineering-paper-coach` or `engineering-writing`.
+
 ### Install One Skill
 
 ```bash
@@ -489,7 +522,8 @@ git pull
 cp -a skills/_shared skills/engineering-* ~/.codex/skills/
 ```
 
-Restart Codex after updating.
+Restart Codex after updating. For Claude Code installs, copy to
+`~/.claude/skills/` instead and restart Claude Code.
 
 ### Uninstall
 
@@ -506,6 +540,9 @@ rm -rf ~/.codex/skills/engineering-writing \
        ~/.codex/skills/engineering-paper-router \
        ~/.codex/skills/_shared
 ```
+
+For Claude Code installs, remove the same directories under
+`~/.claude/skills/`.
 
 ### Troubleshooting
 

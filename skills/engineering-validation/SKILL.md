@@ -63,6 +63,7 @@ overall readiness must be `NOT_READY` or `CANNOT_DETERMINE`.
 | [../_shared/story-spine.md](../_shared/story-spine.md) | Checking whether Abstract/Conclusion claims match Methods/Experiments evidence |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Validation touches claims, citations, results, or completion status |
 | [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | Citation existence, citation placement, or reference claims are part of the check |
+| [../_shared/citation-verification-workflow.md](../_shared/citation-verification-workflow.md) | Externally discovered references need existence, metadata, or claim-support verification before readiness |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | High-risk claim verbs need audit during validation |
 | [../_shared/ai-assisted-writing-policy.md](../_shared/ai-assisted-writing-policy.md) | Venue disclosure or author-verification status is part of readiness |
 | [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for a short validation result only |

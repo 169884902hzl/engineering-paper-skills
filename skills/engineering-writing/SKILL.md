@@ -208,6 +208,7 @@ translation of already stable section logic. For pure polish, prefer
 | [references/page-budget-war-plan.md](references/page-budget-war-plan.md) | Cutting manuscript length without damaging evidence anchors |
 | [references/source-learning.md](references/source-learning.md) | Learning structure from 3-5 neighboring papers without copying wording or surface format |
 | [references/ral-style-writing-guide.md](references/ral-style-writing-guide.md) | Drafting engineering prose from notes using RAL-style section skeletons: Abstract, Introduction, Related Work, Methods reader path, Results interpretation, ablation, robustness, or Conclusion |
+| [references/positive-patterns.md](references/positive-patterns.md) | Choosing a paper-level or section-level pattern before drafting, or a draft reads structurally generic |
 | [references/bad-sentence-repairs.md](references/bad-sentence-repairs.md) | Repairing common bad manuscript sentences and section-level failure symptoms |
 | [manifest.yaml](manifest.yaml) | Planning which references to load for section, input-state, or failure-repair tasks |
 | [references/examples.md](references/examples.md) | Needing concrete prompt and output behavior examples |
@@ -217,6 +218,7 @@ translation of already stable section logic. For pure polish, prefer
 | [../_shared/story-spine.md](../_shared/story-spine.md) | Building problem-to-evidence-to-boundary logic before drafting |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Any task asks for stronger claims, missing evidence, or manuscript facts |
 | [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | Related Work or citations are requested without provided sources |
+| [../_shared/citation-verification-workflow.md](../_shared/citation-verification-workflow.md) | The user supplies externally discovered citations (deep research, scholarly APIs) that need a verification gate before Related Work positioning |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | Calibrating verbs, novelty, robustness, generalization, or causal language |
 | [../_shared/ai-assisted-writing-policy.md](../_shared/ai-assisted-writing-policy.md) | AI-assisted prose or venue disclosure risk is relevant |
 | [../_shared/list-to-argument.md](../_shared/list-to-argument.md) | Source material is a bullet list, module list, result-row list, or contribution list |

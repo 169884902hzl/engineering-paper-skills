@@ -4,6 +4,26 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Add citation gate, pattern library, scored audit mode, and Claude Code path
+
+- Added `skills/_shared/citation-verification-workflow.md`: literature
+  discovery stays external by design (deep-research tools, scholarly APIs);
+  the suite now defines the verification ladder, intake table, and gate rules
+  that let verified citations unlock Related Work positioning. Linked from
+  the writing, validation, and response skills.
+- Added `skills/engineering-writing/references/positive-patterns.md`:
+  original pattern skeletons for pipeline systems, ablation-led component,
+  rethinking, benchmark, and results-ladder writing.
+- Added an opt-in scored audit mode to `engineering-paper-auditor` with three
+  reviewer lenses and finding-anchored bands; default output remains
+  unscored, and no weighted total is produced.
+- README: added a Claude Code install path next to the Codex path, and a
+  scope section that names literature discovery, paper reading, and slide
+  building as out of scope with recommended external pairings.
+- Made `scripts/check_public_writing_demos.py` parse on Python 3.8-3.11 by
+  moving backslash expressions out of f-strings; CI already ran 3.12 and is
+  unchanged.
+
 ## Strengthen public writing checks and rough-note evidence
 
 - Upgraded `scripts/check_public_writing_demos.py` from fixed blocker strings

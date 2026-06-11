@@ -49,6 +49,7 @@ English responses.
 | [references/failure-modes.md](references/failure-modes.md) | Handling false completed-change claims or impossible reviewer requests |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | A response may claim unsupported experiments, citations, or edits |
 | [../_shared/citation-boundary.md](../_shared/citation-boundary.md) | A response mentions added or corrected references |
+| [../_shared/citation-verification-workflow.md](../_shared/citation-verification-workflow.md) | A response relies on externally discovered references that have not passed a verification gate |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | A response or manuscript change needs claim downgrading |
 | [../_shared/list-to-argument.md](../_shared/list-to-argument.md) | A comment batch arrives as an unordered list |
 | [../_shared/output-mode.md](../_shared/output-mode.md) | The user asks for response text only |

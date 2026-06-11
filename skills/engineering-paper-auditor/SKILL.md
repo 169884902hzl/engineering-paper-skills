@@ -38,6 +38,7 @@ produce final paper prose; it produces a prioritized audit and repair plan.
 | [references/story-continuity-audit.md](references/story-continuity-audit.md) | Auditing whether paper sections form a coherent story |
 | [references/paragraph-to-paragraph-transition-audit.md](references/paragraph-to-paragraph-transition-audit.md) | Paragraphs are individually plausible but the section feels jumpy |
 | [references/claim-resurrection-audit.md](references/claim-resurrection-audit.md) | Abstract, Discussion, or Conclusion may revive unsupported claims |
+| [references/scored-audit-mode.md](references/scored-audit-mode.md) | The user explicitly asks for scores, a review panel, or reviewer simulation |
 | [../_shared/story-spine.md](../_shared/story-spine.md) | Full-paper or multi-section audit needs story dependency checks |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Any claim may exceed available evidence |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | Auditing novelty, robustness, causality, or generalization language |
@@ -65,6 +66,19 @@ produce final paper prose; it produces a prioritized audit and repair plan.
    overreach, sentence redundancy, terminology drift, and unsupported readiness
    claims.
 9. Produce a prioritized action list and route each action to the correct skill.
+
+## Scored Audit Mode
+
+Off by default. Use it only when the user explicitly asks for scores, a
+review panel, or reviewer simulation; otherwise keep the unscored verdict
+vocabulary. The protocol, lens table, and band anchors are in
+[references/scored-audit-mode.md](references/scored-audit-mode.md).
+
+- Three reviewer lenses pass independently: method rigor, experimental
+  evidence, contribution and positioning.
+- Bands are heuristic triage anchored to listed findings, not acceptance
+  predictions; no weighted total is produced.
+- Material that was not inspected is `CANNOT_DETERMINE`, not a low band.
 
 ## Default Output
 
