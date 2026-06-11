@@ -25,7 +25,7 @@ routing.
 - Do not use it when the user explicitly names one of the five task skills and
   the request matches that skill.
 
-## When To Open Extra Files
+## When to Open Extra Files
 
 | File | Open when |
 |---|---|
