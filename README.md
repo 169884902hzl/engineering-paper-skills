@@ -584,6 +584,17 @@ method, results, and limitation notes:
 [paste your notes]
 ```
 
+In Claude Code, ask for the skill by name instead:
+
+```text
+Use the engineering-writing skill to draft an abstract from the following
+contribution, method, results, and limitation notes:
+[paste your notes]
+```
+
+If the skill does not appear in Claude Code, confirm each copied directory
+still contains its `SKILL.md` and restart the session.
+
 For local structure validation, run:
 
 ```bash
@@ -837,6 +848,12 @@ preserved in `NOTICE.md`.
 Thanks to Yuqi Cheng (`hustCYQ`) for publishing
 [`phd-writing`](https://github.com/hustCYQ/phd-writing) under the MIT License.
 The required third-party notice is preserved in `NOTICE.md`.
+
+The multi-skill layout of this suite, including skill contracts with shared
+reference files and "When to Open Extra Files" routing tables, was informed
+by the design of
+[`nature-skills`](https://github.com/Yuan1z0825/nature-skills) by Yuan Yizhe
+(`Yuan1z0825`). No files from that project are included in this repository.
 
 The goal is not to make papers sound longer or more impressive. The goal is to
 make technical claims clear, bounded, and supported.
