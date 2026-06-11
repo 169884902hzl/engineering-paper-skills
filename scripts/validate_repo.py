@@ -186,7 +186,7 @@ def check_structure(errors: list[str]) -> None:
         text = read(skill_md)
         if not text.startswith("---"):
             errors.append(f"{rel(skill_md)} missing YAML frontmatter")
-        if "description:" not in text.split("---", 2)[1]:
+        elif "description:" not in text.split("---", 2)[1]:
             errors.append(f"{rel(skill_md)} missing description")
         if "## Boundaries" not in text:
             errors.append(f"{rel(skill_md)} missing Boundaries section")
@@ -219,6 +219,9 @@ def check_links(errors: list[str]) -> None:
                 continue
             if target.startswith("<") and target.endswith(">"):
                 target = target[1:-1]
+            target = target.split("#", 1)[0]
+            if not target:
+                continue
             target_path = (md.parent / target).resolve()
             if not target_path.exists():
                 errors.append(f"{rel(md)} broken relative link: {target}")
