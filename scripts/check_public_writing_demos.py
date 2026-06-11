@@ -92,19 +92,23 @@ PUBLIC_REGISTER_TERMS = (
     "The current evidence",
 )
 
+def _term_pattern(term: str) -> "re.Pattern[str]":
+    # Keep the backslash replacement outside the f-string so this module still
+    # parses on Python 3.8-3.11 (PEP 701 allows it only from 3.12).
+    escaped = re.escape(term).replace(r"\ ", r"\s+")
+    return re.compile(rf"(?<![A-Za-z0-9]){escaped}(?![A-Za-z0-9])", re.IGNORECASE)
+
+
 PHYSICAL_MECHANISM_PATTERNS = {
-    term: re.compile(rf"(?<![A-Za-z0-9]){re.escape(term).replace(r'\ ', r'\s+')}(?![A-Za-z0-9])", re.IGNORECASE)
-    for term in PHYSICAL_MECHANISM_TERMS
+    term: _term_pattern(term) for term in PHYSICAL_MECHANISM_TERMS
 }
 
 PUBLIC_OUTPUT_BLOCKERS = {
-    term: re.compile(rf"(?<![A-Za-z0-9]){re.escape(term).replace(r'\ ', r'\s+')}(?![A-Za-z0-9])", re.IGNORECASE)
-    for term in PROMPT_META_LANGUAGE_TERMS
+    term: _term_pattern(term) for term in PROMPT_META_LANGUAGE_TERMS
 }
 
 PUBLIC_REGISTER_BLOCKERS = {
-    term: re.compile(rf"(?<![A-Za-z0-9]){re.escape(term).replace(r'\ ', r'\s+')}(?![A-Za-z0-9])", re.IGNORECASE)
-    for term in PUBLIC_REGISTER_TERMS
+    term: _term_pattern(term) for term in PUBLIC_REGISTER_TERMS
 }
 
 RELATED_WORK_BLOCKERS = {
