@@ -46,8 +46,7 @@ are a small sample; treat the patterns as a checklist, not a predictor.
 
 The examples below are raw recorded Codex outputs from public writing prompt
 fixtures. They show the intended user experience: rough notes, result tables,
-ablation rows, Chinese source notes, or Methods notes become manuscript prose
-first. These are local artifacts, not CI-controlled behavior proof and not
+Chinese source notes, or Methods notes become manuscript prose first. These are local artifacts, not CI-controlled behavior proof and not
 top-tier-ready proof.
 
 Examples are recorded local Codex outputs; detailed provenance is in Evidence
@@ -73,25 +72,6 @@ outperforming fixed side viewing by 12 percentage points...
 
 Full artifact:
 [writing_results_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_results_showcase_v2_ad6d5b4.md).
-
-### Ablation rows -> contribution-level ablation paragraph
-
-```text
-Input skeleton:
-Naive direct hint 17%; + geometry-aware execution 23%; + target-focused
-perception 44%; + overlay self-verification 76%; full mask-constrained
-grounding 88%. Interpret each delta as a contribution role, not causal proof.
-```
-
-```text
-Short excerpt from recorded output:
-The ablation indicates that the main bottleneck in contact-rich action
-grounding is not merely executing a hinted motion, but verifying that a
-visually plausible hint is grounded to the intended insertion target.
-```
-
-Full artifact:
-[writing_ablation_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md).
 
 ### Chinese notes -> English manuscript paragraph
 
@@ -298,8 +278,8 @@ Out of scope by design:
 
 ### Recorded Showcase Writing Outputs
 
-The outputs below are raw local Codex final answers. Results and Ablation from
-showcase v2 remain strong hero candidates. The Abstract, Related Work,
+The outputs below are raw local Codex final answers. Results from showcase v2
+remains a strong hero candidate. The Abstract, Related Work,
 Chinese-to-English, and Conclusion public-demo blockers were rerun at base
 commit `e99ca8120a6174a9cdba7083bd71f739908c822c`, and Methods showcase v2 was
 added in the same pass. Commit `8865acf6469b0dae32d16807c341c04bf249e2a3`
@@ -310,13 +290,11 @@ CI-controlled behavior proof and not top-tier-ready proof.
 | Writing task | Prompt fixture | Recorded local output | Review placement |
 |---|---|---|---|
 | Results paragraph from diagnostic axes | [writing_results_showcase_v2.md](tests/prompts/writing_results_showcase_v2.md) | [writing_results_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_results_showcase_v2_ad6d5b4.md) | hero |
-| Ablation paragraph with contribution roles | [writing_ablation_showcase_v2.md](tests/prompts/writing_ablation_showcase_v2.md) | [writing_ablation_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md) | hero |
 | Chinese notes to English manuscript argument | [writing_zh_to_en_showcase_v2_rerun.md](tests/prompts/writing_zh_to_en_showcase_v2_rerun.md) | [writing_zh_to_en_showcase_v2_rerun_e99ca81.md](tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_rerun_e99ca81.md) | hero |
 | Methods overview with reader path | [writing_methods_showcase_v2.md](tests/prompts/writing_methods_showcase_v2.md) | [writing_methods_showcase_v2_e99ca81.md](tests/outputs/model_runs/writing/writing_methods_showcase_v2_e99ca81.md) | hero |
 | Six-sentence Abstract rerun | [writing_abstract_showcase_v2_rerun.md](tests/prompts/writing_abstract_showcase_v2_rerun.md) | [writing_abstract_showcase_v2_rerun_e99ca81.md](tests/outputs/model_runs/writing/writing_abstract_showcase_v2_rerun_e99ca81.md) | gallery |
 | Related Work positioning rerun | [writing_related_work_showcase_v2_rerun.md](tests/prompts/writing_related_work_showcase_v2_rerun.md) | [writing_related_work_showcase_v2_rerun_e99ca81.md](tests/outputs/model_runs/writing/writing_related_work_showcase_v2_rerun_e99ca81.md) | gallery |
 | Two-paragraph Conclusion rerun2 | [writing_conclusion_showcase_v2_rerun2.md](tests/prompts/writing_conclusion_showcase_v2_rerun2.md) | [writing_conclusion_showcase_v2_rerun2_8865acf.md](tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun2_8865acf.md) | gallery |
-| Full-section Results demo v2 | [full_section_results_demo_v2.md](tests/prompts/full_section_results_demo_v2.md) | [full_section_results_demo_v2_8865acf.md](tests/outputs/model_runs/writing/full_section_results_demo_v2_8865acf.md) | gallery |
 | Full-section Methods demo | [full_section_methods_demo.md](tests/prompts/full_section_methods_demo.md) | [full_section_methods_demo_8865acf.md](tests/outputs/model_runs/writing/full_section_methods_demo_8865acf.md) | gallery |
 | Realistic manuscript-note Results | [realistic_robotics_manuscript_notes_results.md](tests/prompts/realistic_robotics_manuscript_notes_results.md) | [realistic_robotics_manuscript_notes_results_8865acf.md](tests/outputs/model_runs/writing/realistic_robotics_manuscript_notes_results_8865acf.md) | gallery |
 | Chinese notes to Methods | [zh_notes_to_methods_showcase.md](tests/prompts/zh_notes_to_methods_showcase.md) | [zh_notes_to_methods_showcase_8865acf.md](tests/outputs/model_runs/writing/zh_notes_to_methods_showcase_8865acf.md) | gallery |
@@ -368,7 +346,8 @@ They are maintainer-written expected outputs, not recorded model-run artifacts.
 
 The remaining recorded writing outputs are retained for provenance, regression
 review, and previous behavior comparison. Some are useful evidence, but they
-are not public hero cards.
+are not public hero cards. Some were partly redacted on 2026-10-05; see
+[tests/outputs/model_runs/REDACTIONS.md](tests/outputs/model_runs/REDACTIONS.md).
 
 ### Superseded Or Evidence-only Showcase Outputs
 
@@ -376,6 +355,8 @@ are not public hero cards.
 |---|---|
 | [writing_conclusion_showcase_v2_rerun_e99ca81.md](tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun_e99ca81.md) | Superseded by boundary-first rerun2 at `8865acf`; retained for provenance only. |
 | [full_section_results_demo_e99ca81.md](tests/outputs/model_runs/writing/full_section_results_demo_e99ca81.md) | Superseded by the exactly-three-paragraph v2 output at `8865acf`; retained for provenance only. |
+| [writing_ablation_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md) | Former Ablation hero output, partly redacted; retained for provenance only. |
+| [full_section_results_demo_v2_8865acf.md](tests/outputs/model_runs/writing/full_section_results_demo_v2_8865acf.md) | Former full-section Results gallery output, ablation paragraph partly redacted; retained for provenance only. |
 | [writing_abstract_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_abstract_showcase_v2_ad6d5b4.md) | Rejected original Abstract showcase output; retained for comparison only. |
 | [writing_related_work_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_related_work_showcase_v2_ad6d5b4.md) | Evidence-only original Related Work showcase output. |
 | [writing_zh_to_en_showcase_v2_ad6d5b4.md](tests/outputs/model_runs/writing/writing_zh_to_en_showcase_v2_ad6d5b4.md) | Evidence-only original Chinese-to-English showcase output. |
@@ -405,13 +386,6 @@ The local eval record is
 [evals/results/078d53e_rich_writing_model_eval.jsonl](evals/results/078d53e_rich_writing_model_eval.jsonl).
 
 **Hero candidates from recorded local Codex outputs**
-
-```text
-The largest improvement enters at the overlay self-verification stage: success
-increases from 44% to 76%, a 32 percentage point gain, consistent with its role
-in rejecting visually plausible but poorly grounded action hints before they
-reach execution.
-```
 
 ```text
 The diagnostic pattern explains why the ranking is not simply a
@@ -457,15 +431,6 @@ used to estimate the insertion pose and an associated confidence score. When
 the confidence score is low, the system requests an additional view before
 continuing the insertion attempt. The guarded insertion controller then
 executes the motion while monitoring force and pose deviation...
-```
-
-**Golden expected excerpt: Ablation interpretation**
-
-```text
-Directly querying action hints reaches only 17% success, indicating that raw
-image-space reasoning is not sufficient for reliable manipulation in the
-evaluated task family. Adding geometry-aware execution increases success to
-23%, suggesting that better action realization helps...
 ```
 
 ### Recorded Local Demos

@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage{booktabs,graphicx}
+\begin{document}
+Dense clutter is the hardest case; the overall 80\% success rate on the stacked setting shows the limit.
+On glossy surfaces the success rate is 70\%.
+See Table~\ref{tab:stacked}.
+\begin{table}[h]
+\centering
+\caption{\textbf{Success rates of our method under varying conditions.}}
+\label{tab:stacked}
+\resizebox{\linewidth}{!}{
+\begin{tabular}{c|cccc}
+\toprule
+Surface $\rightarrow$ & Matte & Glossy & Clear & Dark \\
+Ours & 90\% & 70\% & 60\% & 80\% \\ \midrule
+Weight $\rightarrow$ & 50g & 100g & 200g & 400g \\
+Ours & 90\% & 80\% & 70\% & 40\% \\ \midrule
+Clutter $\rightarrow$ & Sparse & Medium & Dense & Stacked \\
+Ours & 90\% & 80\% & 70\% & 50\% \\
+\bottomrule
+\end{tabular}}
+\end{table}
+\nocite{*}\bibliography{../refs}
+\end{document}

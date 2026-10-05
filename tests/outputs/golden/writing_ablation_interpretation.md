@@ -1,6 +1,6 @@
 ## Draft
 
-The ablation results show that each major component contributes to a different part of the execution chain. Directly querying action hints reaches only 17% success, indicating that raw image-space reasoning is not sufficient for reliable manipulation in the evaluated task family. Adding geometry-aware execution increases success to 23%, suggesting that better action realization helps, but does not by itself resolve perception and hint-validity errors. Incorporating target-focused perception raises success to 44%, which supports the role of cleaner task-centric observations in action-hint generation. Overlay self-verification further increases success to 76%, consistent with improved stability of the predicted interaction directions. The full system reaches 88% after adding mask-constrained grounding, supporting the interpretation that validity checks on interaction points reduce off-target contacts. These ablations support complementary component roles, but they do not establish a fully isolated causal mechanism or deployment readiness without additional controlled tests.
+The ablation results show that each major component addresses a different failure source in suction picking of transparent and reflective parts. The depth-only grasp planner reaches only 21% success, indicating that raw depth is not a reliable basis for choosing suction points on these surfaces in the evaluated task family. Adding seal-pressure retry increases success to 34%, suggesting that recovering picks that lose vacuum helps, but does not by itself correct poorly chosen grasp points. Incorporating depth completion raises success to 52%, the largest single increase at 18 percentage points, which supports the role of recovered surface geometry in candidate generation. Collision-aware candidate re-ranking adds a comparable 17 percentage points, reaching 69%, consistent with fewer approach paths that disturb neighboring parts. The full system reaches 81% after adding the surface-normal consistency filter, supporting the interpretation that rejecting grasp points where the cup cannot seal removes part of the remaining failures. These ablations support complementary component roles, but they do not establish a fully isolated causal mechanism or deployment readiness without additional controlled tests.
 
 ## Why this works
 
@@ -10,7 +10,7 @@ The ablation results show that each major component contributes to a different p
 
 ## Evidence used
 
-- Ablation rows: 17%, 23%, 44%, 76%, and 88%.
+- Ablation rows: 21%, 34%, 52%, 69%, and 81%.
 - Boundary: one task family, no statistical significance test, no deployment evaluation.
 
 ## Boundary / do-not-claim

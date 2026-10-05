@@ -54,6 +54,30 @@ Use them as options to check, not as a template.
    affects the method (as an interpretation unless measured), what still
    works, and representative examples, including observed failures.
 
+## From Numbers To Findings
+
+In a blind writing test, expert results paragraphs made these moves and model
+drafts written from the same notes mostly did not. Each move needs support in
+the data at hand; when the data do not isolate the cause, write it as an
+interpretation ("suggests", "is consistent with").
+
+- Name the bottleneck from the largest delta: the component that adds the most
+  points points to where the problem was.
+- Attribute a gain to the stage it can affect: a module that only executes
+  improves realization, not reasoning, when the predictions themselves are
+  unchanged.
+- Read flat results across a factor as robustness to that factor within the
+  tested range, and state the range.
+- Give a verdict per method family when several methods of one family behave
+  alike, and name the exception.
+- Use a concessive contrast when a method that scores lower shows a property
+  worth keeping ("X scores lower, yet its maps are the least sensitive to
+  noise").
+- Close the section with the lesson for the field or the next design
+  direction, hedged, instead of ending on a restated number.
+- When criticizing prior datasets or methods, name the concrete shortcoming
+  (unrealistic alignment, fixed lighting) rather than a vague limitation.
+
 ## Sentence Level
 
 - Put old, linking information at the start of a sentence and the new point at

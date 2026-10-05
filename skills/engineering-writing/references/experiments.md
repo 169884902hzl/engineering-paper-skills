@@ -136,8 +136,8 @@ remains outside the evaluation.
 ```
 
 If the comparison is between percentages, say `percentage points` when the
-table supports an absolute difference. For example, use `from 19% to 88%` or
-`69 percentage points higher` rather than `69% higher` unless a relative ratio
+table supports an absolute difference. For example, use `from 38% to 81%` or
+`43 percentage points higher` rather than `43% higher` unless a relative ratio
 is intended and supported.
 
 ### Category Or Condition Axis

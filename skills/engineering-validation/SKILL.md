@@ -55,17 +55,20 @@ It follows `\input`/`\include` and reports, with file:line:
   keys missing from the bibliography, a declared bibliography that cannot be
   read;
 - warnings: floats never referenced, figures or tables first referenced out of
-  numeric order, success rates that are impossible for the stated number of
-  trials (heuristic; it skips aggregated values and reports ambiguous trial
-  counts as info);
+  numeric order (in source, and in the compiled numbering when a `.aux` file
+  is found or passed with `--aux`), success rates that are impossible for the
+  stated number of trials (heuristic; it skips aggregated values and reports
+  ambiguous trial counts as info), average or total columns that do not match
+  their row, and prose values that contradict the table cell they name
+  (heuristic; silent when the match is ambiguous);
 - info: uncited bibliography entries, prose percentages that appear in no
   table, and anything it could not check (an input file outside the project,
   a dynamic macro argument).
 
 It skips macro definitions, verbatim-like environments, and `\iffalse` blocks,
-and treats only `\%` and siunitx forms as percentages. It reads source order,
-not the compiled layout, and does not expand general macros, so numbers
-defined through `\newcommand` and float placement in the PDF are not checked.
+and treats only `\%` and siunitx forms as percentages. Without a `.aux` file
+it reads source order only. It does not expand general macros, so numbers
+defined through `\newcommand` are not checked.
 Report its output verbatim as one check in the readiness table; a clean run is
 evidence for these checks only.
 

@@ -15,7 +15,7 @@ tag implies readiness.
 | Current structured-contract baseline | `38b3d4d72660fbfe5705103e6bc27addac14668e` |
 | Latest local structured-contract attempt | `38b3d4d72660fbfe5705103e6bc27addac14668e` |
 | Latest local structured-contract failure kept for diagnosis | `80d9c23b8b9e6fd42470df845547724d63a8cc48` |
-| Current user-facing demo baseline | `8865acf6469b0dae32d16807c341c04bf249e2a3` public-check and rough-note evidence plus retained Results/Ablation from `ad6d5b4` |
+| Current user-facing demo baseline | `8865acf6469b0dae32d16807c341c04bf249e2a3` public-check and rough-note evidence plus retained Results from `ad6d5b4` |
 | Current showcase v2 writing baseline | `8865acf6469b0dae32d16807c341c04bf249e2a3` rerun2 outputs, full-section v2, rough-user evidence, rough/benchmark stability, realistic-note evidence, and retained `e99ca81` reruns |
 | Current rich writing model-output baseline | `078d53e7b5925cf7c56b3b4696c8a35b9ac8d475` |
 | Current draft-first writing model-output baseline | `ce1478f66f50a27abe7dfe3d45ee31565ca6cb71` |
@@ -119,11 +119,13 @@ full-section Results v2 and Methods outputs, rough-user prompts, rough and
 benchmark stability samples, realistic manuscript-note prompts, citation-mode
 Related Work evidence, and Chinese-note Methods/Discussion cases.
 
-The current first-screen showcase uses four outputs: Results, Ablation,
+The current first-screen showcase uses three outputs: Results,
 Chinese-to-English rerun, and Methods v2. Abstract, Related Work, Conclusion
-rerun2, full-section Results v2, full-section Methods, realistic-note Results,
-and Chinese-note Methods/Discussion are gallery items when their human review
-allows it. Citation-sensitive Related Work variants stay gallery or
+rerun2, full-section Methods, realistic-note Results, and Chinese-note
+Methods/Discussion are gallery items when their human review allows it. The
+`ad6d5b4` Ablation output and the full-section Results v2 output were partly
+redacted on 2026-10-05 and are kept as evidence-only artifacts; see
+`tests/outputs/model_runs/REDACTIONS.md`. Citation-sensitive Related Work variants stay gallery or
 evidence-only, never hero. The old Abstract, old `ad6d5b4` Related Work,
 Chinese-to-English, Conclusion outputs, the old `e99ca81` Conclusion rerun, and
 the old `e99ca81` full-section Results output are evidence-only or rejected
@@ -151,9 +153,8 @@ commit `078d53e7b5925cf7c56b3b4696c8a35b9ac8d475`. They were generated after
 installing this repository's current `engineering-writing` and
 `engineering-paper-coach` skill files into Codex home.
 
-The current user-facing showcase uses three of those outputs: Ablation rows to
-contribution-level ablation prose, Results with diagnostic axes, and Methods
-overview reader path. The Introduction, Related Work, Chinese notes, Abstract,
+The current user-facing showcase uses two of those outputs: Results with
+diagnostic axes and Methods overview reader path. The Introduction, Related Work, Chinese notes, Abstract,
 and Conclusion outputs are kept in the demo gallery. These artifacts remain
 `local_single_run` evidence; they are not CI-controlled proof, not multi-run
 stability proof, and not top-tier-ready proof. Their full output paths and

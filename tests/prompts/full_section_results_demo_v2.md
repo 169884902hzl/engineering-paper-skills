@@ -17,10 +17,10 @@ Source notes:
 - Overhead view loses the hole near final approach.
 - Side view preserves lateral visibility but leaves depth uncertain.
 - Open-loop execution carries pose error into contact.
-- Ablation rows: naive direct action hint 17%; + geometry-aware execution 23%;
-  + target-focused perception and geometry-aware execution 44%; + target-focused
-  perception, overlay self-verification, and geometry-aware execution 76%;
-  full mask-constrained grounding 88%.
+- Ablation rows: fixed overhead camera with force-guarded insertion 69%;
+  + pose-confidence estimation 70%; + confidence-triggered additional view 78%;
+  + pose refinement from the additional view 81%; full system with
+  pose-deviation stop 84%.
 - Ablation rows are additive, not factorial.
 - Remaining failures occur when all available views are ambiguous or when
   contact produces large pose deviation.

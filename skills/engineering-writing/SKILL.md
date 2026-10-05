@@ -65,7 +65,10 @@ first and leaves sentence craft to the model.
   execution and failure handling), not a module directory. Say how every
   decision rule is computed; label heuristics as heuristics.
 - Results: ranking, key number, the interpretation the evidence supports,
-  per-category results, and the operating boundary. Present an unmeasured
+  per-category results, and the operating boundary. Turn numbers into
+  findings (bottleneck, stage attribution, method-family verdict, closing
+  lesson; see "From Numbers To Findings" in
+  [revision-moves.md](../_shared/revision-moves.md)). Present an unmeasured
   mechanism as an interpretation, not a cause. Keep setup short and
   parameters in a table.
 - Ablation: relate each major delta to a component role or failure mode, and

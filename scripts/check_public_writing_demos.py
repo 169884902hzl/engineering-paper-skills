@@ -39,6 +39,8 @@ PUBLIC_REJECTED_OR_ARCHIVE_ONLY_OUTPUTS = {
     "tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_ad6d5b4.md",
     "tests/outputs/model_runs/writing/writing_conclusion_showcase_v2_rerun_e99ca81.md",
     "tests/outputs/model_runs/writing/full_section_results_demo_e99ca81.md",
+    "tests/outputs/model_runs/writing/writing_ablation_showcase_v2_ad6d5b4.md",
+    "tests/outputs/model_runs/writing/full_section_results_demo_v2_8865acf.md",
 }
 
 PHYSICAL_MECHANISM_TERMS = (

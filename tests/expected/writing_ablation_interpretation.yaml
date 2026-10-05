@@ -2,11 +2,11 @@
   "case": "writing_ablation_interpretation",
   "prompt": "writing_ablation_interpretation.md",
   "must_include": [
-    "17%",
-    "23%",
-    "44%",
-    "76%",
-    "88%"
+    "21%",
+    "34%",
+    "52%",
+    "69%",
+    "81%"
   ],
   "must_not_include": [
     "## Verdict",
