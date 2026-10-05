@@ -1,8 +1,18 @@
 {
   "case": "writing_min",
   "prompt": "writing_min.md",
-  "must_include": ["## Draft", "## Why this works", "## Evidence used", "## Boundary / do-not-claim", "120 real trials", "86%", "71%"],
-  "must_not_include": ["## Verdict", "Story spine", "Source-note triage", "SOTA", "guarantees complete generalization"],
+  "must_include": [
+    "120 real trials",
+    "86%",
+    "71%"
+  ],
+  "must_not_include": [
+    "## Verdict",
+    "Story spine",
+    "Source-note triage",
+    "SOTA",
+    "guarantees complete generalization"
+  ],
   "required_status": {},
   "forbidden_claims": [
     "verdict-first writing output",

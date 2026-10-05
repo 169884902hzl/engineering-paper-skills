@@ -18,6 +18,17 @@ Use this skill to make figures and tables serve the manuscript argument.
 - Do not use tables as unstructured parameter dumps unless the table's job is
   setup compression.
 - Keep category names, metric names, captions, and prose consistent.
+- Give each float one job. Showing the same data as a trend and as exact
+  values is fine; showing it twice for the same purpose is not. Split the main
+  comparison and the ablation when combining them makes either harder to
+  read (P9 in [reviewer-attack-patterns.md](../_shared/reviewer-attack-patterns.md)).
+- Make colors semantic (for example success versus failure), and keep one
+  table style across the paper.
+- A teaser figure stays light, the framework figure carries the method, and
+  qualitative result figures show representative cases chosen by a stated
+  criterion, including observed failures (step 5 in
+  [writing-process.md](../_shared/writing-process.md)).
+- Number floats in the order they are first referenced in the text (P7).
 
 ## Boundaries
 

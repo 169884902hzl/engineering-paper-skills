@@ -18,6 +18,27 @@ verification, advisor review, official venue instructions, or author judgment.
 It should not invent methods, baselines, citations, metrics, figures, line
 numbers, deployment tests, or submission readiness.
 
+## What Experienced Authors Know
+
+Current models already write fluent, hedged academic English. What they lack
+is experience: which comparison a reviewer will call unfair, which assumption
+a reviewer will probe, what to write first. Three shared files carry that
+experience and are linked from the skills:
+
+| File | What it holds |
+|---|---|
+| [skills/_shared/reviewer-attack-patterns.md](skills/_shared/reviewer-attack-patterns.md) | Objections real reviewers and senior co-authors raised (handicapped baselines, unstated operating assumptions, unmeasured internal components, added cost, heuristic decision rules), with the cheapest pre-submission fix for each |
+| [skills/_shared/writing-process.md](skills/_shared/writing-process.md) | The order experienced authors follow: page budget, table slots before the remaining experiments, figures from tables, Abstract last |
+| [skills/_shared/revision-moves.md](skills/_shared/revision-moves.md) | Concrete moves observed in a senior author's revisions, plus global-to-local revision order |
+
+Evidence and limits: an earlier version of the attack patterns was tested
+leave-one-paper-out on two robotics papers with real reviews (Claude and
+Codex, one run per condition, blind scoring). Without patterns, the models
+already found most of the real objections; with patterns, recall changed by
+at most one point, and the first objection of the first reviewer moved to rank
+1 in three of four runs. Two papers, four reviewers, and one run per condition
+are a small sample; treat the patterns as a checklist, not a predictor.
+
 ## What It Can Write
 
 The examples below are raw recorded Codex outputs from public writing prompt
@@ -208,6 +229,7 @@ Writing requirements:
 |---|---|
 | I have notes and want practical Markdown guidance | `engineering-paper-coach` |
 | I want to audit a section before rewriting | `engineering-paper-auditor` |
+| I want to know what reviewers will attack before submission | `engineering-paper-auditor` (reviewer simulation) |
 | I want to draft Abstract, Introduction, Methods, or Experiments | `engineering-writing` |
 | I want to polish text without strengthening claims | `engineering-polishing` |
 | I want to check figures, tables, captions, or result prose | `engineering-figure-table` |

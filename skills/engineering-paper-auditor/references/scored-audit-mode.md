@@ -1,7 +1,8 @@
 # Scored Audit Mode
 
-Opt-in protocol for users who ask for scores, a review panel, or reviewer
-simulation. The default audit output stays unscored; scored mode adds a
+Opt-in protocol for users who explicitly ask for scores, a scored review
+panel, or a scored reviewer simulation. The default audit output, including
+the default reviewer simulation, stays unscored; scored mode adds a
 triage layer on top of the same findings.
 
 ## Calibration Boundary

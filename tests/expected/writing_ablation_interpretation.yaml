@@ -1,8 +1,20 @@
 {
   "case": "writing_ablation_interpretation",
   "prompt": "writing_ablation_interpretation.md",
-  "must_include": ["## Draft", "## Why this works", "## Evidence used", "## Boundary / do-not-claim", "17%", "23%", "44%", "76%", "88%"],
-  "must_not_include": ["## Verdict", "Story spine", "Source-note triage", "the ablation proves the causal mechanism", "deployment-ready"],
+  "must_include": [
+    "17%",
+    "23%",
+    "44%",
+    "76%",
+    "88%"
+  ],
+  "must_not_include": [
+    "## Verdict",
+    "Story spine",
+    "Source-note triage",
+    "the ablation proves the causal mechanism",
+    "deployment-ready"
+  ],
   "required_status": {},
   "forbidden_claims": [
     "verdict-first writing output",

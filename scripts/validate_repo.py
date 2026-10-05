@@ -40,6 +40,9 @@ REQUIRED_SHARED = {
     "story-spine.md",
     "ai-assisted-writing-policy.md",
     "terminology-ledger.md",
+    "reviewer-attack-patterns.md",
+    "writing-process.md",
+    "revision-moves.md",
 }
 
 

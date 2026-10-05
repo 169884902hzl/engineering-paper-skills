@@ -34,6 +34,7 @@ English manuscript prose without hiding structural or evidence problems.
 
 | File | Open when |
 |---|---|
+| [../_shared/revision-moves.md](../_shared/revision-moves.md) | Revising a draft: order of revision, expert section moves, sentence-level rules |
 | [references/fact-boundary.md](references/fact-boundary.md) | The source is a rough skeleton, non-English notes, or evidence is incomplete |
 | [references/paragraph-function.md](references/paragraph-function.md) | Identifying paragraph job before rewriting |
 | [references/engineering-topic-modules.md](references/engineering-topic-modules.md) | Polishing control, algorithm, data-driven, materials, process, or multi-physics paragraphs |
@@ -64,13 +65,18 @@ English manuscript prose without hiding structural or evidence problems.
 3. Diagnose the main problem:
    paper logic, section job, paragraph flow, claim/evidence mismatch, or
    sentence style.
-4. Fix higher-level logic before sentence polish.
+4. Fix higher-level logic before sentence polish: argument, then evidence
+   design, then section moves, then sentences
+   ([revision-moves.md](../_shared/revision-moves.md)).
 5. Run a sentence-role check: each sentence must be necessary, placed correctly,
    connected to its neighbors, and bounded by evidence.
 6. Run a claim-strength diff against the source before accepting stronger verbs.
 7. Preserve source facts and evidence boundaries.
 8. Rewrite in English with concrete subjects, varied sentence shapes, and
-   calibrated verbs.
+   calibrated verbs. Put linking information at the start of a sentence
+   and the new point at the end; keep subject and verb close. Check single
+   words that change the technical claim ("dedicated", "verify",
+   "generalize").
 9. Report any claim that still needs evidence.
 
 A paragraph has a stable claim-evidence structure only when at least three of
