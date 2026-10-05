@@ -4,6 +4,34 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Beginner guide, experiment pre-mortem, and LaTeX checker
+
+- `engineering-paper-coach`: new guide mode for beginners. It reads the
+  project folder or notes before asking, detects the paper stage (idea,
+  experiments, results, draft, reviews), produces one deliverable per stage,
+  asks at most three questions, and ends each reply with what was produced,
+  what comes next, and what to bring. Direct mode keeps the one-answer
+  behavior for specific tasks. Stage detail is in
+  `references/stage-playbook.md`; a Chinese beginner guide is in
+  `docs/quickstart-zh.md`.
+- Added `skills/_shared/experiment-premortem.md`: the reviewer patterns applied
+  to an experiment plan (matched controls, assumption logging, independent
+  measurement of internal components, time and cost logging, decision rules,
+  trial counts with 95% Wilson intervals, held-out conditions, what to log).
+  `engineering-paper-auditor` gains an experiment plan pre-mortem section; the
+  router sends plan reviews there and beginners to the coach.
+- Added `skills/engineering-validation/scripts/paper_check.py` (standard
+  library): duplicate labels, undefined references, missing citations,
+  unreferenced floats, float first-reference order, percentages impossible for
+  a stated trial count, uncited entries, and prose percentages absent from
+  tables. Synthetic fixtures under `tests/fixtures/paper_check*` and
+  `scripts/check_paper_check.py` run in CI.
+- On two real submissions, the checker found the duplicate table label behind
+  a wrong table reference that a reviewer flagged, a duplicate figure label,
+  seven percentages impossible for the stated ten trials per condition, and
+  three never-referenced figures. It reads source order, not compiled layout,
+  so it cannot see float placement in the PDF, and it does not expand macros.
+
 ## Shift from writing rules to author experience
 
 - Added `skills/_shared/reviewer-attack-patterns.md`: nine objection patterns

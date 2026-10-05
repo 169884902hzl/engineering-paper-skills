@@ -1,4 +1,4 @@
 interface:
   display_name: "Engineering Paper Coach"
-  short_description: "Lightweight conservative engineering paper writing and audit guidance"
-  default_prompt: "Use $engineering-paper-coach to audit or rewrite my engineering paper draft without strengthening claims beyond the supplied evidence."
+  short_description: "Stage-aware guide and conservative engineering paper coach, from a one-line idea to reviewer responses"
+  default_prompt: "Use $engineering-paper-coach to find where my paper is now and guide me to the next concrete step, without strengthening claims beyond the supplied evidence."

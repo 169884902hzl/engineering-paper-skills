@@ -30,6 +30,8 @@ comparisons, assumptions, cost, and under-specified mechanisms.
    number or comparison ranks with the major objections. List only
    non-substantive slips (a typo, a duplicate label that resolves correctly,
    formatting) separately as mechanical issues.
+5. For an experiment plan rather than a draft, the procedure is in
+   [experiment-premortem.md](experiment-premortem.md).
 
 Evidence tags: `review N/2` = raised in N of the two real review sets studied;
 `senior` = raised in a senior co-author's comments on a student draft;

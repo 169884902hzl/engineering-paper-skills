@@ -1,6 +1,6 @@
 ---
 name: engineering-paper-auditor
-description: Audit English engineering manuscripts like a strict reviewer without drafting final prose. Use when the user asks to review, diagnose, critique, find paper weaknesses, check claim-evidence logic, inspect section boundaries, identify overclaims, assess figures/tables against claims, or produce a paper-quality action list before writing, polishing, response drafting, or validation.
+description: Audit English engineering manuscripts like a strict reviewer without drafting final prose. Use when the user asks to review, diagnose, critique, find paper weaknesses, check claim-evidence logic, inspect section boundaries, identify overclaims, assess figures/tables against claims, produce a paper-quality action list before writing, polishing, response drafting, or validation, predict what reviewers will attack, or run a pre-mortem on an experiment plan, proposal, or results-table skeleton before the experiments finish.
 ---
 
 # Engineering Paper Auditor
@@ -34,6 +34,7 @@ cheapest fixes.
 | File | Open when |
 |---|---|
 | [../_shared/reviewer-attack-patterns.md](../_shared/reviewer-attack-patterns.md) | Any pre-submission review or reviewer simulation |
+| [../_shared/experiment-premortem.md](../_shared/experiment-premortem.md) | An experiment plan, proposal, or results-table skeleton exists but experiments are not finished |
 | [references/audit-rubric.md](references/audit-rubric.md) | Running a full manuscript or section audit |
 | [references/examples.md](references/examples.md) | Needing concrete audit output examples |
 | [references/failure-modes.md](references/failure-modes.md) | Avoiding audit overreach, rewriting, or unsupported conclusions |
@@ -87,6 +88,18 @@ Mechanical issues: [non-substantive slips: typos, labels that resolve correctly,
 Not triggered: [pattern ids]
 Needs author input: [facts the manuscript does not state]
 ```
+
+## Experiment Plan Pre-mortem (Before Experiments)
+
+Use this when an experiment plan, a proposal, or a results-table skeleton
+exists but the experiments are not finished. Follow
+[experiment-premortem.md](../_shared/experiment-premortem.md): map each claim
+to the comparison that would support it, plan matched controls, measurements,
+logging, and trial counts against P1-P6 and P8, and return the plan table,
+the cheapest additions, and the claims to drop or narrow now. Choose the mode
+by what is being reviewed: experiments still to be run get the pre-mortem;
+arguments and results already written get Reviewer Simulation. A draft with
+partial results can need both.
 
 ## Detailed Audit (On Request)
 

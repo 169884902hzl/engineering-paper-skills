@@ -1,0 +1,14 @@
+\newcommand{\figref}[1]{Fig.~\ref{#1}}
+\renewcommand{\unused}[1]{\label{sec:real}\ref{absent}\cite{absent}\input{absent}}
+\providecommand\unusedTwo[1]{\label{sec:real}\ref{#1}}
+\DeclareRobustCommand{\unusedThree}[1]{\cite{#1}\input{#1}}
+\def\unusedFour#1{\label{sec:real}\ref{absent}\cite{absent}\input{absent}}
+\let\unusedFive=\ref
+\let\unusedSix\cite
+\newcommand{\commented}[1]{% A brace } is only a comment.
+  \ref{absent}\label{sec:real}\input{absent}\cite{absent}}
+\section{System}\label{sec:real}
+\label{sec:#1}\ref{sec:#1}\cite{entry:#1}\input{file:#1}
+\figref{fig:system} shows an invented mechanism.
+\begin{figure}\caption{Mechanism}\label{fig:system}\end{figure}
+\nocite{*}\bibliography{../refs}

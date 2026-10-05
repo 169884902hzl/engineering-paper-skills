@@ -1,0 +1,18 @@
+\vref{missing:vref}\Vref{missing:Vref}\cpageref{missing:cpageref}
+\Cpageref{missing:Cpageref}\labelcref{missing:labelcref}\nameref{missing:nameref}
+\autoref{missing:autoref}\subref{missing:subref}
+\hyperref[missing:hyperref]{Visible text}
+\crefrange{missing:crefrange:first}{missing:crefrange:last}
+\Crefrange{missing:Crefrange:first}{missing:Crefrange:last}
+\cpagerefrange{missing:cpagerefrange:first}{missing:cpagerefrange:last}
+\ref{lst:plain}\Cref{lst:braced}\cref{lst:minted}
+\begin{lstlisting} [label=lst:plain]
+\ref{absent}
+\end{lstlisting}
+\begin{lstlisting}[caption={An invented controller, label=literal text},label={lst:braced}]
+\label{duplicate}\label{duplicate}
+\end{lstlisting}
+\begin{minted}[caption={An invented function},label=lst:minted]{python}
+\cite{absent}\input{absent}
+\end{minted}
+\nocite{*}\bibliography{../refs}

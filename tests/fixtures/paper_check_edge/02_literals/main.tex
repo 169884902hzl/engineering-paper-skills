@@ -1,0 +1,25 @@
+\section{System}\label{sec:real}
+See \ref{sec:real}.
+\begin{verbatim}
+\label{sec:real}\ref{absent}\cite{absent}\input{absent}
+\end{verbatim}
+\begin{Verbatim}
+\label{sec:real}\ref{absent}\cite{absent}\input{absent}
+\end{Verbatim}
+\begin{lstlisting}
+{\label{sec:real}\ref{absent}\cite{absent}\input{absent}}
+\end{lstlisting}
+\begin{minted}{python}
+\label{sec:real}\ref{absent}\cite{absent}\input{absent}
+\end{minted}
+\begin{comment}
+\label{sec:real}\ref{absent}\cite{absent}\input{absent}
+\end{comment}
+\verb|\ref{absent}\cite{absent}\input{absent}\label{sec:real}|
+\verb*+50% \ref{absent}+ See \ref{sec:real}.
+\iffalse
+\label{sec:real}\ref{absent}\cite{absent}\input{absent}
+\iffalse \label{sec:real}\fi
+% A commented \fi does not close the block.
+\fi
+\nocite{*}\bibliography{../refs}

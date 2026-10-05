@@ -45,6 +45,30 @@ Overall readiness can only be `READY`, `NOT_READY`, or `CANNOT_DETERMINE`.
 `PASS`. If any required check is `FAIL`, `PARTIAL`, `NOT_RUN`, or `UNKNOWN`,
 overall readiness must be `NOT_READY` or `CANNOT_DETERMINE`.
 
+## LaTeX Consistency Checker
+
+Run `python3 scripts/paper_check.py path/to/main.tex [--bib refs.bib] [--json]`
+(the script lives in this skill's `scripts/` directory; standard library only).
+It follows `\input`/`\include` and reports, with file:line:
+
+- errors: duplicate `\label` keys, references to undefined labels, citation
+  keys missing from the bibliography, a declared bibliography that cannot be
+  read;
+- warnings: floats never referenced, figures or tables first referenced out of
+  numeric order, success rates that are impossible for the stated number of
+  trials (heuristic; it skips aggregated values and reports ambiguous trial
+  counts as info);
+- info: uncited bibliography entries, prose percentages that appear in no
+  table, and anything it could not check (an input file outside the project,
+  a dynamic macro argument).
+
+It skips macro definitions, verbatim-like environments, and `\iffalse` blocks,
+and treats only `\%` and siunitx forms as percentages. It reads source order,
+not the compiled layout, and does not expand general macros, so numbers
+defined through `\newcommand` and float placement in the PDF are not checked.
+Report its output verbatim as one check in the readiness table; a clean run is
+evidence for these checks only.
+
 ## When to Open Extra Files
 
 | File | Open when |

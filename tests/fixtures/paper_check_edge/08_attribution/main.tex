@@ -1,0 +1,17 @@
+See \eqref{eq:nested}, \subref{fig:child}, \ref{fig:subcaption},
+\ref{fig:subfloat}, and \eqref{eq:only}.
+\begin{figure}
+\caption{An equation embedded in an invented diagram}
+\begin{equation}x=1\label{eq:nested}\end{equation}
+\end{figure}
+\begin{figure}
+\begin{subfigure}{0.4\linewidth}\caption{Detail}\label{fig:child}\end{subfigure}
+\subcaption{Another detail}\label{fig:subcaption}
+\subfloat[Third detail]{A sketch\label{fig:subfloat}}
+\caption{An invented diagram with parts}\label{fig:parent}
+\end{figure}
+\begin{figure}
+\begin{equation}x=2\label{eq:only}\end{equation}
+\caption{Another invented diagram}\label{fig:unreferenced}
+\end{figure}
+\nocite{*}\bibliography{../refs}
