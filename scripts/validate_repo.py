@@ -43,6 +43,7 @@ REQUIRED_SHARED = {
     "reviewer-attack-patterns.md",
     "writing-process.md",
     "revision-moves.md",
+    "experiment-premortem.md",
 }
 
 

@@ -1,6 +1,6 @@
 ---
 name: engineering-paper-router
-description: Route ambiguous or mixed English engineering paper tasks to the correct engineering paper skill. Use when the user asks broadly to improve my paper, check my manuscript, revise this draft, prepare submission, respond to comments, or combine drafting, polishing, figure/table work, response drafting, and validation.
+description: Route ambiguous or mixed English engineering paper tasks to the correct engineering paper skill. Use when the user names several paper tasks at once or a mixed request such as revise this draft and prepare submission, respond to comments, or combine drafting, polishing, figure/table work, response drafting, and validation. Beginners and open-ended "where do I start" requests go to engineering-paper-coach guide mode.
 ---
 
 # Engineering Paper Router
@@ -46,12 +46,14 @@ routing.
 | classify reviewer/advisor/editor comments, build revision tracker, draft response letter | `engineering-response` |
 | compile/check manuscript, inspect citations, claim-evidence anchors, figures/tables, readiness | `engineering-validation` |
 | what will reviewers say, is the evidence convincing, pre-submission critique | `engineering-paper-auditor` (reviewer simulation) |
+| review an experiment plan, proposal, or results-table skeleton before experiments finish | `engineering-paper-auditor` (experiment plan pre-mortem) |
+| beginner, "where do I start", a project folder with no specific task | `engineering-paper-coach` (guide mode) |
 
 ## Input-State Routing
 
 | Input state | Primary route | Secondary route | Stop condition |
 |---|---|---|---|
-| Thin idea, no method/evidence/boundary | `engineering-writing` scaffold only | none | Do not draft final Abstract/Conclusion |
+| Thin idea, no method/evidence/boundary | `engineering-paper-coach` guide mode (stage S0) | `engineering-writing` scaffold only if the user asks for prose | Do not draft final Abstract/Conclusion |
 | Notes plus result tables, no figure responsibilities | `engineering-writing` | `engineering-figure-table` | Do not write strong claims before evidence map |
 | Existing paragraph with stable claim/evidence | `engineering-polishing` | `engineering-writing` only if structure fails | Stop if claim, evidence, and boundary are unclear |
 | Caption, table, category names, or visual claims | `engineering-figure-table` | `engineering-polishing` for caption wording only | Stop if visual evidence cannot support the requested claim |
@@ -62,8 +64,9 @@ routing.
 
 For full-paper work, use this order unless the user gives a narrower task:
 
-1. `engineering-paper-auditor`: story-spine and blocker audit if the draft is
-   already written or the task is broad.
+1. `engineering-paper-auditor`: story-spine and blocker audit if a draft is
+   already written. Without a draft, skip this step; open-ended requests from
+   beginners go to `engineering-paper-coach` guide mode.
 2. `engineering-writing`: one-sentence thesis, story spine, and
    contribution-evidence map.
 3. `engineering-figure-table`: visual responsibility and evidence roles.

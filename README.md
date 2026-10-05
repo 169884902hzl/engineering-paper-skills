@@ -4,10 +4,12 @@ Evidence-bound Codex skills for **engineering paper writing**, **manuscript
 audit**, **reviewer response**, **figure/table claim checks**, and **research
 paper validation** for robotics, machine learning, control, and systems papers.
 
-Most users should start with **`$engineering-paper-coach`**. Give it research
-notes, draft text, results, figures, or reviewer comments; it will either write
-within the supplied evidence, downgrade unsupported claims, or tell you what
-evidence is missing.
+Most users should start with **`$engineering-paper-coach`**. If you are new to
+paper writing, just say "I want to write a paper" and point it at your project
+folder or notes (any language): it works out which stage you are at (idea,
+experiments, results, draft, reviews), produces that stage's deliverable, and
+tells you what to bring next. For a specific task, it gives one direct answer.
+Chinese quick start: [docs/quickstart-zh.md](docs/quickstart-zh.md).
 
 Normal users only need `skills/_shared` and `skills/engineering-*`. The
 `scripts/`, `tests/`, and `evals/` directories are for maintainers and
@@ -29,6 +31,7 @@ experience and are linked from the skills:
 |---|---|
 | [skills/_shared/reviewer-attack-patterns.md](skills/_shared/reviewer-attack-patterns.md) | Objections real reviewers and senior co-authors raised (handicapped baselines, unstated operating assumptions, unmeasured internal components, added cost, heuristic decision rules), with the cheapest pre-submission fix for each |
 | [skills/_shared/writing-process.md](skills/_shared/writing-process.md) | The order experienced authors follow: page budget, table slots before the remaining experiments, figures from tables, Abstract last |
+| [skills/_shared/experiment-premortem.md](skills/_shared/experiment-premortem.md) | The reviewer pre-mortem applied to an experiment plan, while a missing control still costs one more condition instead of a rebuttal |
 | [skills/_shared/revision-moves.md](skills/_shared/revision-moves.md) | Concrete moves observed in a senior author's revisions, plus global-to-local revision order |
 
 Evidence and limits: an earlier version of the attack patterns was tested
@@ -227,7 +230,10 @@ Writing requirements:
 
 | Task | Start with |
 |---|---|
+| I am new and do not know where to start | `engineering-paper-coach` (guide mode) |
 | I have notes and want practical Markdown guidance | `engineering-paper-coach` |
+| I have an experiment plan and want it checked before running | `engineering-paper-auditor` (experiment plan pre-mortem) |
+| I want mechanical LaTeX checks (labels, references, float order, impossible percentages) | `skills/engineering-validation/scripts/paper_check.py` |
 | I want to audit a section before rewriting | `engineering-paper-auditor` |
 | I want to know what reviewers will attack before submission | `engineering-paper-auditor` (reviewer simulation) |
 | I want to draft Abstract, Introduction, Methods, or Experiments | `engineering-writing` |
@@ -279,7 +285,7 @@ Out of scope by design:
 
 | Use case | Skill |
 |---|---|
-| Quick conservative writing, audit, polishing, response planning, or readiness triage in Markdown | `engineering-paper-coach` |
+| Stage-by-stage guidance for beginners, or quick conservative writing, audit, polishing, response planning, or readiness triage in Markdown | `engineering-paper-coach` |
 | Unsure which workflow to use, or planning a mixed paper task | `engineering-paper-router` |
 | Audit paper logic, claim-evidence gaps, section drift, and visual overclaims before rewriting | `engineering-paper-auditor` |
 | Plan or draft paper sections from claims, notes, figures, or results | `engineering-writing` |
@@ -770,9 +776,9 @@ to use the skills.
   terminology-ledger, source-note, and output-mode rules
 - `skills/engineering-paper-router/`: routing skill for ambiguous or mixed paper
   tasks
-- `skills/engineering-paper-coach/`: lightweight conservative Markdown entry
-  skill for quick writing, audit, polishing, response planning, and readiness
-  triage
+- `skills/engineering-paper-coach/`: entry skill; guide mode walks beginners
+  through paper stages, direct mode gives quick conservative writing, audit,
+  polishing, response planning, and readiness triage
 - `skills/engineering-paper-auditor/`: reviewer-like paper audit skill for
   claim-evidence, section-boundary, visual, and readiness risks
 - `skills/engineering-writing/`: drafting and manuscript-structure skill

@@ -1,0 +1,45 @@
+\section{Results}
+Each condition used ten trials.
+\subsection{Caption precedence}
+Each condition used 10 trials.
+See \ref{tab:caption}.
+\begin{table}
+\caption{Success rates from twenty-five independent trials}\label{tab:caption}
+\begin{tabular}{lr}Condition & Rate (\%) \\ A & 64 \\ B & 65 \\ \end{tabular}
+\end{table}
+\subsection{Nearest statement}
+A pilot used 10 trials.
+Success was 60\%.
+A later measurement used 20 trials.
+Success was 65\%.
+\subsection{Inherited denominator}
+Success was 65\%.
+See \ref{tab:header}.
+\begin{table}\caption{Invented measurements}\label{tab:header}
+\begin{tabular}{lr}Condition & Completion (\%) \\ A & 65 \\ \end{tabular}
+\end{table}
+\subsection{Ambiguous denominators}
+A pilot used 10 trials and another measurement used 20 runs.
+Success was 65\%.
+See \ref{tab:ambiguous}.
+\begin{table}
+\caption{Success measurements from 10 trials and 20 trials}\label{tab:ambiguous}
+\begin{tabular}{lr}Condition & Rate (\%) \\ A & 65 \\ \end{tabular}
+\end{table}
+\subsection{Half-up precision}
+Each condition used eight trials.
+Success was 13\%, 12.5\%, and 12.50\%.
+Success was 12\%.
+\subsection{Two-decimal precision}
+Each condition used 3 trials.
+Success was 66.67\%, 66.7\%, and 67\%.
+Success was 66.66\%, 66.70\%, and 66\%.
+The budget share was 65\%.
+See \ref{tab:values}.
+\begin{table}\caption{Invented reported shares}\label{tab:values}
+\begin{tabular}{lr}
+Condition & Share (\%) \\
+A & 60\% \\ B & 65\% \\ C & 13\% \\ D & 12.5\% \\ E & 12\% \\
+F & 66.67\% \\ G & 66.7\% \\ H & 67\% \\ I & 66.66\% \\ J & 66.70\% \\ K & 66\% \\
+\end{tabular}\end{table}
+\nocite{*}\bibliography{../refs}

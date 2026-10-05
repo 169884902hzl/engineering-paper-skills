@@ -21,7 +21,8 @@ authors actually follow, which differs from "draft the Introduction first".
    empty cells are the experiment to-do list. The table decides what to
    compare and under which conditions; the number of trials per cell comes
    from the evaluation unit, the expected variability, and the uncertainty the
-   claim needs, not from the layout.
+   claim needs, not from the layout. Before running them, check the plan with
+   [experiment-premortem.md](experiment-premortem.md).
 5. Design figures from the tables. A teaser figure stays light and contrasts
    the naive approach with the proposed one. The framework figure carries the
    method and doubles as a reading guide for Methods. Qualitative figures

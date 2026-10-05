@@ -383,6 +383,10 @@ REQUIRED_DEMO_CASES = {
 }
 
 REQUIRED_REFERENCE_MARKERS = {
+    "skills/_shared/experiment-premortem.md": [
+        "Experiment plan pre-mortem",
+        "Cheapest additions, ranked",
+    ],
     "skills/_shared/reviewer-attack-patterns.md": [
         "P1. Handicapped Baseline",
         "Reviewer simulation",
