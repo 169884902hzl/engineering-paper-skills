@@ -9,31 +9,32 @@ Paper type:
 Robotics / engineering conference paper.
 
 Task:
-Contact-rich action grounding for visually ambiguous insertion targets.
+Suction-cup bin picking of transparent and reflective parts.
 
 Core bottleneck:
 Identify the main bottleneck and recover contribution roles from the deltas.
 The paragraph should explain where the largest improvement enters the pipeline.
 
 Method:
-A staged action-grounding pipeline that adds geometry-aware execution,
-target-focused perception, overlay self-verification, and mask-constrained
-grounding.
+A staged picking pipeline that adds seal-pressure retry, depth completion,
+collision-aware candidate re-ranking, and a surface-normal consistency filter.
 
 Evidence:
 
-- Naive direct action hint: 17% success.
-- + Geometry-aware execution: 23% success.
-- + Target-focused perception and geometry-aware execution: 44% success.
-- + Target-focused perception, overlay self-verification, and geometry-aware
-  execution: 76% success.
-- Full system with mask-constrained grounding: 88% success.
-- Geometry-aware execution mainly improves action realization but cannot choose
-  the correct target by itself.
-- Target-focused perception reduces scene-level ambiguity.
-- Overlay self-verification rejects visually plausible but poorly grounded
-  action hints.
-- Mask-constrained grounding reduces spatial ambiguity near the target.
+- Depth-only grasp planner: 21% success.
+- + Seal-pressure retry: 34% success.
+- + Depth completion and seal-pressure retry: 52% success.
+- + Depth completion, collision-aware candidate re-ranking, and seal-pressure
+  retry: 69% success.
+- Full system with surface-normal consistency filter: 81% success.
+- Seal-pressure retry mainly recovers picks that lose vacuum after contact but
+  cannot choose a better grasp point by itself.
+- Depth completion restores missing depth on transparent and reflective
+  surfaces.
+- Collision-aware re-ranking rejects candidates whose approach path would hit
+  neighboring parts.
+- The surface-normal consistency filter removes grasp points on curved edges
+  where the cup cannot seal.
 
 Boundary:
 

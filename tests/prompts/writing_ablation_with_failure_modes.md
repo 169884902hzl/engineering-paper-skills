@@ -7,21 +7,23 @@ one complete ablation paragraph, not a component list.
 
 Ablation rows:
 
-- Naive direct action hint: 17% success.
-- + Geometry-aware execution: 23%.
-- + Target-focused perception and geometry-aware execution: 44%.
-- + Target-focused perception, overlay self-verification, and geometry-aware
-  execution: 76%.
-- Full system with mask-constrained grounding: 88%.
+- Depth-only grasp planner: 21% success.
+- + Seal-pressure retry: 34%.
+- + Depth completion and seal-pressure retry: 52%.
+- + Depth completion, collision-aware candidate re-ranking, and seal-pressure
+  retry: 69%.
+- Full system with surface-normal consistency filter: 81%.
 
 Interpretation notes:
 
-- Geometry-aware execution mainly improves action realization but cannot choose
-  the correct target by itself.
-- Target-focused perception reduces scene-level ambiguity.
-- Overlay self-verification rejects visually plausible but poorly grounded
-  action hints.
-- Mask-constrained grounding reduces spatial ambiguity near the target.
+- Seal-pressure retry mainly recovers picks that lose vacuum after contact but
+  cannot choose a better grasp point by itself.
+- Depth completion restores missing depth on transparent and reflective
+  surfaces.
+- Collision-aware re-ranking rejects candidates whose approach path would hit
+  neighboring parts.
+- The surface-normal consistency filter removes grasp points on curved edges
+  where the cup cannot seal.
 - The ablation is additive, not a fully isolated factorial design.
 
 Boundary:

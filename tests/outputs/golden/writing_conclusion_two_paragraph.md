@@ -1,8 +1,8 @@
 ## Draft
 
-We presented a verification-driven framework for dual-arm manipulation from a single RGB-D observation. The method combines target-focused perception, structured action-hint generation, iterative verification, mask-constrained grounding, and geometry-aware execution to convert visual reasoning into executable bimanual actions. In the supplied evaluation, the full system achieved 88% average success compared with 19% for the best trained baseline, and the ablation results show that verification and grounding are important to the final performance. These results support a bounded claim that verification-driven visual reasoning improves reliability under the tested real-robot conditions.
+We presented a suction bin-picking pipeline for transparent and reflective parts that plans grasps from one overhead depth camera. The method combines depth completion, collision-aware candidate re-ranking, a surface-normal consistency filter, and seal-pressure retry to turn incomplete depth on difficult surfaces into executable suction picks. In the supplied evaluation, the full system achieved 81% average pick success compared with 38% for the best learned grasp baseline, and the ablation results show that depth completion and candidate re-ranking are important to the final performance. These results support a bounded claim that recovering surface geometry before grasp selection improves picking reliability under the tested bin conditions.
 
-The current method remains limited by object scale, visual ambiguity, and evaluation scope. Very thin objects and severe occlusion remain difficult, and the evidence comes from one real robot platform without an industrial deployment evaluation. Future work should therefore focus on improving perception and grounding under severe visibility loss and testing the framework across additional platforms and task settings.
+The current method remains limited by part geometry, part arrangement, and evaluation scope. Small parts with highly curved surfaces and densely interlocked parts remain difficult, and the evidence comes from one real robot platform without an industrial deployment evaluation. Future work should therefore focus on seal prediction for curved surfaces and separation strategies for interlocked parts, and on testing the pipeline across additional robot platforms and part families.
 
 ## Why this works
 
@@ -13,12 +13,12 @@ The current method remains limited by object scale, visual ambiguity, and evalua
 ## Evidence used
 
 - Method components supplied in the prompt.
-- 88% full-system success and 19% best trained baseline.
-- Ablation note about verification and grounding.
-- Boundary notes about thin objects, severe occlusion, one platform, and no deployment evaluation.
+- 81% full-system success and 38% best learned grasp baseline.
+- Ablation note about depth completion and candidate re-ranking.
+- Boundary notes about curved small parts, interlocked parts, one platform, and no deployment evaluation.
 
 ## Boundary / do-not-claim
 
 - Do not introduce new modules, benchmarks, or results.
 - Do not claim deployment validation.
-- Do not claim that all occlusion or thin-object cases are solved.
+- Do not claim that all curved-part or interlocked-part cases are solved.

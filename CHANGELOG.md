@@ -4,6 +4,38 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Remove unpublished-derived content, add privacy tooling, checker table checks
+
+- Removed content derived from an unpublished manuscript from the current
+  tree: synthetic fixtures were replaced with an invented scenario, recorded
+  model outputs and eval notes had the derived spans replaced with
+  `[redacted: unpublished source data]` (listed in
+  `tests/outputs/model_runs/REDACTIONS.md`), showcase blocks that displayed it
+  were removed from README and docs, and two example passages in
+  `engineering-writing` references were rewritten. Earlier git history is
+  unchanged.
+- Added `scripts/check_private_overlap.py`: scans repo files for word n-gram
+  overlap with private files and for distinctive terms, without printing the
+  private content; tested by `scripts/check_private_overlap_test.py` in CI.
+  `docs/maintainers/adding-private-experience.md` describes how to turn
+  private reviews into public patterns.
+- `paper_check.py`: average/total columns recomputed from their rows, prose
+  values checked against the table cell they name (including stacked tables
+  with sub-header rows), and compiled float order read from `.aux`. On a real
+  manuscript it found two wrong averages and a prose value that contradicted
+  its table.
+- Writing test (two expert papers, 4 units each, Claude and Codex, three
+  conditions: no skill, SKILL.md plus shared experience files, full skill with
+  references; two blind judges): results were small and judge-dependent;
+  the judges agreed on the best draft in 10 of 16 tasks and disagreed on
+  which condition won. Both judges listed the same expert moves that drafts
+  missed: turning numbers into findings. Added "From Numbers To Findings" to
+  `skills/_shared/revision-moves.md` and a pointer in `engineering-writing`.
+- Reference pruning: the pre-registered rule gave a mixed result, and the test
+  covered only Abstract, Introduction, Results, and analysis units, so no
+  reference file was deleted. `paper-workflow.md` now points to
+  `writing-process.md` instead of repeating the writing order.
+
 ## Beginner guide, experiment pre-mortem, and LaTeX checker
 
 - `engineering-paper-coach`: new guide mode for beginners. It reads the

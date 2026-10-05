@@ -1,0 +1,27 @@
+Atlas achieves 81\% in Table~\ref{tab:scores}.
+Beacon achieves 90\% in Table~\ref{tab:scores}.
+Shared achieves 99\%.
+Unique achieves 77\%.
+See \ref{tab:other} and \ref{tab:ambiguous}.
+Duplicate achieves 99\% in Table~\ref{tab:ambiguous}.
+The Success value is 99\% in Table~\ref{tab:scores}.
+Table~\ref{tab:Atlas} reports 99\%.
+\begin{table}\caption{Invented rates}\label{tab:scores}\label{tab:Atlas}
+\begin{tabular}{lrr}
+Method & Success (\%) & Delay (s) \\
+\textbf{Atlas} & \underline{80} & 2 \\
+Beacon & 90 & 3 \\
+Shared & 70 & 4 \\
+Unique & 77 & 5 \\
+\end{tabular}\end{table}
+\begin{table}\caption{Other invented rates}\label{tab:other}
+\begin{tabular}{lr}
+Method & Score (\%) \\
+Shared & 75 \\
+\end{tabular}\end{table}
+\begin{table}\caption{Ambiguous invented rates}\label{tab:ambiguous}
+\begin{tabular}{lrr}
+Method & Success before (\%) & Success after (\%) \\
+Duplicate & 60 & 70 \\
+\end{tabular}\end{table}
+\nocite{*}\bibliography{../refs}

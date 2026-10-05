@@ -5,18 +5,9 @@ what to write first.
 
 ## Do Not Start with the Abstract
 
-For an engineering systems or robotics paper, use this order:
-
-1. lock the one-sentence thesis
-2. define figure/table responsibilities and evidence map
-3. write Methods
-4. write Experiments/Results
-5. write Introduction
-6. decide whether Related Work is folded or standalone
-7. write Abstract and Conclusion
-8. run figure, wording, citation, and build validation
-
-The Abstract should only promise what Methods and Experiments can support.
+The writing order, including how to work while results are incomplete, is in
+[writing-process.md](../../_shared/writing-process.md). The Abstract should
+only promise what Methods and Experiments can support.
 
 ## Three-Window Rule
 

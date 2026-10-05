@@ -178,11 +178,11 @@ achieves Z. These results indicate improvement in the tested setup.
 Stronger engineering prose:
 
 ```text
-The experiment isolates where the system gains reliability: execution
-constraints alone produce only a small improvement, while target-focused
-perception and verification account for the main jumps in success. This pattern
-suggests that the bottleneck is not only executing the action, but selecting and
-grounding the action before contact.
+The experiment isolates where the system gains reliability: retrying picks
+that lose vacuum produces only a small improvement, while depth completion and
+candidate re-ranking account for the main jumps in success. This pattern
+suggests that the bottleneck is not only executing the pick, but choosing a
+grasp point that can seal before contact.
 ```
 
 ## Abstract: Six-Sentence System Template
@@ -365,8 +365,8 @@ The trend is consistent with [bounded mechanism interpretation], but [boundary] 
 ```
 
 If the result is a difference between percentages, say `percentage points` when
-that is what the table shows. For example, write `from 19% to 88%` or `69
-percentage points higher`, not just `69% higher`, unless a relative-ratio claim
+that is what the table shows. For example, write `from 38% to 81%` or `43
+percentage points higher`, not just `43% higher`, unless a relative-ratio claim
 is intended and supported.
 
 A stronger Results paragraph explains the numbers:

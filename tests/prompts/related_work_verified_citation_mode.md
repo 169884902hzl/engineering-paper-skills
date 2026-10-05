@@ -18,8 +18,8 @@ Synthetic citation snippets:
   deviation checks. Method: limits execution when contact deviates from the
   planned path. Limitation: assumes the insertion pose is already supplied.
 - [C3] Language-guided action proposal system. Setting: object-centric robot
-  manipulation. Method: proposes task-relevant action hints from visual and
-  language context. Limitation: does not verify fine insertion pose before
+  manipulation. Method: proposes task-relevant object-centric actions from
+  visual and language context. Limitation: does not verify fine insertion pose before
   contact.
 
 Current paper notes:

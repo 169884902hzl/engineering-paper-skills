@@ -2,10 +2,10 @@
   "case": "writing_conclusion_two_paragraph",
   "prompt": "writing_conclusion_two_paragraph.md",
   "must_include": [
-    "88%",
-    "19%",
-    "very thin objects",
-    "severe occlusion"
+    "81%",
+    "38%",
+    "highly curved surfaces",
+    "interlocked parts"
   ],
   "must_not_include": [
     "## Verdict",

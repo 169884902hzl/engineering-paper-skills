@@ -4,21 +4,22 @@ Use $engineering-writing to draft a two-paragraph Conclusion from these notes.
 Produce manuscript prose first.
 
 Method:
-Verification-driven dual-arm manipulation framework from one RGB-D observation.
-It combines target-focused perception, structured action-hint generation,
-iterative verification, mask-constrained grounding, and geometry-aware execution.
+Suction bin-picking pipeline for transparent and reflective parts from one
+overhead depth camera.
+It combines depth completion, collision-aware candidate re-ranking, a
+surface-normal consistency filter, and seal-pressure retry.
 
 Evidence:
 
-- Full system: 88% average success.
-- Best trained baseline: 19%.
-- Ablation: removing verification and grounding reduces success.
-- Robustness tests cover appearance, diameter, and complexity variations.
+- Full system: 81% average pick success.
+- Best learned grasp baseline: 38%.
+- Ablation: removing depth completion or candidate re-ranking reduces success.
+- Robustness tests cover part material, bin fill level, and lighting variations.
 
 Boundary:
 
-- very thin objects remain difficult
-- severe occlusion remains difficult
+- small parts with highly curved surfaces remain difficult
+- densely interlocked parts remain difficult
 - one real robot platform
 - no industrial deployment evaluation
 

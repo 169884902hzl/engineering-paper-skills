@@ -20,12 +20,11 @@ Main result evidence:
 
 Ablation evidence:
 
-- Naive direct action hint: 17%.
-- + Geometry-aware execution: 23%.
-- + Target-focused perception and geometry-aware execution: 44%.
-- + Target-focused perception, overlay self-verification, and geometry-aware
-  execution: 76%.
-- Full mask-constrained grounding: 88%.
+- Fixed overhead camera with force-guarded insertion: 69%.
+- + Pose-confidence estimation: 70%.
+- + Confidence-triggered additional view: 78%.
+- + Pose refinement from the additional view: 81%.
+- Full system with pose-deviation stop: 84%.
 - Rows are additive, not factorial.
 
 Failure boundary:

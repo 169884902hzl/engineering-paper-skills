@@ -54,6 +54,7 @@ def check_fixtures():
         ("trial_granularity", "warning", "tables/outcomes.tex", 6, "N=10"),
         ("uncited_bib_entry", "info", "refs.bib", 8, "unused_grasp_note"),
         ("prose_percentage_not_tabulated", "info", "sections/experiments.tex", 5, "80%"),
+        ("aux_float_order", "info", "main.tex", 1, "Compiled float order was not checked"),
     ]
     expected_locations = Counter((c, s, FIXTURES + "paper_check/" + f, n)
                                  for c, s, f, n, _ in expected)
@@ -65,7 +66,9 @@ def check_fixtures():
                     and f["line"] == line and token in f["message"] for f in findings),
                 "Missing finding detail: " + check + " " + token)
     status, clean = run("paper_check_clean")
-    require(status == 0 and not clean, "Clean fixture must have no findings: " + str(clean))
+    require(status == 0 and len(clean) == 1 and clean[0]["check"] == "aux_float_order"
+            and clean[0]["severity"] == "info",
+            "Clean fixture must only skip compiled order: " + str(clean))
     status, explicit = run("paper_check", "--bib", FIXTURES + "paper_check/refs.bib")
     require(status == 1 and explicit == findings, "Explicit bibliography changed fixture findings")
 
@@ -101,7 +104,9 @@ Observed success was 66.7\%. % Ignore 65\% and \ref{absent}.
 """
     findings = virtual({"main.tex": sample, "sections/details.tex": details,
                         "refs.bib": "@article{a, title={Invented A}}\n@article{b, title={Invented B}}"})
-    require(not findings, "Nested sections, rounding, or optional citations failed: " + str(findings))
+    require(len(findings) == 1 and findings[0]["check"] == "aux_float_order"
+            and findings[0]["severity"] == "info",
+            "Nested sections, rounding, or optional citations failed: " + str(findings))
     for token, count in checker.WORDS.items():
         match = checker.TRIALS.search("Each condition used " + token + " repeated trials.")
         require(match and checker.WORDS[match.group(1)] == count,
@@ -132,6 +137,8 @@ def check_regressions():
     """Each numbered review fix has a checked, on-disk regression project."""
     def expect(case, expected, *extra):
         _, findings = run("paper_check_edge/" + case, *extra)
+        if not (ROOT / FIXTURES / "paper_check_edge" / case / "main.aux").is_file() and "--aux" not in extra:
+            expected = expected + [("aux_float_order", "info", 1, "Compiled float order was not checked")]
         actual = Counter((f["check"], f["severity"], f["line"]) for f in findings)
         wanted = Counter((check, severity, line) for check, severity, line, _ in expected)
         require(actual == wanted, case + " findings differ: " + str(findings))
@@ -211,6 +218,49 @@ def check_regressions():
         ("trial_granularity", "warning", 22, "N=10"),
         ("trial_granularity", "info", 24, "aggregated value; trial granularity not checked"),
     ])
+    # 14: Wrapped cells, spreads and units work; precision ties, gaps and spans stay silent.
+    expect("14_table_math", [("table_arithmetic", "warning", 6, "recomputed value is 90%"),
+                             ("table_arithmetic", "warning", 18, "recomputed value is 6")])
+    expect("14_table_math/rows", [("table_arithmetic", "warning", 4, "recomputed value is 3"),
+                                  ("table_arithmetic", "warning", 8, "recomputed value is 6")])
+    # 15: One uniquely grounded disagreement includes the table cell's source location.
+    expect("15_text_table", [("text_table_mismatch", "warning", 1, "81% in prose, but 80%")])
+    _, text_findings = run("paper_check_edge/15_text_table")
+    mismatch = next(f for f in text_findings if f["check"] == "text_table_mismatch")
+    require(FIXTURES + "paper_check_edge/15_text_table/main.tex:12" in mismatch["message"],
+            "Text/table mismatch omitted the table location")
+    expect("15_text_table/conservative", [("text_table_mismatch", "warning", 1,
+                                           "79% in prose, but 80%"),
+                                          ("text_table_mismatch", "warning", 27,
+                                           "74% in prose, but 75%")])
+    # 16: Compiled numbering can disagree even when source float order agrees.
+    aux = FIXTURES + "paper_check_edge/16_aux/"
+    expect("16_aux", [("aux_float_order", "warning", 2, "Table I (tab:earlier)")])
+    expect("16_aux", [("aux_float_order", "warning", 2, "table II (tab:later)")],
+           "--aux", aux + "main.aux")
+    expect("16_aux", [], "--aux", aux + "ordered.aux")
+    expect("16_aux", [("aux_float_order", "warning", 3, "Figure 1 (fig:later)")],
+           "--aux", aux + "figures.aux")
+    expect("16_aux", [("aux_float_order", "info", 1, "Compiled float order was not checked")],
+           "--aux", aux + "absent.aux")
+
+    # 17: Wide, wrapped rows retain names, zeroes and rounded summary precision.
+    expect("17_wide_avg", [("table_arithmetic", "warning", 18, "recomputed value is 6.7%"),
+                           ("table_arithmetic", "warning", 20, "recomputed value is 18.3%")])
+    _, wide_findings = run("paper_check_edge/17_wide_avg")
+    arithmetic = [f for f in wide_findings if f["check"] == "table_arithmetic"]
+    for row, reported, item in zip(("Baseline A", "Baseline B"), ("5%", "22%"), arithmetic):
+        require(row in item["message"] and "reports " + reported in item["message"],
+                "Wide summary omitted its row name or reported value: " + str(item))
+
+    # 18: Sub-headers bind each block; prose may put a percentage before the label.
+    expect("18_stacked", [("text_table_mismatch", "warning", 4, "80% in prose, but 50%")])
+    _, stacked_findings = run("paper_check_edge/18_stacked")
+    mismatch = next(f for f in stacked_findings if f["check"] == "text_table_mismatch")
+    require("'stacked'" in mismatch["message"]
+            and mismatch["file"] == FIXTURES + "paper_check_edge/18_stacked/main.tex"
+            and FIXTURES + "paper_check_edge/18_stacked/main.tex:19" in mismatch["message"],
+            "Stacked mismatch omitted its label or either source location")
 
 
 def main():

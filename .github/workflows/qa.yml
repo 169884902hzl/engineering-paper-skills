@@ -20,6 +20,7 @@ jobs:
       - run: python scripts/check_venue_profiles.py
       - run: python scripts/check_metadata_files.py
       - run: python scripts/check_paper_check.py
+      - run: python scripts/check_private_overlap_test.py
       - name: Optional prompt behavior regression
         run: |
           if [ -z "${PROMPT_REGRESSION_COMMAND_TEMPLATE:-}" ]; then

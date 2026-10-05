@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Check LaTeX manuscript consistency with conservative source heuristics.
 
-Not checked: general macro expansion and compiled float placement.
-Usage: python3 paper_check.py path/to/main.tex [--bib refs.bib] [--json]
+Checks: labels, references, citations, float labels and source reference order.
+Heuristics: trial granularity, prose percentages, table_arithmetic and
+text_table_mismatch. Compiled reference order: aux_float_order (with an aux file).
+Not checked: general macro expansion and compiled float placement on pages.
+Usage: python3 paper_check.py path/to/main.tex [--bib refs.bib] [--aux main.aux] [--json]
 """
 
 import argparse
@@ -43,6 +46,8 @@ TRIALS = re.compile(r"\b(" + COUNT + r")\s+"
 GROUP_COUNTS = re.compile(r"\b(" + COUNT + r")\s+(object|condition|seed)s?\b", re.I)
 AGGREGATION = re.compile(r"\b(?:overall|average|averaged|mean|across|in\s+total|total|"
                          r"pooled|for\s+each\s+of|per\s+(?:object|condition))\b", re.I)
+TABLE_NUMBER = r"[+-]?(?:\d+(?:\.\d+)?|\.\d+)"
+SUMMARY = {"avg", "average", "mean", "overall", "total"}
 
 
 def escaped(text, pos):
@@ -573,7 +578,316 @@ def check_percentages(source, sections, floats, tabulars):
     return findings
 
 
-def check_paper(main, bib=None):
+def cell_text(text):
+    """Unwrap common presentation macros, leaving unknown content opaque."""
+    parts, cursor = [], 0
+    for match in COMMAND.finditer(text):
+        if match.start() < cursor or escaped(text, match.start()):
+            continue
+        name, end = match.group(1), match.end()
+        if name in {"textcolor", "color", "cellcolor", "colorbox", "fcolorbox"}:
+            end = space(text, end)
+            if text[end:end + 1] == "[":
+                _, end = group(text, end)
+            for _ in range(2 if name == "fcolorbox" else 1):
+                end = space(text, end)
+                if text[end:end + 1] != "{":
+                    break
+                _, end = group(text, end)
+        elif name not in {"textbf", "textit", "textnormal", "textrm", "textsf",
+                          "texttt", "emph", "underline", "mathbf", "mathrm", "mathit",
+                          "text", "mbox", "makecell", "bm", "boldsymbol", "bf", "bfseries", "itshape",
+                          "normalfont", "quad", "qquad", "enspace"}:
+            continue
+        parts.append(text[cursor:match.start()])
+        cursor = end
+    parts.append(text[cursor:])
+    text = "".join(parts).replace(r"\%", "%")
+    text = re.sub(r"\\[,;! ]|\\[()]", " ", text)
+    return " ".join(text.translate(str.maketrans("", "", "{}$")).replace("~", " ").split())
+
+
+def header_text(text):
+    text = cell_text(text)
+    unit = re.search(r"\s*[([]\s*(%|[A-Za-z]+)\s*[)\]]$", text)
+    return (text[:unit.start()].strip(), unit.group(1)) if unit else (text, "")
+
+
+def numeric_cell(text, unit=""):
+    text = cell_text(text)
+    match = re.fullmatch(r"(" + TABLE_NUMBER + r")\s*(%|[A-Za-z]+)?"
+                         r"(?:\s*(?:\\pm|±|\+/-|\+-)\s*" + TABLE_NUMBER
+                         + r"\s*(%|[A-Za-z]+)?)?", text)
+    if not match:
+        return None
+    units = {value for value in (unit, match.group(2), match.group(3)) if value}
+    if len(units) > 1:
+        return None
+    return {"token": match.group(1), "value": Decimal(match.group(1)),
+            "unit": next(iter(units), "")}
+
+
+def parsed_tables(source, tabulars, floats):
+    """Retain simple cells and their source positions; spans stay unchecked."""
+    tables = []
+    rules = re.compile(r"\s*(?:\[[^]]*\]|\\(?:hline|toprule|midrule|bottomrule|"
+                       r"addlinespace)\b(?:\s*\[[^]]*\])?|"
+                       r"\\(?:cline|cmidrule)\b(?:\s*\[[^]]*\])?"
+                       r"(?:\s*\([^)]*\))?\s*\{[^}]*\})")
+    for tabular in tabulars:
+        body = source.text[tabular["body"]:tabular["end"]]
+        if re.search(r"\\(?:multirow|multicolumn|begin)\b", body):
+            continue
+        blocks, rows, headers = [], [], []
+        for offset, row in separated(body, r"\\"):
+            divided = False
+            while True:
+                match = rules.match(row)
+                if not match:
+                    break
+                divided |= bool(re.search(r"\\midrule\b", match.group()))
+                offset, row = offset + match.end(), row[match.end():]
+            if divided and rows:
+                blocks.append((headers, rows))
+                headers, rows = [], []
+            if not row.strip():
+                continue
+            cells = [{"text": cell, "pos": tabular["body"] + offset + start
+                      + len(cell) - len(cell.lstrip())}
+                     for start, cell in separated(row, "&")]
+            if sum(numeric_cell(cell["text"]) is None for cell in cells) * 2 > len(cells):
+                if rows:
+                    blocks.append((headers, rows))
+                    rows = []
+                headers = [header_text(cell["text"]) for cell in cells]
+            else:
+                rows.append(cells)
+        if rows:
+            blocks.append((headers, rows))
+        parent = next((f for f in floats if f["kind"] == "table"
+                       and f["start"] <= tabular["start"] < f["end"]), None)
+        for headers, rows in blocks:
+            width = len(headers) if headers else len(rows[0])
+            headers = headers or [("", "")] * width
+            row_headers = all(numeric_cell(row[0]["text"]) is None
+                              and cell_text(row[0]["text"]) for row in rows)
+            for row in rows:
+                row_unit = header_text(row[0]["text"])[1] if row_headers else ""
+                for column, cell in enumerate(row):
+                    unit = headers[column][1] if column < width else ""
+                    cell["number"] = (None if unit and row_unit and unit != row_unit
+                                      else numeric_cell(cell["text"], unit or row_unit))
+            tables.append({"headers": headers, "rows": rows, "width": width,
+                           "row_headers": row_headers, "parent": parent,
+                           "id": parent["start"] if parent else tabular["start"]})
+    return tables
+
+
+def check_table_arithmetic(source, tables):
+    findings = []
+
+    def compare(label, cell, others, row_name=""):
+        numbers = [other["number"] for other in [cell] + others]
+        if not others or any(number is None for number in numbers):
+            return
+        if len({number["unit"] for number in numbers}) != 1:
+            return
+        reported = numbers[0]
+        computed = sum((number["value"] for number in numbers[1:]), Decimal(0))
+        if label.rstrip(".").lower() != "total":
+            computed /= len(others)
+        tolerance = Decimal("0.5").scaleb(reported["value"].as_tuple().exponent)
+        if abs(reported["value"] - computed) > tolerance:
+            precision = Decimal(1).scaleb(min(-1, reported["value"].as_tuple().exponent))
+            recomputed = computed.quantize(precision, rounding=ROUND_HALF_UP)
+            findings.append(finding("table_arithmetic", "warning", source.location(cell["pos"]),
+                                     "Heuristic: " + (row_name + ": " if row_name else "")
+                                     + label + " reports " + reported["token"]
+                                     + reported["unit"] + "; recomputed value is "
+                                     + format(recomputed.normalize(), "f") + reported["unit"] + ".",
+                                     "Check the summary cell or explain a weighted aggregation."))
+
+    for table in tables:
+        rows, width = table["rows"], table["width"]
+        columns = [i for i, (label, _) in enumerate(table["headers"])
+                   if label.rstrip(".").lower() in SUMMARY]
+        summaries = [i for i, row in enumerate(rows) if table["row_headers"]
+                     and header_text(row[0]["text"])[0].rstrip(".").lower() in SUMMARY]
+        first = int(table["row_headers"])
+        if len(columns) == 1:
+            column = columns[0]
+            for index, row in enumerate(rows):
+                if len(row) == width and index not in summaries:
+                    compare(table["headers"][column][0], row[column],
+                            [row[i] for i in range(first, width) if i != column],
+                            header_text(row[0]["text"])[0] if table["row_headers"] else "")
+        if len(summaries) == 1 and all(len(row) == width for row in rows):
+            index = summaries[0]
+            for column in range(first, width):
+                if column not in columns:
+                    compare(header_text(rows[index][0]["text"])[0], rows[index][column],
+                            [row[column] for i, row in enumerate(rows) if i != index])
+    return findings
+
+
+def check_text_tables(source, tables, floats, tabulars, refs):
+    labels = defaultdict(list)
+    row_names = set()
+    bodies = []
+    for tabular in tabulars:
+        parent = next((f for f in floats if f["kind"] == "table"
+                       and f["start"] <= tabular["start"] < f["end"]), None)
+        bodies.append((parent["start"] if parent else tabular["start"],
+                       cell_text(source.text[tabular["body"]:tabular["end"]])))
+    for table in tables:
+        rows = [row for row in table["rows"] if len(row) == table["width"]]
+        numeric = [i for i in range(int(table["row_headers"]), table["width"])
+                   if any(row[i]["number"] is not None for row in rows)]
+        success = [i for i, (label, _) in enumerate(table["headers"]) if SUCCESS.search(label)]
+        selected = success if success else numeric
+        column = selected[0] if len(selected) == 1 else None
+        entries = []
+        if table["row_headers"]:
+            entries.extend((header_text(row[0]["text"])[0],
+                            [row[column]] if column is not None and len(row) == table["width"] else [])
+                           for row in table["rows"])
+            row_names.update(label.lower() for label, _ in entries if len(label) >= 4)
+        entries.extend((label, [row[i] for row in rows] if i in selected else [])
+                       for i, (label, _) in enumerate(table["headers"]))
+        if len(selected) > 1:
+            row_names.update(label.lower() for i, (label, _) in enumerate(table["headers"])
+                             if i in selected and len(label) >= 4)
+        for label, cells in entries:
+            if len(label) >= 4 and not re.search(r"[\\{}]", label):
+                labels[label.lower()].append((table, cells))
+    prose = list(source.text)
+    for item in floats + tabulars:
+        prose[item["start"]:item["end"]] = blank(source.text[item["start"]:item["end"]])
+    # Headings and reference keys cannot supply prose row or column names.
+    for cmd in commands(source.text):
+        if cmd["name"] in LEVELS.keys() | REFERENCES | RANGES | {"hyperref"} | source.wrappers.keys():
+            prose[cmd["pos"]:cmd["end"]] = blank(source.text[cmd["pos"]:cmd["end"]])
+    prose = "".join(prose)
+    boundaries = [0] + [m.end() for m in re.finditer(r"\.(?!\d)|[!?]|\n\s*\n", prose)] + [len(prose)]
+    findings = []
+    for start, end in zip(boundaries, boundaries[1:]):
+        sentence = prose[start:end]
+        referenced = {table["start"] for table in floats if table["kind"] == "table"
+                      and any(start <= pos < end for key in table["labels"]
+                              for pos in refs.get(key, []))}
+        for label, entries in labels.items():
+            pattern = r"(?<!\w)" + r"[\s~]+".join(map(re.escape, label.split())) + r"(?!\w)"
+            # Even an unaligned table can make an otherwise unique name ambiguous.
+            if not referenced and len({table_id for table_id, body in bodies
+                                       if re.search(pattern, body, re.I)}) != 1:
+                continue
+            candidates = [(table, cells) for table, cells in entries
+                          if table["id"] in referenced] if referenced else entries
+            if len(candidates) != 1:
+                continue
+            cells = {cell["pos"]: cell for _, items in candidates for cell in items}
+            if len(cells) != 1:
+                continue
+            cell = next(iter(cells.values()))
+            number = cell["number"]
+            if number is None or number["unit"] not in {"", "%"}:
+                continue
+            for match in re.finditer(pattern, sentence, re.I):
+                following = sentence[match.end():]
+                percent = re.search(r"(?<![\d.])(" + NUMBER + r")\s*\\%", following)
+                claims = []
+                if percent:
+                    claims.append((percent.group(1), following[:percent.start()],
+                                   start + match.end() + percent.start(1)))
+                preceding = list(PERCENT.finditer(sentence[:match.start()]))
+                if preceding:
+                    percent = preceding[-1]
+                    claims.append((percent.group(1), sentence[percent.end():match.start()],
+                                   start + percent.start(1)))
+                for token, between, pos in claims:
+                    if (re.search(r"\d|[,;:]|\b(?:and|whereas|while)\b", between, re.I)
+                            or any(re.search(r"(?<!\w)" + re.escape(other) + r"(?!\w)", between, re.I)
+                                   for other in row_names if other != label)):
+                        continue
+                    if Decimal(token) != number["value"]:
+                        location = source.location(cell["pos"])
+                        findings.append(finding("text_table_mismatch", "warning", source.location(pos),
+                                                 "Heuristic: '" + sentence[match.start():match.end()]
+                                                 + "' is " + token + "% in prose, but "
+                                                 + number["token"] + "% in the table at {}:{}.".format(*location),
+                                                 "Make the prose and table values agree or explain the difference."))
+                    break
+    return findings
+
+
+def compiled_number(token):
+    if re.fullmatch(r"\d+(?:\.\d+)*", token):
+        return tuple(int(part) for part in token.split("."))
+    if re.fullmatch(r"(?=[MDCLXVI]+$)M{0,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})"
+                    r"(?:IX|IV|V?I{0,3})", token, re.I):
+        values = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+        digits = [values[char] for char in token.upper()]
+        return (sum(-value if i + 1 < len(digits) and value < digits[i + 1] else value
+                    for i, value in enumerate(digits)),)
+    return None
+
+
+def check_aux_order(source, floats, tabulars, refs, aux):
+    path = Path(aux).resolve() if aux is not None else source.main.with_suffix(".aux")
+    try:
+        text = clean_source(path.read_text(encoding="utf-8"), {})
+    except (OSError, UnicodeError):
+        return [finding("aux_float_order", "info", (display_path(source.main), 1),
+                        "Compiled float order was not checked: no readable aux file.",
+                        "Compile the manuscript or provide --aux with a readable aux file.")]
+    kinds = {key: item["kind"] for item in floats for key in item["labels"]}
+    entries = {"table": {}, "figure": {}}
+    for cmd in commands(text):
+        if cmd["name"] != "newlabel" or not resolved(cmd["value"]):
+            continue
+        pos = space(text, cmd["end"])
+        if text[pos:pos + 1] != "{":
+            continue
+        body, _ = group(text, pos)
+        fields, offset = [], 0
+        while True:
+            offset = space(body, offset)
+            if body[offset:offset + 1] != "{":
+                break
+            value, end = group(body, offset)
+            if end == offset + 1:
+                break
+            fields.append(value)
+            offset = end
+        if len(fields) < 2:
+            continue
+        token = cell_text(fields[0])
+        number = compiled_number(token)
+        anchor = fields[3].split(".")[0] if len(fields) > 3 else ""
+        prefix = cmd["value"].split(":")[0].lower()
+        kind = kinds.get(cmd["value"]) or (anchor if anchor in entries else
+                                           {"tab": "table", "table": "table",
+                                            "fig": "figure", "figure": "figure"}.get(prefix))
+        positions = [pos for pos in refs.get(cmd["value"], []) if not contains(floats + tabulars, pos)]
+        if kind and number is not None and positions:
+            entry = (min(positions), token, cmd["value"])
+            if number not in entries[kind] or entry[0] < entries[kind][number][0]:
+                entries[kind][number] = entry
+    findings = []
+    for kind, numbered in entries.items():
+        ordered = sorted(numbered.items(), key=lambda item: item[1][0])
+        for (before, first), (after, second) in zip(ordered, ordered[1:]):
+            if before > after and first[0] < second[0]:
+                findings.append(finding("aux_float_order", "warning", source.location(second[0]),
+                                         kind.capitalize() + " " + second[1] + " (" + second[2]
+                                         + ") is first referenced after " + kind + " " + first[1]
+                                         + " (" + first[2] + "); compiled numbers from '"
+                                         + display_path(path) + "'.",
+                                         "Reference " + kind + "s in increasing compiled number order."))
+    return findings
+
+
+def check_paper(main, bib=None, aux=None):
     source = Source(main)
     findings, events = source.findings, list(commands(source.text))
     labels, refs, cites = defaultdict(list), defaultdict(list), defaultdict(list)
@@ -654,6 +968,10 @@ def check_paper(main, bib=None):
                                          "Reference " + kind + "s in the order they appear."))
     findings.extend(check_bibliography(source, events, cites, bib))
     findings.extend(check_percentages(source, sections, floats, tabulars))
+    tables = parsed_tables(source, tabulars, floats)
+    findings.extend(check_table_arithmetic(source, tables))
+    findings.extend(check_text_tables(source, tables, floats, tabulars, refs))
+    findings.extend(check_aux_order(source, floats, tabulars, refs, aux))
     severity_order = {"error": 0, "warning": 1, "info": 2}
     return sorted(findings, key=lambda f: (severity_order[f["severity"]], f["file"],
                                           f["line"], f["check"], f["message"]))
@@ -663,9 +981,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("main", type=Path, help="Main LaTeX source")
     parser.add_argument("--bib", type=Path, help="Bibliography path (relative to the working directory)")
+    parser.add_argument("--aux", type=Path, help="Compiled labels (relative to the working directory)")
     parser.add_argument("--json", action="store_true", help="Print findings as a JSON list")
     args = parser.parse_args()
-    findings = check_paper(args.main, args.bib)
+    findings = check_paper(args.main, args.bib, args.aux)
     if args.json:
         print(json.dumps(findings, indent=2))
     elif not findings:

@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage{booktabs,graphicx,colortbl}
+\begin{document}
+Table~\ref{tab:wide} compares success rates across bin heights.
+\begin{table*}[t]
+\centering
+\caption{\textbf{Success Rate (\%) of bin picking across Different Bin Heights}. The best is in \textbf{bold}.}
+\label{tab:wide}
+\fontsize{11}{14}\selectfont{
+\resizebox{\linewidth}{!}{
+\begin{tabular}{c|cccccc|>{\columncolor{gray!12}}c}
+\toprule[1pt]
+Method~$\downarrow$
+& $h_1=10cm$ & $h_2=15cm$ & $h_3=20cm$ & $h_4=25cm$ & $h_5=30cm$ & $h_6=35cm$
+& \textbf{Avg.} \\
+\midrule
+Baseline A (20 demos)
+& 00\% & 10\% & 10\% & 0\% & 10\% & 10\% & 5\% \\
+Baseline B (50 demos)
+& 10\% & 20\% & 10\% & 20\% & 30\% & 20\% & 22\% \\ \hline
+\textbf{Ours}
+& \textbf{80\%} & \textbf{90\%} & \textbf{90\%} & \textbf{80\%} & \textbf{90\%} & \textbf{90\%}
+& \textbf{87\%} \\
+\bottomrule[1pt]
+\end{tabular}}}
+\end{table*}
+\nocite{*}\bibliography{../refs}
+\end{document}

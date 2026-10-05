@@ -5,11 +5,11 @@ Produce manuscript prose first.
 
 Ablation rows:
 
-- Naive direct action hint: 17% success.
-- + Geometry-aware execution: 23%.
-- + Target-focused perception and geometry-aware execution: 44%.
-- + Target-focused perception, overlay self-verification, and geometry-aware execution: 76%.
-- Full system with mask-constrained grounding: 88%.
+- Depth-only grasp planner: 21% success.
+- + Seal-pressure retry: 34%.
+- + Depth completion and seal-pressure retry: 52%.
+- + Depth completion, collision-aware candidate re-ranking, and seal-pressure retry: 69%.
+- Full system with surface-normal consistency filter: 81%.
 
 Boundary:
 
