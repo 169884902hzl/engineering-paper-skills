@@ -1,8 +1,18 @@
 {
   "case": "coach_write_draft_first",
   "prompt": "coach_write_draft_first.md",
-  "must_include": ["## Draft", "## Evidence boundary", "## Do-not-claim", "92%", "81%", "one inspection fixture"],
-  "must_not_include": ["## Verdict", "## Unsafe Claims", "Story spine", "deployment-ready", "statistically significant"],
+  "must_include": [
+    "92%",
+    "81%",
+    "one inspection fixture"
+  ],
+  "must_not_include": [
+    "## Verdict",
+    "## Unsafe Claims",
+    "Story spine",
+    "deployment-ready",
+    "statistically significant"
+  ],
   "required_status": {},
   "forbidden_claims": [
     "coach verdict-first writing output",

@@ -19,6 +19,16 @@ English responses.
 - Prefer concise, evidence-linked responses over defensive explanations.
 - When a comment reveals misunderstanding, first check whether the manuscript
   caused it.
+- Separate misreadings from real gaps. A misreading (a fallback mistaken for
+  the main mechanism, a reused component read as added hardware) is fixed in
+  the manuscript framing: an operating-envelope paragraph, a clearer split
+  between primary and fallback mechanisms, a corrected word. A real gap (an
+  unfair baseline, an unmeasured component, missing cost) needs a control or
+  measurement when feasible, or an explicit limitation when not.
+- Do not force an incomparable system into the results table to satisfy a
+  comparison request. Discuss it qualitatively, state the differences in
+  task, data, and hardware, and keep the controlled comparison as the main
+  evidence. A weak baseline can be reframed as a reference configuration.
 
 ## Boundaries
 

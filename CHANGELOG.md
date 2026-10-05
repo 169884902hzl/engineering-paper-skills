@@ -4,6 +4,51 @@ This project currently uses commit-based beta tracking instead of GitHub
 releases. Entries below document quality-gate changes that matter for external
 review and reuse.
 
+## Shift from writing rules to author experience
+
+- Added `skills/_shared/reviewer-attack-patterns.md`: nine objection patterns
+  drawn from two real review sets and a senior co-author's comments, written
+  generically so that neither source paper is identifiable. Each pattern gives
+  the trigger, how reviewers raise it, why authors miss it, and the cheapest
+  pre-submission fix.
+- Added `skills/_shared/writing-process.md` (writing order, writing while
+  results are incomplete, where published advice disagrees) and
+  `skills/_shared/revision-moves.md` (global-to-local revision order and
+  section moves observed in a senior author's revisions).
+- `engineering-paper-auditor`: reviewer simulation is now the default for
+  pre-submission review, ranked by what real reviewers lead with; the
+  claim-by-claim audit tables are available on request.
+- `engineering-writing` and `engineering-paper-coach`: removed rules that
+  fought the model instead of informing it: the triple-repeated
+  "write first, do not audit" override, fixed 120-220 word quotas, mandatory
+  output templates, and the public-demo blocker list (still enforced for
+  recorded demos by `scripts/check_public_writing_demos.py`). The same
+  constraints were removed from `engineering-writing/manifest.yaml`, which now
+  only routes to references. Kept the hard floor against invented results,
+  citations, mechanisms, and completed work.
+- `tests/expected`: dropped the output-heading requirements of the removed
+  templates from seven behavior specs (coach and writing draft-first specs,
+  `auditor_realistic`); numeric and content requirements are unchanged. The
+  recorded golden outputs still pass. The optional real-model prompt
+  regression was not rerun for this change.
+- `engineering-figure-table`, `engineering-validation`, `engineering-response`,
+  `engineering-polishing`, `engineering-paper-router`: short additions linking
+  the new experience files (float numbering order, one job per float,
+  misreading versus real-gap responses, revision order).
+- Evidence: leave-one-paper-out reviewer-prediction test of an earlier
+  version of the patterns (for each paper, a pattern file built only from the
+  other paper's reviews) on two robotics papers with real reviews, Claude and
+  Codex, one run per condition, blind scoring. Recall changed by at most one point (paper A: 8 to 9 and 6 to 7 of
+  16; paper B: 9 to 9 of 10 for both models). The reviewers' top
+  objection (the first objection of the first reviewer) moved to rank 1 in
+  three of four runs; in one run another major objection dropped from rank 4
+  to 8. Test materials contain
+  unpublished manuscripts and confidential reviews and are not in this
+  repository.
+- Not done in this round: the roughly 80 existing reference files were left in
+  place. Whether they still help current models needs a skill-off writing
+  baseline, which has not been run; pruning waits for that result.
+
 ## Add citation gate, pattern library, scored audit mode, and Claude Code path
 
 - Added `skills/_shared/citation-verification-workflow.md`: literature

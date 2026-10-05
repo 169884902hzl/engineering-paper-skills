@@ -45,6 +45,7 @@ routing.
 | plan or revise figures, tables, captions, visual roles, page budget, or visual consistency | `engineering-figure-table` |
 | classify reviewer/advisor/editor comments, build revision tracker, draft response letter | `engineering-response` |
 | compile/check manuscript, inspect citations, claim-evidence anchors, figures/tables, readiness | `engineering-validation` |
+| what will reviewers say, is the evidence convincing, pre-submission critique | `engineering-paper-auditor` (reviewer simulation) |
 
 ## Input-State Routing
 

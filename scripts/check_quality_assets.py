@@ -383,6 +383,10 @@ REQUIRED_DEMO_CASES = {
 }
 
 REQUIRED_REFERENCE_MARKERS = {
+    "skills/_shared/reviewer-attack-patterns.md": [
+        "P1. Handicapped Baseline",
+        "Reviewer simulation",
+    ],
     "skills/_shared/story-spine.md": [
         "Complete Claim Inventory",
         "Contribution dependency map",

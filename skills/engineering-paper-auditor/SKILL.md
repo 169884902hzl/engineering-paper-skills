@@ -5,8 +5,9 @@ description: Audit English engineering manuscripts like a strict reviewer withou
 
 # Engineering Paper Auditor
 
-Use this skill to find manuscript weaknesses before rewriting. It does not
-produce final paper prose; it produces a prioritized audit and repair plan.
+Use this skill to find manuscript weaknesses before a reviewer does. It does
+not produce final paper prose; it produces a ranked list of objections and the
+cheapest fixes.
 
 ## Core Stance
 
@@ -32,13 +33,14 @@ produce final paper prose; it produces a prioritized audit and repair plan.
 
 | File | Open when |
 |---|---|
+| [../_shared/reviewer-attack-patterns.md](../_shared/reviewer-attack-patterns.md) | Any pre-submission review or reviewer simulation |
 | [references/audit-rubric.md](references/audit-rubric.md) | Running a full manuscript or section audit |
 | [references/examples.md](references/examples.md) | Needing concrete audit output examples |
 | [references/failure-modes.md](references/failure-modes.md) | Avoiding audit overreach, rewriting, or unsupported conclusions |
 | [references/story-continuity-audit.md](references/story-continuity-audit.md) | Auditing whether paper sections form a coherent story |
 | [references/paragraph-to-paragraph-transition-audit.md](references/paragraph-to-paragraph-transition-audit.md) | Paragraphs are individually plausible but the section feels jumpy |
 | [references/claim-resurrection-audit.md](references/claim-resurrection-audit.md) | Abstract, Discussion, or Conclusion may revive unsupported claims |
-| [references/scored-audit-mode.md](references/scored-audit-mode.md) | The user explicitly asks for scores, a review panel, or reviewer simulation |
+| [references/scored-audit-mode.md](references/scored-audit-mode.md) | The user explicitly asks for scores, a scored review panel, or a scored reviewer simulation |
 | [../_shared/story-spine.md](../_shared/story-spine.md) | Full-paper or multi-section audit needs story dependency checks |
 | [../_shared/evidence-boundary.md](../_shared/evidence-boundary.md) | Any claim may exceed available evidence |
 | [../_shared/claim-strength.md](../_shared/claim-strength.md) | Auditing novelty, robustness, causality, or generalization language |
@@ -48,39 +50,57 @@ produce final paper prose; it produces a prioritized audit and repair plan.
 | [../_shared/sentence-role-and-story-flow.md](../_shared/sentence-role-and-story-flow.md) | A paragraph may contain redundant, misplaced, missing, or disconnected sentences |
 | [../_shared/terminology-ledger.md](../_shared/terminology-ledger.md) | Terms, metrics, categories, or method names drift across sections |
 
-## Workflow
+## Reviewer Simulation (Default For Pre-Submission Review)
+
+Use this whenever the user asks what reviewers will say, whether the paper is
+convincing, or for a pre-submission check.
+
+1. Read the manuscript as a skeptical reviewer from the closest neighboring
+   field. Ask what that reviewer would compare the work against: the simplest
+   alternative configuration, the principled method from the adjacent field,
+   and a baseline given the same capability or prior.
+2. Walk the patterns in
+   [reviewer-attack-patterns.md](../_shared/reviewer-attack-patterns.md) as
+   prompts. Report any problem the manuscript gives evidence for, whether or
+   not a pattern names it; skip patterns that are not triggered.
+3. Rank by what real reviewers lead with. In observed review sets, reviewers
+   led with comparison validity (handicapped baselines), reliance on
+   unvalidated assumptions or components, and practical cost (hardware, time,
+   compute). In a small blind test, models without the pattern checklist
+   often put internal-consistency checks (numeric slips, metric definitions)
+   at the top and pushed the reviewers' main objection down to rank 2-7. Rank
+   by consequence instead: a numeric or metric error that changes a headline
+   number, a comparison, or reproducibility belongs with the major
+   objections; only non-substantive slips go to the mechanical list.
+4. Give the three objections most likely to appear in an actual report first,
+   then at most seven more. Long undifferentiated lists hide the objections
+   that decide the outcome.
+5. For each objection, give the cheapest pre-submission fix: a matched
+   control, a measurement, an operating-envelope paragraph, a wording change,
+   or a reframing of a weak baseline as a reference configuration.
+
+```text
+Reviewer simulation
+| Rank | Pattern | Trigger in manuscript | Objection as a reviewer would write it | Cheapest fix before submission |
+
+Mechanical issues: [non-substantive slips: typos, labels that resolve correctly, formatting]
+Not triggered: [pattern ids]
+Needs author input: [facts the manuscript does not state]
+```
+
+## Detailed Audit (On Request)
+
+Use when the user asks for a claim-by-claim or section-by-section audit.
 
 1. Identify the audit scope: full paper, section, figure/table set, response
    package, or claim-evidence map.
-2. Extract the paper's one-sentence thesis and stated contributions if present.
-3. Build a story-spine audit before local style findings.
-4. Build a claim-evidence audit table.
-5. Check section jobs: Abstract, Introduction, Related Work, Methods,
-   Experiments, Discussion, Conclusion.
-6. Check figure/table responsibility against the claims they are asked to
-   support.
-7. Audit sentence roles when a paragraph is unclear: every sentence must be
-   necessary, placed correctly, connected to neighboring sentences, and bounded
-   by evidence.
-8. Flag overclaims, missing anchors, section drift, table narration, caption
-   overreach, sentence redundancy, terminology drift, and unsupported readiness
-   claims.
-9. Produce a prioritized action list and route each action to the correct skill.
-
-## Scored Audit Mode
-
-Off by default. Use it only when the user explicitly asks for scores, a
-review panel, or reviewer simulation; otherwise keep the unscored verdict
-vocabulary. The protocol, lens table, and band anchors are in
-[references/scored-audit-mode.md](references/scored-audit-mode.md).
-
-- Three reviewer lenses pass independently: method rigor, experimental
-  evidence, contribution and positioning.
-- Bands are heuristic triage anchored to listed findings, not acceptance
-  predictions; no weighted total is produced.
-- Material that was not inspected is `CANNOT_DETERMINE`, not a low band.
-
-## Default Output
+2. Extract the one-sentence thesis and stated contributions.
+3. Build the claim-evidence and story-spine audits before local style notes.
+4. Check section jobs and figure/table responsibility against the claims they
+   are asked to support.
+5. Flag overclaims, missing anchors, section drift, table narration, caption
+   overreach, terminology drift, and unsupported readiness claims.
+6. Produce a prioritized action list and route each action to the right skill.
 
 ```text
 Audit verdict
@@ -91,18 +111,19 @@ Audit verdict
 Claim-evidence audit
 | Claim | First stated | Method anchor | Experiment anchor | Figure/table anchor | Status | Repair route |
 
-Story-spine findings
-| Node | Present? | Evidence anchor | Break risk | Repair route |
-
-Section-boundary findings
-| Location | Symptom | Why it matters | Repair route |
-
-Sentence role findings
-| Sentence/span | Job | Needed because | Connection issue | Evidence boundary | Action |
-
-Figure/table findings
-| Item | Claim requested | Evidence visible/tabulated | Must not claim | Repair route |
-
 Prioritized action list
 | Priority | Action | Owner skill | Required input | Stop condition |
 ```
+
+## Scored Audit Mode
+
+Off by default. Use it only when the user explicitly asks for scores, a
+review panel, or scored reviewer simulation. The protocol, lens table, and
+band anchors are in
+[references/scored-audit-mode.md](references/scored-audit-mode.md).
+
+- Three reviewer lenses pass independently: method rigor, experimental
+  evidence, contribution and positioning.
+- Bands are heuristic triage anchored to listed findings, not acceptance
+  predictions; no weighted total is produced.
+- Material that was not inspected is `CANNOT_DETERMINE`, not a low band.

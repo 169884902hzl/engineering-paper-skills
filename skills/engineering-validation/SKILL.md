@@ -77,7 +77,10 @@ overall readiness must be `NOT_READY` or `CANNOT_DETERMINE`.
    limitations.
 5. Check story spine: Abstract and Conclusion claims must have Methods,
    Experiments, figure/table, and boundary anchors.
-6. Check figures, tables, captions, labels, and category/metric names.
+6. Check figures, tables, captions, labels, and category/metric names. Check
+   that floats are first referenced in numeric order, that no `\label` is
+   duplicated, and that every `\ref` resolves to the intended float; wrong or
+   out-of-order table references were flagged by real reviewers.
 7. Run the smallest relevant build and consistency commands.
 8. If tools or files are unavailable, mark command-dependent checks `NOT_RUN`
    and perform only the file-based or local-text audit that evidence allows.

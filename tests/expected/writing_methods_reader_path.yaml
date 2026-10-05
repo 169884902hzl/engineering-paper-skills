@@ -1,8 +1,19 @@
 {
   "case": "writing_methods_reader_path",
   "prompt": "writing_methods_reader_path.md",
-  "must_include": ["## Draft", "## Why this works", "## Evidence used", "## Boundary / do-not-claim", "RGB-D observations", "confidence", "guarded insertion controller"],
-  "must_not_include": ["## Verdict", "Story spine", "Source-note triage", "industrial deployment", "achieves", "proves"],
+  "must_include": [
+    "RGB-D observations",
+    "confidence",
+    "guarded insertion controller"
+  ],
+  "must_not_include": [
+    "## Verdict",
+    "Story spine",
+    "Source-note triage",
+    "industrial deployment",
+    "achieves",
+    "proves"
+  ],
   "required_status": {},
   "forbidden_claims": [
     "verdict-first writing output",

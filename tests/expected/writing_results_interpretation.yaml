@@ -1,8 +1,21 @@
 {
   "case": "writing_results_interpretation",
   "prompt": "writing_results_interpretation.md",
-  "must_include": ["## Draft", "## Why this works", "## Evidence used", "## Boundary / do-not-claim", "84% success over 180 trials", "69%", "72%", "61%", "tested tabletop"],
-  "must_not_include": ["## Verdict", "Story spine", "Source-note triage", "statistically significant", "causally proves", "deployment-ready"],
+  "must_include": [
+    "84% success over 180 trials",
+    "69%",
+    "72%",
+    "61%",
+    "tested tabletop"
+  ],
+  "must_not_include": [
+    "## Verdict",
+    "Story spine",
+    "Source-note triage",
+    "statistically significant",
+    "causally proves",
+    "deployment-ready"
+  ],
   "required_status": {},
   "forbidden_claims": [
     "verdict-first writing output",
